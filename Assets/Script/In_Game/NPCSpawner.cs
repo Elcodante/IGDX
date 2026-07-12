@@ -1,0 +1,87 @@
+using UnityEngine;
+using System.Collections.Generic;
+
+public class NPCSpawner : MonoBehaviour
+{
+    [Header("Spawner Settings")]
+    public GameObject npcPrefab;
+    public Transform spawnPoint;
+    public float spawnInterval = 5f;
+
+    [Header("Antrean Kasir")]
+    public Transform[] queueWaypoints;
+    private bool[] slotOccupied;
+
+    [Header("Object Pool")]
+    public int poolSize = 3;
+    private Queue<GameObject> npcPool;
+
+    [Header("UI Reference")]
+    // Tambahkan variabel ini untuk menyimpan referensi UI
+    public UIManager uiManager;
+
+    private float timer;
+
+    void Start()
+    {
+        slotOccupied = new bool[queueWaypoints.Length];
+        npcPool = new Queue<GameObject>();
+
+        for (int i = 0; i < poolSize; i++)
+        {
+            GameObject obj = Instantiate(npcPrefab);
+            obj.SetActive(false);
+
+            NPCController controller = obj.GetComponent<NPCController>();
+            controller.SetSpawner(this);
+
+            controller.OnPesananDiambil.AddListener(uiManager.TampilkanPanelPesanan);
+
+            npcPool.Enqueue(obj);
+        }
+    }
+
+    void Update()
+    {
+        timer += Time.deltaTime;
+
+        if (timer >= spawnInterval)
+        {
+            int availableSlot = GetEmptySlot();
+
+            if (availableSlot != -1 && npcPool.Count > 0)
+            {
+                SpawnNPC(availableSlot);
+                timer = 0f;
+            }
+        }
+    }
+
+    private int GetEmptySlot()
+    {
+        for (int i = 0; i < slotOccupied.Length; i++)
+        {
+            if (!slotOccupied[i]) return i;
+        }
+        return -1;
+    }
+
+    private void SpawnNPC(int slotIndex)
+    {
+        slotOccupied[slotIndex] = true;
+
+        GameObject spawnNPC = npcPool.Dequeue();
+        spawnNPC.transform.position = spawnPoint.position;
+        spawnNPC.SetActive(true);
+
+        NPCController controller = spawnNPC.GetComponent<NPCController>();
+        controller.InitializeNPC(queueWaypoints[slotIndex], slotIndex);
+    }
+
+    public void ReturnNPC(GameObject npc, int slotIndex)
+    {
+        npc.SetActive(false);
+        slotOccupied[slotIndex] = false;
+        npcPool.Enqueue(npc);
+    }
+}
