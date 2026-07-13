@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI; // Ditambahkan untuk akses UI
+using UnityEngine.UI; 
+using TMPro;
 
 public class CookingAppliance : MonoBehaviour
 {
@@ -119,7 +120,7 @@ public class CookingAppliance : MonoBehaviour
             GameObject iconBaru = Instantiate(indikatorPrefab, indikatorContainer);
             
             Image iconImage = iconBaru.GetComponentInChildren<Image>();
-            Text qtyText = iconBaru.GetComponentInChildren<Text>();
+            TextMeshProUGUI qtyText = iconBaru.GetComponentInChildren<TextMeshProUGUI>();
 
             if (iconImage != null) iconImage.sprite = item.Key.icon;
             if (qtyText != null) qtyText.text = "x" + item.Value.ToString();
