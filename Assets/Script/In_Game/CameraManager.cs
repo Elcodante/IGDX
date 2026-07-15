@@ -63,7 +63,7 @@ public class CameraManager : MonoBehaviour
         {
             targetTransform = posisiKasir;
             currentArea = CameraArea.Kasir;
-            if(panelKasir != null) panelKasir.SetActive(true);
+            //if(panelKasir != null) panelKasir.SetActive(false);
             if(panelDapur != null) panelDapur.SetActive(false);
             Debug.Log("Kamera bergeser ke area Kasir.");
         }
