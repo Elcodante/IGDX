@@ -1,10 +1,12 @@
 using TMPro;
 using UnityEngine;
-
+using UnityEngine.UI;
 public class UIManager : MonoBehaviour
 {
     [Header("UI Elements")]
     public GameObject panelPesanan;
+    public GameObject tombolPerpindahan;
+    public Image potretNPC;
 
     [Header("Order Ticket Text Compoents")]
     public TextMeshProUGUI teksNamaMakanan;
@@ -18,13 +20,28 @@ public class UIManager : MonoBehaviour
         {
             panelPesanan.SetActive(false);
         }
+        if (tombolPerpindahan != null)
+        {
+            tombolPerpindahan.SetActive(true);
+        }
+        if (potretNPC != null)
+        {
+            potretNPC.sprite = null; // Reset potret NPC
+            potretNPC.enabled = false; // Nonaktifkan potret NPC saat panel pesanan ditutup
+        }
     }
 
-    public void TampilkanPanelPesanan(OrderData dataPesanan)
+    public void TampilkanPanelPesanan(OrderData dataPesanan, Sprite gambarNPC)
     {
         panelPesanan.SetActive(true);
+        tombolPerpindahan.SetActive(false); // Nonaktifkan tombol perpindahan saat panel pesanan terbuka
+        potretNPC.enabled = true; // Aktifkan potret NPC saat panel pesanan terbuka
         IsPanelOpen = true; 
 
+        if(potretNPC != null && gambarNPC != null)
+        {
+            potretNPC.sprite = gambarNPC;
+        }
         teksNamaMakanan.text = dataPesanan.idResep;
         
         string detailOrder = "Detail Pesanan:\n";
@@ -43,6 +60,8 @@ public class UIManager : MonoBehaviour
     public void TutupPanelPesanan()
     {
         panelPesanan.SetActive(false);
+        tombolPerpindahan.SetActive(true); // Aktifkan kembali tombol perpindahan
+        potretNPC.enabled = false; // Nonaktifkan potret NPC saat panel pesanan ditutup
         IsPanelOpen = false; // BUKA KUNCI: NPC lain bisa diklik kembali
         Debug.Log("Panel Pesanan Ditutup. NPC lain terbuka.");
     }

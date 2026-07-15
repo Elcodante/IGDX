@@ -23,7 +23,7 @@ public class NPCController : MonoBehaviour, IPointerClickHandler
     [Header("Warna tanda seru saat pesanan diambil")]
     public Color warnaPesananDiambil = new Color(0.4f, 0.4f, 0.4f, 1f);
     
-    public UnityEvent<OrderData> OnPesananDiambil;
+    public UnityEvent<OrderData, Sprite> OnPesananDiambil;
 
     private NPCState currentState;
     private Transform targetWaypoint;
@@ -31,6 +31,7 @@ public class NPCController : MonoBehaviour, IPointerClickHandler
     private int mySlotIndex;
 
     private SpriteRenderer tandaSeruRenderer;
+    private SpriteRenderer npcSpriteRenderer;
 
     void Awake()
     {
@@ -38,6 +39,7 @@ public class NPCController : MonoBehaviour, IPointerClickHandler
         {
             tandaSeruRenderer = tandaSeru.GetComponent<SpriteRenderer>();
         }
+        npcSpriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     public void SetSpawner(NPCSpawner spawner)
@@ -106,7 +108,7 @@ public class NPCController : MonoBehaviour, IPointerClickHandler
                 OrderManager.Instance.KirimPesananKeDapur(currentOrder);
             }
 
-            OnPesananDiambil?.Invoke(currentOrder);
+            OnPesananDiambil?.Invoke(currentOrder, npcSpriteRenderer.sprite);
         }
 
         // KONDISI 2: Pesanan sudah pernah diambil, tetapi pemain klik LAGI untuk mengintip resep
@@ -115,7 +117,7 @@ public class NPCController : MonoBehaviour, IPointerClickHandler
             Debug.Log("Melihat kembali pesanan milik NPC ini: " + currentOrder.idResep);
 
             // Panggil kembali panel UI untuk menampilkan resep yang sama
-            OnPesananDiambil?.Invoke(currentOrder);
+            OnPesananDiambil?.Invoke(currentOrder, npcSpriteRenderer.sprite);
         }
     }
 
