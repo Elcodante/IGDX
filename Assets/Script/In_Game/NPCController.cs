@@ -82,7 +82,6 @@ public class NPCController : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        // PEMBATAS GLOBAL: Jika ada panel pesanan LAIN yang sedang terbuka, abaikan klik
         if (UIManager.IsPanelOpen)
         {
             Debug.Log("Klik diabaikan karena sedang ada panel aktif.");
@@ -101,6 +100,12 @@ public class NPCController : MonoBehaviour, IPointerClickHandler
             currentState = NPCState.WaitingForFood; // Status berubah menunggu makanan
 
             Debug.Log("Mengambil pesanan pertama kali: " + currentOrder.idResep);
+            
+            if(OrderManager.Instance != null)
+            {
+                OrderManager.Instance.KirimPesananKeDapur(currentOrder);
+            }
+
             OnPesananDiambil?.Invoke(currentOrder);
         }
 
