@@ -4,7 +4,7 @@ using System.Collections.Generic;
 public class NPCSpawner : MonoBehaviour
 {
     [Header("Spawner Settings")]
-    public GameObject npcPrefab;
+    public GameObject[] npcPrefab;
     public Transform spawnPoint;
     public float spawnInterval = 5f;
 
@@ -13,7 +13,7 @@ public class NPCSpawner : MonoBehaviour
     private bool[] slotOccupied;
 
     [Header("Object Pool")]
-    public int poolSize = 3;
+    public int poolSize = 6;
     private Queue<GameObject> npcPool;
 
     [Header("UI Reference")]
@@ -27,15 +27,22 @@ public class NPCSpawner : MonoBehaviour
         slotOccupied = new bool[queueWaypoints.Length];
         npcPool = new Queue<GameObject>();
 
-        for (int i = 0; i < poolSize; i++)
+        if(npcPrefab.Length == 0 || npcPrefab[0] == null)
         {
-            GameObject obj = Instantiate(npcPrefab);
+            Debug.LogError("NPC Prefab array is empty. Please assign at least one NPC prefab.");
+            return;
+        }
+
+        for(int i = 0; i < poolSize; i++)
+        {
+            GameObject prefabTerpilih = npcPrefab[Random.Range(0, npcPrefab.Length)];
+
+            GameObject obj = Instantiate(prefabTerpilih);
             obj.SetActive(false);
 
             NPCController controller = obj.GetComponent<NPCController>();
             controller.SetSpawner(this);
-
-            controller.OnPesananDiambil.AddListener(uiManager.TampilkanPanelPesanan);
+            controller.OnPesananDiambil.AddListener(uiManager.TampilkanPanelPesanan); // Pastikan UIManager memiliki metode ini
 
             npcPool.Enqueue(obj);
         }
