@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86442b7a1a0223842b7722ae67f037ee, type: 3}
   m_Name: Kue
   m_EditorClassIdentifier: Assembly-CSharp::IngredientData
-  ingredientID: 4
-  ingredientName: Kue
+  ingredientID: Serabi
+  ingredientName: Serabi
   icon: {fileID: 2144182940185001809, guid: 392cb22cd0ba50e48a5b3af449836d50, type: 3}
