@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2400745531004987052}
   - component: {fileID: 8931574329704783468}
   - component: {fileID: 866690022886815204}
+  - component: {fileID: 1686848164341618850}
   m_Layer: 0
   m_Name: NPC_1
   m_TagString: Untagged
@@ -164,6 +165,18 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 4, y: 10}
   m_EdgeRadius: 0
+--- !u!114 &1686848164341618850
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1782478254039802041}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3c29e6b20e78b3459ddd8eaf4d21623, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::NPCDropTarget
 --- !u!1 &4217841086553712287
 GameObject:
   m_ObjectHideFlags: 0

@@ -25,7 +25,7 @@ public class NPCController : MonoBehaviour, IPointerClickHandler
     
     public UnityEvent<OrderData, Sprite> OnPesananDiambil;
 
-    private NPCState currentState;
+    public NPCState currentState;
     private Transform targetWaypoint;
     private NPCSpawner mySpawner;
     private int mySlotIndex;
