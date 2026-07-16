@@ -16,6 +16,8 @@ public class CameraManager : MonoBehaviour
     [Tooltip("Tarik objek Text (TMP) milik tombol ke sini agar teksnya bisa berubah otomatis.")]
     public TextMeshProUGUI tombolText;
 
+    [Header("UI Panels Per Area")]
+    public GameObject panelKasir;
     public GameObject panelDapur;
 
     private Transform targetTransform;
@@ -25,7 +27,8 @@ public class CameraManager : MonoBehaviour
     void Start()
     {
         cameraZOffset = transform.position.z;
-        panelDapur.SetActive(false);
+        if(panelKasir != null) panelKasir.SetActive(true);
+        if(panelDapur != null) panelDapur.SetActive(false);
 
         // Set kamera awal di Kasir
         if (posisiKasir != null)
@@ -51,7 +54,8 @@ public class CameraManager : MonoBehaviour
         if (currentArea == CameraArea.Kasir)
         {
             targetTransform = posisiDapur;
-            panelDapur.SetActive(true);
+            if(panelKasir != null) panelKasir.SetActive(false);
+            if(panelDapur != null) panelDapur.SetActive(true);
             currentArea = CameraArea.Dapur;
             Debug.Log("Kamera bergeser ke area Dapur.");
         }
@@ -59,7 +63,8 @@ public class CameraManager : MonoBehaviour
         {
             targetTransform = posisiKasir;
             currentArea = CameraArea.Kasir;
-            panelDapur.SetActive(false);
+            //if(panelKasir != null) panelKasir.SetActive(false);
+            if(panelDapur != null) panelDapur.SetActive(false);
             Debug.Log("Kamera bergeser ke area Kasir.");
         }
 

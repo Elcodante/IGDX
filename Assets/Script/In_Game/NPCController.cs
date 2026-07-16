@@ -19,12 +19,28 @@ public class NPCController : MonoBehaviour, IPointerClickHandler
 
     [Header("UI / Visuals")]
     public GameObject tandaSeru;
-    public UnityEvent<OrderData> OnPesananDiambil;
+
+    [Header("Warna tanda seru saat pesanan diambil")]
+    public Color warnaPesananDiambil = new Color(0.4f, 0.4f, 0.4f, 1f);
+    
+    public UnityEvent<OrderData, Sprite> OnPesananDiambil;
 
     private NPCState currentState;
     private Transform targetWaypoint;
     private NPCSpawner mySpawner;
     private int mySlotIndex;
+
+    private SpriteRenderer tandaSeruRenderer;
+    private SpriteRenderer npcSpriteRenderer;
+
+    void Awake()
+    {
+        if(tandaSeru != null)
+        {
+            tandaSeruRenderer = tandaSeru.GetComponent<SpriteRenderer>();
+        }
+        npcSpriteRenderer = GetComponent<SpriteRenderer>();
+    }
 
     public void SetSpawner(NPCSpawner spawner)
     {
@@ -38,6 +54,12 @@ public class NPCController : MonoBehaviour, IPointerClickHandler
         currentState = NPCState.WalkToCounter;
 
         tandaSeru.SetActive(false);
+
+        if (tandaSeruRenderer != null)
+        {
+            tandaSeruRenderer.color = Color.white; // Warna default
+        }
+
         GenerateRandomOrder();
     }
 
@@ -62,28 +84,54 @@ public class NPCController : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        // PERIKSA SAKELAR: Jika ada panel terbuka, batalkan proses klik!
         if (UIManager.IsPanelOpen)
         {
-            Debug.Log("Klik diabaikan karena ada pesanan lain yang sedang diproses.");
+            Debug.Log("Klik diabaikan karena sedang ada panel aktif.");
             return;
         }
 
+        // KONDISI 1: Pesanan baru diambil pertama kali
         if (currentState == NPCState.WaitingToOrder)
         {
-            tandaSeru.SetActive(false);
-            currentState = NPCState.WaitingForFood;
+            // PENTING: Jangan di-deactivate, melainkan ubah warnanya jadi gelap
+            if (tandaSeruRenderer != null)
+            {
+                tandaSeruRenderer.color = warnaPesananDiambil;
+            }
 
-            Debug.Log("Mengirim pesanan ke UI: " + currentOrder.idResep);
-            OnPesananDiambil?.Invoke(currentOrder);
+            currentState = NPCState.WaitingForFood; // Status berubah menunggu makanan
+
+            Debug.Log("Mengambil pesanan pertama kali: " + currentOrder.idResep);
+            
+            if(OrderManager.Instance != null)
+            {
+                OrderManager.Instance.KirimPesananKeDapur(currentOrder);
+            }
+
+            OnPesananDiambil?.Invoke(currentOrder, npcSpriteRenderer.sprite);
+        }
+
+        // KONDISI 2: Pesanan sudah pernah diambil, tetapi pemain klik LAGI untuk mengintip resep
+        else if (currentState == NPCState.WaitingForFood)
+        {
+            Debug.Log("Melihat kembali pesanan milik NPC ini: " + currentOrder.idResep);
+
+            // Panggil kembali panel UI untuk menampilkan resep yang sama
+            OnPesananDiambil?.Invoke(currentOrder, npcSpriteRenderer.sprite);
         }
     }
 
     private void GenerateRandomOrder()
     {
-        currentOrder.idResep = "Serabi";
-        currentOrder.isian = TingkatIsian.Banyak;
-        currentOrder.tepung = JenisTepung.Beras;
+        string[] contohKue = { "Serabi", "Putu Ayu" };
+        currentOrder.idResep = contohKue[Random.Range(0, contohKue.Length)];
+
+        currentOrder.isian = (TingkatIsian)Random.Range(0, 3);
+        currentOrder.tepung = (JenisTepung)Random.Range(0, 4);
+
+        currentOrder.targetManis = Random.Range(20, 90);
+        currentOrder.targetLembut = Random.Range(20, 90);
+        currentOrder.targetGurih = Random.Range(20, 90);
     }
 
     public void Pulang()
