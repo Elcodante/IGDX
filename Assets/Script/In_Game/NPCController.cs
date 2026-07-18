@@ -47,7 +47,7 @@ public class NPCController : MonoBehaviour, IPointerClickHandler
         mySpawner = spawner;
     }
 
-    public void InitializeNPC(Transform assignedWaypoint, int slotIndex)
+    public void InitializeNPC(Transform assignedWaypoint, int slotIndex, MenuData[] menuList)
     {
         targetWaypoint = assignedWaypoint;
         mySlotIndex = slotIndex;
@@ -60,7 +60,7 @@ public class NPCController : MonoBehaviour, IPointerClickHandler
             tandaSeruRenderer.color = Color.white; // Warna default
         }
 
-        GenerateRandomOrder();
+        GenerateRandomOrder(menuList);
     }
 
     void Update()
@@ -121,17 +121,22 @@ public class NPCController : MonoBehaviour, IPointerClickHandler
         }
     }
 
-    private void GenerateRandomOrder()
+    private void GenerateRandomOrder(MenuData[] menuList)
     {
-        string[] contohKue = { "Serabi", "Putu Ayu" };
-        currentOrder.idResep = contohKue[Random.Range(0, contohKue.Length)];
+        if(menuList == null || menuList.Length == 0)
+        {
+            Debug.LogError("Menu list kosong atau null!");
+            return;
+        }
 
-        currentOrder.isian = (TingkatIsian)Random.Range(0, 3);
-        currentOrder.tepung = (JenisTepung)Random.Range(0, 4);
+        MenuData menupilihan = menuList[Random.Range(0, menuList.Length)];
 
-        currentOrder.targetManis = Random.Range(20, 90);
-        currentOrder.targetLembut = Random.Range(20, 90);
-        currentOrder.targetGurih = Random.Range(20, 90);
+        currentOrder.idResep = menupilihan.menuName;
+        currentOrder.isian = (TingkatIsian)Random.Range(0, 3); // Random antara 0 dan 2
+
+        currentOrder.targetManis = (TingkatRasa)Random.Range(0, 4);
+        currentOrder.targetLembut = (TingkatRasa)Random.Range(0, 4);
+        currentOrder.targetGurih = (TingkatRasa)Random.Range(0, 4);
     }
 
     public void Pulang()

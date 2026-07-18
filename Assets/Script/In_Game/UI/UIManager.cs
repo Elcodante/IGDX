@@ -43,14 +43,13 @@ public class UIManager : MonoBehaviour
             potretNPC.sprite = gambarNPC;
         }
         teksNamaMakanan.text = dataPesanan.idResep;
-        
+
         string detailOrder = "Detail Pesanan:\n";
         detailOrder += "- Tepung: " + dataPesanan.tepung.ToString() + "\n";
         detailOrder += "- Isian: " + dataPesanan.isian.ToString() + "\n";
-        detailOrder += "- Rasa Khas: " + 
-            (dataPesanan.targetManis > 50 ? "Manis " : "") + 
-            (dataPesanan.targetLembut > 50 ? "Lembut " : "") +
-            (dataPesanan.targetGurih > 50 ? "Gurih" : "");
+        detailOrder += "- Takaran Gula (Manis): " + dataPesanan.targetManis.ToString() + "\n";
+        detailOrder += "- Takaran Santan (Lembut): " + dataPesanan.targetLembut.ToString() + "\n";
+        detailOrder += "- Takaran Kelapa (Gurih): " + dataPesanan.targetGurih.ToString();
 
         teksKostumisasi.text = detailOrder;
 
