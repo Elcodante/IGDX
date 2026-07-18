@@ -3,6 +3,9 @@ using System.Collections.Generic;
 
 public class NPCSpawner : MonoBehaviour
 {
+    [Header("Daftar Menu")]
+    public MenuData[] menuList;
+
     [Header("Spawner Settings")]
     public GameObject[] npcPrefab;
     public Transform spawnPoint;
@@ -33,7 +36,13 @@ public class NPCSpawner : MonoBehaviour
             return;
         }
 
-        for(int i = 0; i < poolSize; i++)
+        if(menuList.Length == 0)
+        {
+            Debug.LogError("Menu list is empty. Please assign at least one menu item.");
+            return;
+        }
+
+        for (int i = 0; i < poolSize; i++)
         {
             GameObject prefabTerpilih = npcPrefab[Random.Range(0, npcPrefab.Length)];
 
@@ -82,7 +91,7 @@ public class NPCSpawner : MonoBehaviour
         spawnNPC.SetActive(true);
 
         NPCController controller = spawnNPC.GetComponent<NPCController>();
-        controller.InitializeNPC(queueWaypoints[slotIndex], slotIndex);
+        controller.InitializeNPC(queueWaypoints[slotIndex], slotIndex, menuList);
     }
 
     public void ReturnNPC(GameObject npc, int slotIndex)

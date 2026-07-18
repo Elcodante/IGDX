@@ -2,6 +2,8 @@ using UnityEngine;
 public enum TingkatIsian { Sedikit, Sedang, Banyak };
 public enum JenisTepung { Tapioka, Terigu, Ketan, Beras };
 
+public enum TingkatRasa {  TidakPakai, Sedikit, Sedang, Banyak };
+
 [System.Serializable]
 public struct OrderData
 {
@@ -12,7 +14,7 @@ public struct OrderData
     public JenisTepung tepung;
 
     [Header("Target Rasa")]
-    public float targetManis;
-    public float targetLembut;
-    public float targetGurih;
+    public TingkatRasa targetManis;
+    public TingkatRasa targetLembut;
+    public TingkatRasa targetGurih;
 };
