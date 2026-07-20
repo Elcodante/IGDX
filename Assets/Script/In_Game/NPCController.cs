@@ -65,7 +65,7 @@ public class NPCController : MonoBehaviour, IPointerClickHandler
 
     void Update()
     {
-        if (currentState == NPCState.WalkToCounter)
+        if (currentState == NPCState.WalkToCounter || currentState == NPCState.Leave)
         {
             MoveTowardsTarget();
         }
@@ -77,8 +77,15 @@ public class NPCController : MonoBehaviour, IPointerClickHandler
 
         if (Vector2.Distance(transform.position, targetWaypoint.position) < 0.1f)
         {
-            currentState = NPCState.WaitingToOrder;
-            tandaSeru.SetActive(true);
+            if(currentState == NPCState.WalkToCounter)
+            {
+                currentState = NPCState.WaitingToOrder;
+                tandaSeru.SetActive(true);
+            }
+            else if(currentState == NPCState.Leave)
+            {
+                mySpawner.ReturnNPC(this.gameObject);
+            }
         }
     }
 
@@ -141,6 +148,18 @@ public class NPCController : MonoBehaviour, IPointerClickHandler
 
     public void Pulang()
     {
-        mySpawner.ReturnNPC(this.gameObject, mySlotIndex);
+        currentState = NPCState.Leave;
+        tandaSeru.SetActive(false);
+
+        if(mySpawner != null)
+        {
+            targetWaypoint = mySpawner.exitPoint;
+        }
+        else
+        {
+            targetWaypoint = mySpawner.spawnPoint; // Fallback jika mySpawner null, meskipun seharusnya tidak terjadi
+        }
+
+        mySpawner.BebaskanSlot(mySlotIndex);
     }
 }

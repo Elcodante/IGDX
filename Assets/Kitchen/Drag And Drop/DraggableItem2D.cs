@@ -7,6 +7,8 @@ public class DraggableItem2D : MonoBehaviour, IBeginDragHandler, IDragHandler, I
     private Collider2D col;
     private Vector3 offset;
 
+    private Vector3 posisiAwal;
+
     private void Awake()
     {
         col = GetComponent<Collider2D>();
@@ -20,6 +22,8 @@ public class DraggableItem2D : MonoBehaviour, IBeginDragHandler, IDragHandler, I
 
     public void OnBeginDrag(PointerEventData eventData)
     {
+        posisiAwal = transform.position;
+
         Vector3 mousePos = Camera.main.ScreenToWorldPoint(eventData.position);
         mousePos.z = 0;
         offset = transform.position - mousePos;
@@ -37,5 +41,7 @@ public class DraggableItem2D : MonoBehaviour, IBeginDragHandler, IDragHandler, I
     public void OnEndDrag(PointerEventData eventData)
     {
         if (col != null) col.enabled = true;
+
+        transform.position = posisiAwal;    
     }
 }

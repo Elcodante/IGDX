@@ -11,6 +11,12 @@ public class NPCSpawner : MonoBehaviour
     public Transform spawnPoint;
     public float spawnInterval = 5f;
 
+    [Tooltip("Titik tujuan NPC setelah mereka selesai.")]
+    public Transform exitPoint;
+
+    [Tooltip("Jumlah total npc yang akan muncul di level ini.")]
+    public int maksimalNPC;
+
     [Header("Antrean Kasir")]
     public Transform[] queueWaypoints;
     private bool[] slotOccupied;
@@ -24,6 +30,8 @@ public class NPCSpawner : MonoBehaviour
     public UIManager uiManager;
 
     private float timer;
+
+    private int jumlahNPCSudahMuncul = 0;
 
     void Start()
     {
@@ -59,6 +67,11 @@ public class NPCSpawner : MonoBehaviour
 
     void Update()
     {
+        if(jumlahNPCSudahMuncul >= maksimalNPC)
+        {
+            return; // Tidak spawn NPC lagi jika sudah mencapai maksimal
+        }
+
         timer += Time.deltaTime;
 
         if (timer >= spawnInterval)
@@ -92,12 +105,18 @@ public class NPCSpawner : MonoBehaviour
 
         NPCController controller = spawnNPC.GetComponent<NPCController>();
         controller.InitializeNPC(queueWaypoints[slotIndex], slotIndex, menuList);
+
+        jumlahNPCSudahMuncul++;
+        Debug.Log($"NPC spawned. Total NPCs spawned: {jumlahNPCSudahMuncul}/{maksimalNPC}");
     }
 
-    public void ReturnNPC(GameObject npc, int slotIndex)
+    public void BebaskanSlot(int slotIndex)
+    {
+        slotOccupied[slotIndex] = false;
+    }
+    public void ReturnNPC(GameObject npc)
     {
         npc.SetActive(false);
-        slotOccupied[slotIndex] = false;
         npcPool.Enqueue(npc);
     }
 }
