@@ -3303,7 +3303,7 @@ Transform:
   m_GameObject: {fileID: 1030543586}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -18, y: 0, z: 0}
+  m_LocalPosition: {x: -22, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3472,7 +3472,7 @@ Transform:
   m_GameObject: {fileID: 1072064912}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 18, y: 0, z: 0}
+  m_LocalPosition: {x: 22, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4687,6 +4687,8 @@ MonoBehaviour:
   - {fileID: 11347220522793723, guid: aacdbedec83bbde4a85ade7c861f92fb, type: 3}
   spawnPoint: {fileID: 1072064913}
   spawnInterval: 5
+  exitPoint: {fileID: 1030543587}
+  maksimalNPC: 2
   queueWaypoints:
   - {fileID: 1679164985}
   - {fileID: 854869674}
