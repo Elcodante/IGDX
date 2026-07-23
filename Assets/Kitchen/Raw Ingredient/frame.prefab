@@ -143,7 +143,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 8766902409135515105, guid: 2862a59b852cc8c4f9d1265d99daf2f4, type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -177,4 +177,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d0e04265e3862a43ac903ccb522f23a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DraggableItem
-  namaBahan: 
+  dataBahan: {fileID: 0}

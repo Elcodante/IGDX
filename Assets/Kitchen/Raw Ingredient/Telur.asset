@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86442b7a1a0223842b7722ae67f037ee, type: 3}
   m_Name: Telur
   m_EditorClassIdentifier: Assembly-CSharp::IngredientData
-  ingredientID: 1
+  ingredientID: Telur
   ingredientName: Telur
-  icon: {fileID: -929299012049512342, guid: 444daf646c71b6a4fbbda797b3f6112a, type: 3}
+  icon: {fileID: 3931983199761314821, guid: 44de210ada1216a4caa1db579b62f225, type: 3}

@@ -1,10 +1,13 @@
 fileFormatVersion: 2
-guid: 444daf646c71b6a4fbbda797b3f6112a
+guid: a8f7d22b071af8f49b71590632efd1d0
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -929299012049512342
-    second: telur_0
+      213: -4574755228185893049
+    second: Santan empty_0
+  - first:
+      213: -1530525760196013320
+    second: Santan empty_1
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -37,7 +40,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -75,7 +78,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -100,13 +103,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: telur_0
+      name: Santan empty_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 275
-        height: 183
+        x: 71
+        y: 175
+        width: 898
+        height: 654
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +118,30 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: a68daa0e8777a13f0800000000000000
-      internalID: -929299012049512342
+      spriteID: 7476e99ab543380c0800000000000000
+      internalID: -4574755228185893049
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Santan empty_1
+      rect:
+        serializedVersion: 2
+        x: 991
+        y: 251
+        width: 14
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8f29eef1eea72cae0800000000000000
+      internalID: -1530525760196013320
       vertices: []
       indices: 
       edges: []
@@ -135,7 +160,8 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      telur_0: -929299012049512342
+      Santan empty_0: -4574755228185893049
+      Santan empty_1: -1530525760196013320
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

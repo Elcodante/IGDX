@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 2862a59b852cc8c4f9d1265d99daf2f4
+guid: 61547dc9df0dd344fa909407a88cd7c7
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 8766902409135515105
-    second: tepung_0
+      213: 271790178126711492
+    second: Minyak_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -37,7 +37,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -75,7 +75,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: tepung_0
+      name: Minyak_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 1000
-        height: 1000
+        x: 207
+        y: 107
+        width: 538
+        height: 838
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 1e5e905ca4b4aa970800000000000000
-      internalID: 8766902409135515105
+      spriteID: 4caceac1ab795c300800000000000000
+      internalID: 271790178126711492
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      tepung_0: 8766902409135515105
+      Minyak_0: 271790178126711492
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
