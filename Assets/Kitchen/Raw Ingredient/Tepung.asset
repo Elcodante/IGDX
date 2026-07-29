@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86442b7a1a0223842b7722ae67f037ee, type: 3}
   m_Name: Tepung
   m_EditorClassIdentifier: Assembly-CSharp::IngredientData
-  ingredientID: 2
+  ingredientID: Tepung
   ingredientName: Tepung
-  icon: {fileID: 8766902409135515105, guid: 2862a59b852cc8c4f9d1265d99daf2f4, type: 3}
+  icon: {fileID: -7115273739440965115, guid: 4a2854619328a4143ac6c83826c7e48a, type: 3}
