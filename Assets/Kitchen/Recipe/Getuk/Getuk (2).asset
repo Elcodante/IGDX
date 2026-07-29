@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24585a0301d620548849279fb4e9137b, type: 3}
+  m_Name: Getuk (2)
+  m_EditorClassIdentifier: Assembly-CSharp::RecipeData
+  inputIngredients:
+  - {fileID: 11400000, guid: 2b2c13831bf1fb44aa410867ab27914e, type: 2}
+  - {fileID: 11400000, guid: 1431c2da236bd8e48aa65da57e651b48, type: 2}
+  requiredMechanic: 1
+  timeLimit: 10
+  targetDifficulty: 1
+  successResult: {fileID: 11400000, guid: 8d212f1fde96e954aa2e10fb215a86e2, type: 2}
+  failResult: {fileID: 0}

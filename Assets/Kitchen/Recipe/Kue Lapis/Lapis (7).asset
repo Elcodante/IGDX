@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24585a0301d620548849279fb4e9137b, type: 3}
+  m_Name: Lapis (7)
+  m_EditorClassIdentifier: Assembly-CSharp::RecipeData
+  inputIngredients:
+  - {fileID: 11400000, guid: c475bd1dfee798240a05282a31c34bac, type: 2}
+  requiredMechanic: 3
+  timeLimit: 10
+  targetDifficulty: 1
+  successResult: {fileID: 11400000, guid: 26c4064a6e7bbb441a02ecd69c4be511, type: 2}
+  failResult: {fileID: 0}

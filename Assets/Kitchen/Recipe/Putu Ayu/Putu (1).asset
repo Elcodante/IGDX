@@ -13,9 +13,12 @@ MonoBehaviour:
   m_Name: Putu (1)
   m_EditorClassIdentifier: Assembly-CSharp::RecipeData
   inputIngredients:
-  - {fileID: 0}
-  requiredMechanic: 0
+  - {fileID: 11400000, guid: 0eae308e7309a0b42bcad39f7ba8d24b, type: 2}
+  - {fileID: 11400000, guid: 3f2d486a9222e874cb4d378d02235ad6, type: 2}
+  - {fileID: 11400000, guid: f23e39e7d779cbc4495583cb72deeb1f, type: 2}
+  - {fileID: 11400000, guid: 4f67e6456b40504459d91c6885778abd, type: 2}
+  requiredMechanic: 1
   timeLimit: 10
   targetDifficulty: 1
-  successResult: {fileID: 0}
+  successResult: {fileID: 11400000, guid: fea5d1b8f4a5d8d40890036730557cbf, type: 2}
   failResult: {fileID: 0}

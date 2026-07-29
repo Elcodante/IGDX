@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24585a0301d620548849279fb4e9137b, type: 3}
   m_Name: Serabi (2)
   m_EditorClassIdentifier: Assembly-CSharp::RecipeData
-  inputIngredients: []
-  requiredMechanic: 0
+  inputIngredients:
+  - {fileID: 11400000, guid: ef322dca571284a4baff8b0a65523078, type: 2}
+  requiredMechanic: 4
   timeLimit: 10
   targetDifficulty: 1
-  successResult: {fileID: 0}
+  successResult: {fileID: 11400000, guid: 7683120a2b1e6f34cbd3a403f5e9cfd7, type: 2}
   failResult: {fileID: 0}

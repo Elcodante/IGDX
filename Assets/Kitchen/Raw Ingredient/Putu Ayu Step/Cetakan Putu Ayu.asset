@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86442b7a1a0223842b7722ae67f037ee, type: 3}
+  m_Name: Cetakan Putu Ayu
+  m_EditorClassIdentifier: Assembly-CSharp::IngredientData
+  ingredientID: Cetakan Putu Ayu
+  ingredientName: Cetakan Putu Ayu
+  icon: {fileID: -2597748956768640907, guid: e15f0830dcffd2f45b5f9ed898aacb97, type: 3}
