@@ -7048,6 +7048,8 @@ MonoBehaviour:
   spawnInterval: 5
   exitPoint: {fileID: 1030543587}
   maksimalNPC: 2
+  maksimalVariasiMenu: 2
+  minimalVariasiMenu: 2
   queueWaypoints:
   - {fileID: 1679164985}
   - {fileID: 854869674}

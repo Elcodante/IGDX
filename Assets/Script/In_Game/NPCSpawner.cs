@@ -17,6 +17,12 @@ public class NPCSpawner : MonoBehaviour
     [Tooltip("Jumlah total npc yang akan muncul di level ini.")]
     public int maksimalNPC;
 
+    [Tooltip("Batas maksimal variasi menu yang bisa dimiliki NPC.")]
+    public int maksimalVariasiMenu;
+
+    [Tooltip("Batas Minimal variasinya menu yang bisa dimiliki NPC.")]
+    public int minimalVariasiMenu;
+
     [Header("Antrean Kasir")]
     public Transform[] queueWaypoints;
     private bool[] slotOccupied;
@@ -38,13 +44,13 @@ public class NPCSpawner : MonoBehaviour
         slotOccupied = new bool[queueWaypoints.Length];
         npcPool = new Queue<GameObject>();
 
-        if(npcPrefab.Length == 0 || npcPrefab[0] == null)
+        if (npcPrefab.Length == 0 || npcPrefab[0] == null)
         {
             Debug.LogError("NPC Prefab array is empty. Please assign at least one NPC prefab.");
             return;
         }
 
-        if(menuList.Length == 0)
+        if (menuList.Length == 0)
         {
             Debug.LogError("Menu list is empty. Please assign at least one menu item.");
             return;
@@ -67,7 +73,7 @@ public class NPCSpawner : MonoBehaviour
 
     void Update()
     {
-        if(jumlahNPCSudahMuncul >= maksimalNPC)
+        if (jumlahNPCSudahMuncul >= maksimalNPC)
         {
             return; // Tidak spawn NPC lagi jika sudah mencapai maksimal
         }
@@ -104,7 +110,7 @@ public class NPCSpawner : MonoBehaviour
         spawnNPC.SetActive(true);
 
         NPCController controller = spawnNPC.GetComponent<NPCController>();
-        controller.InitializeNPC(queueWaypoints[slotIndex], slotIndex, menuList);
+        controller.InitializeNPC(queueWaypoints[slotIndex], slotIndex, menuList,minimalVariasiMenu, maksimalVariasiMenu);
 
         jumlahNPCSudahMuncul++;
         Debug.Log($"NPC spawned. Total NPCs spawned: {jumlahNPCSudahMuncul}/{maksimalNPC}");

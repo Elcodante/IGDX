@@ -7,7 +7,6 @@ public class NPCDropTarget : MonoBehaviour, IDropHandler
 
     void Awake()
     {
-        // Ambil komponen NPCController yang dibuat temanmu
         npcController = GetComponent<NPCController>();
         if (npcController == null)
         {
@@ -15,52 +14,53 @@ public class NPCDropTarget : MonoBehaviour, IDropHandler
         }
     }
 
-    // Fungsi otomatis Unity saat mendeteksi ada objek di-drop ke NPC
     public void OnDrop(PointerEventData eventData)
     {
         if (npcController == null) return;
 
-        if (npcController.currentState != NPCState.WaitingForFood) 
+        if (npcController.currentState != NPCState.WaitingForFood)
         {
             Debug.Log("NPC menolak: 'Tanya dulu pesanan saya dong!'");
-            return; 
+            return;
         }
 
         GameObject droppedObj = eventData.pointerDrag;
         if (droppedObj == null) return;
 
         DraggableItem2D foodItem = droppedObj.GetComponent<DraggableItem2D>();
-        
+
         if (foodItem != null && foodItem.dataBahan != null)
         {
-            string idMakananDiberikan = foodItem.dataBahan.ingredientID; 
-            string idResepDiminta = npcController.currentOrder.idResep; 
+            string idMakananDiberikan = foodItem.dataBahan.ingredientID;
 
-            if (idMakananDiberikan == idResepDiminta)
+            // MENGGUNAKAN FUNGSI ENKAPSULASI: Biarkan NPC yang mengecek daftar pesanannya sendiri
+            bool diterima = npcController.CobaTerimaMakanan(idMakananDiberikan);
+
+            if (diterima)
             {
-                Debug.Log("Sesuai! NPC senang dan bersiap pulang.");
+                Debug.Log("Sesuai! Makanan diterima oleh NPC.");
 
+                // Hapus 1 tiket pesanan terkait dari papan dapur
                 if (OrderManager.Instance != null)
                 {
-                    // cari pesanan di daftar aktif yang ID-nya sama dengan pesanan NPC ini
-                    for (int i = 0; i < OrderManager.Instance.daftarPesananAktif.Count; i++) 
+                    for (int i = 0; i < OrderManager.Instance.daftarPesananAktif.Count; i++)
                     {
-                        if (OrderManager.Instance.daftarPesananAktif[i].idResep == idResepDiminta)
+                        if (OrderManager.Instance.daftarPesananAktif[i].idResep == idMakananDiberikan)
                         {
-                            // Hapus dari daftar agar tiketnya tidak muncul lagi di dapur
-                            OrderManager.Instance.daftarPesananAktif.RemoveAt(i); 
-                            break; 
+                            OrderManager.Instance.daftarPesananAktif.RemoveAt(i);
+                            break;
                         }
                     }
                 }
 
-                // Hancurkan makanan dan suruh NPC pulang
+                // Hancurkan makanan dari tangan pemain
                 Destroy(foodItem.gameObject);
-                npcController.Pulang(); 
             }
             else
             {
                 Debug.Log("Salah makanan! NPC menolak masakan ini.");
+                // Karena makanan tidak di-Destroy, otomatis fitur 'Snap Back' 
+                // di DraggableItem2D akan menarik makanan ini kembali ke meja.
             }
         }
     }

@@ -1,29 +1,20 @@
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
+using System.Collections.Generic;
 
-public enum NPCState
-{
-    WalkToCounter,
-    WaitingToOrder,
-    WaitingForFood,
-    Reacting,
-    Leave
-}
+public enum NPCState { WalkToCounter, WaitingToOrder, WaitingForFood, Leave }
 
+[RequireComponent(typeof(NPCOrderHandler))] // Memastikan script Order otomatis terpasang
 public class NPCController : MonoBehaviour, IPointerClickHandler
 {
     [Header("NPC Settings")]
     public float moveSpeed = 3f;
-    public OrderData currentOrder;
 
     [Header("UI / Visuals")]
     public GameObject tandaSeru;
-
-    [Header("Warna tanda seru saat pesanan diambil")]
     public Color warnaPesananDiambil = new Color(0.4f, 0.4f, 0.4f, 1f);
-    
-    public UnityEvent<OrderData, Sprite> OnPesananDiambil;
+    public UnityEvent<List<OrderData>, Sprite> OnPesananDiambil;
 
     public NPCState currentState;
     private Transform targetWaypoint;
@@ -33,34 +24,32 @@ public class NPCController : MonoBehaviour, IPointerClickHandler
     private SpriteRenderer tandaSeruRenderer;
     private SpriteRenderer npcSpriteRenderer;
 
+    // Referensi ke "Buku Catatan" NPC
+    private NPCOrderHandler orderHandler;
+
     void Awake()
     {
-        if(tandaSeru != null)
-        {
-            tandaSeruRenderer = tandaSeru.GetComponent<SpriteRenderer>();
-        }
+        if (tandaSeru != null) tandaSeruRenderer = tandaSeru.GetComponent<SpriteRenderer>();
         npcSpriteRenderer = GetComponent<SpriteRenderer>();
+
+        // Ambil komponen handler
+        orderHandler = GetComponent<NPCOrderHandler>();
     }
 
-    public void SetSpawner(NPCSpawner spawner)
-    {
-        mySpawner = spawner;
-    }
+    public void SetSpawner(NPCSpawner spawner) { mySpawner = spawner; }
 
-    public void InitializeNPC(Transform assignedWaypoint, int slotIndex, MenuData[] menuList)
+    public void InitializeNPC(Transform assignedWaypoint, int slotIndex, MenuData[] menuList, int minVariasi, int maxVariasi)
     {
         targetWaypoint = assignedWaypoint;
         mySlotIndex = slotIndex;
         currentState = NPCState.WalkToCounter;
 
         tandaSeru.SetActive(false);
+        if (tandaSeruRenderer != null) tandaSeruRenderer.color = Color.white;
 
-        if (tandaSeruRenderer != null)
-        {
-            tandaSeruRenderer.color = Color.white; // Warna default
-        }
-
-        GenerateRandomOrder(menuList);
+        // Suruh handler mereset dan mengacak pesanan
+        orderHandler.ResetHandler();
+        orderHandler.GenerateRandomOrder(menuList, minVariasi, maxVariasi);
     }
 
     void Update()
@@ -77,12 +66,12 @@ public class NPCController : MonoBehaviour, IPointerClickHandler
 
         if (Vector2.Distance(transform.position, targetWaypoint.position) < 0.1f)
         {
-            if(currentState == NPCState.WalkToCounter)
+            if (currentState == NPCState.WalkToCounter)
             {
                 currentState = NPCState.WaitingToOrder;
                 tandaSeru.SetActive(true);
             }
-            else if(currentState == NPCState.Leave)
+            else if (currentState == NPCState.Leave)
             {
                 mySpawner.ReturnNPC(this.gameObject);
             }
@@ -91,75 +80,46 @@ public class NPCController : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        if (UIManager.IsPanelOpen)
-        {
-            Debug.Log("Klik diabaikan karena sedang ada panel aktif.");
-            return;
-        }
+        if (UIManager.IsPanelOpen) return;
 
-        // KONDISI 1: Pesanan baru diambil pertama kali
         if (currentState == NPCState.WaitingToOrder)
         {
-            // PENTING: Jangan di-deactivate, melainkan ubah warnanya jadi gelap
-            if (tandaSeruRenderer != null)
-            {
-                tandaSeruRenderer.color = warnaPesananDiambil;
-            }
+            if (tandaSeruRenderer != null) tandaSeruRenderer.color = warnaPesananDiambil;
+            currentState = NPCState.WaitingForFood;
 
-            currentState = NPCState.WaitingForFood; // Status berubah menunggu makanan
+            // Suruh handler mengirim tiket ke dapur
+            orderHandler.KirimKeDapur();
 
-            Debug.Log("Mengambil pesanan pertama kali: " + currentOrder.idResep);
-            
-            if(OrderManager.Instance != null)
-            {
-                OrderManager.Instance.KirimPesananKeDapur(currentOrder);
-            }
-
-            OnPesananDiambil?.Invoke(currentOrder, npcSpriteRenderer.sprite);
+            OnPesananDiambil?.Invoke(orderHandler.daftarPesanan, npcSpriteRenderer.sprite);
         }
-
-        // KONDISI 2: Pesanan sudah pernah diambil, tetapi pemain klik LAGI untuk mengintip resep
         else if (currentState == NPCState.WaitingForFood)
         {
-            Debug.Log("Melihat kembali pesanan milik NPC ini: " + currentOrder.idResep);
-
-            // Panggil kembali panel UI untuk menampilkan resep yang sama
-            OnPesananDiambil?.Invoke(currentOrder, npcSpriteRenderer.sprite);
+            OnPesananDiambil?.Invoke(orderHandler.daftarPesanan, npcSpriteRenderer.sprite);
         }
     }
 
-    private void GenerateRandomOrder(MenuData[] menuList)
+    // Fungsi Facade (Jembatan) untuk NPCDropTarget
+    public bool CobaTerimaMakanan(string idMakananDiberikan)
     {
-        if(menuList == null || menuList.Length == 0)
+        // Lempar tugas pengecekan ke orderHandler
+        bool diterima = orderHandler.CobaTerimaMakanan(idMakananDiberikan);
+
+        if (diterima)
         {
-            Debug.LogError("Menu list kosong atau null!");
-            return;
+            // Cek apakah NPC ini sudah kenyang (semua pesanan terpenuhi)
+            if (orderHandler.ApakahSemuaPesananSelesai())
+            {
+                Pulang();
+            }
         }
-
-        MenuData menupilihan = menuList[Random.Range(0, menuList.Length)];
-
-        currentOrder.idResep = menupilihan.menuName;
-        currentOrder.isian = (TingkatIsian)Random.Range(0, 3); // Random antara 0 dan 2
-
-        currentOrder.targetManis = (TingkatRasa)Random.Range(0, 4);
-        currentOrder.targetLembut = (TingkatRasa)Random.Range(0, 4);
-        currentOrder.targetGurih = (TingkatRasa)Random.Range(0, 4);
+        return diterima;
     }
 
     public void Pulang()
     {
         currentState = NPCState.Leave;
         tandaSeru.SetActive(false);
-
-        if(mySpawner != null)
-        {
-            targetWaypoint = mySpawner.exitPoint;
-        }
-        else
-        {
-            targetWaypoint = mySpawner.spawnPoint; // Fallback jika mySpawner null, meskipun seharusnya tidak terjadi
-        }
-
+        targetWaypoint = (mySpawner != null && mySpawner.exitPoint != null) ? mySpawner.exitPoint : transform;
         mySpawner.BebaskanSlot(mySlotIndex);
     }
 }

@@ -1,6 +1,7 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections.Generic;
 public class UIManager : MonoBehaviour
 {
     [Header("UI Elements")]
@@ -31,29 +32,43 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    public void TampilkanPanelPesanan(OrderData dataPesanan, Sprite gambarNPC)
+    public void TampilkanPanelPesanan(List<OrderData> dataPesanan, Sprite gambarNPC)
     {
         panelPesanan.SetActive(true);
-        tombolPerpindahan.SetActive(false); // Nonaktifkan tombol perpindahan saat panel pesanan terbuka
-        potretNPC.enabled = true; // Aktifkan potret NPC saat panel pesanan terbuka
-        IsPanelOpen = true; 
+        tombolPerpindahan.SetActive(false);
+        potretNPC.enabled = true;
+        IsPanelOpen = true;
 
-        if(potretNPC != null && gambarNPC != null)
+        if (potretNPC != null && gambarNPC != null)
         {
             potretNPC.sprite = gambarNPC;
         }
-        teksNamaMakanan.text = dataPesanan.idResep;
 
-        string detailOrder = "Detail Pesanan:\n";
-        detailOrder += "- Tepung: " + dataPesanan.tepung.ToString() + "\n";
-        detailOrder += "- Isian: " + dataPesanan.isian.ToString() + "\n";
-        detailOrder += "- Takaran Gula (Manis): " + dataPesanan.targetManis.ToString() + "\n";
-        detailOrder += "- Takaran Santan (Lembut): " + dataPesanan.targetLembut.ToString() + "\n";
-        detailOrder += "- Takaran Kelapa (Gurih): " + dataPesanan.targetGurih.ToString();
+        // 1. KOSONGKAN TEKS SEBELUMNYA
+        teksNamaMakanan.text = "";
+        string detailOrder = "Detail Pesanan:\n\n";
+
+        // 2. LAKUKAN LOOPING SEBANYAK JUMLAH PESANAN
+        for (int i = 0; i < dataPesanan.Count; i++)
+        {
+            // Format Judul Makanan (Contoh: "Serabi & Putu Ayu")
+            teksNamaMakanan.text += dataPesanan[i].idResep;
+            if (i < dataPesanan.Count - 1)
+            {
+                teksNamaMakanan.text += " & ";
+            }
+
+            // Format Isi Teks (Menggunakan Rich Text Unity agar nama menu berwarna kuning)
+            detailOrder += $"<color=yellow>--- Pesanan {i + 1}: {dataPesanan[i].idResep} ---</color>\n";
+            detailOrder += "- Tepung: " + dataPesanan[i].tepung.ToString() + "\n";
+            detailOrder += "- Isian: " + dataPesanan[i].isian.ToString() + "\n";
+            detailOrder += "- Takaran Gula: " + dataPesanan[i].targetManis.ToString() + "\n";
+            detailOrder += "- Takaran Santan: " + dataPesanan[i].targetLembut.ToString() + "\n";
+            detailOrder += "- Takaran Kelapa: " + dataPesanan[i].targetGurih.ToString() + "\n\n";
+        }
 
         teksKostumisasi.text = detailOrder;
-
-        Debug.Log("Panel Pesanan Terbuka. NPC lain terkunci.");
+        Debug.Log("Panel Pesanan Terbuka. Menampilkan " + dataPesanan.Count + " pesanan.");
     }
 
     public void TutupPanelPesanan()
