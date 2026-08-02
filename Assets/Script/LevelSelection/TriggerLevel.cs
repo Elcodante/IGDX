@@ -23,7 +23,10 @@ public class TriggerLevel : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            ButtonLevel.SetActive(false); 
+            if (ButtonLevel != null) 
+            {
+                ButtonLevel.SetActive(false);
+            }
         }
     }
 }

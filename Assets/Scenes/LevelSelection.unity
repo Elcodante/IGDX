@@ -235,6 +235,7 @@ GameObject:
   - component: {fileID: 446278591}
   - component: {fileID: 446278593}
   - component: {fileID: 446278594}
+  - component: {fileID: 446278595}
   m_Layer: 0
   m_Name: Pocong Lvl 1
   m_TagString: Untagged
@@ -308,12 +309,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 446278590}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.58, y: 3.82, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -32.18, y: 0, z: 0}
   m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
   m_ConstrainProportionsScale: 1
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1640733227}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!58 &446278593
 CircleCollider2D:
@@ -364,6 +365,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TriggerLevel
   ButtonLevel: {fileID: 1396040236}
+--- !u!114 &446278595
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 446278590}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b4dda02fddf50b4fb05ff0bfbb13c8c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LevelData
+  namaSceneGameplay: GameplayScene
+  levelberapa: 1
+  menuList:
+  - {fileID: 11400000, guid: 9a0aaff7ceb0bfe4a8ab1dfc54856e78, type: 2}
+  - {fileID: 11400000, guid: c42fde2b8188a32439895b95ef4cfc02, type: 2}
+  npcPrefab: []
+  spawnInterval: 5
+  maksimalNPC: 5
+  minimalVariasiMenu: 1
+  maksimalVariasiMenu: 2
 --- !u!1 &455659556
 GameObject:
   m_ObjectHideFlags: 0
@@ -649,6 +672,7 @@ GameObject:
   - component: {fileID: 745650541}
   - component: {fileID: 745650543}
   - component: {fileID: 745650544}
+  - component: {fileID: 745650545}
   m_Layer: 0
   m_Name: Genderuwo Lvl 4
   m_TagString: Untagged
@@ -722,12 +746,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 745650540}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 12.47, y: -0.36, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -12.13, y: -4.18, z: 0}
   m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
   m_ConstrainProportionsScale: 1
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1640733227}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!58 &745650543
 CircleCollider2D:
@@ -778,6 +802,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TriggerLevel
   ButtonLevel: {fileID: 1396040236}
+--- !u!114 &745650545
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 745650540}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b4dda02fddf50b4fb05ff0bfbb13c8c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LevelData
+  namaSceneGameplay: GameplayScene
+  levelberapa: 4
+  menuList:
+  - {fileID: 11400000, guid: 9a0aaff7ceb0bfe4a8ab1dfc54856e78, type: 2}
+  - {fileID: 11400000, guid: c42fde2b8188a32439895b95ef4cfc02, type: 2}
+  npcPrefab: []
+  spawnInterval: 5
+  maksimalNPC: 20
+  minimalVariasiMenu: 1
+  maksimalVariasiMenu: 3
 --- !u!1 &921641576
 GameObject:
   m_ObjectHideFlags: 0
@@ -790,6 +836,7 @@ GameObject:
   - component: {fileID: 921641577}
   - component: {fileID: 921641579}
   - component: {fileID: 921641580}
+  - component: {fileID: 921641581}
   m_Layer: 0
   m_Name: Sundel Bolong Lvl 5
   m_TagString: Untagged
@@ -863,12 +910,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 921641576}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 24.6, y: 3.82, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
   m_ConstrainProportionsScale: 1
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1640733227}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!58 &921641579
 CircleCollider2D:
@@ -919,6 +966,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TriggerLevel
   ButtonLevel: {fileID: 1396040236}
+--- !u!114 &921641581
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 921641576}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b4dda02fddf50b4fb05ff0bfbb13c8c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LevelData
+  namaSceneGameplay: GameplayScene
+  levelberapa: 5
+  menuList:
+  - {fileID: 11400000, guid: 9a0aaff7ceb0bfe4a8ab1dfc54856e78, type: 2}
+  - {fileID: 11400000, guid: c42fde2b8188a32439895b95ef4cfc02, type: 2}
+  npcPrefab: []
+  spawnInterval: 5
+  maksimalNPC: 25
+  minimalVariasiMenu: 1
+  maksimalVariasiMenu: 3
 --- !u!1 &991205695
 GameObject:
   m_ObjectHideFlags: 0
@@ -1459,6 +1528,7 @@ GameObject:
   - component: {fileID: 1428832018}
   - component: {fileID: 1428832020}
   - component: {fileID: 1428832021}
+  - component: {fileID: 1428832022}
   m_Layer: 0
   m_Name: Kunti Lvl 2
   m_TagString: Untagged
@@ -1532,12 +1602,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1428832017}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.78, y: -4.03, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -23.82, y: -7.8500004, z: 0}
   m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
   m_ConstrainProportionsScale: 1
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1640733227}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!58 &1428832020
 CircleCollider2D:
@@ -1588,6 +1658,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TriggerLevel
   ButtonLevel: {fileID: 1396040236}
+--- !u!114 &1428832022
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1428832017}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b4dda02fddf50b4fb05ff0bfbb13c8c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LevelData
+  namaSceneGameplay: GameplayScene
+  levelberapa: 2
+  menuList:
+  - {fileID: 11400000, guid: 9a0aaff7ceb0bfe4a8ab1dfc54856e78, type: 2}
+  - {fileID: 11400000, guid: c42fde2b8188a32439895b95ef4cfc02, type: 2}
+  npcPrefab: []
+  spawnInterval: 5
+  maksimalNPC: 10
+  minimalVariasiMenu: 1
+  maksimalVariasiMenu: 3
 --- !u!1 &1489503988
 GameObject:
   m_ObjectHideFlags: 0
@@ -1936,6 +2028,93 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1557372597}
   m_CullTransparentMesh: 1
+--- !u!1 &1640733226
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1640733227}
+  m_Layer: 0
+  m_Name: Karakter
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1640733227
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1640733226}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 24.6, y: 3.82, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 446278592}
+  - {fileID: 1428832019}
+  - {fileID: 2035541279}
+  - {fileID: 745650542}
+  - {fileID: 921641578}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1869968989
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1869968991}
+  - component: {fileID: 1869968990}
+  m_Layer: 0
+  m_Name: LevelManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1869968990
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1869968989}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c3ccada25595e54fbbfe08d9a469542, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LevelManager
+  pilihanlevel: 
+  currentMenuList: []
+  currentNpcPrefab: []
+  currentSpawnInterval: 0
+  currentMaksimalNPC: 0
+  currentMinimalVariasiMenu: 0
+  currentMaksimalVariasiMenu: 0
+--- !u!4 &1869968991
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1869968989}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 5.3133, y: -0.32394, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1885171503
 GameObject:
   m_ObjectHideFlags: 0
@@ -2081,6 +2260,7 @@ GameObject:
   - component: {fileID: 2035541278}
   - component: {fileID: 2035541280}
   - component: {fileID: 2035541281}
+  - component: {fileID: 2035541282}
   m_Layer: 0
   m_Name: Tuyul Lvl 3
   m_TagString: Untagged
@@ -2154,12 +2334,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2035541277}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8.39, y: 3.82, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -16.21, y: 0, z: 0}
   m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
   m_ConstrainProportionsScale: 1
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1640733227}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!58 &2035541280
 CircleCollider2D:
@@ -2210,15 +2390,34 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TriggerLevel
   ButtonLevel: {fileID: 1396040236}
+--- !u!114 &2035541282
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2035541277}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b4dda02fddf50b4fb05ff0bfbb13c8c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LevelData
+  namaSceneGameplay: GameplayScene
+  levelberapa: 3
+  menuList:
+  - {fileID: 11400000, guid: 9a0aaff7ceb0bfe4a8ab1dfc54856e78, type: 2}
+  - {fileID: 11400000, guid: c42fde2b8188a32439895b95ef4cfc02, type: 2}
+  npcPrefab: []
+  spawnInterval: 5
+  maksimalNPC: 15
+  minimalVariasiMenu: 1
+  maksimalVariasiMenu: 3
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 991205697}
-  - {fileID: 446278592}
-  - {fileID: 1428832019}
-  - {fileID: 2035541279}
-  - {fileID: 745650542}
-  - {fileID: 921641578}
+  - {fileID: 1640733227}
   - {fileID: 191555251}
   - {fileID: 1507444587}
+  - {fileID: 1869968991}

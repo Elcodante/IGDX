@@ -41,6 +41,7 @@ public class NPCSpawner : MonoBehaviour
 
     void Start()
     {
+        LoadLevelData();
         slotOccupied = new bool[queueWaypoints.Length];
         npcPool = new Queue<GameObject>();
 
@@ -92,6 +93,22 @@ public class NPCSpawner : MonoBehaviour
         }
     }
 
+    private void LoadLevelData()
+    {
+        if (LevelManager.Instance != null)
+        {
+            Debug.Log("Ini Level" + LevelManager.Instance.pilihanlevel);
+            menuList = LevelManager.Instance.currentMenuList;
+            maksimalNPC = LevelManager.Instance.currentMaksimalNPC;
+
+            Debug.Log("Berhasil memuat data level dari LevelManager!");
+        }
+        else
+        {
+            Debug.LogWarning("LevelManager tidak ditemukan.");
+        }
+    }
+
     private int GetEmptySlot()
     {
         for (int i = 0; i < slotOccupied.Length; i++)
@@ -125,4 +142,5 @@ public class NPCSpawner : MonoBehaviour
         npc.SetActive(false);
         npcPool.Enqueue(npc);
     }
+
 }
