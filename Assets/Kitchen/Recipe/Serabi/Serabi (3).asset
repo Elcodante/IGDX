@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Serabi (3)
   m_EditorClassIdentifier: Assembly-CSharp::RecipeData
   inputIngredients:
-  - {fileID: 11400000, guid: ef322dca571284a4baff8b0a65523078, type: 2}
+  - {fileID: 11400000, guid: 7683120a2b1e6f34cbd3a403f5e9cfd7, type: 2}
   requiredMechanic: 3
   timeLimit: 10
   targetDifficulty: 1

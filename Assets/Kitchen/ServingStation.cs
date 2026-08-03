@@ -2,17 +2,22 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
+[RequireComponent(typeof(BoxCollider2D))]
 public class ServingStation : MonoBehaviour, IDropHandler
 {
-    [Header("Referensi UI")]
-    public Transform dropSlot;           // Tempat makanan di dapur
-    public Button serveButton;           // Tombol "Serve"
-    
-    [Header("Meja Depan (Kasir)")]
-    [Tooltip("Tarik slot kosong yang ada di dekat NPC ke sini")]
-    public Transform frontCounterSlot;   // Tempat makanan muncul di depan kasir
+    [Header("Referensi Piring (Dapur)")]
+    [Tooltip("Masukkan 3 objek piring kosong di dapur ke sini")]
+    public Transform[] plateSlots = new Transform[3]; 
 
-    private DraggableItem2D currentFood;
+    [Header("Meja Depan (Kasir)")]
+    [Tooltip("Masukkan 3 slot posisi di meja kasir depan")]
+    public Transform[] frontCounterSlots = new Transform[3];
+
+    [Header("UI")]
+    public Button serveButton; 
+
+    // Array untuk menyimpan maksimal 3 masakan
+    private DraggableItem2D[] currentFoods = new DraggableItem2D[3];
 
     void Start()
     {
@@ -25,52 +30,78 @@ public class ServingStation : MonoBehaviour, IDropHandler
 
     public void OnDrop(PointerEventData eventData)
     {
-        GameObject droppedObj = eventData.pointerDrag;
-        if (droppedObj == null) return;
+        GameObject droppedObj = eventData.pointerDrag; 
+        if (droppedObj == null) return; 
 
-        DraggableItem2D dragItem = droppedObj.GetComponent<DraggableItem2D>();
-        if (dragItem != null)
+        // Kita cari tahu apakah yang di-drop adalah makanan hasil masak (2D)
+        DraggableItem2D dragItem = droppedObj.GetComponent<DraggableItem2D>(); 
+        if (dragItem != null && dragItem.dataBahan != null) 
         {
-            if (dropSlot == null)
+            // 1. Cari piring mana yang masih kosong
+            int piringKosongIndex = -1;
+            for (int i = 0; i < currentFoods.Length; i++)
             {
-                Debug.LogError("ERROR: Kolom 'Drop Slot' di Serving Station belum diisi di Inspector!");
-                return;
+                if (currentFoods[i] == null)
+                {
+                    piringKosongIndex = i;
+                    break; // Ketemu yang kosong, langsung stop pencarian
+                }
             }
 
-            if (dragItem.dataBahan == null)
+            // 2. Jika ada piring kosong, taruh makanannya!
+            if (piringKosongIndex != -1)
             {
-                Debug.LogError("ERROR: Makanan yang di-drop tidak memiliki dataBahan!");
-                return;
+
+                // Simpan ke daftar
+                currentFoods[piringKosongIndex] = dragItem;
+
+                // Kunci posisi makanan di atas piring tersebut
+                dragItem.transform.SetParent(plateSlots[piringKosongIndex]);
+                dragItem.transform.position = plateSlots[piringKosongIndex].position;
+                
+                // Pastikan gambar makanan tampil di atas gambar piring
+                SpriteRenderer sr = dragItem.GetComponent<SpriteRenderer>();
+                if (sr != null) sr.sortingOrder = 10; 
+
+                if (serveButton != null) serveButton.gameObject.SetActive(true); 
+                
+                Debug.Log($"Makanan {dragItem.dataBahan.ingredientID} ditaruh di piring ke-{piringKosongIndex + 1}!");
             }
-
-            currentFood = dragItem;
-            currentFood.transform.SetParent(dropSlot);
-            currentFood.transform.position = dropSlot.position;
-
-            if (serveButton != null) serveButton.gameObject.SetActive(true);
-            
-            Debug.Log($"Makanan {currentFood.dataBahan.ingredientID} siap di-serve!");
+            else
+            {
+                Debug.Log("Gagal! Semua 3 piring sudah penuh!");
+            }
         }
     }
 
     private void OnServeButtonClicked()
     {
-        if (currentFood != null && currentFood.dataBahan != null)
+        bool adaYangDiserve = false;
+
+        // Looping untuk mengirim semua masakan yang ada di piring
+        for (int i = 0; i < currentFoods.Length; i++)
         {
-            Debug.Log($"Mengirim {currentFood.dataBahan.ingredientID} ke depan...[cite: 5]");
-
-            // PINDAHKAN MAKANAN KE MEJA KASIR DEPAN
-            if (frontCounterSlot != null)
+            if (currentFoods[i] != null)
             {
-                currentFood.transform.SetParent(frontCounterSlot);
-                currentFood.transform.position = frontCounterSlot.position;
-            }
+                adaYangDiserve = true;
+                Debug.Log($"Mengirim {currentFoods[i].dataBahan.ingredientID} ke depan...[cite: 10]");
 
-            // Sembunyikan tombol serve karena makanan sudah dikirim
-            if (serveButton != null) serveButton.gameObject.SetActive(false);
-            
-            // Lepas referensi agar meja saji kosong lagi
-            currentFood = null; 
+                // Pindahkan masakan ke meja kasir sesuai urutan piring
+                if (i < frontCounterSlots.Length && frontCounterSlots[i] != null)
+                {
+                    currentFoods[i].transform.SetParent(frontCounterSlots[i]);
+                    currentFoods[i].transform.position = frontCounterSlots[i].position;
+                }
+
+                // Kosongkan piring ini
+                currentFoods[i] = null; 
+            }
+        }
+
+        // Sembunyikan tombol jika sudah terkirim semua
+        if (adaYangDiserve && serveButton != null) 
+        {
+            serveButton.gameObject.SetActive(false); //[cite: 10]
         }
     }
 }
