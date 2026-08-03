@@ -74,17 +74,22 @@ public class DropTarget : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPo
             // Jika valid ada bahan yang masuk
             if (bahanYangMasuk != null)
             {
-                Debug.Log($"Berhasil! {bahanYangMasuk.ingredientName} dimasukkan ke {namaAlat}");
-                
-                CookingAppliance appliance = GetComponent<CookingAppliance>();
+                CookingAppliance appliance = GetComponent<CookingAppliance>(); //[cite: 13]
                 if (appliance != null)
                 {
-                    appliance.AddIngredient(bahanYangMasuk);
+                    // --- KODE PENGAMAN BUKA/TUTUP ---
+                    if (appliance.butuhDibuka && !appliance.isOpen)
+                    {
+                        Debug.Log($"Tolak! {namaAlat} masih ditutup. Buka dulu dong!");
+                        return; // Batal masukin bahan dan batalkan drop
+                    }
+
+                    Debug.Log($"Berhasil! {bahanYangMasuk.ingredientName} dimasukkan ke {namaAlat}"); //[cite: 13]
+                    appliance.AddIngredient(bahanYangMasuk); //[cite: 13]
                     
                     if (!isUIItem)
                     {
-                        // Hanya hancurkan jika itu objek 2D overworld
-                        Destroy(eventData.pointerDrag.gameObject); 
+                        Destroy(eventData.pointerDrag.gameObject); //[cite: 13]
                     }
                 }
             }

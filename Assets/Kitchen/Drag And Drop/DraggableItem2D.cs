@@ -42,6 +42,6 @@ public class DraggableItem2D : MonoBehaviour, IBeginDragHandler, IDragHandler, I
     {
         if (col != null) col.enabled = true;
 
-        transform.position = posisiAwal;    
+        // transform.position = posisiAwal;    
     }
 }

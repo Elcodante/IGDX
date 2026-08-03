@@ -10,16 +10,31 @@ public class CookingAppliance : MonoBehaviour
     public GameObject startButtonUI; 
     [SerializeField] private MonoBehaviour minigameScript; 
     
+    [Header("Gimik Interaksi")]
+    public bool butuhDibuka = false;
+    public bool isOpen = true; 
+    public Sprite spriteTertutup; // Gambar saat panci/oven ditutup
+
+    public bool butuhDinyalakan = false;
+    public bool isOn = false; 
+    public Sprite spriteNyala; // Gambar kompor saat nyala tapi belum ada wajan/bahan
+
     [Header("Database & Output")]
     public List<RecipeData> resepYangBisaDimasak; 
     public GameObject draggableItemPrefab;
     public Transform spawnPoint;
 
     [Header("Visual Alat Masak")]
-    public SpriteRenderer applianceSprite2D; // Isi ini jika alat masakmu objek 2D
-    public Image applianceUIImage;           // Isi ini jika alat masakmu UI Canvas
-    public Sprite spriteKosong;              // Gambar saat belum ada bahan
-    public Sprite spriteTerisi;              // Gambar saat ada bahan masuk
+    public SpriteRenderer applianceSprite2D; 
+    public Image applianceUIImage;           
+    public Sprite spriteKosong;              
+    public Sprite spriteTerisi;              
+
+    [Header("Gimik Tumpukan Bahan (2D)")]
+    [Tooltip("Centang ini khusus untuk alat seperti mangkuk (Bowl)")]
+    public bool gunakanTumpukanVisual = false; 
+    public Transform tumpukanContainer;       // Titik kumpul spawn gambar bahan
+    public GameObject prefabVisualBahan2D;    // Prefab kosong isi SpriteRenderer
 
     [System.Serializable]
     public struct VisualBahanMapping
@@ -29,12 +44,11 @@ public class CookingAppliance : MonoBehaviour
     }
 
     [Header("Mapping Gambar Spesifik")]
-    [Tooltip("Jika kosong, akan otomatis pakai Sprite Terisi")]
     public List<VisualBahanMapping> visualSpesifikBahan;
 
     [Header("Indikator UI Bahan")]
-    public Transform indikatorContainer;     // Objek kosong/Layout Group tempat UI icon muncul
-    public GameObject indikatorPrefab;       // Prefab yang isinya Image dan Text
+    public Transform indikatorContainer;     
+    public GameObject indikatorPrefab;       
 
     private IMinigameMechanic activeMinigame; 
     private List<IngredientData> currentIngredients = new List<IngredientData>();
@@ -46,67 +60,96 @@ public class CookingAppliance : MonoBehaviour
         if (activeMinigame == null) activeMinigame = GetComponent<IMinigameMechanic>();
         
         if (startButtonUI != null) startButtonUI.SetActive(false);
-        UpdateVisualAlat(); // Set gambar awal ke kosong
+        UpdateVisualAlat(); 
+    }
+
+    public void ToggleBukaTutup()
+    {
+        if (!butuhDibuka) return;
+        isOpen = !isOpen;
+        UpdateVisualAlat();
+        Debug.Log($"{applianceName} sekarang {(isOpen ? "Terbuka" : "Tertutup")}");
+    }
+
+    public void ToggleNyalaMati()
+    {
+        if (!butuhDinyalakan) return;
+        isOn = !isOn;
+        UpdateVisualAlat();
+        Debug.Log($"{applianceName} sekarang {(isOn ? "Nyala" : "Mati")}");
     }
 
     public void AddIngredient(IngredientData ingredient)
     {
         currentIngredients.Add(ingredient);
-        UpdateVisualAlat(); // Update gambar dan UI indikator
+        UpdateVisualAlat(); 
         CheckForValidRecipe();
     }
 
-    // TOMBOL RESET 
     public void ResetIngredients()
     {
         currentIngredients.Clear();
         currentValidRecipe = null;
         if (startButtonUI != null) startButtonUI.SetActive(false);
         
-        UpdateVisualAlat(); // Kembalikan ke gambar kosong
-        Debug.Log($"Bahan di {applianceName} berhasil dibuang!");
+        UpdateVisualAlat(); 
     }
 
-    // UPDATE VISUAL & UI INDIKATOR 
     private void UpdateVisualAlat()
     {
-        // Ubah Sprite
-        Sprite targetSprite = spriteKosong; // Defaultnya kosong
+        Sprite targetSprite = spriteKosong; 
 
-        if (currentIngredients.Count > 0)
+        // 1. Cek apakah harus menampilkan visual tertutup
+        if (butuhDibuka && !isOpen && spriteTertutup != null)
         {
-            targetSprite = spriteTerisi; // Default jika ada isi tapi ga ada di list mapping
-
-            IngredientData bahanTerakhir = currentIngredients[currentIngredients.Count - 1]; 
-
-            // Cari apakah bahan terakhir ini ada di daftar gambar spesifik 
-            foreach (var mapping in visualSpesifikBahan)
+            targetSprite = spriteTertutup;
+        }
+        else 
+        {
+            // 2. Jika ada bahan, utamakan visual bahan
+            if (currentIngredients.Count > 0)
             {
-                if (mapping.bahan == bahanTerakhir)
+                targetSprite = spriteTerisi; 
+                IngredientData bahanTerakhir = currentIngredients[currentIngredients.Count - 1]; 
+
+                foreach (var mapping in visualSpesifikBahan)
                 {
-                    targetSprite = mapping.spriteSaatBahanMasuk;
-                    break;
+                    if (mapping.bahan == bahanTerakhir)
+                    {
+                        targetSprite = mapping.spriteSaatBahanMasuk;
+                        break;
+                    }
                 }
+            }
+            // 3. Jika kosong tapi kompor dinyalakan, tampilkan visual nyala
+            else if (butuhDinyalakan && isOn && spriteNyala != null)
+            {
+                targetSprite = spriteNyala;
             }
         }
 
-        // Terapkan gambarnya
         if (targetSprite != null)
         {
             if (applianceSprite2D != null) applianceSprite2D.sprite = targetSprite;
             if (applianceUIImage != null) applianceUIImage.sprite = targetSprite;
         }
 
-        // Update UI Indikator Bahan di atas alat
         if (indikatorContainer == null || indikatorPrefab == null) return;
 
-        // Bersihkan icon UI yang lama
+        if (currentIngredients.Count == 0)
+        {
+            indikatorContainer.gameObject.SetActive(false);
+        }
+        else
+        {
+            indikatorContainer.gameObject.SetActive(true);
+        }
+
         foreach (Transform child in indikatorContainer)
         {
             Destroy(child.gameObject);
         }
 
-        // Hitung jumlah tiap bahan yang masuk
         Dictionary<IngredientData, int> hitungBahan = new Dictionary<IngredientData, int>();
         foreach (var bahan in currentIngredients)
         {
@@ -114,16 +157,44 @@ public class CookingAppliance : MonoBehaviour
             else hitungBahan[bahan] = 1;
         }
 
-        // Munculkan UI Icon baru sesuai jumlah bahan
         foreach (var item in hitungBahan)
         {
             GameObject iconBaru = Instantiate(indikatorPrefab, indikatorContainer);
-            
             Image iconImage = iconBaru.GetComponentInChildren<Image>();
             TextMeshProUGUI qtyText = iconBaru.GetComponentInChildren<TextMeshProUGUI>();
 
             if (iconImage != null) iconImage.sprite = item.Key.icon;
             if (qtyText != null) qtyText.text = "x" + item.Value.ToString();
+        }
+
+        if (gunakanTumpukanVisual && tumpukanContainer != null && prefabVisualBahan2D != null)
+        {
+            // 1. Bersihkan visual tumpukan yang lama
+            foreach (Transform child in tumpukanContainer)
+            {
+                Destroy(child.gameObject);
+            }
+
+            // 2. Munculkan gambar bahan satu per satu
+            for (int i = 0; i < currentIngredients.Count; i++)
+            {
+                // Spawn prefab visual
+                GameObject visualBaru = Instantiate(prefabVisualBahan2D, tumpukanContainer);
+                
+                SpriteRenderer sr = visualBaru.GetComponent<SpriteRenderer>();
+                if (sr != null)
+                {
+                    // Set gambarnya sesuai icon dari IngredientData
+                    sr.sprite = currentIngredients[i].icon; 
+                    
+                    // Supaya gambar yang masuk belakangan posisinya ada di depan gambar sebelumnya
+                    sr.sortingOrder = i + 1; 
+                }
+
+                // 3. Kasih jarak (offset) ke atas sedikit biar kelihatan menumpuk!
+                // Angka 0.3f bisa kamu ubah-ubah kalau jarak antar bahannya kurang/ketinggian
+                visualBaru.transform.localPosition = new Vector3(0, i * 0.3f, 0); 
+            }
         }
     }
 
@@ -157,12 +228,17 @@ public class CookingAppliance : MonoBehaviour
         if (currentValidRecipe != null)
         {
             if (startButtonUI != null) startButtonUI.SetActive(true); 
-            Debug.Log($"Resep {currentValidRecipe.name} siap dimasak!");
         }
     }
 
     public void OnStartButtonClicked()
     {
+        if (butuhDinyalakan && !isOn)
+        {
+            Debug.Log($"Gagal! {applianceName} belum dinyalakan woi!");
+            return;
+        }
+
         if (startButtonUI != null) startButtonUI.SetActive(false);
         if (activeMinigame != null && currentValidRecipe != null)
         {
@@ -184,6 +260,10 @@ public class CookingAppliance : MonoBehaviour
         }
         
         currentIngredients.Clear(); 
-        UpdateVisualAlat(); // Reset gambar alat masak ke kondisi kosong setelah masak
+        
+        // Opsional: Matikan otomatis setelah selesai masak
+        // isOn = false; 
+
+        UpdateVisualAlat(); 
     }
 }
