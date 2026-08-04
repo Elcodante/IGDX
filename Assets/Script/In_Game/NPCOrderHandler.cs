@@ -27,6 +27,7 @@ public class NPCOrderHandler : MonoBehaviour
             MenuData menuDipilih = menuList[Random.Range(0, menuList.Length)];
 
             pesananBaru.idResep = menuDipilih.menuName;
+            pesananBaru.ikonMakanan = menuDipilih.menuImage;
             pesananBaru.tepung = menuDipilih.jenisTepung;
             pesananBaru.isian = (TingkatIsian)Random.Range(0, 3);
             pesananBaru.targetManis = (TingkatRasa)Random.Range(0, 4);

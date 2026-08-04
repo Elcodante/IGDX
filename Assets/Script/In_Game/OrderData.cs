@@ -8,6 +8,7 @@ public enum TingkatRasa {  TidakPakai, Sedikit, Sedang, Banyak };
 public struct OrderData
 {
     public string idResep;
+    public Sprite ikonMakanan;
 
     [Header("Kostumisasi bahan")]
     public TingkatIsian isian;
