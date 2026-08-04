@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0bd985757db8e744597380670caaca2c, type: 3}
   m_Name: Kue Ayu
   m_EditorClassIdentifier: Assembly-CSharp::MenuData
-  menuName: Kue Ayu
+  menuName: Kue Putu Ayu
+  menuImage: {fileID: 1968876835447747157, guid: 2c6e3da22f59df54ca7875fc00a36307, type: 3}
   jenisTepung: 0

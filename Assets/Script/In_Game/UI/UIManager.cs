@@ -2,6 +2,18 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
+
+// 1. CLASS BARU UNTUK MENYIMPAN KOMPONEN UI DI SETIAP KOTAK PESANAN
+[System.Serializable]
+public class SlotPesananUI
+{
+    public GameObject wadahSlot; // Objek utama pembungkus 1 pesanan
+    public Image ikonMakanan;
+    public TextMeshProUGUI teksNamaMenu;
+    public TextMeshProUGUI teksDialog;
+    public TextMeshProUGUI teksKeyword;
+}
+
 public class UIManager : MonoBehaviour
 {
     [Header("UI Elements")]
@@ -9,26 +21,20 @@ public class UIManager : MonoBehaviour
     public GameObject tombolPerpindahan;
     public Image potretNPC;
 
-    [Header("Order Ticket Text Compoents")]
-    public TextMeshProUGUI teksNamaMakanan;
-    public TextMeshProUGUI teksKostumisasi;
+    [Header("Slot Pesanan Maksimal (Isi dengan 3 Slot)")]
+    public SlotPesananUI[] daftarSlotUI;
+
     public static bool IsPanelOpen { get; private set; }
 
     void Start()
     {
-        IsPanelOpen = false; // Reset 
-        if (panelPesanan != null)
-        {
-            panelPesanan.SetActive(false);
-        }
-        if (tombolPerpindahan != null)
-        {
-            tombolPerpindahan.SetActive(true);
-        }
+        IsPanelOpen = false;
+        if (panelPesanan != null) panelPesanan.SetActive(false);
+        if (tombolPerpindahan != null) tombolPerpindahan.SetActive(true);
         if (potretNPC != null)
         {
-            potretNPC.sprite = null; // Reset potret NPC
-            potretNPC.enabled = false; // Nonaktifkan potret NPC saat panel pesanan ditutup
+            potretNPC.sprite = null;
+            potretNPC.enabled = false;
         }
     }
 
@@ -44,39 +50,71 @@ public class UIManager : MonoBehaviour
             potretNPC.sprite = gambarNPC;
         }
 
-        // 1. KOSONGKAN TEKS SEBELUMNYA
-        teksNamaMakanan.text = "";
-        string detailOrder = "Detail Pesanan:\n\n";
-
-        // 2. LAKUKAN LOOPING SEBANYAK JUMLAH PESANAN
-        for (int i = 0; i < dataPesanan.Count; i++)
+        // 2. MATIKAN SEMUA SLOT TERLEBIH DAHULU AGAR BERSIH
+        foreach (SlotPesananUI slot in daftarSlotUI)
         {
-            // Format Judul Makanan (Contoh: "Serabi & Putu Ayu")
-            teksNamaMakanan.text += dataPesanan[i].idResep;
-            if (i < dataPesanan.Count - 1)
-            {
-                teksNamaMakanan.text += " & ";
-            }
-
-            // Format Isi Teks (Menggunakan Rich Text Unity agar nama menu berwarna kuning)
-            detailOrder += $"<color=yellow>--- Pesanan {i + 1}: {dataPesanan[i].idResep} ---</color>\n";
-            detailOrder += "- Tepung: " + dataPesanan[i].tepung.ToString() + "\n";
-            detailOrder += "- Isian: " + dataPesanan[i].isian.ToString() + "\n";
-            detailOrder += "- Takaran Gula: " + dataPesanan[i].targetManis.ToString() + "\n";
-            detailOrder += "- Takaran Santan: " + dataPesanan[i].targetLembut.ToString() + "\n";
-            detailOrder += "- Takaran Kelapa: " + dataPesanan[i].targetGurih.ToString() + "\n\n";
+            slot.wadahSlot.SetActive(false);
         }
 
-        teksKostumisasi.text = detailOrder;
-        Debug.Log("Panel Pesanan Terbuka. Menampilkan " + dataPesanan.Count + " pesanan.");
+        // 3. NYALAKAN DAN ISI SLOT SESUAI JUMLAH PESANAN NPC
+        for (int i = 0; i < dataPesanan.Count; i++)
+        {
+            // Cegah error jika pesanan melebihi jumlah slot UI yang kita siapkan
+            if (i >= daftarSlotUI.Length) break;
+
+            SlotPesananUI slotAktif = daftarSlotUI[i];
+            OrderData data = dataPesanan[i];
+
+            // Aktifkan visual kotak slot ini
+            slotAktif.wadahSlot.SetActive(true);
+
+            // Masukkan data gambar dan nama
+            if (slotAktif.ikonMakanan != null) slotAktif.ikonMakanan.sprite = data.ikonMakanan;
+            if (slotAktif.teksNamaMenu != null) slotAktif.teksNamaMenu.text = data.idResep.ToUpper();
+
+            // Generate otomatis teks dialog & keywords
+            if (slotAktif.teksKeyword != null) slotAktif.teksKeyword.text = "KEYWORDS: " + BuatTeksKeyword(data);
+            if (slotAktif.teksDialog != null) slotAktif.teksDialog.text = BuatTeksDialog(data);
+        }
     }
 
     public void TutupPanelPesanan()
     {
         panelPesanan.SetActive(false);
-        tombolPerpindahan.SetActive(true); // Aktifkan kembali tombol perpindahan
-        potretNPC.enabled = false; // Nonaktifkan potret NPC saat panel pesanan ditutup
-        IsPanelOpen = false; // BUKA KUNCI: NPC lain bisa diklik kembali
-        Debug.Log("Panel Pesanan Ditutup. NPC lain terbuka.");
+        tombolPerpindahan.SetActive(true);
+        potretNPC.enabled = false;
+        IsPanelOpen = false;
+    }
+
+    // --- FUNGSI PEMBANTU UNTUK MERANGKAI KATA-KATA --- //
+
+    private string BuatTeksKeyword(OrderData data)
+    {
+        List<string> keywords = new List<string>();
+
+        if (data.targetManis != TingkatRasa.TidakPakai) keywords.Add("Manis");
+        if (data.targetGurih != TingkatRasa.TidakPakai) keywords.Add("Gurih");
+        if (data.targetLembut != TingkatRasa.TidakPakai) keywords.Add("Lembut");
+        if (data.isian == TingkatIsian.Banyak) keywords.Add("Isian Penuh");
+
+        if (keywords.Count == 0) return "Original";
+
+        return string.Join(", ", keywords); // Hasilnya: "Manis, Lembut"
+    }
+
+    private string BuatTeksDialog(OrderData data)
+    {
+        // Anda bisa membuat percabangan dialog yang jauh lebih kompleks dan bervariasi di sini
+        string dialog = $"\"Aku mau pesan {data.idResep}. ";
+
+        if (data.targetManis == TingkatRasa.Banyak) dialog += "Aku suka banget yang manis, gula yang banyak ya. ";
+        else if (data.targetManis == TingkatRasa.Sedikit) dialog += "Manisnya sedikit aja, jangan giung. ";
+
+        if (data.targetGurih == TingkatRasa.Banyak || data.targetGurih == TingkatRasa.Sedang) dialog += "Terus agak gurih juga enak. ";
+
+        if (data.targetLembut == TingkatRasa.Banyak) dialog += "Jangan terlalu padat, aku lebih suka yang lembut.\"";
+        else dialog += "\"";
+
+        return dialog;
     }
 }

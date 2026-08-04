@@ -10,63 +10,44 @@ public class NPCSpawner : MonoBehaviour
     public GameObject[] npcPrefab;
     public Transform spawnPoint;
     public float spawnInterval = 5f;
-
-    [Tooltip("Titik tujuan NPC setelah mereka selesai.")]
     public Transform exitPoint;
 
-    [Tooltip("Jumlah total npc yang akan muncul di level ini.")]
     public int maksimalNPC;
-
-    [Tooltip("Batas maksimal variasi menu yang bisa dimiliki NPC.")]
     public int maksimalVariasiMenu;
-
-    [Tooltip("Batas Minimal variasinya menu yang bisa dimiliki NPC.")]
     public int minimalVariasiMenu;
-
-    [Header("Antrean Kasir")]
-    public Transform[] queueWaypoints;
-    private bool[] slotOccupied;
 
     [Header("Object Pool")]
     public int poolSize = 6;
     private Queue<GameObject> npcPool;
 
-    [Header("UI Reference")]
-    // Tambahkan variabel ini untuk menyimpan referensi UI
+    [Header("References")]
     public UIManager uiManager;
 
-    private float timer;
+    // 1. TAMBAHKAN REFERENSI KE MANAJER ANTREAN
+    public NPCQueueManager queueManager;
 
+    private float timer;
     private int jumlahNPCSudahMuncul = 0;
 
     void Start()
     {
         LoadLevelData();
-        slotOccupied = new bool[queueWaypoints.Length];
+
+        // 2. KODE INISIALISASI POOL LEBIH BERSIH
         npcPool = new Queue<GameObject>();
 
-        if (npcPrefab.Length == 0 || npcPrefab[0] == null)
-        {
-            Debug.LogError("NPC Prefab array is empty. Please assign at least one NPC prefab.");
-            return;
-        }
-
-        if (menuList.Length == 0)
-        {
-            Debug.LogError("Menu list is empty. Please assign at least one menu item.");
-            return;
-        }
+        if (npcPrefab.Length == 0 || npcPrefab[0] == null) return;
+        if (menuList.Length == 0) return;
 
         for (int i = 0; i < poolSize; i++)
         {
             GameObject prefabTerpilih = npcPrefab[Random.Range(0, npcPrefab.Length)];
-
             GameObject obj = Instantiate(prefabTerpilih);
             obj.SetActive(false);
 
             NPCController controller = obj.GetComponent<NPCController>();
             controller.SetSpawner(this);
-            controller.OnPesananDiambil.AddListener(uiManager.TampilkanPanelPesanan); // Pastikan UIManager memiliki metode ini
+            controller.OnPesananDiambil.AddListener(uiManager.TampilkanPanelPesanan);
 
             npcPool.Enqueue(obj);
         }
@@ -74,16 +55,14 @@ public class NPCSpawner : MonoBehaviour
 
     void Update()
     {
-        if (jumlahNPCSudahMuncul >= maksimalNPC)
-        {
-            return; // Tidak spawn NPC lagi jika sudah mencapai maksimal
-        }
+        if (jumlahNPCSudahMuncul >= maksimalNPC) return;
 
         timer += Time.deltaTime;
 
         if (timer >= spawnInterval)
         {
-            int availableSlot = GetEmptySlot();
+            // 3. MINTA INFO SLOT KOSONG DARI QUEUE MANAGER
+            int availableSlot = queueManager.GetEmptySlot();
 
             if (availableSlot != -1 && npcPool.Count > 0)
             {
@@ -93,6 +72,26 @@ public class NPCSpawner : MonoBehaviour
         }
     }
 
+    private void SpawnNPC(int slotIndex)
+    {
+        // 4. BERITAHU QUEUE MANAGER BAHWA SLOT INI DIAMBIL
+        queueManager.TempatiSlot(slotIndex);
+
+        GameObject spawnNPC = npcPool.Dequeue();
+        spawnNPC.transform.position = spawnPoint.position;
+        spawnNPC.SetActive(true);
+
+        NPCController controller = spawnNPC.GetComponent<NPCController>();
+
+        // 5. MINTA TITIK WAYPOINT DARI QUEUE MANAGER
+        Transform targetWaypoint = queueManager.GetWaypoint(slotIndex);
+
+        controller.InitializeNPC(targetWaypoint, slotIndex, menuList, minimalVariasiMenu, maksimalVariasiMenu);
+
+        jumlahNPCSudahMuncul++;
+        Debug.Log($"NPC spawned. Total NPCs spawned: {jumlahNPCSudahMuncul}/{maksimalNPC}");
+    }
+
     private void LoadLevelData()
     {
         if (LevelManager.Instance != null)
@@ -100,47 +99,18 @@ public class NPCSpawner : MonoBehaviour
             Debug.Log("Ini Level" + LevelManager.Instance.pilihanlevel);
             menuList = LevelManager.Instance.currentMenuList;
             maksimalNPC = LevelManager.Instance.currentMaksimalNPC;
-
-            Debug.Log("Berhasil memuat data level dari LevelManager!");
-        }
-        else
-        {
-            Debug.LogWarning("LevelManager tidak ditemukan.");
         }
     }
 
-    private int GetEmptySlot()
-    {
-        for (int i = 0; i < slotOccupied.Length; i++)
-        {
-            if (!slotOccupied[i]) return i;
-        }
-        return -1;
-    }
-
-    private void SpawnNPC(int slotIndex)
-    {
-        slotOccupied[slotIndex] = true;
-
-        GameObject spawnNPC = npcPool.Dequeue();
-        spawnNPC.transform.position = spawnPoint.position;
-        spawnNPC.SetActive(true);
-
-        NPCController controller = spawnNPC.GetComponent<NPCController>();
-        controller.InitializeNPC(queueWaypoints[slotIndex], slotIndex, menuList,minimalVariasiMenu, maksimalVariasiMenu);
-
-        jumlahNPCSudahMuncul++;
-        Debug.Log($"NPC spawned. Total NPCs spawned: {jumlahNPCSudahMuncul}/{maksimalNPC}");
-    }
-
+    // 6. FUNGSI FACADE: Meneruskan perintah dari NPCController ke QueueManager
     public void BebaskanSlot(int slotIndex)
     {
-        slotOccupied[slotIndex] = false;
+        queueManager.BebaskanSlot(slotIndex);
     }
+
     public void ReturnNPC(GameObject npc)
     {
         npc.SetActive(false);
         npcPool.Enqueue(npc);
     }
-
 }
