@@ -8,6 +8,7 @@ public class DraggableItem2D : MonoBehaviour, IBeginDragHandler, IDragHandler, I
     private Vector3 offset;
 
     private Vector3 posisiAwal;
+    public bool isDroppedSuccessfully = false;
 
     private void Awake()
     {
