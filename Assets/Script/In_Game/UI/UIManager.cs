@@ -90,16 +90,69 @@ public class UIManager : MonoBehaviour
 
     private string BuatTeksKeyword(OrderData data)
     {
-        List<string> keywords = new List<string>();
+        List<string> keyword = new List<string>();
 
-        if (data.targetManis != TingkatRasa.TidakPakai) keywords.Add("Manis");
-        if (data.targetGurih != TingkatRasa.TidakPakai) keywords.Add("Gurih");
-        if (data.targetLembut != TingkatRasa.TidakPakai) keywords.Add("Lembut");
-        if (data.isian == TingkatIsian.Banyak) keywords.Add("Isian Penuh");
+        switch (data.targetManis)
+        {
+            case TingkatRasa.TidakPakai:
+                break;
+            case TingkatRasa.Sedikit:
+                keyword.Add("Sedikit manis");
+                break;
+            case TingkatRasa.Sedang:
+                keyword.Add("Manis sedang");
+                break;
+            case TingkatRasa.Banyak:
+                keyword.Add("Sangat manis");
+                break;
+        }
 
-        if (keywords.Count == 0) return "Original";
+        switch (data.targetGurih)
+        {
+            case TingkatRasa.TidakPakai:
+                break;
+            case TingkatRasa.Sedikit:
+                keyword.Add("Sedikit gurih");
+                break;
+            case TingkatRasa.Sedang:
+                keyword.Add("Gurih sedang");
+                break;
+            case TingkatRasa.Banyak:
+                keyword.Add("Sangat gurih");
+                break;
+        }
 
-        return string.Join(", ", keywords); // Hasilnya: "Manis, Lembut"
+        switch (data.targetLembut)
+        {
+            case TingkatRasa.TidakPakai:
+                break;
+            case TingkatRasa.Sedikit:
+                keyword.Add("Sedikit lembut");
+                break;
+            case TingkatRasa.Sedang:
+                keyword.Add("Lembut sedang");
+                break;
+            case TingkatRasa.Banyak:
+                keyword.Add("Sangat lembut");
+                break;
+        }
+
+        switch (data.isian)
+        {
+            case TingkatIsian.Sedikit:
+                keyword.Add("Isian sedikit");
+                break;
+            case TingkatIsian.Sedang:
+                keyword.Add("Isian sedang");
+                break;
+            case TingkatIsian.Banyak:
+                keyword.Add("Isian banyak");
+                break;
+        }
+
+        if (keyword.Count == 0) return "Original";
+
+        return string.Join(", ", keyword); // Hasilnya: "Sedikit manis, Gurih sedang"
     }
 
     private string BuatTeksDialog(OrderData data)
