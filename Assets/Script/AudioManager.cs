@@ -29,8 +29,8 @@ public class AudioManager : MonoBehaviour
 
     private void Start()
     {
-        // Contoh memutar lagu utama saat game dimulai (opsional)
-        // PlayMusic("Theme");
+       
+        PlayMusic("BG");
     }
 
     // ==========================================
