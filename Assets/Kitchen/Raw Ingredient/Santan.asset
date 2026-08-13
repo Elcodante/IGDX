@@ -15,3 +15,5 @@ MonoBehaviour:
   ingredientID: Santan
   ingredientName: Santan
   icon: {fileID: 7988714859682520075, guid: 401dada58f317c44f951fe7795c926a5, type: 3}
+  peranBahan: 3
+  jenisTepung: 0
