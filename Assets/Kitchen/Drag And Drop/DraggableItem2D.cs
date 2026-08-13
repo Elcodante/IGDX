@@ -3,6 +3,12 @@ using UnityEngine.EventSystems;
 
 public class DraggableItem2D : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
+    [Header("Data Rasa (Hanya untuk Makanan Matang)")]
+    public JenisTepung tepungDigunakan;
+    public TingkatIsian tingkatIsian;
+    public TingkatRasa tingkatManis;
+    public TingkatRasa tingkatLembut;
+    public TingkatRasa tingkatGurih;
     public IngredientData dataBahan;
     private Collider2D col;
     private Vector3 offset;
@@ -43,6 +49,5 @@ public class DraggableItem2D : MonoBehaviour, IBeginDragHandler, IDragHandler, I
     {
         if (col != null) col.enabled = true;
 
-        // transform.position = posisiAwal;    
     }
 }

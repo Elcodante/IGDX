@@ -15,3 +15,5 @@ MonoBehaviour:
   ingredientID: Tepung
   ingredientName: Tepung
   icon: {fileID: -7115273739440965115, guid: 4a2854619328a4143ac6c83826c7e48a, type: 3}
+  peranBahan: 1
+  jenisTepung: 1

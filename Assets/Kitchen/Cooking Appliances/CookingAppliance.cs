@@ -14,8 +14,8 @@ public class CookingAppliance : MonoBehaviour
 
     [Header("Pengaturan Alat / Kompor")]
     public string applianceName;
-    public bool isStoveBase = false; // Centang HANYA jika objek ini adalah Kompor Utamanya
-    public Transform applianceMountPoint; // Titik posisi alat ditaruh di atas kompor
+    public bool isStoveBase = false; 
+    public Transform applianceMountPoint; 
     public GameObject startButtonUI; 
 
     [Header("Visual Indikator Kompor (Khusus Kompor)")]
@@ -48,6 +48,13 @@ public class CookingAppliance : MonoBehaviour
     public Transform indikatorContainer;     
     public GameObject indikatorPrefab;       
 
+    // Variabel internal penghitung bumbu
+    private int countManis = 0;
+    private int countLembut = 0;
+    private int countGurih = 0;
+    private int countIsian = 0;
+    private JenisTepung jenisTepung = JenisTepung.Terigu; // Default
+
     // Data internal
     private CookingAppliance mountedAppliance; // Alat yang sedang menempel di atas kompor ini
     private IMinigameMechanic activeMinigame; 
@@ -72,7 +79,6 @@ public class CookingAppliance : MonoBehaviour
             activeMinigame = GetComponent<IMinigameMechanic>();
     }
 
-    // --- FUNGSI MOUNTING ALAT KE ATAS KOMPOR ---
     public bool MountAppliance(CookingAppliance newAppliance)
     {
         if (!isStoveBase) return false;
@@ -123,111 +129,178 @@ public class CookingAppliance : MonoBehaviour
         }
     }
 
-    // --- LOGIKA BAHAN & RESEP ---
     public void AddIngredient(IngredientData ingredient)
     {
         currentIngredients.Add(ingredient);
+        
+        if (ingredient.peranBahan == PeranBahan.BumbuManis) countManis++;
+        else if (ingredient.peranBahan == PeranBahan.BumbuLembut) countLembut++;
+        else if (ingredient.peranBahan == PeranBahan.BumbuGurih) countGurih++;
+        else if (ingredient.peranBahan == PeranBahan.Isian) countIsian++;
+        else if (ingredient.peranBahan == PeranBahan.Tepung) jenisTepung = ingredient.jenisTepung;
+
         UpdateVisualAlat(); 
-        CheckForValidRecipe();
+        
+        if (komporInduk != null) komporInduk.CheckForValidRecipe();
+        else CheckForValidRecipe();
     }
+
 
     public void ResetIngredients()
     {
         currentIngredients.Clear();
         currentValidRecipe = null;
+        countManis = 0;
+        countLembut = 0;
+        countGurih = 0;
+        countIsian = 0;
         if (startButtonUI != null) startButtonUI.SetActive(false);
         UpdateVisualAlat(); 
     }
 
     private void CheckForValidRecipe()
     {
-        currentValidRecipe = null;
+        // 1. Tentukan siapa yang lagi dipakai masak? (Kalau ada alat menempel, pakai alat itu. Kalau kosong, pakai kompor)
+        CookingAppliance alatYangDipakai = (mountedAppliance != null) ? mountedAppliance : this;
         
-        // Tentukan tombol Start mana yang mau dipakai (Punya sendiri, atau pinjam kompor induk)
+        // Reset validasi sebelumnya
+        alatYangDipakai.currentValidRecipe = null;
+        
         GameObject btnStartAktif = (komporInduk != null && komporInduk.startButtonUI != null) ? komporInduk.startButtonUI : startButtonUI;
-        
         if (btnStartAktif != null) btnStartAktif.SetActive(false);
 
-        List<RecipeData> activeRecipes = (mountedAppliance != null) ? mountedAppliance.resepYangBisaDimasak : resepYangBisaDimasak;
+        // 2. Ambil HANYA resep dan bahan dari alat yang lagi dipakai!
+        List<RecipeData> activeRecipes = alatYangDipakai.resepYangBisaDimasak;
         if (activeRecipes == null || activeRecipes.Count == 0) return;
+
+        List<IngredientData> bahanDiWadah = alatYangDipakai.currentIngredients;
+
+        RecipeData resepTerbaik = null;
+        int jumlahBahanTerbanyak = -1;
 
         foreach (var resep in activeRecipes)
         {
-            if (currentIngredients.Count == resep.inputIngredients.Count)
+            List<IngredientData> sisaBahanEkstra = new List<IngredientData>(bahanDiWadah);
+            bool semuaBahanWajibAda = true;
+
+            foreach (var bahanWajib in resep.inputIngredients)
             {
-                bool semuaBahanCocok = true;
-                foreach (var bahanDibutuhkan in resep.inputIngredients)
+                if (sisaBahanEkstra.Contains(bahanWajib))
                 {
-                    if (!currentIngredients.Contains(bahanDibutuhkan))
+                    sisaBahanEkstra.Remove(bahanWajib);
+                }
+                else
+                {
+                    semuaBahanWajibAda = false;
+                    break;
+                }
+            }
+
+            if (semuaBahanWajibAda)
+            {
+                bool sisaBahanHanyaBumbu = true;
+
+                foreach (var sisa in sisaBahanEkstra)
+                {
+                    if (sisa.peranBahan == PeranBahan.Biasa || sisa.peranBahan == PeranBahan.Tepung)
                     {
-                        semuaBahanCocok = false;
+                        sisaBahanHanyaBumbu = false;
                         break;
                     }
                 }
 
-                if (semuaBahanCocok)
+                if (sisaBahanHanyaBumbu)
                 {
-                    currentValidRecipe = resep;
-                    break;
+                    if (resep.inputIngredients.Count > jumlahBahanTerbanyak)
+                    {
+                        jumlahBahanTerbanyak = resep.inputIngredients.Count;
+                        resepTerbaik = resep;
+                    }
                 }
             }
         }
 
-        // Jika resep valid, nyalakan tombol UI-nya!
-        if (currentValidRecipe != null && btnStartAktif != null)
+        // 3. Simpan resep yang valid HANYA ke alat yang bersangkutan
+        alatYangDipakai.currentValidRecipe = resepTerbaik;
+
+        if (alatYangDipakai.currentValidRecipe != null && btnStartAktif != null)
         {
-            btnStartAktif.SetActive(true); 
+            btnStartAktif.SetActive(true);
         }
     }
 
-    // --- MULAI MEMASAK ---
     public void OnStartButtonClicked()
     {
-        IMinigameMechanic targetMinigame = (mountedAppliance != null) ? mountedAppliance.activeMinigame : activeMinigame;
+        // 1. Tentukan alat mana yang lagi dipakai buat ambil data resepnya
+        CookingAppliance alatYangDipakai = (mountedAppliance != null) ? mountedAppliance : this;
+        RecipeData resepAktif = alatYangDipakai.currentValidRecipe;
 
-        if (targetMinigame == null && mountedAppliance != null)
+        // 2. TAPI, Minigamenya SELALU pakai milik Kompor Base (this)
+        IMinigameMechanic targetMinigame = this.activeMinigame;
+
+        if (targetMinigame == null)
         {
-            mountedAppliance.RefreshMinigameScript();
-            targetMinigame = mountedAppliance.activeMinigame;
+            this.RefreshMinigameScript();
+            targetMinigame = this.activeMinigame;
         }
 
-        // Ambil resep valid dari alat yang menempel (jika ada), atau dari diri sendiri
-        RecipeData resepAktif = (mountedAppliance != null) ? mountedAppliance.currentValidRecipe : currentValidRecipe;
+        if (targetMinigame == null)
+        {
+            Debug.LogError("Error: Script Minigame belum dipasang di Kompor Base!");
+            return;
+        }
 
-        if (targetMinigame != null && resepAktif != null)
+        // 3. Jalankan minigame kompor, tapi oper resep dari alat (wajan/kukusan)
+        if (resepAktif != null)
         {
             if (startButtonUI != null) startButtonUI.SetActive(false);
+            if (komporInduk != null && komporInduk.startButtonUI != null) komporInduk.startButtonUI.SetActive(false);
+
             SetStoveState(true);
-            targetMinigame.StartMinigame(resepAktif, OnMinigameFinished); 
+            
+            // Perhatikan bahwa callback OnMinigameFinished akan tetap memanggil fungsi di Kompor
+            targetMinigame.StartMinigame(resepAktif, OnMinigameFinished);
         }
     }
 
     private void OnMinigameFinished(float finalScore)
     {
-        // OTOMATIS MATIKAN SPRITE KOMPOR SETELAH MINIGAME SELESAI
         SetStoveState(false);
-
-        IngredientData hasilAkhir = (finalScore >= 0.6f) ? currentValidRecipe.successResult : currentValidRecipe.failResult;
         
-        if (hasilAkhir != null && draggableItemPrefab != null)
+        CookingAppliance alatYangDipakai = (mountedAppliance != null) ? mountedAppliance : this;
+        RecipeData resepSelesai = alatYangDipakai.currentValidRecipe;
+
+        if (resepSelesai != null)
         {
-            Transform titikSpawn = (spawnPoint != null) ? spawnPoint : transform;
-            GameObject objekBaru = Instantiate(draggableItemPrefab, titikSpawn.position, Quaternion.identity);
+            IngredientData hasilAkhir = (finalScore >= 0.6f) ? resepSelesai.successResult : resepSelesai.failResult;
             
-            DraggableItem2D dragScript2D = objekBaru.GetComponent<DraggableItem2D>();
-            if (dragScript2D != null) dragScript2D.SetupData(hasilAkhir); 
+            if (hasilAkhir != null && draggableItemPrefab != null)
+            {
+                Transform titikSpawn = (alatYangDipakai.spawnPoint != null) ? alatYangDipakai.spawnPoint : alatYangDipakai.transform;
+                GameObject objekBaru = Instantiate(draggableItemPrefab, titikSpawn.position, Quaternion.identity);
+                
+                DraggableItem2D dragScript2D = objekBaru.GetComponent<DraggableItem2D>();
+                if (dragScript2D != null)
+                {
+                    dragScript2D.SetupData(hasilAkhir);
+                    
+                    // Ambil bumbu dari alat yang dipakai
+                    dragScript2D.tepungDigunakan = alatYangDipakai.jenisTepung;
+                    dragScript2D.tingkatManis = KonversiKeTingkatRasa(alatYangDipakai.countManis);
+                    dragScript2D.tingkatLembut = KonversiKeTingkatRasa(alatYangDipakai.countLembut);
+                    dragScript2D.tingkatGurih = KonversiKeTingkatRasa(alatYangDipakai.countGurih);
+                    dragScript2D.tingkatIsian = KonversiKeTingkatIsian(alatYangDipakai.countIsian);
+                }
+            }
         }
         
-        currentIngredients.Clear(); 
-        if (mountedAppliance != null) mountedAppliance.currentIngredients.Clear();
-
-        UpdateVisualAlat(); 
-        if (mountedAppliance != null) mountedAppliance.UpdateVisualAlat();
+        alatYangDipakai.ResetIngredients();
+        alatYangDipakai.UpdateVisualAlat();
     }
 
     private void UpdateVisualAlat()
     {
-        // 1. Update Sprite Utama Alat (Panci/Wajan)
+
         if (applianceSprite2D != null)
         {
             Sprite targetSprite = spriteKosong; 
@@ -248,7 +321,6 @@ public class CookingAppliance : MonoBehaviour
             if (targetSprite != null) applianceSprite2D.sprite = targetSprite;
         }
 
-        // 2. Gimik Tumpukan Visual 2D (Khusus Mangkuk/Bowl jika ada)
         if (gunakanTumpukanVisual && tumpukanContainer != null && prefabVisualBahan2D != null)
         {
             foreach (Transform child in tumpukanContainer) Destroy(child.gameObject);
@@ -266,7 +338,6 @@ public class CookingAppliance : MonoBehaviour
             }
         }
 
-        // 3. UI INDIKATOR BAHAN (OTOMATIS PINJAM UI KOMPOR JIKA DI PREFAB KOSONG)
         Transform targetContainer = (indikatorContainer != null) ? indikatorContainer : (komporInduk != null ? komporInduk.indikatorContainer : null);
         GameObject targetPrefab = (indikatorPrefab != null) ? indikatorPrefab : (komporInduk != null ? komporInduk.indikatorPrefab : null);
 
@@ -301,5 +372,20 @@ public class CookingAppliance : MonoBehaviour
             if (iconImage != null) iconImage.sprite = item.Key.icon;
             if (qtyText != null) qtyText.text = "x" + item.Value.ToString();
         }
+    }
+
+    private TingkatRasa KonversiKeTingkatRasa(int jumlah)
+    {
+        if (jumlah == 0) return TingkatRasa.TidakPakai;
+        if (jumlah == 1) return TingkatRasa.Sedikit;
+        if (jumlah == 2) return TingkatRasa.Sedang;
+        return TingkatRasa.Banyak;
+    }
+
+    private TingkatIsian KonversiKeTingkatIsian(int jumlah)
+    {
+        if (jumlah <= 1) return TingkatIsian.Sedikit; // 0 atau 1 dianggap sedikit
+        if (jumlah == 2) return TingkatIsian.Sedang;
+        return TingkatIsian.Banyak;
     }
 }

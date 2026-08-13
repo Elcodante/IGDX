@@ -15,3 +15,5 @@ MonoBehaviour:
   ingredientID: Kelapa
   ingredientName: Kelapa
   icon: {fileID: -4484525813680188103, guid: 02f234d853aa05e428ca51ffd0ede77d, type: 3}
+  peranBahan: 4
+  jenisTepung: 0

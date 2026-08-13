@@ -15,3 +15,5 @@ MonoBehaviour:
   ingredientID: Gula Merah
   ingredientName: Gula Merah
   icon: {fileID: 1377672344492089888, guid: 4f127f033d96a6b43ba9bdc541605f76, type: 3}
+  peranBahan: 2
+  jenisTepung: 0

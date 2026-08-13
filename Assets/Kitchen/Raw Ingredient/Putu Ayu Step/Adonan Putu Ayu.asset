@@ -14,4 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::IngredientData
   ingredientID: Adonan Putu Ayu
   ingredientName: Adonan Putu Ayu
-  icon: {fileID: 2592155257771149909, guid: 98e414bbb570c5a40b07e9a5ff5bb012, type: 3}
+  icon: {fileID: 4788085906601644805, guid: 5054bc8e0624d404caf3adaafa6a652c, type: 3}
+  peranBahan: 0
+  jenisTepung: 0

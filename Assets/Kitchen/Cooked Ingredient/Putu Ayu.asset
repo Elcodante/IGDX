@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86442b7a1a0223842b7722ae67f037ee, type: 3}
   m_Name: Putu Ayu
   m_EditorClassIdentifier: Assembly-CSharp::IngredientData
-  ingredientID: Putu Ayu
-  ingredientName: Putu Ayu
-  icon: {fileID: -6053470758556796266, guid: 2c6e3da22f59df54ca7875fc00a36307, type: 3}
+  ingredientID: Kue Putu Ayu
+  ingredientName: Kue Putu Ayu
+  icon: {fileID: 1968876835447747157, guid: 2c6e3da22f59df54ca7875fc00a36307, type: 3}
+  peranBahan: 0
+  jenisTepung: 0

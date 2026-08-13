@@ -15,3 +15,5 @@ MonoBehaviour:
   ingredientID: 3
   ingredientName: Adonan
   icon: {fileID: 6665887431819257951, guid: 1e2c5c5764bdcc146a844e42967121c4, type: 3}
+  peranBahan: 1
+  jenisTepung: 0

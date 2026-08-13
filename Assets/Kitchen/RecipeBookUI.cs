@@ -1,85 +1,169 @@
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.Collections;
+using System.Collections.Generic;
+
+// Kita bikin wadah data khusus untuk UI di sini, biar RecipeData asli aman!
+[System.Serializable]
+public struct BukuResepData
+{
+    [Header("Referensi Resep Asli (Opsional)")]
+    public RecipeData resepDasar;
+    
+    [Header("Tampilan UI Teks & Gambar")]
+    public string namaMasakan;
+    public Sprite ikonMasakan;
+    
+    [TextArea(2, 5)] 
+    public string teksBahan;
+    
+    [TextArea(2, 4)] 
+    public string teksAlat;
+    
+    [TextArea(4, 8)] 
+    public string teksCara;
+}
 
 public class RecipeBookUI : MonoBehaviour
 {
-    [System.Serializable]
-    public struct RecipeInfo
+    [Header("Data UI Content")]
+    public CanvasGroup contentCanvasGroup; 
+    public Image iconMasakan;
+    public TextMeshProUGUI namaMasakan;
+    public TextMeshProUGUI teksBahan;
+    public TextMeshProUGUI teksAlat;
+    public TextMeshProUGUI teksCara;
+
+    [Header("Kertas Background (Wajib urut dari Depan ke Belakang)")]
+    [Tooltip("Isi dengan: BG, BG (1), BG (2)")]
+    public RectTransform[] papers; 
+    
+    [Header("Database Buku Resep UI")]
+    // List ini sekarang menggunakan struct BukuResepData yang kita buat di atas
+    public List<BukuResepData> listResepUI; 
+
+    // Variabel Internal
+    private Vector2[] basePositions;
+    private int currentIndex = 0;
+    private bool isAnimating = false;
+
+    void Start()
     {
-        public string namaMasakan;
-        public Sprite iconMasakan;
-        [TextArea(2, 5)] public string caraMasak; // TextArea agar kotak ketiknya lega
-    }
-
-    [Header("Referensi UI")]
-    public GameObject menuPanel;          // Panel utama buku resep
-    public Transform contentContainer;    // Tempat resep ngumpul 
-    public GameObject recipeItemPrefab;   // Cetakan UI per resep
-
-    [Header("Database Resep")]
-    public List<RecipeInfo> daftarResep;
-
-    private void Start()
-    {
-        // Pastikan menu tertutup di awal
-        if (menuPanel != null) menuPanel.SetActive(false);
-
-        // Cetak semua resep ke dalam buku
-        PopulateMenu();
-    }
-
-    // Fungsi ini akan dipanggil oleh Tombol Show/Hide
-    public void ToggleMenu()
-    {
-        if (menuPanel != null)
+        basePositions = new Vector2[papers.Length];
+        for (int i = 0; i < papers.Length; i++)
         {
-            // Jika aktif, matikan. Jika mati, aktifkan.
-            bool isActive = menuPanel.activeSelf;
-            menuPanel.SetActive(!isActive);
-        }
-    }
-
-    private void PopulateMenu()
-    {
-        if (recipeItemPrefab == null || contentContainer == null) return;
-
-        // Bersihkan isi sebelumnya (jika ada)
-        foreach (Transform child in contentContainer)
-        {
-            Destroy(child.gameObject);
+            basePositions[i] = papers[i].anchoredPosition;
         }
 
-        // Bikin daftar resep satu per satu ke bawah
-        foreach (var resep in daftarResep)
+        UpdateUIContent();
+    }
+
+    public void NextRecipe()
+    {
+        if (isAnimating || listResepUI.Count <= 1) return;
+        
+        currentIndex++;
+        if (currentIndex >= listResepUI.Count) currentIndex = 0; 
+        
+        StartCoroutine(AnimateShuffle(1));
+    }
+
+    public void PrevRecipe()
+    {
+        if (isAnimating || listResepUI.Count <= 1) return;
+        
+        currentIndex--;
+        if (currentIndex < 0) currentIndex = listResepUI.Count - 1; 
+        
+        StartCoroutine(AnimateShuffle(-1));
+    }
+
+    private IEnumerator AnimateShuffle(int direction)
+    {
+        isAnimating = true;
+
+        RectTransform frontPaper = papers[0]; 
+
+        // --- FASE 1: Kertas ditarik ---
+        float time = 0;
+        float duration = 0.18f; 
+        Vector2 startPos = frontPaper.anchoredPosition;
+        Vector2 pullTargetPos = startPos + new Vector2(350f, -40f); 
+
+        while (time < duration)
         {
-            GameObject itemBaru = Instantiate(recipeItemPrefab, contentContainer);
-            itemBaru.transform.localScale = Vector3.one; 
+            time += Time.deltaTime;
+            float t = time / duration;
+            
+            frontPaper.anchoredPosition = Vector2.Lerp(startPos, pullTargetPos, t);
+            if (contentCanvasGroup != null) contentCanvasGroup.alpha = Mathf.Lerp(1f, 0f, t); 
+            
+            yield return null;
+        }
 
-            // Cari objeknya dulu 
-            Transform iconTransform = itemBaru.transform.Find("Icon_Masakan");
-            Transform teksTransform = itemBaru.transform.Find("Text_CaraMasak");
+        // --- FASE 2: Ganti Data & Pindah Posisi ---
+        UpdateUIContent(); 
+        frontPaper.SetSiblingIndex(0);
 
-            if (iconTransform == null)
+        RectTransform temp = papers[0];
+        for (int i = 0; i < papers.Length - 1; i++)
+        {
+            papers[i] = papers[i + 1];
+        }
+        papers[papers.Length - 1] = temp;
+
+        // --- FASE 3: Kertas kembali ---
+        time = 0;
+        duration = 0.22f; 
+        
+        Vector2[] startPositions = new Vector2[papers.Length];
+        for (int i = 0; i < papers.Length; i++) startPositions[i] = papers[i].anchoredPosition;
+
+        while (time < duration)
+        {
+            time += Time.deltaTime;
+            float t = time / duration;
+
+            if (contentCanvasGroup != null) contentCanvasGroup.alpha = Mathf.Lerp(0f, 1f, t); 
+
+            for (int i = 0; i < papers.Length; i++)
             {
-                Debug.LogError("ERROR: Tidak ada objek bernama 'Icon_Masakan' di dalam Prefab Template_Resep. Cek ejaan dan huruf besarnya!");
+                papers[i].anchoredPosition = Vector2.Lerp(startPositions[i], basePositions[i], t);
+            }
+            yield return null;
+        }
+
+        for (int i = 0; i < papers.Length; i++) papers[i].anchoredPosition = basePositions[i];
+        if (contentCanvasGroup != null) contentCanvasGroup.alpha = 1f;
+
+        isAnimating = false;
+    }
+
+    private void UpdateUIContent()
+    {
+        if (listResepUI == null || listResepUI.Count == 0) return;
+        
+        // Ambil data dari struct UI, BUKAN dari RecipeData
+        BukuResepData data = listResepUI[currentIndex];
+
+        if (namaMasakan != null) namaMasakan.text = data.namaMasakan;
+        
+        if (iconMasakan != null)
+        {
+            if (data.ikonMasakan != null)
+            {
+                iconMasakan.sprite = data.ikonMasakan;
+                iconMasakan.enabled = true;
             }
             else
             {
-                Image iconUI = iconTransform.GetComponent<Image>();
-                if (iconUI != null) iconUI.sprite = resep.iconMasakan;
-            }
-
-            if (teksTransform == null)
-            {
-                Debug.LogError("ERROR: Tidak ada objek bernama 'Text_CaraMasak' di dalam Prefab Template_Resep. Cek ejaan dan huruf besarnya!");
-            }
-            else
-            {
-                TextMeshProUGUI teksUI = teksTransform.GetComponent<TextMeshProUGUI>();
-                if (teksUI != null) teksUI.text = $"<b>{resep.namaMasakan}</b>\n{resep.caraMasak}";
+                iconMasakan.enabled = false;
             }
         }
+
+        if (teksBahan != null) teksBahan.text = data.teksBahan;
+        if (teksAlat != null) teksAlat.text = data.teksAlat;
+        if (teksCara != null) teksCara.text = data.teksCara;
     }
 }
