@@ -23,6 +23,10 @@ public class NPCSpawner : MonoBehaviour
     [Header("References")]
     public UIManager uiManager;
 
+    [Header("Level Completion")]
+    public LevelEndManager levelEndManager;
+    private int jumlahNPCSelesai = 0;
+
     // 1. TAMBAHKAN REFERENSI KE MANAJER ANTREAN
     public NPCQueueManager queueManager;
 
@@ -110,7 +114,40 @@ public class NPCSpawner : MonoBehaviour
 
     public void ReturnNPC(GameObject npc)
     {
+        // CEK TERSANGKA 1: Apakah Sistem Pool Kosong?
+        if (npcPool == null)
+        {
+            Debug.LogError("<color=red>[ERROR 1]</color> npcPool KOSONG! Ini biasanya terjadi karena ada error merah lain saat game baru saja di-Play (di fungsi Start).");
+            return; // Hentikan sistem agar tidak crash
+        }
+
         npc.SetActive(false);
         npcPool.Enqueue(npc);
+
+        // Tambah hitungan NPC yang sudah beres
+        jumlahNPCSelesai++;
+
+        // Cek apakah NPC yang sudah di-spawn mencapai batas, DAN semuanya sudah pulang
+        if (jumlahNPCSudahMuncul >= maksimalNPC && jumlahNPCSelesai >= maksimalNPC)
+        {
+            Debug.Log("Level Selesai! Semua NPC sudah pulang.");
+
+            // CEK TERSANGKA 2: Apakah LevelEndManager belum dimasukkan?
+            if (levelEndManager == null)
+            {
+                Debug.LogError("<color=red>[ERROR 2]</color> levelEndManager KOSONG! Anda belum menarik objek LevelEnd_Manager ke dalam kolom Spawner di Inspector.");
+                return; // Hentikan sistem agar tidak crash
+            }
+
+            // CEK TERSANGKA 3: Apakah ScoreManager hilang dari Scene?
+            if (ScoreManager.Instance == null)
+            {
+                Debug.LogError("<color=red>[ERROR 3]</color> ScoreManager KOSONG! Pastikan objek yang memiliki script ScoreManager ada menyala di dalam Scene.");
+                return; // Hentikan sistem agar tidak crash
+            }
+
+            // Jika semua aman, panggil Panel Hasil!
+            levelEndManager.TampilkanHasilAkhir(ScoreManager.Instance.totalSkor);
+        }
     }
 }

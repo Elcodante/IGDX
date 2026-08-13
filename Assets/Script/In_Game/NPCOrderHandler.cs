@@ -80,7 +80,7 @@ public class NPCOrderHandler : MonoBehaviour
         {
             if (daftarPesanan[i].idResep == idMakananDiberikan)
             {
-                HitungSkorMakanan(daftarPesanan[i].idResep);
+                HitungSkorMakanan(daftarPesanan[i].idResep, daftarPesanan[i].ikonMakanan);
 
                 daftarPesanan.RemoveAt(i); // Coret dari daftar
 
@@ -102,17 +102,25 @@ public class NPCOrderHandler : MonoBehaviour
         return daftarPesanan.Count == 0;
     }
 
-    private void HitungSkorMakanan(string namaMakanan)
+    // --- FUNGSI MENGHITUNG SKOR --- //
+    private void HitungSkorMakanan(string namaMakanan, Sprite ikonMakanan)
     {
         float persentaseWaktuTerpakai = Mathf.Clamp01(waktuMenunggu / batasWaktuTunggu);
-
         int skorDidapat = Mathf.RoundToInt(Mathf.Lerp(100f, 10f, persentaseWaktuTerpakai));
 
-        Debug.Log($"Skor untuk makanan {namaMakanan}: {skorDidapat} (Waktu menunggu: {waktuMenunggu:F2}s)");
+        Debug.Log($"[DEBUG 1] Menghitung skor untuk {namaMakanan}. Skor: {skorDidapat}");
 
-        if(ScoreManager.Instance != null)
+        if (ScoreManager.Instance != null) ScoreManager.Instance.TambahSkor(skorDidapat);
+
+        NPCScoreDisplay scoreDisplay = GetComponent<NPCScoreDisplay>();
+        if (scoreDisplay != null)
         {
-            ScoreManager.Instance.TambahSkor(skorDidapat);
+            Debug.Log("[DEBUG 2] Komponen NPCScoreDisplay ditemukan di NPC. Memerintahkan MunculkanSkor().");
+            scoreDisplay.MunculkanSkor(skorDidapat, ikonMakanan);
+        }
+        else
+        {
+            Debug.LogError("[ERROR A] Komponen NPCScoreDisplay TIDAK DITEMUKAN pada NPC ini! Pastikan script-nya sudah ditempel ke Prefab NPC.");
         }
     }
 }
