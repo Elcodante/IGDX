@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86442b7a1a0223842b7722ae67f037ee, type: 3}
   m_Name: Serabi
   m_EditorClassIdentifier: Assembly-CSharp::IngredientData
-  ingredientID: Kue Serabi Solo
+  ingredientID: Serabi
   ingredientName: Kue Serabi Solo
   icon: {fileID: -5081801242459528388, guid: 63c73e4f00501eb4faaa6c29086d2401, type: 3}
   peranBahan: 0
