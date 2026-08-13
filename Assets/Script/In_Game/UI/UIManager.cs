@@ -19,6 +19,7 @@ public class UIManager : MonoBehaviour
     [Header("UI Elements")]
     public GameObject panelPesanan;
     public GameObject tombolPerpindahan;
+    public GameObject tombolSettings;
     public Image potretNPC;
 
     [Header("Slot Pesanan Maksimal (Isi dengan 3 Slot)")]
@@ -36,6 +37,7 @@ public class UIManager : MonoBehaviour
             potretNPC.sprite = null;
             potretNPC.enabled = false;
         }
+        if(tombolSettings != null) tombolSettings.SetActive(true);
     }
 
     public void TampilkanPanelPesanan(List<OrderData> dataPesanan, Sprite gambarNPC)
@@ -44,7 +46,7 @@ public class UIManager : MonoBehaviour
         tombolPerpindahan.SetActive(false);
         potretNPC.enabled = true;
         IsPanelOpen = true;
-
+        tombolSettings.SetActive(false);
         if (potretNPC != null && gambarNPC != null)
         {
             potretNPC.sprite = gambarNPC;
@@ -84,6 +86,7 @@ public class UIManager : MonoBehaviour
         tombolPerpindahan.SetActive(true);
         potretNPC.enabled = false;
         IsPanelOpen = false;
+        tombolSettings.SetActive(true);
     }
 
     // --- FUNGSI PEMBANTU UNTUK MERANGKAI KATA-KATA --- //

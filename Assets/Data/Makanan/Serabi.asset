@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0bd985757db8e744597380670caaca2c, type: 3}
   m_Name: Serabi
   m_EditorClassIdentifier: Assembly-CSharp::MenuData
-  menuName: Kue Serabi Solo
+  menuName: Serabi
   menuImage: {fileID: -5081801242459528388, guid: 63c73e4f00501eb4faaa6c29086d2401, type: 3}
   jenisTepung: 0
