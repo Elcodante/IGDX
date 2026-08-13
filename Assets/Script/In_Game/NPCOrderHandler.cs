@@ -7,11 +7,28 @@ public class NPCOrderHandler : MonoBehaviour
     public List<OrderData> daftarPesanan = new List<OrderData>();
     private bool pesananSudahDikirimKeDapur = false;
 
+    [Header("Pengaturan waktu dan skor")]
+    [Tooltip("Batas waktu (detik) sebelum skor pesanan jatuh ke nilai minimum")]
+    public float batasWaktuTunggu = 60f; //Detik
+
+    private float waktuMenunggu = 0f;
+    private bool sedangMenungguMakanan = false;
+
     // Reset status saat NPC baru spawn
     public void ResetHandler()
     {
         pesananSudahDikirimKeDapur = false;
+        sedangMenungguMakanan = false;
+        waktuMenunggu = 0f;
         daftarPesanan.Clear();
+    }
+
+    void Update()
+    {
+        if (sedangMenungguMakanan)
+        {
+            waktuMenunggu += Time.deltaTime;
+        }
     }
 
     // Tanggung jawab 1: Mengacak Pesanan
@@ -48,6 +65,10 @@ public class NPCOrderHandler : MonoBehaviour
                 OrderManager.Instance.KirimPesananKeDapur(pesanan);
             }
             pesananSudahDikirimKeDapur = true;
+
+            sedangMenungguMakanan = true;
+            waktuMenunggu = 0f;
+
             Debug.Log("Pesanan NPC dikirim ke dapur.");
         }
     }
@@ -59,7 +80,16 @@ public class NPCOrderHandler : MonoBehaviour
         {
             if (daftarPesanan[i].idResep == idMakananDiberikan)
             {
+                HitungSkorMakanan(daftarPesanan[i].idResep);
+
                 daftarPesanan.RemoveAt(i); // Coret dari daftar
+
+                if(ApakahSemuaPesananSelesai())
+                {
+                    sedangMenungguMakanan = false;
+                    Debug.Log("Semua pesanan NPC telah selesai.");
+                }
+
                 return true;
             }
         }
@@ -70,5 +100,19 @@ public class NPCOrderHandler : MonoBehaviour
     public bool ApakahSemuaPesananSelesai()
     {
         return daftarPesanan.Count == 0;
+    }
+
+    private void HitungSkorMakanan(string namaMakanan)
+    {
+        float persentaseWaktuTerpakai = Mathf.Clamp01(waktuMenunggu / batasWaktuTunggu);
+
+        int skorDidapat = Mathf.RoundToInt(Mathf.Lerp(100f, 10f, persentaseWaktuTerpakai));
+
+        Debug.Log($"Skor untuk makanan {namaMakanan}: {skorDidapat} (Waktu menunggu: {waktuMenunggu:F2}s)");
+
+        if(ScoreManager.Instance != null)
+        {
+            ScoreManager.Instance.TambahSkor(skorDidapat);
+        }
     }
 }
