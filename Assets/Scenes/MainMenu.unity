@@ -260,6 +260,7 @@ GameObject:
   - component: {fileID: 198995072}
   - component: {fileID: 198995071}
   - component: {fileID: 198995070}
+  - component: {fileID: 198995073}
   m_Layer: 0
   m_Name: Play
   m_TagString: Untagged
@@ -380,6 +381,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 198995068}
   m_CullTransparentMesh: 1
+--- !u!114 &198995073
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 198995068}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 60a13e3e005d4de43b267e80a0689e3f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UIanimated
+  uiElement: {fileID: 198995069}
+  duration: 0.4
+  offsetStart: {x: 0, y: -800}
+  delay: 1
 --- !u!1 &298563455
 GameObject:
   m_ObjectHideFlags: 0
@@ -1014,8 +1031,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1075710916}
   - component: {fileID: 1075710917}
+  - component: {fileID: 1075710918}
   m_Layer: 0
-  m_Name: Background Lampu (1)
+  m_Name: Background Kunti
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1094,6 +1112,28 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &1075710918
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1075710915}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: cd578283aeaf87b459f5334d8f561826, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1253401620
 GameObject:
   m_ObjectHideFlags: 0
@@ -1105,6 +1145,7 @@ GameObject:
   - component: {fileID: 1253401621}
   - component: {fileID: 1253401623}
   - component: {fileID: 1253401622}
+  - component: {fileID: 1253401624}
   m_Layer: 5
   m_Name: NamGame
   m_TagString: Untagged
@@ -1169,6 +1210,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1253401620}
   m_CullTransparentMesh: 1
+--- !u!114 &1253401624
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1253401620}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 60a13e3e005d4de43b267e80a0689e3f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UIanimated
+  uiElement: {fileID: 1253401621}
+  duration: 0.4
+  offsetStart: {x: 0, y: 800}
+  delay: 0.8
 --- !u!1 &1951809022
 GameObject:
   m_ObjectHideFlags: 0
@@ -1538,6 +1595,7 @@ GameObject:
   - component: {fileID: 2048566118}
   - component: {fileID: 2048566117}
   - component: {fileID: 2048566116}
+  - component: {fileID: 2048566119}
   m_Layer: 5
   m_Name: Settings
   m_TagString: Untagged
@@ -1646,6 +1704,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2048566114}
   m_CullTransparentMesh: 1
+--- !u!114 &2048566119
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2048566114}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 60a13e3e005d4de43b267e80a0689e3f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UIanimated
+  uiElement: {fileID: 2048566115}
+  duration: 0.4
+  offsetStart: {x: 0, y: 700}
+  delay: 1.2
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
