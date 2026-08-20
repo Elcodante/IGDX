@@ -6,12 +6,16 @@ public class LevelEndManager : MonoBehaviour
 {
     [Header("Referensi UI")]
     public GameObject panelHasil;
-    public TextMeshProUGUI teksJudul; 
+    public Image gambarJudul; 
     public TextMeshProUGUI teksSkorAkhir;
 
     public Image[] slotBintang;
     public Button tombolLanjut;
     public Button tombolBack;
+
+    [Header("Pengaturan Gambar Judul")]
+    public Sprite judulMenang;
+    public Sprite judulKalah;
 
     [Header("Pengaturan Bintang")]
     public Sprite bintangKosong;
@@ -63,11 +67,11 @@ public class LevelEndManager : MonoBehaviour
 
         if(jumlahBintang > 0)
         {
-            teksJudul.text = "Selamat!";
+            gambarJudul.sprite = judulMenang;
         }
         else
         {
-            teksJudul.text = "Coba Lagi!";
+            gambarJudul.sprite = judulKalah;
         }
 
         Time.timeScale = 0f; // Pause the game
