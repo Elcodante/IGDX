@@ -5,6 +5,7 @@ public class PlayerMovement : MonoBehaviour
 {
     [Header("Movement Settings")]
     [SerializeField] private float _speed = 5f;
+    [SerializeField] private Animator anim;
 
     private Rigidbody2D rb;
 
@@ -34,9 +35,28 @@ public class PlayerMovement : MonoBehaviour
             if (Keyboard.current.wKey.isPressed || Keyboard.current.upArrowKey.isPressed) moveY += 1f;
 
             moveInput = new Vector2(moveX, moveY).normalized;
+
+            if(moveInput != Vector2.zero)
+            {
+                anim.SetBool("isWalk", true);
+            }
+            else
+            {
+                anim.SetBool("isWalk", false);
+            }
+
+            if(moveX < 0)
+            {
+                var spriteRenderer = GetComponent<SpriteRenderer>();
+                spriteRenderer.flipX = true;
+            }
+            else
+            {
+                var spriteRenderer = GetComponent<SpriteRenderer>();
+                spriteRenderer.flipX = false;
+            }
         }
 
-        // Menggerakkan Rigidbody2D
         rb.linearVelocity = moveInput * _speed;
     }
 }
