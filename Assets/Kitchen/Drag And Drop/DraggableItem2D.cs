@@ -1,7 +1,8 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class DraggableItem2D : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
+// Tambahkan IPointerEnterHandler & IPointerExitHandler untuk deteksi hover
+public class DraggableItem2D : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerEnterHandler, IPointerExitHandler
 {
     [Header("Data Rasa (Hanya untuk Makanan Matang)")]
     public JenisTepung tepungDigunakan;
@@ -36,6 +37,9 @@ public class DraggableItem2D : MonoBehaviour, IBeginDragHandler, IDragHandler, I
         offset = transform.position - mousePos;
 
         if (col != null) col.enabled = false;
+
+        // Matikan tooltip saat mulai di-drag biar nggak mengganggu
+        if (FoodTooltipUI.Instance != null) FoodTooltipUI.Instance.SembunyikanTooltip();
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -48,6 +52,30 @@ public class DraggableItem2D : MonoBehaviour, IBeginDragHandler, IDragHandler, I
     public void OnEndDrag(PointerEventData eventData)
     {
         if (col != null) col.enabled = true;
+    }
 
+    // --- DETEKSI HOVER MOUSE ---
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        if (FoodTooltipUI.Instance != null && dataBahan != null)
+        {
+            // Susun teks untuk ditampilkan
+            string info = $"<b>{dataBahan.ingredientName}</b>\n";
+            info += $"Manis: {tingkatManis}\n";
+            info += $"Lembut: {tingkatLembut}\n";
+            info += $"Gurih: {tingkatGurih}\n";
+            info += $"Isian: {tingkatIsian}\n";
+            info += $"Tepung: {tepungDigunakan}";
+
+            FoodTooltipUI.Instance.TampilkanTooltip(info);
+        }
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        if (FoodTooltipUI.Instance != null)
+        {
+            FoodTooltipUI.Instance.SembunyikanTooltip();
+        }
     }
 }

@@ -5,85 +5,158 @@ using TMPro;
 
 public class KitchenOrderUI : MonoBehaviour
 {
-    [Header("Pengaturan UI Tiket")]
-    public Transform ticketContainer; // Tempat kertas tiket kumpul
-    public GameObject ticketPrefab;   // Prefab cetakan tiket
+    [Header("UI Teks Pesanan 1 (Atas)")]
+    public TextMeshProUGUI namaMakanan1Text;
+    public TextMeshProUGUI atributText1;
+    public TextMeshProUGUI jumlahText1;
 
-    [System.Serializable]
-    public struct MenuVisual
-    {
-        public string idResep; // Harus sama persis dengan idResep dari NPC
-        public Sprite iconMasakan;
-    }
+    [Header("UI Teks Pesanan 2 (Bawah)")]
+    public TextMeshProUGUI namaMakanan2Text;
+    public TextMeshProUGUI atributText2;
+    public TextMeshProUGUI jumlahText2;
 
-    [Header("Database Gambar Tiket")]
-    public List<MenuVisual> daftarMenu; 
+    [Header("Tombol Navigasi")]
+    public Button prevButton;
+    public Button nextButton;
+
+    private int currentPage = 0;
+    private const int ITEMS_PER_PAGE = 2; // Maksimal 2 pesanan per halaman sesuai gambar
 
     private void OnEnable()
     {
-        // Berlangganan untuk pesanan baru
-        OrderManager.OnPesananBaruMasukDapur += MunculkanTiket; 
-
-        // Biar tiket tidak numpuk double saat player bolak-balik Kasir-Dapur
-        HancurkanSemuaTiket();
-
-        //Tarik semua pesanan yang masuk pas dapur sedang OFF
-        if (OrderManager.Instance != null)
-        {
-            foreach (var pesanan in OrderManager.Instance.daftarPesananAktif)
-            {
-                MunculkanTiket(pesanan);
-            }
-        }
+        OrderManager.OnPesananBaruMasukDapur += RefreshOrderUI;
+        UpdateUI();
     }
 
     private void OnDisable()
     {
-        // Berhenti berlangganan saat dapur dimatikan agar tidak terjadi memory leak
-        OrderManager.OnPesananBaruMasukDapur -= MunculkanTiket; 
+        OrderManager.OnPesananBaruMasukDapur -= RefreshOrderUI;
     }
 
-    private void HancurkanSemuaTiket()
+    private void RefreshOrderUI(OrderData newOrder)
     {
-        if (ticketContainer == null) return;
-        foreach (Transform child in ticketContainer)
+        UpdateUI();
+    }
+
+    public void NextPage()
+    {
+        if (OrderManager.Instance == null) return;
+        int totalPesanan = OrderManager.Instance.daftarPesananAktif.Count;
+        
+        if ((currentPage + 1) * ITEMS_PER_PAGE < totalPesanan)
         {
-            Destroy(child.gameObject);
+            currentPage++;
+            UpdateUI();
         }
     }
 
-    private void MunculkanTiket(OrderData pesananBaru)
+    public void PrevPage()
     {
-        if (ticketPrefab == null || ticketContainer == null) return;
-
-        // Cetak tiket baru di UI dapur
-        GameObject tiketBaru = Instantiate(ticketPrefab, ticketContainer);
-        
-        tiketBaru.transform.localScale = Vector3.one;
-        tiketBaru.transform.localPosition = Vector3.zero;
-
-        Image iconTiket = tiketBaru.GetComponentInChildren<Image>(); 
-        TextMeshProUGUI teksPesanan = tiketBaru.GetComponentInChildren<TextMeshProUGUI>(); 
-
-        // Cari ikon masakan yang cocok
-        Sprite gambarKetemu = null;
-        foreach (var menu in daftarMenu)
+        if (currentPage > 0)
         {
-            if (menu.idResep == pesananBaru.idResep) 
+            currentPage--;
+            UpdateUI();
+        }
+    }
+
+    public void UpdateUI()
+    {
+        if (OrderManager.Instance == null || OrderManager.Instance.daftarPesananAktif == null) 
+        {
+            KosongkanTampilan();
+            return;
+        }
+
+        List<OrderData> listPesanan = OrderManager.Instance.daftarPesananAktif;
+        int totalPesanan = listPesanan.Count;
+
+        if (totalPesanan == 0)
+        {
+            KosongkanTampilan();
+            if (prevButton != null) prevButton.interactable = false;
+            if (nextButton != null) nextButton.interactable = false;
+            return;
+        }
+
+        // Hitung batas maksimal halaman biar nggak error index
+        int maxPage = Mathf.Max(0, Mathf.CeilToInt((float)totalPesanan / ITEMS_PER_PAGE) - 1);
+        if (currentPage > maxPage) currentPage = maxPage;
+
+        int indexAwal = currentPage * ITEMS_PER_PAGE;
+
+        // --- BINDING ITEM 1 (SLOT ATAS) ---
+        if (indexAwal < totalPesanan)
+        {
+            SetItemData(listPesanan[indexAwal], namaMakanan1Text, atributText1, jumlahText1);
+        }
+        else
+        {
+            ClearSlot(namaMakanan1Text, atributText1, jumlahText1);
+        }
+
+        // --- BINDING ITEM 2 (SLOT BAWAH) ---
+        if (indexAwal + 1 < totalPesanan)
+        {
+            SetItemData(listPesanan[indexAwal + 1], namaMakanan2Text, atributText2, jumlahText2);
+        }
+        else
+        {
+            ClearSlot(namaMakanan2Text, atributText2, jumlahText2);
+        }
+
+        // --- ATUR INTERAKSI TOMBOL PREV / NEXT ---
+        if (prevButton != null) prevButton.interactable = (currentPage > 0);
+        if (nextButton != null) nextButton.interactable = ((currentPage + 1) * ITEMS_PER_PAGE < totalPesanan);
+    }
+
+    private void SetItemData(OrderData order, TextMeshProUGUI namaTxt, TextMeshProUGUI atributTxt, TextMeshProUGUI jumlahTxt)
+    {
+        if (namaTxt != null) 
+        {
+            namaTxt.gameObject.SetActive(true);
+            namaTxt.text = order.idResep; // idResep dari struct temenmu
+        }
+
+        if (jumlahTxt != null) 
+        {
+            jumlahTxt.gameObject.SetActive(true);
+            // Dari skrip temenmu, 1 array list = 1 pesanan, jadi kita tulis hardcode 1
+            jumlahTxt.text = "1"; 
+        }
+
+        if (atributTxt != null)
+        {
+            atributTxt.gameObject.SetActive(true);
+
+            // Menerjemahkan Enum TingkatRasa temenmu menjadi teks koma
+            List<string> listAtribut = new List<string>();
+
+            if (order.targetManis != TingkatRasa.TidakPakai) listAtribut.Add("Manis");
+            if (order.targetLembut != TingkatRasa.TidakPakai) listAtribut.Add("Lembut");
+            if (order.targetGurih != TingkatRasa.TidakPakai) listAtribut.Add("Gurih");
+
+            if (listAtribut.Count > 0)
             {
-                gambarKetemu = menu.iconMasakan;
-                break;
+                // Hasil: "Manis, Lembut" 
+                atributTxt.text = string.Join(", ", listAtribut);
+            }
+            else
+            {
+                atributTxt.text = "-";
             }
         }
+    }
 
-        if (iconTiket != null && gambarKetemu != null)
-        {
-            iconTiket.sprite = gambarKetemu;
-        }
-        
-        if (teksPesanan != null)
-        {
-            teksPesanan.text = pesananBaru.idResep; 
-        }
+    private void ClearSlot(TextMeshProUGUI namaTxt, TextMeshProUGUI atributTxt, TextMeshProUGUI jumlahTxt)
+    {
+        if (namaTxt != null) { namaTxt.text = ""; namaTxt.gameObject.SetActive(false); }
+        if (atributTxt != null) { atributTxt.text = ""; atributTxt.gameObject.SetActive(false); }
+        if (jumlahTxt != null) { jumlahTxt.text = ""; jumlahTxt.gameObject.SetActive(false); }
+    }
+
+    private void KosongkanTampilan()
+    {
+        ClearSlot(namaMakanan1Text, atributText1, jumlahText1);
+        ClearSlot(namaMakanan2Text, atributText2, jumlahText2);
     }
 }
