@@ -7,6 +7,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float _speed = 5f;
     [SerializeField] private Animator anim;
 
+    public bool canMove = true;
+
     private Rigidbody2D rb;
 
     private void Start()
@@ -21,7 +23,13 @@ public class PlayerMovement : MonoBehaviour
 
     private void Move()
     {
-        
+        if(!canMove)
+        {
+            rb.linearVelocity = Vector2.zero;
+            anim.SetBool("isWalk", false);
+            return;
+        }
+
         Vector2 moveInput = Vector2.zero;
 
         if (Keyboard.current != null)
@@ -50,7 +58,7 @@ public class PlayerMovement : MonoBehaviour
                 var spriteRenderer = GetComponent<SpriteRenderer>();
                 spriteRenderer.flipX = true;
             }
-            else
+            else if (moveX > 0)
             {
                 var spriteRenderer = GetComponent<SpriteRenderer>();
                 spriteRenderer.flipX = false;

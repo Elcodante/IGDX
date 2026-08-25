@@ -5,7 +5,10 @@ public class CameraUIController : MonoBehaviour
 {
     [Header("References")]
     public CameraController cameraController;
-    public TextMeshProUGUI tombolText;
+
+    [Header("Tombol Navigasi")]
+    public GameObject tombolKeDapur;
+    public GameObject tombolKeKasir;
 
     [Header("UI Panels")]
     public GameObject PanelKasir;
@@ -13,36 +16,37 @@ public class CameraUIController : MonoBehaviour
 
     private void OnEnable()
     {
-        if(cameraController != null)
+        if (cameraController != null)
         {
-            cameraController.OnAreaChanged += UpdateUI;
+            cameraController.OnAreaChangeStarted += SembunyikanSemuaUI;
+            cameraController.OnAreaChangeCompleted += TampilkanUI;
         }
     }
 
     private void OnDisable()
     {
-        if(cameraController != null)
+        if (cameraController != null)
         {
-            cameraController.OnAreaChanged -= UpdateUI;
+            cameraController.OnAreaChangeStarted -= SembunyikanSemuaUI;
+            cameraController.OnAreaChangeCompleted -= TampilkanUI;
         }
     }
 
-    private void UpdateUI(CameraController.CameraArea currentArea)
+    private void SembunyikanSemuaUI(CameraController.CameraArea area)
     {
-        bool isKasir = currentArea == CameraController.CameraArea.Kasir;
+        PanelKasir.SetActive(false);
+        PanelDapur.SetActive(false);
+        tombolKeDapur.SetActive(false);
+        tombolKeKasir.SetActive(false);
+    }
 
-        if(PanelKasir != null)
-        {
-            PanelKasir.SetActive(false);
-        }
-        if(PanelDapur != null)
-        {
-            PanelDapur.SetActive(!isKasir);
-        }
+    private void TampilkanUI(CameraController.CameraArea area)
+    {
+        bool isKasir = area == CameraController.CameraArea.Kasir;
 
-        if (tombolText != null)
-        {
-            tombolText.text = isKasir ? "KE Dapur" : "KE Kasir";
-        }
+        //PanelKasir.SetActive(isKasir);
+        PanelDapur.SetActive(!isKasir);
+        tombolKeDapur.SetActive(isKasir);
+        tombolKeKasir.SetActive(!isKasir);
     }
 }
