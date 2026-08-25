@@ -3,8 +3,11 @@ using UnityEngine.UI;
 
 public class CollectionBook : MonoBehaviour
 {
-    [Header("UI & GameObjects")]
-    public GameObject[] itemKoleksi;
+    [Header("UI Tampilan")]
+    public Image gambarBuku;
+
+    [Header("Data Koleksi (Assets Gambar)")]
+    public Sprite[] daftarAsetGambar;
 
     [Header("Tombol Navigasi")]
     public Button tombolKiri;
@@ -24,12 +27,12 @@ public class CollectionBook : MonoBehaviour
 
     public void TampilBerikutnya()
     {
-        if (itemKoleksi.Length == 0) return;
+        if (daftarAsetGambar.Length == 0) return;
 
         indexSekarang++;
         
         
-        if (indexSekarang >= itemKoleksi.Length)
+        if (indexSekarang >= daftarAsetGambar.Length)
         {
             indexSekarang = 0;
         }
@@ -39,14 +42,14 @@ public class CollectionBook : MonoBehaviour
 
     public void TampilSebelumnya()
     {
-        if (itemKoleksi.Length == 0) return;
+        if (daftarAsetGambar.Length == 0) return;
 
         indexSekarang--;
 
         
         if (indexSekarang < 0)
         {
-            indexSekarang = itemKoleksi.Length - 1;
+            indexSekarang = daftarAsetGambar.Length - 1;
         }
 
         UpdateTampilanKoleksi();
@@ -54,13 +57,13 @@ public class CollectionBook : MonoBehaviour
 
     private void UpdateTampilanKoleksi()
     {
-        if (itemKoleksi.Length == 0) return;
+        if (daftarAsetGambar.Length == 0 || gambarBuku == null) return;
 
-        for (int i = 0; i < itemKoleksi.Length; i++)
+        for (int i = 0; i < daftarAsetGambar.Length; i++)
         {
-            if (itemKoleksi[i] != null)
+            if (daftarAsetGambar[i] != null)
             {
-                itemKoleksi[i].SetActive(i == indexSekarang);
+                gambarBuku.sprite = daftarAsetGambar[indexSekarang];
             }
         }
     }

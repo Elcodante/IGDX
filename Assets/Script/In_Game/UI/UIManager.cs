@@ -1,18 +1,6 @@
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
-
-// 1. CLASS BARU UNTUK MENYIMPAN KOMPONEN UI DI SETIAP KOTAK PESANAN
-[System.Serializable]
-public class SlotPesananUI
-{
-    public GameObject wadahSlot; // Objek utama pembungkus 1 pesanan
-    public Image ikonMakanan;
-    public TextMeshProUGUI teksNamaMenu;
-    public TextMeshProUGUI teksDialog;
-    public TextMeshProUGUI teksKeyword;
-}
 
 public class UIManager : MonoBehaviour
 {
@@ -22,10 +10,17 @@ public class UIManager : MonoBehaviour
     public GameObject tombolSettings;
     public Image potretNPC;
 
-    [Header("Slot Pesanan Maksimal (Isi dengan 3 Slot)")]
+    [Header("Slot Pesanan (Cukup Isi dengan 2 Slot)")]
     public SlotPesananUI[] daftarSlotUI;
 
+    [Header("Navigasi Halaman")]
+    public Button tombolHalamanBerikutnya;
+    public Button tombolHalamanSebelumnya;
+
     public static bool IsPanelOpen { get; private set; }
+
+    private List<OrderData> dataPesananAktif;
+    private int halamanSekarang = 0;
 
     void Start()
     {
@@ -37,7 +32,10 @@ public class UIManager : MonoBehaviour
             potretNPC.sprite = null;
             potretNPC.enabled = false;
         }
-        if(tombolSettings != null) tombolSettings.SetActive(true);
+        if (tombolSettings != null) tombolSettings.SetActive(true);
+
+        if (tombolHalamanBerikutnya != null) tombolHalamanBerikutnya.onClick.AddListener(BukaHalamanBerikutnya);
+        if (tombolHalamanSebelumnya != null) tombolHalamanSebelumnya.onClick.AddListener(BukaHalamanSebelumnya);
     }
 
     public void TampilkanPanelPesanan(List<OrderData> dataPesanan, Sprite gambarNPC)
@@ -47,37 +45,58 @@ public class UIManager : MonoBehaviour
         potretNPC.enabled = true;
         IsPanelOpen = true;
         tombolSettings.SetActive(false);
+
         if (potretNPC != null && gambarNPC != null)
         {
             potretNPC.sprite = gambarNPC;
         }
 
-        // 2. MATIKAN SEMUA SLOT TERLEBIH DAHULU AGAR BERSIH
-        foreach (SlotPesananUI slot in daftarSlotUI)
+        dataPesananAktif = dataPesanan;
+        halamanSekarang = 0;
+
+        UpdateTampilanHalaman();
+    }
+
+    private void UpdateTampilanHalaman()
+    {
+        if (dataPesananAktif == null) return;
+
+        int jumlahSlot = daftarSlotUI.Length;
+        int indexAwal = halamanSekarang * jumlahSlot;
+
+        for (int i = 0; i < jumlahSlot; i++)
         {
-            slot.wadahSlot.SetActive(false);
+            int indexData = indexAwal + i;
+
+            if (indexData < dataPesananAktif.Count)
+            {
+                // Cukup suruh slotnya untuk menampilkan data
+                daftarSlotUI[i].TampilkanData(dataPesananAktif[indexData]);
+            }
+            else
+            {
+                // Suruh slotnya sembunyi
+                daftarSlotUI[i].Sembunyikan();
+            }
         }
 
-        // 3. NYALAKAN DAN ISI SLOT SESUAI JUMLAH PESANAN NPC
-        for (int i = 0; i < dataPesanan.Count; i++)
-        {
-            // Cegah error jika pesanan melebihi jumlah slot UI yang kita siapkan
-            if (i >= daftarSlotUI.Length) break;
+        if (tombolHalamanSebelumnya != null)
+            tombolHalamanSebelumnya.gameObject.SetActive(halamanSekarang > 0);
 
-            SlotPesananUI slotAktif = daftarSlotUI[i];
-            OrderData data = dataPesanan[i];
+        if (tombolHalamanBerikutnya != null)
+            tombolHalamanBerikutnya.gameObject.SetActive(indexAwal + jumlahSlot < dataPesananAktif.Count);
+    }
 
-            // Aktifkan visual kotak slot ini
-            slotAktif.wadahSlot.SetActive(true);
+    public void BukaHalamanBerikutnya()
+    {
+        halamanSekarang++;
+        UpdateTampilanHalaman();
+    }
 
-            // Masukkan data gambar dan nama
-            if (slotAktif.ikonMakanan != null) slotAktif.ikonMakanan.sprite = data.ikonMakanan;
-            if (slotAktif.teksNamaMenu != null) slotAktif.teksNamaMenu.text = data.idResep.ToUpper();
-
-            // Generate otomatis teks dialog & keywords
-            if (slotAktif.teksKeyword != null) slotAktif.teksKeyword.text = "KEYWORDS: " + BuatTeksKeyword(data);
-            if (slotAktif.teksDialog != null) slotAktif.teksDialog.text = BuatTeksDialog(data);
-        }
+    public void BukaHalamanSebelumnya()
+    {
+        halamanSekarang--;
+        UpdateTampilanHalaman();
     }
 
     public void TutupPanelPesanan()
@@ -87,90 +106,5 @@ public class UIManager : MonoBehaviour
         potretNPC.enabled = false;
         IsPanelOpen = false;
         tombolSettings.SetActive(true);
-    }
-
-    // --- FUNGSI PEMBANTU UNTUK MERANGKAI KATA-KATA --- //
-
-    private string BuatTeksKeyword(OrderData data)
-    {
-        List<string> keyword = new List<string>();
-
-        switch (data.targetManis)
-        {
-            case TingkatRasa.TidakPakai:
-                break;
-            case TingkatRasa.Sedikit:
-                keyword.Add("Sedikit manis");
-                break;
-            case TingkatRasa.Sedang:
-                keyword.Add("Manis sedang");
-                break;
-            case TingkatRasa.Banyak:
-                keyword.Add("Sangat manis");
-                break;
-        }
-
-        switch (data.targetGurih)
-        {
-            case TingkatRasa.TidakPakai:
-                break;
-            case TingkatRasa.Sedikit:
-                keyword.Add("Sedikit gurih");
-                break;
-            case TingkatRasa.Sedang:
-                keyword.Add("Gurih sedang");
-                break;
-            case TingkatRasa.Banyak:
-                keyword.Add("Sangat gurih");
-                break;
-        }
-
-        switch (data.targetLembut)
-        {
-            case TingkatRasa.TidakPakai:
-                break;
-            case TingkatRasa.Sedikit:
-                keyword.Add("Sedikit lembut");
-                break;
-            case TingkatRasa.Sedang:
-                keyword.Add("Lembut sedang");
-                break;
-            case TingkatRasa.Banyak:
-                keyword.Add("Sangat lembut");
-                break;
-        }
-
-        switch (data.isian)
-        {
-            case TingkatIsian.Sedikit:
-                keyword.Add("Isian sedikit");
-                break;
-            case TingkatIsian.Sedang:
-                keyword.Add("Isian sedang");
-                break;
-            case TingkatIsian.Banyak:
-                keyword.Add("Isian banyak");
-                break;
-        }
-
-        if (keyword.Count == 0) return "Original";
-
-        return string.Join(", ", keyword); // Hasilnya: "Sedikit manis, Gurih sedang"
-    }
-
-    private string BuatTeksDialog(OrderData data)
-    {
-        // Anda bisa membuat percabangan dialog yang jauh lebih kompleks dan bervariasi di sini
-        string dialog = $"\"Aku mau pesan {data.idResep}. ";
-
-        if (data.targetManis == TingkatRasa.Banyak) dialog += "Aku suka banget yang manis, gula yang banyak ya. ";
-        else if (data.targetManis == TingkatRasa.Sedikit) dialog += "Manisnya sedikit aja, jangan giung. ";
-
-        if (data.targetGurih == TingkatRasa.Banyak || data.targetGurih == TingkatRasa.Sedang) dialog += "Terus agak gurih juga enak. ";
-
-        if (data.targetLembut == TingkatRasa.Banyak) dialog += "Jangan terlalu padat, aku lebih suka yang lembut.\"";
-        else dialog += "\"";
-
-        return dialog;
     }
 }
