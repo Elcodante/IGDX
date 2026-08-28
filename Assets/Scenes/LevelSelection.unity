@@ -1272,13 +1272,17 @@ MonoBehaviour:
   namaSceneGameplay: GameplayScene
   levelberapa: 1
   menuList:
-  - {fileID: 11400000, guid: 9a0aaff7ceb0bfe4a8ab1dfc54856e78, type: 2}
   - {fileID: 11400000, guid: c42fde2b8188a32439895b95ef4cfc02, type: 2}
-  npcPrefab: []
+  npcPrefab:
+  - {fileID: 1782478254039802041, guid: 26168ca11eb62d749ba4272f5648eb57, type: 3}
+  - {fileID: 11347220522793723, guid: 2f73a0997f5d5684d850682ce6f82354, type: 3}
+  - {fileID: 11347220522793723, guid: a26a501f010c974409933ee412e6576f, type: 3}
+  - {fileID: 11347220522793723, guid: 15aa43175e2193b47a8d4b6a1e821110, type: 3}
+  - {fileID: 11347220522793723, guid: aacdbedec83bbde4a85ade7c861f92fb, type: 3}
   spawnInterval: 5
-  maksimalNPC: 5
+  maksimalNPC: 2
   minimalVariasiMenu: 1
-  maksimalVariasiMenu: 2
+  maksimalVariasiMenu: 1
 --- !u!1 &521691931
 GameObject:
   m_ObjectHideFlags: 0
@@ -3658,13 +3662,17 @@ MonoBehaviour:
   namaSceneGameplay: GameplayScene
   levelberapa: 2
   menuList:
-  - {fileID: 11400000, guid: 9a0aaff7ceb0bfe4a8ab1dfc54856e78, type: 2}
   - {fileID: 11400000, guid: c42fde2b8188a32439895b95ef4cfc02, type: 2}
-  npcPrefab: []
+  npcPrefab:
+  - {fileID: 1782478254039802041, guid: 26168ca11eb62d749ba4272f5648eb57, type: 3}
+  - {fileID: 11347220522793723, guid: 2f73a0997f5d5684d850682ce6f82354, type: 3}
+  - {fileID: 11347220522793723, guid: a26a501f010c974409933ee412e6576f, type: 3}
+  - {fileID: 11347220522793723, guid: 15aa43175e2193b47a8d4b6a1e821110, type: 3}
+  - {fileID: 11347220522793723, guid: aacdbedec83bbde4a85ade7c861f92fb, type: 3}
   spawnInterval: 5
-  maksimalNPC: 10
+  maksimalNPC: 4
   minimalVariasiMenu: 1
-  maksimalVariasiMenu: 3
+  maksimalVariasiMenu: 2
 --- !u!1 &1456934648
 GameObject:
   m_ObjectHideFlags: 0

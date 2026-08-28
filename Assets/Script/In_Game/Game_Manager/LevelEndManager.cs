@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-
+using UnityEngine.SceneManagement;
 public class LevelEndManager : MonoBehaviour
 {
     [Header("Referensi UI")]
@@ -26,6 +26,8 @@ public class LevelEndManager : MonoBehaviour
     public int skorduaBintang = 200;
     public int skortigaBintang = 300;
 
+    [Header("Pengaturan Scene")]
+    public string namaSceneSelanjutnya = "LevelSelection"; // Ganti dengan nama scene yang sesuai
     private void Start()
     {
         if (panelHasil != null)
@@ -75,5 +77,11 @@ public class LevelEndManager : MonoBehaviour
         }
 
         Time.timeScale = 0f; // Pause the game
+    }
+
+    public void KembaliKeLevelSelesction()
+    {
+        Time.timeScale = 1f; // Resume the game
+        SceneManager.LoadScene(namaSceneSelanjutnya);
     }
 }
