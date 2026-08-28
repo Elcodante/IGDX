@@ -200,7 +200,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1148054}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 235005398}
+        m_TargetAssemblyTypeName: LevelEndManager, Assembly-CSharp
+        m_MethodName: KembaliKeLevelSelesction
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1148054
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3988,6 +4000,7 @@ MonoBehaviour:
   skorsatuBintang: 30
   skorduaBintang: 50
   skortigaBintang: 80
+  namaSceneSelanjutnya: LevelSelection
 --- !u!1 &244083413
 GameObject:
   m_ObjectHideFlags: 0
@@ -9456,7 +9469,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 832842885}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 235005398}
+        m_TargetAssemblyTypeName: LevelEndManager, Assembly-CSharp
+        m_MethodName: KembaliKeLevelSelesction
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &832842885
 MonoBehaviour:
   m_ObjectHideFlags: 0
