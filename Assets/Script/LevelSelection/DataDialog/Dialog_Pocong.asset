@@ -1,0 +1,108 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91d0607851f3a3a4e82b72ca752ac31f, type: 3}
+  m_Name: Dialog_Pocong
+  m_EditorClassIdentifier: Assembly-CSharp::CharacterDialogueData
+  characterOwner: 0
+  requiredLevel: 2
+  unlockedDialogue:
+  - speaker: 0
+    message: Eh... kamu yang tinggal di sini?
+  - speaker: 2
+    message: Bisa jadi. Ada apa?
+  - speaker: 0
+    message: Aku lagi cari tahu gimana caranya supaya bisa pulang. Katanya, aku harus
+      belajar dari hantu-hantu yang ada di sini.
+  - speaker: 2
+    message: Kalau begitu, apa yang sudah kamu pelajari?
+  - speaker: 0
+    message: Hmm... cara bikin beberapa makanan. Ternyata lebih susah dari yang aku
+      kira.
+  - speaker: 2
+    message: Lebih susah?
+  - speaker: 0
+    message: 'Iya. Aku kira tinggal ikutin resep, masukin bahan, terus jadi. Ternyata
+      kalau salah sedikit aja
+
+      hasilnya bisa beda.'
+  - speaker: 2
+    message: Dan bagaimana rasanya ketika kamu gagal?
+  - speaker: 0
+    message: Kesel, sih. Apalagi kalau udah lama bikinnya.
+  - speaker: 2
+    message: Sekarang bayangkan kalau yang gagal bukan hanya satu masakan.
+  - speaker: 0
+    message: Maksudnya?
+  - speaker: 2
+    message: Kamu pernah lihat sawah?
+  - speaker: 0
+    message: Pernah. Kenapa?
+  - speaker: 2
+    message: Pernah kepikiran berapa lama sesuatu yang tumbuh di sana sampai bisa
+      ada di meja makanmu?
+  - speaker: 0
+    message: Nggak juga...
+  - speaker: 2
+    message: Aku juga dulu begitu. Dulu aku cuma melihat apa yang ada di depan mata.
+      Kalau tidak suka, ya sudah.
+  - speaker: 0
+    message: Terus sekarang?
+  - speaker: 2
+    message: Sekarang aku tahu, ada banyak hal yang terjadi sebelum sesuatu sampai
+      ke tangan kita.
+  - speaker: 0
+    message: Jadi... selama ini aku cuma lihat bagian akhirnya.
+  - speaker: 2
+    message: Kurang lebih.
+  - speaker: 0
+    message: Aku nggak pernah mikir sampai sana.
+  - speaker: 2
+    message: Tidak apa-apa. Sekarang kamu punya kesempatan untuk mulai melihatnya.
+  - speaker: 0
+    message: Berarti aku harus belajar dari awal lagi?
+  - speaker: 2
+    message: Bukan dari awal tapi dari hal yang belum kamu lihat.
+  lockedDialogue:
+  - speaker: 0
+    message: Eh... kamu tinggal di sini?
+  - speaker: 2
+    message: Iya. Kenapa ?
+  - speaker: 0
+    message: Aku lagi cari tahu tempat ini. Aku juga masih belum tahu gimana caranya
+      pulang.
+  - speaker: 2
+    message: Kalau begitu, kamu masih punya banyak hal yang belum kamu temukan.
+  - speaker: 0
+    message: Memangnya ada apa di sini?
+  - speaker: 2
+    message: Banyak hal. Tapi tidak semuanya bisa kamu pahami sekaligus.
+  - speaker: 0
+    message: Terus... kamu bisa bantu aku?
+  - speaker: 2
+    message: Bisa. Tapi belum sekarang.
+  - speaker: 0
+    message: Kenapa ?
+  - speaker: 2
+    message: Karena ada hal-hal yang harus kamu lihat sendiri sebelum kamu bisa mengerti
+      apa yang ingin aku ajarkan.
+  - speaker: 0
+    message: Jadi aku harus pergi dulu?
+  - speaker: 2
+    message: Jelajahi tempat ini. Temui mereka. Masak, lihat, dan dengarkan.
+  - speaker: 0
+    message: Terus kalau aku sudah siap?
+  - speaker: 2
+    message: Datang kembali.
+  - speaker: 0
+    message: Kamu bakal masih di sini?
+  - speaker: 2
+    message: Aku tidak ke mana-mana.

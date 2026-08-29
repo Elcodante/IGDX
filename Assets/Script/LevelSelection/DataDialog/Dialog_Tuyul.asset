@@ -1,0 +1,128 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91d0607851f3a3a4e82b72ca752ac31f, type: 3}
+  m_Name: Dialog_Tuyul
+  m_EditorClassIdentifier: Assembly-CSharp::CharacterDialogueData
+  characterOwner: 0
+  requiredLevel: 4
+  unlockedDialogue:
+  - speaker: 0
+    message: Aku lagi cari hantu yang bisa ngajarin aku.
+  - speaker: 5
+    message: Kalau begitu kamu datang ke orang yang tepat.
+  - speaker: 0
+    message: Kamu bisa masak?
+  - speaker: 5
+    message: Bisa sedikit. Tapi aku lebih sering lihat orang lain masak.
+  - speaker: 0
+    message: Di sini?
+  - speaker: 5
+    message: Bukan. Dulu, waktu aku masih sering keliling kampung.
+  - speaker: 0
+    message: Ngapain keliling?
+  - speaker: 5
+    message: Cari makanan, lah.
+  - speaker: 0
+    message: Pantes.
+  - speaker: 5
+    message: Tapi dari situ aku jadi sering lihat orang-orang masak. Kalau satu rumah
+      tiba-tiba masak banyak, biasanya rumah itu lagi punya acara.
+  - speaker: 0
+    message: Kayak hajatan?
+  - speaker: 5
+    message: 'Iya. Bisa hajatan, syukuran, atau cuma lagi ada keluarga yang datang.
+      Biasanya tetangga juga
+
+      ikut kebagian.'
+  - speaker: 0
+    message: Berarti kalau masak banyak, bukan cuma buat yang punya rumah.
+  - speaker: 5
+    message: Nah.
+  - speaker: 5
+    message: 'Kadang ada juga yang datang bawa makanan ke rumah orang lain. Apalagi
+      kalau ada yang lagi
+
+      susah.'
+  - speaker: 0
+    message: Mereka nggak cuma bilang 'semoga cepat baikan'?
+  - speaker: 5
+    message: Hahaha. Nggak. Mereka datang bawa sesuatu.
+  - speaker: 0
+    message: Makanan?
+  - speaker: 5
+    message: Iya. Mungkin kelihatannya sederhana, tapi orang yang menerima pasti
+      tahu maksudnya.
+  - speaker: 0
+    message: Kayak bilang ikut peduli?
+  - speaker: 5
+    message: Kurang lebih.
+  - speaker: 0
+    message: Aku jadi ingat waktu keluargaku kumpul. Kalau ada makanan, semuanya
+      jadi ikut duduk bareng.
+  - speaker: 5
+    message: Nah, itu.
+  - speaker: 0
+    message: Jadi makanan bisa bikin orang berkumpul juga.
+  - speaker: 5
+    message: Bukan cuma bikin berkumpul. Kadang makanan yang bikin orang punya alasan
+      untuk datang.
+  - speaker: 0
+    message: Hmm...
+  - speaker: 5
+    message: Makanya jangan cuma mikir makanan itu buat dimakan.
+  - speaker: 0
+    message: Terus buat apa?
+  - speaker: 5
+    message: Banyak. Bisa buat merayakan, berbagi, nemenin orang, atau sekadar bikin
+      satu meja jadi lebih ramai.
+  - speaker: 0
+    message: Kamu ternyata lumayan pintar.
+  - speaker: 5
+    message: Aku memang pintar.
+  - speaker: 0
+    message: Tadi katanya cuma bisa masak sedikit.
+  - speaker: 5
+    message: Masak sedikit bukan berarti nggak pintar.
+  - speaker: 0
+    message: Hahaha.
+  - speaker: 5
+    message: Sudah, sekarang giliran kamu. Kita lihat kamu bisa bikin makanan yang
+      bikin orang mau duduk bareng atau nggak.
+  lockedDialogue:
+  - speaker: 0
+    message: Kamu Tuyul?
+  - speaker: 5
+    message: Iya. Kamu mau belajar masak?
+  - speaker: 0
+    message: Iya.
+  - speaker: 5
+    message: Yah, sekarang nggak bisa.
+  - speaker: 0
+    message: Kenapa?
+  - speaker: 5
+    message: Aku lagi sibuk.
+  - speaker: 0
+    message: Sibuk ngapain?
+  - speaker: 5
+    message: Lagi bantu siapin makanan.
+  - speaker: 0
+    message: Banyak banget.
+  - speaker: 5
+    message: Iya. Nanti mau dibagi.
+  - speaker: 0
+    message: Oh....
+  - speaker: 5
+    message: Kalau sudah selesai, baru kita masak.
+  - speaker: 0
+    message: Janji?
+  - speaker: 5
+    message: Janji.

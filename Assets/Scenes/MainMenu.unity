@@ -313,7 +313,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -7323008486289365319, guid: 9b3f62ee6ea17f64d9457dc2da2734b5, type: 3}
+  m_Sprite: {fileID: 4324459528721359582, guid: f665a02c77f4b3d418405c08c1c0e93d, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -345,8 +345,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UIanimated
   uiElement: {fileID: 198995069}
   duration: 1.2
-  offsetStart: {x: 0, y: -800}
-  delay: 2
+  offsetStart: {x: 0, y: -1200}
+  delay: 2.5
 --- !u!1 &298563455
 GameObject:
   m_ObjectHideFlags: 0
@@ -1120,7 +1120,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 129.25}
-  m_SizeDelta: {x: 1466, y: 782}
+  m_SizeDelta: {x: 1690, y: 592}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1253401622
 MonoBehaviour:
@@ -1142,7 +1142,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -7352339073622421304, guid: f86b9e11e171cac41814ffff37393357, type: 3}
+  m_Sprite: {fileID: 2350917285905775204, guid: 07b1c6ad254ec0645b7f76241dac70c7, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

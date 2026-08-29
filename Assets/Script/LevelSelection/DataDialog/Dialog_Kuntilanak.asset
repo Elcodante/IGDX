@@ -1,0 +1,86 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91d0607851f3a3a4e82b72ca752ac31f, type: 3}
+  m_Name: Dialog_Kuntilanak
+  m_EditorClassIdentifier: Assembly-CSharp::CharacterDialogueData
+  characterOwner: 0
+  requiredLevel: 1
+  unlockedDialogue:
+  - speaker: 0
+    message: Hah...? Ini di mana? Kok aku bisa ada di sini?
+  - speaker: 0
+    message: Tunggu... kamu siapa?! Jangan dekat-dekat!
+  - speaker: 1
+    message: Tenang. Aku tidak akan menyakitimu.
+  - speaker: 0
+    message: Kamu hantu, kan...? Aku... aku harus pergi dari sini.
+  - speaker: 0
+    message: Anak melihat sekeliling, mencoba mencari jalan keluar.
+  - speaker: 0
+    message: Tadi aku masih di rumah. Terus... tiba-tiba semuanya gelap. Sekarang
+      malah ada tempat aneh seperti ini.
+  - speaker: 1
+    message: Kamu sedang berada di Alam Arwah.
+  - speaker: 0
+    message: Alam... Arwah?
+  - speaker: 0
+    message: Anak terdiam beberapa saat, mencoba mencerna perkataan itu.
+  - speaker: 0
+    message: Tunggu. Jadi aku... sudah mati?
+  - speaker: 1
+    message: Belum.
+  - speaker: 0
+    message: Hah? Terus kenapa aku bisa ada di sini?
+  - speaker: 1
+    message: 'Kuntilanak tidak langsung menjawab. '
+  - speaker: 1
+    message: Coba ingat apa yang kamu lakukan sebelum datang ke sini.
+  - speaker: 0
+    message: Aku...
+  - speaker: 0
+    message: Anak mulai mengingat kejadian sebelumnya.
+  - speaker: 0
+    message: Aku lagi makan.
+  - speaker: 1
+    message: Lalu?
+  - speaker: 0
+    message: Aku nggak suka makanannya. Jadi... aku buang.
+  - speaker: 1
+    message: Itulah alasan kamu ada di sini.
+  - speaker: 0
+    message: Cuma gara-gara itu?
+  - speaker: 1
+    message: Menurutmu, membuang makanan berarti tidak ada apa-apanya?
+  - speaker: 0
+    message: Anak tidak menjawab.
+  - speaker: 1
+    message: Kuntilanak kemudian menunjuk ke arah Warung Arwah.
+  - speaker: 1
+    message: Kamu akan tinggal di sini untuk sementara. Di warung itu, kamu akan
+      belajar tentang makanan yang selama ini tidak pernah kamu pikirkan.
+  - speaker: 0
+    message: Aku bahkan nggak bisa masak.
+  - speaker: 1
+    message: Tidak apa-apa. Kamu tidak perlu langsung bisa.
+  - speaker: 0
+    message: Terus aku harus ngapain?
+  - speaker: 1
+    message: Mulai saja dari satu hidangan.
+  - speaker: 0
+    message: Anak masih terlihat ragu, lalu melihat ke arah warung.
+  - speaker: 0
+    message: ...Kalau aku sudah selesai belajar?
+  - speaker: 1
+    message: Aku akan mengantarmu pulang.
+  - speaker: 0
+    message: Anak menarik napas dan perlahan berjalan menuju warung.
+  lockedDialogue: []

@@ -14,6 +14,8 @@ public class TriggerLevel : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
+            LevelData levelData = GetComponent<LevelData>();
+            ButtonLevel.GetComponent<UnityEngine.UI.Button>().onClick.AddListener(levelData.OnButtonClicked);
             ButtonLevel.SetActive(true); 
         }
     }

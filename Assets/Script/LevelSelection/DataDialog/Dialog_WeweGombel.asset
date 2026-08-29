@@ -1,0 +1,159 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91d0607851f3a3a4e82b72ca752ac31f, type: 3}
+  m_Name: Dialog_WeweGombel
+  m_EditorClassIdentifier: Assembly-CSharp::CharacterDialogueData
+  characterOwner: 0
+  requiredLevel: 5
+  unlockedDialogue:
+  - speaker: 0
+    message: Kamu Wewe Gombel?
+  - speaker: 4
+    message: Iya. Kamu mau belajar masak?
+  - speaker: 0
+    message: Iya. Katanya kamu bisa masak makanan yang enak.
+  - speaker: 4
+    message: 'Bisa. Tapi biasanya aku lebih suka memasak untuk seseorang daripada
+      untuk diriku
+
+      sendiri.'
+  - speaker: 0
+    message: Kenapa?
+  - speaker: 4
+    message: Entahlah. Rasanya lebih menyenangkan kalau tahu siapa yang akan memakannya.
+  - speaker: 0
+    message: Memangnya bedanya apa?
+  - speaker: 4
+    message: 'Kalau memasak untuk orang lain, kamu jadi ingat banyak hal. Dia suka
+      yang manis atau tidak, kuat pedas atau tidak, suka makanan yang hangat atau
+      lebih suka menunggu sampai
+
+      dingin.'
+  - speaker: 0
+    message: Kamu bisa ingat semuanya?
+  - speaker: 4
+    message: Kalau orangnya penting, biasanya kamu akan ingat.
+  - speaker: 0
+    message: Berarti kamu dulu sering masak untuk orang lain?
+  - speaker: 4
+    message: 'Iya. Dulu ada anak-anak yang sering datang kepadaku. Ada yang tersesat,
+      ada yang
+
+      tidak ingin pulang, ada juga yang cuma ingin punya tempat
+      untuk beristirahat.'
+  - speaker: 0
+    message: Terus kamu masakin mereka?
+  - speaker: 4
+    message: 'Kadang. Ada anak yang langsung makan banyak, ada juga yang cuma duduk
+      melihat
+
+      makanannya. Jadi aku harus mencari tahu apa yang mereka suka.'
+  - speaker: 0
+    message: Kalau mereka nggak bilang?
+  - speaker: 4
+    message: Aku perhatikan.
+  - speaker: 0
+    message: Susah, dong.
+  - speaker: 4
+    message: Memang. Tapi dari situ kamu jadi tahu hal-hal kecil tentang seseorang.
+  - speaker: 0
+    message: Kayak apa?
+  - speaker: 4
+    message: 'Misalnya, ada anak yang selalu menyisakan sayurnya. Ada yang suka mengambil
+
+      bagian
+      paling renyah. Ada yang diam-diam menunggu sampai orang lain selesai makan
+      sebelum
+
+      mengambil lagi.'
+  - speaker: 0
+    message: Hahaha... ada yang begitu?
+  - speaker: 4
+    message: Banyak.
+  - speaker: 0
+    message: Aku juga kadang begitu.
+  - speaker: 4
+    message: Aku tahu.
+  - speaker: 0
+    message: Hah? Kok tahu?
+  - speaker: 4
+    message: Kelihatan dari caramu makan.
+  - speaker: 0
+    message: Ih...
+  - speaker: 4
+    message: Tapi tidak apa-apa. Yang penting sekarang kamu mulai memperhatikan.
+  - speaker: 0
+    message: Memperhatikan apa?
+  - speaker: 4
+    message: Orang yang akan makan masakanmu.
+  - speaker: 0
+    message: ....
+  - speaker: 4
+    message: Kamu tadi bilang ingin pulang, kan?
+  - speaker: 0
+    message: Iyaa.
+  - speaker: 4
+    message: 'Kalau nanti sudah sampai rumah, coba ingat makanan yang paling sering
+      dibuat
+
+      untukmu.'
+  - speaker: 0
+    message: Kenapa?
+  - speaker: 4
+    message: Mungkin selama ini ada seseorang yang sudah memperhatikanmu lebih banyak
+      daripada yang kamu sadari.
+  - speaker: 0
+    message: ...
+  - speaker: 4
+    message: Sekarang, mari kita buat sesuatu. Kali ini, pikirkan seseorang yang
+      ingin kamu beri makanan.
+  - speaker: 0
+    message: Aku tahu siapa.
+  - speaker: 0
+    message: Kalau begitu, kita mulai.
+  lockedDialogue:
+  - speaker: 0
+    message: Kamu Wewe Gombel?
+  - speaker: 4
+    message: Iya. Sepertinya kamu sedang mencari sesuatu.
+  - speaker: 0
+    message: Aku mau belajar masak.
+  - speaker: 4
+    message: Aku tahu.
+  - speaker: 0
+    message: Terus?
+  - speaker: 4
+    message: Belum sekarang.
+  - speaker: 0
+    message: ....
+  - speaker: 4
+    message: 'Masih banyak hal yang bisa kamu temukan di tempat ini. Jangan buru-buru
+      ingin
+
+      selesai.'
+  - speaker: 0
+    message: Tapi aku ingin cepat pulang.
+  - speaker: 4
+    message: Aku tahu. Justru karena itu, jangan lewatkan apa yang masih bisa kamu
+      pelajari.
+  - speaker: 0
+    message: Jadi aku harus cari yang lain dulu?
+  - speaker: 4
+    message: Iya. Pergilah.
+  - speaker: 0
+    message: Terus aku boleh kembali?
+  - speaker: 4
+    message: Kalau waktunya tiba.
+  - speaker: 0
+    message: ...
+  - speaker: 4
+    message: Aku tidak ke mana-mana.

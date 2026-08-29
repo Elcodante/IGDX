@@ -1,0 +1,137 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91d0607851f3a3a4e82b72ca752ac31f, type: 3}
+  m_Name: Dialog_Genderuwo
+  m_EditorClassIdentifier: Assembly-CSharp::CharacterDialogueData
+  characterOwner: 0
+  requiredLevel: 3
+  unlockedDialogue:
+  - speaker: 0
+    message: Kamu yang tinggal di sini?
+  - speaker: 3
+    message: Iya. Kenapa? Baru pertama kali lihat yang sebesar aku?
+  - speaker: 0
+    message: Iya... sedikit serem.
+  - speaker: 3
+    message: Hahaha. Setidaknya kamu jujur.
+  - speaker: 0
+    message: Aku mau belajar masak. Kamu bisa bantu?
+  - speaker: 3
+    message: Bisa. Tapi aku mau tanya dulu. Waktu kamu memasak, kamu mengikuti resepnya?
+  - speaker: 0
+    message: Iya. Kalau nggak, nanti hasilnya bisa salah.
+  - speaker: 3
+    message: Bagus. Memangnya kamu tahu kenapa setiap langkahnya harus dilakukan
+      seperti itu?
+  - speaker: 0
+    message: Hmm... nggak selalu.
+  - speaker: 3
+    message: Itulah yang ingin aku tunjukkan.
+  - speaker: 0
+    message: Memangnya resep itu penting banget?
+  - speaker: 3
+    message: Tentu. Apalagi untuk makanan yang sudah dibuat dan diwariskan dari generasi
+      ke generasi.
+  - speaker: 0
+    message: Diwariskan?
+  - speaker: 3
+    message: 'Banyak makanan yang kamu kenal hari ini sudah melewati tangan begitu
+      banyak orang.
+
+      Dari orang tua ke anak, dari satu dapur ke dapur lainnya.'
+  - speaker: 0
+    message: Jadi resepnya terus diteruskan?
+  - speaker: 3
+    message: Iya. Dan setiap langkah yang kamu lihat di resep punya alasan.
+  - speaker: 0
+    message: Seperti apa?
+  - speaker: 3
+    message: 'Kenapa bahan tertentu dimasukkan lebih dulu. Kenapa adonan harus diaduk
+      dengan
+
+      cara tertentu. Kenapa api harus dijaga. Kenapa ada bagian yang
+      harus menunggu sebelum
+
+      dilanjutkan.'
+  - speaker: 0
+    message: Jadi bukan cuma supaya makanannya jadi?
+  - speaker: 3
+    message: Bukan. Cara membuatnya juga bagian dari makanan itu sendiri.
+  - speaker: 0
+    message: Aku biasanya cuma mikir yang penting hasilnya enak.
+  - speaker: 3
+    message: Tidak ada yang salah dengan itu.
+  - speaker: 3
+    message: 'Tapi kalau kamu ingin benar-benar mengenal makanan, jangan hanya mengejar
+      hasil
+
+      akhirnya. Pahami juga cara orang sebelum kamu membuatnya.'
+  - speaker: 0
+    message: Karena mereka sudah tahu cara terbaik membuatnya?
+  - speaker: 3
+    message: Dan karena mereka meninggalkan sesuatu untuk orang setelah mereka.
+  - speaker: 0
+    message: '...Jadi sekarang aku harus belajar bukan cuma resepnya, tapi juga kenapa
+      resepnya dibuat
+
+      seperti itu.'
+  - speaker: 3
+    message: Nah. Sekarang kamu sudah siap.
+  - speaker: 0
+    message: Oke. Ayo mulai.
+  lockedDialogue:
+  - speaker: 0
+    message: Eh... kamu tinggal di sini?
+  - speaker: 3
+    message: Iya. Kamu sendiri?
+  - speaker: 0
+    message: Iya... aku sebenarnya lagi cari cara buat pulang.
+  - speaker: 3
+    message: Oh? Baru sampai?
+  - speaker: 0
+    message: Aku juga nggak tahu. Tadi masih di tempatku, terus tiba-tiba ada di
+      sini.
+  - speaker: 3
+    message: Wajar kalau masih bingung.
+  - speaker: 0
+    message: Kamu tahu cara supaya aku bisa pulang?
+  - speaker: 3
+    message: Mungkin.
+  - speaker: 0
+    message: Mungkin ?
+  - speaker: 3
+    message: 'Ada banyak hal di tempat ini yang belum kamu kenal. Aku bisa membantumu
+
+      memahami
+      salah satunya, tapi bukan sesuatu yang bisa kuberitahu begitu saja.'
+  - speaker: 0
+    message: Kenapa?
+  - speaker: 3
+    message: 'Karena kalau kamu belum mengalaminya sendiri, semua yang kukatakan
+      hanya akan
+
+      terdengar seperti nasihat.'
+  - speaker: 0
+    message: Terus aku harus ngapain?
+  - speaker: 3
+    message: Untuk sekarang, jalani saja dulu apa yang ada di depanmu.
+  - speaker: 0
+    message: Dan nanti?
+  - speaker: 3
+    message: 'Kalau suatu hari kamu mulai melihat makanan dengan cara yang berbeda,
+      mungkin
+
+      kamu akan mengerti kenapa aku bilang begitu.'
+  - speaker: 0
+    message: Kamu ngomongnya bikin penasaran.
+  - speaker: 3
+    message: Bagus. Berarti ada yang tertinggal di kepalamu.
