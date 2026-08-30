@@ -15,3 +15,9 @@ MonoBehaviour:
   ingredientID: Wijen
   ingredientName: Wijen
   icon: {fileID: 9172706307153135826, guid: 8237ebe479b55194ebdae2cda4ce5669, type: 3}
+  peranBahan: 0
+  jenisTepung: 0
+  dropVisualPrefab: {fileID: 0}
+  dragIcon: {fileID: -4902723722628974569, guid: e1fb0d11255041a4cad2db7ab84e3cf2, type: 3}
+  usePourAnimation: 0
+  inBowlIcon: {fileID: -4902723722628974569, guid: e1fb0d11255041a4cad2db7ab84e3cf2, type: 3}

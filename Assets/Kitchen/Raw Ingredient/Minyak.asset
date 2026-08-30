@@ -15,3 +15,9 @@ MonoBehaviour:
   ingredientID: Minyak
   ingredientName: Minyak
   icon: {fileID: 271790178126711492, guid: 61547dc9df0dd344fa909407a88cd7c7, type: 3}
+  peranBahan: 0
+  jenisTepung: 0
+  dropVisualPrefab: {fileID: 0}
+  dragIcon: {fileID: 0}
+  usePourAnimation: 0
+  inBowlIcon: {fileID: 271790178126711492, guid: c6f242718e4e8364ba05da3d220fa1e3, type: 3}

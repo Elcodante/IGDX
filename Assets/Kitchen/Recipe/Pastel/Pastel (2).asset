@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::RecipeData
   inputIngredients:
   - {fileID: 11400000, guid: 9d00a8c2ed950fb41a501eaca66898ea, type: 2}
-  requiredMechanic: 2
+  requiredMechanic: 5
   timeLimit: 10
   targetDifficulty: 1
   successResult: {fileID: 11400000, guid: 2c8a31b4b2e14544db05febb92ea6eba, type: 2}

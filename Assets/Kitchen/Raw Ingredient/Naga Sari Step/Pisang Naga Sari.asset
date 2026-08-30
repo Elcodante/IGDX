@@ -14,4 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::IngredientData
   ingredientID: Pisang Naga Sari
   ingredientName: Pisang Naga Sari
-  icon: {fileID: -2597748956768640907, guid: e15f0830dcffd2f45b5f9ed898aacb97, type: 3}
+  icon: {fileID: 2859110354887243876, guid: e1d8d6a536d25bd4b9480a1afdcb75fe, type: 3}
+  peranBahan: 0
+  jenisTepung: 0
+  dropVisualPrefab: {fileID: 0}
+  dragIcon: {fileID: 0}
+  usePourAnimation: 0
+  inBowlIcon: {fileID: 0}

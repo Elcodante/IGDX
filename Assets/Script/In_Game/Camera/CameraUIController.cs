@@ -14,6 +14,15 @@ public class CameraUIController : MonoBehaviour
     public GameObject PanelKasir;
     public GameObject PanelDapur;
 
+    private void Start()
+    {
+        // Panggil fungsi sinkronisasi awal agar UI otomatis menyesuaikan
+        // dengan posisi kamera (Kasir) saat game baru di-play.
+        if (cameraController != null)
+        {
+            TampilkanUI(cameraController.CurrentArea);
+        }
+    }
     private void OnEnable()
     {
         if (cameraController != null)

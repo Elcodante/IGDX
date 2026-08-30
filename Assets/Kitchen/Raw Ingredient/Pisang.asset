@@ -15,3 +15,9 @@ MonoBehaviour:
   ingredientID: Pisang
   ingredientName: Pisang
   icon: {fileID: 7381965769198725172, guid: 04c5c43f3c2f88347bcd118980293383, type: 3}
+  peranBahan: 0
+  jenisTepung: 0
+  dropVisualPrefab: {fileID: 0}
+  dragIcon: {fileID: -5400343169058212833, guid: 185ae2183540e8645a9dca9bd75a40ef, type: 3}
+  usePourAnimation: 0
+  inBowlIcon: {fileID: -5400343169058212833, guid: 185ae2183540e8645a9dca9bd75a40ef, type: 3}

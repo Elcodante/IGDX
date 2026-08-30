@@ -15,7 +15,7 @@ MonoBehaviour:
   inputIngredients:
   - {fileID: 11400000, guid: d23fc595dd336354f8c0411209b5588b, type: 2}
   - {fileID: 11400000, guid: 7bd6fd53c6b9b664a80aa48d1753b559, type: 2}
-  requiredMechanic: 4
+  requiredMechanic: 5
   timeLimit: 10
   targetDifficulty: 1
   successResult: {fileID: 11400000, guid: cd678b4b98a287e45b46c9822dfab08b, type: 2}

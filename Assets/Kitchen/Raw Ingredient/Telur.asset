@@ -15,3 +15,9 @@ MonoBehaviour:
   ingredientID: Telur
   ingredientName: Telur
   icon: {fileID: 3931983199761314821, guid: 44de210ada1216a4caa1db579b62f225, type: 3}
+  peranBahan: 0
+  jenisTepung: 0
+  dropVisualPrefab: {fileID: 0}
+  dragIcon: {fileID: -3698099517601882832, guid: 4f9ed118a3576504da7f4ee2dc779feb, type: 3}
+  usePourAnimation: 0
+  inBowlIcon: {fileID: -721335661585835598, guid: ac508f6ef1aaf8849b6b72dd174e09a4, type: 3}

@@ -15,3 +15,9 @@ MonoBehaviour:
   ingredientID: Kentang
   ingredientName: Kentang
   icon: {fileID: -3480242416550322272, guid: 15bfe81589e09e74eac77c1e97645f6a, type: 3}
+  peranBahan: 0
+  jenisTepung: 0
+  dropVisualPrefab: {fileID: 0}
+  dragIcon: {fileID: -5347962520988085928, guid: 4148540c06934ec458123b65424ea100, type: 3}
+  usePourAnimation: 0
+  inBowlIcon: {fileID: -5347962520988085928, guid: 4148540c06934ec458123b65424ea100, type: 3}
