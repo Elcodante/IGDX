@@ -17,4 +17,5 @@ public class RecipeData : ScriptableObject
     public IngredientData failResult;    // Jika skor jelek 
 }
 
-public enum CookingMechanicType { None, Stir, Chop, SweetSpot, Passive }
+// Ubah baris enum di paling bawah menjadi seperti ini:
+public enum CookingMechanicType { None, Stir, Chop, SweetSpot, Passive, Roll }

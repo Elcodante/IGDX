@@ -15,3 +15,9 @@ MonoBehaviour:
   ingredientID: Isi Onde Onde
   ingredientName: Isi Onde Onde
   icon: {fileID: 4227023084465264146, guid: c427450f869c1844d934439eb7ee9aa8, type: 3}
+  peranBahan: 0
+  jenisTepung: 0
+  dropVisualPrefab: {fileID: 0}
+  dragIcon: {fileID: -2100949409443152480, guid: ec8a5cc52dc1c124ab38ec08fc60218d, type: 3}
+  usePourAnimation: 0
+  inBowlIcon: {fileID: -2100949409443152480, guid: ec8a5cc52dc1c124ab38ec08fc60218d, type: 3}

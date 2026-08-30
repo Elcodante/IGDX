@@ -15,3 +15,9 @@ MonoBehaviour:
   ingredientID: Singkong
   ingredientName: Singkong
   icon: {fileID: -8695284858136433476, guid: 88009e26642a17d429c2a205ac35a3e6, type: 3}
+  peranBahan: 0
+  jenisTepung: 0
+  dropVisualPrefab: {fileID: 0}
+  dragIcon: {fileID: -4339089537657869716, guid: 432e3095d1b9e414b8526ca20d070659, type: 3}
+  usePourAnimation: 0
+  inBowlIcon: {fileID: -4339089537657869716, guid: 432e3095d1b9e414b8526ca20d070659, type: 3}

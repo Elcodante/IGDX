@@ -20,4 +20,12 @@ public class IngredientData : ScriptableObject
     
     [Tooltip("Hanya berlaku jika Peran Bahan diset ke 'Tepung'")]
     public JenisTepung jenisTepung; 
+
+    public GameObject dropVisualPrefab;
+
+    public Sprite dragIcon;
+
+    public bool usePourAnimation = false;   
+
+    public Sprite inBowlIcon;
 }

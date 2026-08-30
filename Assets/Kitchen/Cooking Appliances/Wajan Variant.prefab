@@ -36,6 +36,18 @@ PrefabInstance:
       propertyPath: draggableItemPrefab
       value: 
       objectReference: {fileID: 8340565135148567373, guid: 6a5f009ce834a6346b05a750c4041426, type: 3}
+    - target: {fileID: 4225007674460342585, guid: a669476c0100d4847948942aa413aa1e, type: 3}
+      propertyPath: resepYangBisaDimasak.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4225007674460342585, guid: a669476c0100d4847948942aa413aa1e, type: 3}
+      propertyPath: 'resepYangBisaDimasak.Array.data[0]'
+      value: 
+      objectReference: {fileID: 11400000, guid: be1a5201ec7952647be702daa59e10fe, type: 2}
+    - target: {fileID: 4225007674460342585, guid: a669476c0100d4847948942aa413aa1e, type: 3}
+      propertyPath: 'resepYangBisaDimasak.Array.data[1]'
+      value: 
+      objectReference: {fileID: 11400000, guid: fe79b9e1ded45e347b7bdb9db3afddc0, type: 2}
     - target: {fileID: 5250202370168442478, guid: a669476c0100d4847948942aa413aa1e, type: 3}
       propertyPath: m_LocalPosition.x
       value: 30.7

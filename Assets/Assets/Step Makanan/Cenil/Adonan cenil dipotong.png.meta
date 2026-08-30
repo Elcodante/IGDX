@@ -1,0 +1,819 @@
+fileFormatVersion: 2
+guid: 3bca6478f260db44daa64f3959cb130e
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 4407622251539380470
+    second: Adonan cenil dipotong_0
+  - first:
+      213: -5881306773260648807
+    second: Adonan cenil dipotong_1
+  - first:
+      213: 3468238611923378533
+    second: Adonan cenil dipotong_2
+  - first:
+      213: 3296435312807383240
+    second: Adonan cenil dipotong_3
+  - first:
+      213: 8871690014798308082
+    second: Adonan cenil dipotong_4
+  - first:
+      213: 2291335420539631068
+    second: Adonan cenil dipotong_5
+  - first:
+      213: -5312691652812920644
+    second: Adonan cenil dipotong_6
+  - first:
+      213: 4958467854830206823
+    second: Adonan cenil dipotong_7
+  - first:
+      213: 2126844874191168089
+    second: Adonan cenil dipotong_8
+  - first:
+      213: 1849068434630894330
+    second: Adonan cenil dipotong_9
+  - first:
+      213: 3801237413892453897
+    second: Adonan cenil dipotong_10
+  - first:
+      213: 2818962467795697751
+    second: Adonan cenil dipotong_11
+  - first:
+      213: 4222038101677378628
+    second: Adonan cenil dipotong_12
+  - first:
+      213: -6434987469947031775
+    second: Adonan cenil dipotong_13
+  - first:
+      213: -389284560346333808
+    second: Adonan cenil dipotong_14
+  - first:
+      213: -6577018032452557961
+    second: Adonan cenil dipotong_15
+  - first:
+      213: 5051113814962043432
+    second: Adonan cenil dipotong_16
+  - first:
+      213: -2404810814332105962
+    second: Adonan cenil dipotong_17
+  - first:
+      213: -7802302515566164220
+    second: Adonan cenil dipotong_18
+  - first:
+      213: 6623451201967304456
+    second: Adonan cenil dipotong_19
+  - first:
+      213: 2461060407817688183
+    second: Adonan cenil dipotong_20
+  - first:
+      213: 2189098501320333370
+    second: Adonan cenil dipotong_21
+  - first:
+      213: -3191832078788149275
+    second: Adonan cenil dipotong_22
+  - first:
+      213: -7165677846019081467
+    second: Adonan cenil dipotong_23
+  - first:
+      213: 6498178020341032419
+    second: Adonan cenil dipotong_24
+  - first:
+      213: 9207960551382540239
+    second: Adonan cenil dipotong_25
+  - first:
+      213: -2535543303934589943
+    second: Adonan cenil dipotong_26
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Adonan cenil dipotong_0
+      rect:
+        serializedVersion: 2
+        x: 143
+        y: 491
+        width: 102
+        height: 138
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6f8bc1fc5150b2d30800000000000000
+      internalID: 4407622251539380470
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Adonan cenil dipotong_1
+      rect:
+        serializedVersion: 2
+        x: 255
+        y: 571
+        width: 90
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 99e33b476a6616ea0800000000000000
+      internalID: -5881306773260648807
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Adonan cenil dipotong_2
+      rect:
+        serializedVersion: 2
+        x: 351
+        y: 579
+        width: 94
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 561acfb54a8a12030800000000000000
+      internalID: 3468238611923378533
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Adonan cenil dipotong_3
+      rect:
+        serializedVersion: 2
+        x: 451
+        y: 591
+        width: 94
+        height: 118
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8c010f4a37a4fbd20800000000000000
+      internalID: 3296435312807383240
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Adonan cenil dipotong_4
+      rect:
+        serializedVersion: 2
+        x: 555
+        y: 603
+        width: 94
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2f2ee6170139e1b70800000000000000
+      internalID: 8871690014798308082
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Adonan cenil dipotong_5
+      rect:
+        serializedVersion: 2
+        x: 659
+        y: 607
+        width: 90
+        height: 94
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cd5f88acc657ccf10800000000000000
+      internalID: 2291335420539631068
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Adonan cenil dipotong_6
+      rect:
+        serializedVersion: 2
+        x: 759
+        y: 611
+        width: 66
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cb827e0f6178546b0800000000000000
+      internalID: -5312691652812920644
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Adonan cenil dipotong_7
+      rect:
+        serializedVersion: 2
+        x: 255
+        y: 499
+        width: 90
+        height: 70
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 76ff85d2e3400d440800000000000000
+      internalID: 4958467854830206823
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Adonan cenil dipotong_8
+      rect:
+        serializedVersion: 2
+        x: 355
+        y: 499
+        width: 94
+        height: 78
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 95266820522148d10800000000000000
+      internalID: 2126844874191168089
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Adonan cenil dipotong_9
+      rect:
+        serializedVersion: 2
+        x: 455
+        y: 499
+        width: 94
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: af2ef8bc1f539a910800000000000000
+      internalID: 1849068434630894330
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Adonan cenil dipotong_10
+      rect:
+        serializedVersion: 2
+        x: 555
+        y: 503
+        width: 98
+        height: 94
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 906fbf1c945b0c430800000000000000
+      internalID: 3801237413892453897
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Adonan cenil dipotong_11
+      rect:
+        serializedVersion: 2
+        x: 663
+        y: 503
+        width: 90
+        height: 98
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7500f10dd67fe1720800000000000000
+      internalID: 2818962467795697751
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Adonan cenil dipotong_12
+      rect:
+        serializedVersion: 2
+        x: 763
+        y: 507
+        width: 114
+        height: 94
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 44c05aeb841b79a30800000000000000
+      internalID: 4222038101677378628
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Adonan cenil dipotong_13
+      rect:
+        serializedVersion: 2
+        x: 151
+        y: 407
+        width: 98
+        height: 82
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 12fa7b77df452b6a0800000000000000
+      internalID: -6434987469947031775
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Adonan cenil dipotong_14
+      rect:
+        serializedVersion: 2
+        x: 255
+        y: 407
+        width: 94
+        height: 82
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 09d330041cbf89af0800000000000000
+      internalID: -389284560346333808
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Adonan cenil dipotong_15
+      rect:
+        serializedVersion: 2
+        x: 359
+        y: 407
+        width: 98
+        height: 82
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 773a35e22fcb9b4a0800000000000000
+      internalID: -6577018032452557961
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Adonan cenil dipotong_16
+      rect:
+        serializedVersion: 2
+        x: 463
+        y: 407
+        width: 94
+        height: 82
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 82a71e4b049291640800000000000000
+      internalID: 5051113814962043432
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Adonan cenil dipotong_17
+      rect:
+        serializedVersion: 2
+        x: 559
+        y: 407
+        width: 102
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 61b87bb3e4560aed0800000000000000
+      internalID: -2404810814332105962
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Adonan cenil dipotong_18
+      rect:
+        serializedVersion: 2
+        x: 663
+        y: 407
+        width: 98
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 407ca815337a8b390800000000000000
+      internalID: -7802302515566164220
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Adonan cenil dipotong_19
+      rect:
+        serializedVersion: 2
+        x: 767
+        y: 411
+        width: 110
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 80f256096c93beb50800000000000000
+      internalID: 6623451201967304456
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Adonan cenil dipotong_20
+      rect:
+        serializedVersion: 2
+        x: 187
+        y: 355
+        width: 66
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 77450c2d661772220800000000000000
+      internalID: 2461060407817688183
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Adonan cenil dipotong_21
+      rect:
+        serializedVersion: 2
+        x: 259
+        y: 319
+        width: 94
+        height: 78
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a38d9851d7d316e10800000000000000
+      internalID: 2189098501320333370
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Adonan cenil dipotong_22
+      rect:
+        serializedVersion: 2
+        x: 363
+        y: 315
+        width: 94
+        height: 82
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5efb229a2a554b3d0800000000000000
+      internalID: -3191832078788149275
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Adonan cenil dipotong_23
+      rect:
+        serializedVersion: 2
+        x: 467
+        y: 315
+        width: 94
+        height: 82
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 50b7525e6f56e8c90800000000000000
+      internalID: -7165677846019081467
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Adonan cenil dipotong_24
+      rect:
+        serializedVersion: 2
+        x: 567
+        y: 319
+        width: 102
+        height: 78
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3e5adad0b7a2e2a50800000000000000
+      internalID: 6498178020341032419
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Adonan cenil dipotong_25
+      rect:
+        serializedVersion: 2
+        x: 671
+        y: 327
+        width: 98
+        height: 74
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fcf57fae55f39cf70800000000000000
+      internalID: 9207960551382540239
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Adonan cenil dipotong_26
+      rect:
+        serializedVersion: 2
+        x: 775
+        y: 359
+        width: 70
+        height: 46
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 904cb588cc0ffccd0800000000000000
+      internalID: -2535543303934589943
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Adonan cenil dipotong_0: 4407622251539380470
+      Adonan cenil dipotong_1: -5881306773260648807
+      Adonan cenil dipotong_10: 3801237413892453897
+      Adonan cenil dipotong_11: 2818962467795697751
+      Adonan cenil dipotong_12: 4222038101677378628
+      Adonan cenil dipotong_13: -6434987469947031775
+      Adonan cenil dipotong_14: -389284560346333808
+      Adonan cenil dipotong_15: -6577018032452557961
+      Adonan cenil dipotong_16: 5051113814962043432
+      Adonan cenil dipotong_17: -2404810814332105962
+      Adonan cenil dipotong_18: -7802302515566164220
+      Adonan cenil dipotong_19: 6623451201967304456
+      Adonan cenil dipotong_2: 3468238611923378533
+      Adonan cenil dipotong_20: 2461060407817688183
+      Adonan cenil dipotong_21: 2189098501320333370
+      Adonan cenil dipotong_22: -3191832078788149275
+      Adonan cenil dipotong_23: -7165677846019081467
+      Adonan cenil dipotong_24: 6498178020341032419
+      Adonan cenil dipotong_25: 9207960551382540239
+      Adonan cenil dipotong_26: -2535543303934589943
+      Adonan cenil dipotong_3: 3296435312807383240
+      Adonan cenil dipotong_4: 8871690014798308082
+      Adonan cenil dipotong_5: 2291335420539631068
+      Adonan cenil dipotong_6: -5312691652812920644
+      Adonan cenil dipotong_7: 4958467854830206823
+      Adonan cenil dipotong_8: 2126844874191168089
+      Adonan cenil dipotong_9: 1849068434630894330
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

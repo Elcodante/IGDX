@@ -15,3 +15,9 @@ MonoBehaviour:
   ingredientID: Isi Pastel
   ingredientName: Isi Pastel
   icon: {fileID: -4718364741171091126, guid: 989eb111c546d544db815cef13915f3b, type: 3}
+  peranBahan: 0
+  jenisTepung: 0
+  dropVisualPrefab: {fileID: 0}
+  dragIcon: {fileID: 6515788824541326070, guid: 3eb5b9f720ba09f4bbe428b6490dff08, type: 3}
+  usePourAnimation: 0
+  inBowlIcon: {fileID: 6515788824541326070, guid: 3eb5b9f720ba09f4bbe428b6490dff08, type: 3}

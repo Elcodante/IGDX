@@ -17,3 +17,7 @@ MonoBehaviour:
   icon: {fileID: 7988714859682520075, guid: 401dada58f317c44f951fe7795c926a5, type: 3}
   peranBahan: 3
   jenisTepung: 0
+  dropVisualPrefab: {fileID: 0}
+  dragIcon: {fileID: 0}
+  usePourAnimation: 0
+  inBowlIcon: {fileID: 3262512609997019237, guid: f0400aae718f5204e8362da48733c5d0, type: 3}

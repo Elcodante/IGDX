@@ -6,6 +6,7 @@ using TMPro;
 public class CookingAppliance : MonoBehaviour
 {
     [HideInInspector] public CookingAppliance komporInduk;
+    
 
     [Header("Gimik Tumpukan Bahan (2D)")]
     public bool gunakanTumpukanVisual = false; 
@@ -25,6 +26,7 @@ public class CookingAppliance : MonoBehaviour
 
     [Header("Minigame & Resep (Diisi di Alat / Panci)")]
     [SerializeField] private MonoBehaviour minigameScript; 
+    [SerializeField] private MonoBehaviour minigameAlternatif;
     public List<RecipeData> resepYangBisaDimasak; 
 
     [Header("Database & Output")]
@@ -34,7 +36,14 @@ public class CookingAppliance : MonoBehaviour
     [Header("Visual Bahan & Indikator")]
     public SpriteRenderer applianceSprite2D; 
     public Sprite spriteKosong;              
-    public Sprite spriteTerisi;              
+    public Sprite spriteTerisi;    // Bakal dipake buat state "Lagi Masak / Tutup Rapat"
+    public Sprite spriteMasak;
+    
+    [Header("State Tambahan (Khusus Serabi / Dll)")]
+    public Sprite spriteBeres;     // Bakal dipake buat state "Udah Matang"
+    
+    // 0 = Kosong, 1 = Lagi Masak, 2 = Udah Beres
+    [HideInInspector] public int stateWajan = 0;          
 
     [System.Serializable]
     public struct VisualBahanMapping
@@ -58,6 +67,7 @@ public class CookingAppliance : MonoBehaviour
     // Data internal
     private CookingAppliance mountedAppliance; // Alat yang sedang menempel di atas kompor ini
     private IMinigameMechanic activeMinigame; 
+    
     private List<IngredientData> currentIngredients = new List<IngredientData>();
     private RecipeData currentValidRecipe;
 
@@ -66,9 +76,8 @@ public class CookingAppliance : MonoBehaviour
         RefreshMinigameScript();
         if (startButtonUI != null) startButtonUI.SetActive(false);
         
-        // Inisialisasi kompor dalam keadaan mati
         SetStoveState(false);
-        UpdateVisualAlat(); 
+        UbahStateWajan(0); // Set ke kosong saat mulai
     }
 
     private void RefreshMinigameScript()
@@ -79,33 +88,42 @@ public class CookingAppliance : MonoBehaviour
             activeMinigame = GetComponent<IMinigameMechanic>();
     }
 
+    public void UnmountAppliance()
+    {
+        if (mountedAppliance != null)
+        {
+            DraggableItem2D dragScript = mountedAppliance.GetComponent<DraggableItem2D>();
+            if (dragScript != null) dragScript.enabled = true;
+
+            mountedAppliance.komporInduk = null;
+            mountedAppliance.transform.SetParent(null); 
+            mountedAppliance = null;
+
+            Debug.Log("Alat berhasil dicopot dari kompor!");
+        }
+    }
+
     public bool MountAppliance(CookingAppliance newAppliance)
     {
         if (!isStoveBase) return false;
 
-        // Jika sudah ada alat lain di atas kompor, lepas dulu atau tolak
         if (mountedAppliance != null)
         {
-            Debug.Log("Kompor sudah terisi alat lain!");
-            return false;
+            Destroy(mountedAppliance.gameObject);
+            mountedAppliance = null;
         }
 
         mountedAppliance = newAppliance;
-
-        // Atur posisi alat tepat di titik mount point kompor
         Transform targetTransform = (applianceMountPoint != null) ? applianceMountPoint : transform;
         newAppliance.transform.SetParent(targetTransform);
         newAppliance.transform.localPosition = Vector3.zero;
 
-        // Matikan fungsi drag pada alat agar kuncian posisinya aman saat di atas kompor
         DraggableItem2D dragScript = newAppliance.GetComponent<DraggableItem2D>();
         if (dragScript != null) dragScript.enabled = false;
 
         newAppliance.komporInduk = this;
-        // Pastikan kompor tetap dalam kondisi mati saat alat dipasang
         SetStoveState(false);
 
-        Debug.Log($"Alat {newAppliance.applianceName} berhasil dipasang di atas {applianceName}!");
         return true;
     }
 
@@ -114,19 +132,21 @@ public class CookingAppliance : MonoBehaviour
         return mountedAppliance;
     }
 
-    // --- INDIKATOR SPRITE KOMPOR NYALA / MATI ---
     private void SetStoveState(bool isCooking)
     {
         if (!isStoveBase || stoveSpriteRenderer == null) return;
 
         if (isCooking && spriteKomporNyala != null)
-        {
             stoveSpriteRenderer.sprite = spriteKomporNyala;
-        }
         else if (!isCooking && spriteKomporMati != null)
-        {
             stoveSpriteRenderer.sprite = spriteKomporMati;
-        }
+    }
+
+    // --- FUNGSI BARU UNTUK GANTI STATE WAJAN ---
+    public void UbahStateWajan(int stateIndex)
+    {
+        stateWajan = stateIndex;
+        UpdateVisualAlat();
     }
 
     public void AddIngredient(IngredientData ingredient)
@@ -139,12 +159,13 @@ public class CookingAppliance : MonoBehaviour
         else if (ingredient.peranBahan == PeranBahan.Isian) countIsian++;
         else if (ingredient.peranBahan == PeranBahan.Tepung) jenisTepung = ingredient.jenisTepung;
 
+        // Pas bahan masuk, reset wajan biar ga stuck di state "Beres"
+        stateWajan = 0; 
         UpdateVisualAlat(); 
         
         if (komporInduk != null) komporInduk.CheckForValidRecipe();
         else CheckForValidRecipe();
     }
-
 
     public void ResetIngredients()
     {
@@ -155,26 +176,22 @@ public class CookingAppliance : MonoBehaviour
         countGurih = 0;
         countIsian = 0;
         if (startButtonUI != null) startButtonUI.SetActive(false);
-        UpdateVisualAlat(); 
+        
+        UbahStateWajan(0); // Otomatis balik ke spriteKosong
     }
 
     private void CheckForValidRecipe()
     {
-        // 1. Tentukan siapa yang lagi dipakai masak? (Kalau ada alat menempel, pakai alat itu. Kalau kosong, pakai kompor)
         CookingAppliance alatYangDipakai = (mountedAppliance != null) ? mountedAppliance : this;
-        
-        // Reset validasi sebelumnya
         alatYangDipakai.currentValidRecipe = null;
         
         GameObject btnStartAktif = (komporInduk != null && komporInduk.startButtonUI != null) ? komporInduk.startButtonUI : startButtonUI;
         if (btnStartAktif != null) btnStartAktif.SetActive(false);
 
-        // 2. Ambil HANYA resep dan bahan dari alat yang lagi dipakai!
         List<RecipeData> activeRecipes = alatYangDipakai.resepYangBisaDimasak;
         if (activeRecipes == null || activeRecipes.Count == 0) return;
 
         List<IngredientData> bahanDiWadah = alatYangDipakai.currentIngredients;
-
         RecipeData resepTerbaik = null;
         int jumlahBahanTerbanyak = -1;
 
@@ -185,57 +202,37 @@ public class CookingAppliance : MonoBehaviour
 
             foreach (var bahanWajib in resep.inputIngredients)
             {
-                if (sisaBahanEkstra.Contains(bahanWajib))
-                {
-                    sisaBahanEkstra.Remove(bahanWajib);
-                }
-                else
-                {
-                    semuaBahanWajibAda = false;
-                    break;
-                }
+                if (sisaBahanEkstra.Contains(bahanWajib)) sisaBahanEkstra.Remove(bahanWajib);
+                else { semuaBahanWajibAda = false; break; }
             }
 
             if (semuaBahanWajibAda)
             {
                 bool sisaBahanHanyaBumbu = true;
-
                 foreach (var sisa in sisaBahanEkstra)
                 {
                     if (sisa.peranBahan == PeranBahan.Biasa || sisa.peranBahan == PeranBahan.Tepung)
                     {
-                        sisaBahanHanyaBumbu = false;
-                        break;
+                        sisaBahanHanyaBumbu = false; break;
                     }
                 }
 
-                if (sisaBahanHanyaBumbu)
+                if (sisaBahanHanyaBumbu && resep.inputIngredients.Count > jumlahBahanTerbanyak)
                 {
-                    if (resep.inputIngredients.Count > jumlahBahanTerbanyak)
-                    {
-                        jumlahBahanTerbanyak = resep.inputIngredients.Count;
-                        resepTerbaik = resep;
-                    }
+                    jumlahBahanTerbanyak = resep.inputIngredients.Count;
+                    resepTerbaik = resep;
                 }
             }
         }
 
-        // 3. Simpan resep yang valid HANYA ke alat yang bersangkutan
         alatYangDipakai.currentValidRecipe = resepTerbaik;
-
-        if (alatYangDipakai.currentValidRecipe != null && btnStartAktif != null)
-        {
-            btnStartAktif.SetActive(true);
-        }
+        if (alatYangDipakai.currentValidRecipe != null && btnStartAktif != null) btnStartAktif.SetActive(true);
     }
 
     public void OnStartButtonClicked()
     {
-        // 1. Tentukan alat mana yang lagi dipakai buat ambil data resepnya
         CookingAppliance alatYangDipakai = (mountedAppliance != null) ? mountedAppliance : this;
         RecipeData resepAktif = alatYangDipakai.currentValidRecipe;
-
-        // 2. TAPI, Minigamenya SELALU pakai milik Kompor Base (this)
         IMinigameMechanic targetMinigame = this.activeMinigame;
 
         if (targetMinigame == null)
@@ -244,13 +241,21 @@ public class CookingAppliance : MonoBehaviour
             targetMinigame = this.activeMinigame;
         }
 
-        if (targetMinigame == null)
+        // --- LOGIKA KHUSUS TALENAN (Tanpa merusak alat lain) ---
+        if (resepAktif != null)
         {
-            Debug.LogError("Error: Script Minigame belum dipasang di Kompor Base!");
-            return;
+            // Cek kalau resep minta mekanik Roll, ganti targetnya ke minigame alternatif
+            if (resepAktif.requiredMechanic == CookingMechanicType.Roll)
+            {
+                if (minigameAlternatif != null)
+                    targetMinigame = minigameAlternatif as IMinigameMechanic;
+                else 
+                    targetMinigame = GetComponent<RollerMinigame>(); // Fallback otomatis biar sat-set
+            }
         }
 
-        // 3. Jalankan minigame kompor, tapi oper resep dari alat (wajan/kukusan)
+        if (targetMinigame == null) return;
+
         if (resepAktif != null)
         {
             if (startButtonUI != null) startButtonUI.SetActive(false);
@@ -258,7 +263,9 @@ public class CookingAppliance : MonoBehaviour
 
             SetStoveState(true);
             
-            // Perhatikan bahwa callback OnMinigameFinished akan tetap memanggil fungsi di Kompor
+            // Trigger state masak
+            alatYangDipakai.UbahStateWajan(1); 
+
             targetMinigame.StartMinigame(resepAktif, OnMinigameFinished);
         }
     }
@@ -283,8 +290,6 @@ public class CookingAppliance : MonoBehaviour
                 if (dragScript2D != null)
                 {
                     dragScript2D.SetupData(hasilAkhir);
-                    
-                    // Ambil bumbu dari alat yang dipakai
                     dragScript2D.tepungDigunakan = alatYangDipakai.jenisTepung;
                     dragScript2D.tingkatManis = KonversiKeTingkatRasa(alatYangDipakai.countManis);
                     dragScript2D.tingkatLembut = KonversiKeTingkatRasa(alatYangDipakai.countLembut);
@@ -294,21 +299,38 @@ public class CookingAppliance : MonoBehaviour
             }
         }
         
-        alatYangDipakai.ResetIngredients();
-        alatYangDipakai.UpdateVisualAlat();
+        // Hapus bahan lama dari memori
+        alatYangDipakai.currentIngredients.Clear();
+        alatYangDipakai.currentValidRecipe = null;
+        alatYangDipakai.countManis = 0; alatYangDipakai.countLembut = 0; alatYangDipakai.countGurih = 0; alatYangDipakai.countIsian = 0;
+        
+        // --- TRIGGER STATE BERES (2) OTOMATIS SAAT MINIGAME KELAR ---
+        alatYangDipakai.UbahStateWajan(2); 
     }
 
     private void UpdateVisualAlat()
     {
-
         if (applianceSprite2D != null)
         {
             Sprite targetSprite = spriteKosong; 
-            if (currentIngredients.Count > 0)
+
+            // 1. Prioritas Utama: Kalau state 2 (Udah Beres)
+            if (stateWajan == 2 && spriteBeres != null)
+            {
+                targetSprite = spriteBeres;
+            }
+            // 2. Kalau state 1 (Lagi Proses Masak / Tombol Start ditekan)
+            else if (stateWajan == 1 && spriteMasak != null)
+            {
+                targetSprite = spriteMasak;
+            }
+            // 3. Kalau belum dimasak, tapi SUDAH ADA bahan di dalamnya
+            else if (currentIngredients.Count > 0)
             {
                 targetSprite = spriteTerisi; 
+                
+                // Cek apakah ada gambar mangkuk/wajan custom dari bahan tertentu
                 IngredientData bahanTerakhir = currentIngredients[currentIngredients.Count - 1]; 
-
                 foreach (var mapping in visualSpesifikBahan)
                 {
                     if (mapping.bahan == bahanTerakhir)
@@ -318,9 +340,11 @@ public class CookingAppliance : MonoBehaviour
                     }
                 }
             }
-            if (targetSprite != null) applianceSprite2D.sprite = targetSprite;
+            
+            applianceSprite2D.sprite = targetSprite;
         }
 
+        // Tumpukan Bahan (Mangkuk/Panci)
         if (gunakanTumpukanVisual && tumpukanContainer != null && prefabVisualBahan2D != null)
         {
             foreach (Transform child in tumpukanContainer) Destroy(child.gameObject);
@@ -331,30 +355,28 @@ public class CookingAppliance : MonoBehaviour
                 SpriteRenderer sr = visualBaru.GetComponent<SpriteRenderer>();
                 if (sr != null)
                 {
-                    sr.sprite = currentIngredients[i].icon; 
+                    IngredientData bahan = currentIngredients[i];
+                    
+                    if (bahan.inBowlIcon != null) sr.sprite = bahan.inBowlIcon;
+                    else if (bahan.dragIcon != null) sr.sprite = bahan.dragIcon;
+                    else sr.sprite = bahan.icon;
+
                     sr.sortingOrder = i + 1;
                 }
-                visualBaru.transform.localPosition = new Vector3(0, i * 0.3f, 0); 
+                float randomX = UnityEngine.Random.Range(-0.2f, 0.2f);
+                visualBaru.transform.localPosition = new Vector3(randomX, i * 0.3f, 0); 
             }
         }
 
+        // Indikator UI Icon Bahan
         Transform targetContainer = (indikatorContainer != null) ? indikatorContainer : (komporInduk != null ? komporInduk.indikatorContainer : null);
         GameObject targetPrefab = (indikatorPrefab != null) ? indikatorPrefab : (komporInduk != null ? komporInduk.indikatorPrefab : null);
 
         if (targetContainer == null || targetPrefab == null) return;
-
-        if (currentIngredients.Count == 0)
-        {
-            targetContainer.gameObject.SetActive(false);
-            return;
-        }
+        if (currentIngredients.Count == 0) { targetContainer.gameObject.SetActive(false); return; }
 
         targetContainer.gameObject.SetActive(true);
-
-        foreach (Transform child in targetContainer)
-        {
-            Destroy(child.gameObject);
-        }
+        foreach (Transform child in targetContainer) Destroy(child.gameObject);
 
         Dictionary<IngredientData, int> hitungBahan = new Dictionary<IngredientData, int>();
         foreach (var bahan in currentIngredients)
@@ -384,7 +406,7 @@ public class CookingAppliance : MonoBehaviour
 
     private TingkatIsian KonversiKeTingkatIsian(int jumlah)
     {
-        if (jumlah <= 1) return TingkatIsian.Sedikit; // 0 atau 1 dianggap sedikit
+        if (jumlah <= 1) return TingkatIsian.Sedikit; 
         if (jumlah == 2) return TingkatIsian.Sedang;
         return TingkatIsian.Banyak;
     }
