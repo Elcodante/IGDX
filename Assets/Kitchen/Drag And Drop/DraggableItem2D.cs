@@ -1,7 +1,6 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-// Tambahkan IPointerEnterHandler & IPointerExitHandler untuk deteksi hover
 public class DraggableItem2D : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerEnterHandler, IPointerExitHandler
 {
     [Header("Data Rasa (Hanya untuk Makanan Matang)")]
@@ -31,6 +30,7 @@ public class DraggableItem2D : MonoBehaviour, IBeginDragHandler, IDragHandler, I
     public void OnBeginDrag(PointerEventData eventData)
     {
         posisiAwal = transform.position;
+        isDroppedSuccessfully = false; // RESET status setiap kali mulai ditarik
 
         Vector3 mousePos = Camera.main.ScreenToWorldPoint(eventData.position);
         mousePos.z = 0;
@@ -38,7 +38,6 @@ public class DraggableItem2D : MonoBehaviour, IBeginDragHandler, IDragHandler, I
 
         if (col != null) col.enabled = false;
 
-        // Matikan tooltip saat mulai di-drag biar nggak mengganggu
         if (FoodTooltipUI.Instance != null) FoodTooltipUI.Instance.SembunyikanTooltip();
     }
 
@@ -52,6 +51,12 @@ public class DraggableItem2D : MonoBehaviour, IBeginDragHandler, IDragHandler, I
     public void OnEndDrag(PointerEventData eventData)
     {
         if (col != null) col.enabled = true;
+
+        // KUNCI UTAMA: Jika setelah dilepas statusnya masih false, kembalikan ke awal!
+        if (!isDroppedSuccessfully)
+        {
+            transform.position = posisiAwal;
+        }
     }
 
     // --- DETEKSI HOVER MOUSE ---
@@ -59,7 +64,6 @@ public class DraggableItem2D : MonoBehaviour, IBeginDragHandler, IDragHandler, I
     {
         if (FoodTooltipUI.Instance != null && dataBahan != null)
         {
-            // Susun teks untuk ditampilkan
             string info = $"<b>{dataBahan.ingredientName}</b>\n";
             info += $"Manis: {tingkatManis}\n";
             info += $"Lembut: {tingkatLembut}\n";

@@ -13,6 +13,12 @@ public class CameraUIController : MonoBehaviour
     [Header("UI Panels")]
     public GameObject PanelKasir;
     public GameObject PanelDapur;
+    public GameObject panelMakanan;
+
+    private void Awake()
+    {
+        panelMakanan.SetActive(true);
+    }
 
     private void OnEnable()
     {
@@ -34,6 +40,7 @@ public class CameraUIController : MonoBehaviour
 
     private void SembunyikanSemuaUI(CameraController.CameraArea area)
     {
+        panelMakanan.SetActive(false);
         PanelKasir.SetActive(false);
         PanelDapur.SetActive(false);
         tombolKeDapur.SetActive(false);
@@ -44,6 +51,7 @@ public class CameraUIController : MonoBehaviour
     {
         bool isKasir = area == CameraController.CameraArea.Kasir;
 
+        panelMakanan.SetActive(isKasir);
         //PanelKasir.SetActive(isKasir);
         PanelDapur.SetActive(!isKasir);
         tombolKeDapur.SetActive(isKasir);
