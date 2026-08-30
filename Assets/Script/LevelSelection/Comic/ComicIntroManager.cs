@@ -12,9 +12,17 @@ public class ComicIntroManager : MonoBehaviour
     private int currentPanelIndex = 0;
     private bool sedangBeranimasi = false;
 
+    private static bool sudahPernahLihatKomik = false;
+
     private void Start()
     {
-        if(playerMovement != null)
+        if (sudahPernahLihatKomik)
+        {
+            MulaiGame();
+            return; // Hentikan fungsi Start di sini, jangan jalankan kode di bawahnya
+        }
+
+        if (playerMovement != null)
         {
             playerMovement.canMove = false;
         }
@@ -66,6 +74,8 @@ public class ComicIntroManager : MonoBehaviour
 
     private void MulaiGame()
     {
+        sudahPernahLihatKomik = true;
+
         if(playerMovement != null)
         {
             playerMovement.canMove = true;
