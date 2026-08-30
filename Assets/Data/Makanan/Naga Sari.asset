@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0bd985757db8e744597380670caaca2c, type: 3}
+  m_Name: Naga Sari
+  m_EditorClassIdentifier: Assembly-CSharp::MenuData
+  menuName: Naga Sari
+  menuImage: {fileID: 2209797324394584017, guid: bdc7f2ce956eb134fb71bba28350c709, type: 3}
+  jenisTepung: 0

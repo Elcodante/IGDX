@@ -154,7 +154,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: -25, y: 0}
+  m_AnchoredPosition: {x: -25.000122, y: 0}
   m_SizeDelta: {x: 1113.0232, y: 626.0523}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &18842426
@@ -1462,6 +1462,10 @@ MonoBehaviour:
   levelberapa: 2
   menuList:
   - {fileID: 11400000, guid: c42fde2b8188a32439895b95ef4cfc02, type: 2}
+  - {fileID: 11400000, guid: 9a0aaff7ceb0bfe4a8ab1dfc54856e78, type: 2}
+  - {fileID: 11400000, guid: e834b2701abb237408589b0531cce300, type: 2}
+  - {fileID: 11400000, guid: 98d5a2f1e9e355942a9ad0b3579ee8ee, type: 2}
+  - {fileID: 11400000, guid: c42fde2b8188a32439895b95ef4cfc02, type: 2}
   npcPrefab:
   - {fileID: 1782478254039802041, guid: 26168ca11eb62d749ba4272f5648eb57, type: 3}
   - {fileID: 11347220522793723, guid: 2f73a0997f5d5684d850682ce6f82354, type: 3}
@@ -1469,9 +1473,9 @@ MonoBehaviour:
   - {fileID: 11347220522793723, guid: 15aa43175e2193b47a8d4b6a1e821110, type: 3}
   - {fileID: 11347220522793723, guid: aacdbedec83bbde4a85ade7c861f92fb, type: 3}
   spawnInterval: 5
-  maksimalNPC: 2
+  maksimalNPC: 6
   minimalVariasiMenu: 1
-  maksimalVariasiMenu: 1
+  maksimalVariasiMenu: 2
 --- !u!1 &521691931
 GameObject:
   m_ObjectHideFlags: 0
@@ -2543,7 +2547,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: -25, y: 0}
+  m_AnchoredPosition: {x: -25.000122, y: 0}
   m_SizeDelta: {x: 1113.0232, y: 626.0523}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &937184058
@@ -4066,6 +4070,7 @@ MonoBehaviour:
   levelberapa: 1
   menuList:
   - {fileID: 11400000, guid: c42fde2b8188a32439895b95ef4cfc02, type: 2}
+  - {fileID: 11400000, guid: 9a0aaff7ceb0bfe4a8ab1dfc54856e78, type: 2}
   npcPrefab:
   - {fileID: 1782478254039802041, guid: 26168ca11eb62d749ba4272f5648eb57, type: 3}
   - {fileID: 11347220522793723, guid: 2f73a0997f5d5684d850682ce6f82354, type: 3}
@@ -6194,7 +6199,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: -25, y: 0}
+  m_AnchoredPosition: {x: -25.000122, y: 0}
   m_SizeDelta: {x: 1113.0232, y: 626.0523}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &2050135492
