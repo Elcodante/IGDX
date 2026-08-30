@@ -9,6 +9,7 @@ public class UIManager : MonoBehaviour
     public GameObject tombolPerpindahan;
     public GameObject tombolSettings;
     public Image potretNPC;
+    public GameObject panelMakanan;
 
     [Header("Slot Pesanan (Cukup Isi dengan 2 Slot)")]
     public SlotPesananUI[] daftarSlotUI;
@@ -45,6 +46,7 @@ public class UIManager : MonoBehaviour
         potretNPC.enabled = true;
         IsPanelOpen = true;
         tombolSettings.SetActive(false);
+        panelMakanan.SetActive(false);
 
         if (potretNPC != null && gambarNPC != null)
         {
@@ -106,5 +108,6 @@ public class UIManager : MonoBehaviour
         potretNPC.enabled = false;
         IsPanelOpen = false;
         tombolSettings.SetActive(true);
+        panelMakanan.SetActive(true);
     }
 }

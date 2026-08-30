@@ -7,16 +7,18 @@ public class ServingStation : MonoBehaviour, IDropHandler
 {
     [Header("Referensi Piring (Dapur)")]
     [Tooltip("Masukkan 3 objek piring kosong di dapur ke sini")]
-    public Transform[] plateSlots = new Transform[3]; 
+    public Transform[] plateSlots = new Transform[3];
 
-    [Header("Meja Depan (Kasir)")]
-    [Tooltip("Masukkan 3 slot posisi di meja kasir depan")]
-    public Transform[] frontCounterSlots = new Transform[3];
+    [Header("UI Meja Kasir Dinamis")]
+    [Tooltip("Masukkan Panel_Background_Kasir yang memiliki Content Size Fitter")]
+    public GameObject panelBackgroundKasir;
 
-    [Header("UI")]
-    public Button serveButton; 
+    [Tooltip("Masukkan ketiga objek UI Box_1, Box_2, Box_3 di dalam panel kasir")]
+    public Transform[] frontCounterBoxes = new Transform[3];
 
-    // Array untuk menyimpan maksimal 3 masakan
+    [Header("UI Tombol")]
+    public Button serveButton;
+
     private DraggableItem2D[] currentFoods = new DraggableItem2D[3];
 
     void Start()
@@ -26,46 +28,67 @@ public class ServingStation : MonoBehaviour, IDropHandler
             serveButton.gameObject.SetActive(false);
             serveButton.onClick.AddListener(OnServeButtonClicked);
         }
+
+        // Matikan semua box UI di awal agar panel background menyusut sampai hilang
+        foreach (Transform box in frontCounterBoxes)
+        {
+            if (box != null) box.gameObject.SetActive(false);
+        }
+
+        // Sembunyikan panel utamanya di awal permainan
+        if (panelBackgroundKasir != null) panelBackgroundKasir.SetActive(false);
     }
 
     public void OnDrop(PointerEventData eventData)
     {
-        GameObject droppedObj = eventData.pointerDrag; 
-        if (droppedObj == null) return; 
+        GameObject droppedObj = eventData.pointerDrag;
+        if (droppedObj == null) return;
 
-        // Kita cari tahu apakah yang di-drop adalah makanan hasil masak (2D)
-        DraggableItem2D dragItem = droppedObj.GetComponent<DraggableItem2D>(); 
-        if (dragItem != null && dragItem.dataBahan != null) 
+        DraggableItem2D dragItem = droppedObj.GetComponent<DraggableItem2D>();
+        if (dragItem != null && dragItem.dataBahan != null)
         {
-            // 1. Cari piring mana yang masih kosong
+            // --- PELINDUNG 1: CEK DUPLIKASI ---
+            // Pastikan barang yang ditarik ini belum ada di dalam daftar piring
+            for (int i = 0; i < currentFoods.Length; i++)
+            {
+                if (currentFoods[i] == dragItem)
+                {
+                    // Barang sudah pernah masuk! Langsung batalkan agar tidak memenuhi piring lain.
+                    return;
+                }
+            }
+            // ----------------------------------
+
             int piringKosongIndex = -1;
             for (int i = 0; i < currentFoods.Length; i++)
             {
                 if (currentFoods[i] == null)
                 {
                     piringKosongIndex = i;
-                    break; // Ketemu yang kosong, langsung stop pencarian
+                    break;
                 }
             }
 
-            // 2. Jika ada piring kosong, taruh makanannya!
             if (piringKosongIndex != -1)
             {
-
-                // Simpan ke daftar
                 currentFoods[piringKosongIndex] = dragItem;
 
-                // Kunci posisi makanan di atas piring tersebut
-                dragItem.transform.SetParent(plateSlots[piringKosongIndex]);
-                dragItem.transform.position = plateSlots[piringKosongIndex].position;
-                
-                // Pastikan gambar makanan tampil di atas gambar piring
-                SpriteRenderer sr = dragItem.GetComponent<SpriteRenderer>();
-                if (sr != null) sr.sortingOrder = 10; 
+                // --- PELINDUNG 2: BERI TAHU MAKANAN AGAR TIDAK KABUR ---
+                dragItem.isDroppedSuccessfully = true;
+                // --------------------------------------------------------
 
-                if (serveButton != null) serveButton.gameObject.SetActive(true); 
-                
-                Debug.Log($"Makanan {dragItem.dataBahan.ingredientID} ditaruh di piring ke-{piringKosongIndex + 1}!");
+                // Gunakan SetParent dengan false agar skala objek 2D tidak rusak oleh Canvas
+                dragItem.transform.SetParent(plateSlots[piringKosongIndex], false);
+                dragItem.transform.position = plateSlots[piringKosongIndex].position;
+
+                SpriteRenderer sr = dragItem.GetComponent<SpriteRenderer>();
+                if (sr != null)
+                {
+                    sr.sortingLayerName = "ItemDiAtasUI"; // Memasukkan sprite ke jalur VIP
+                    sr.sortingOrder = 10;
+                }
+
+                if (serveButton != null) serveButton.gameObject.SetActive(true);
             }
             else
             {
@@ -78,30 +101,57 @@ public class ServingStation : MonoBehaviour, IDropHandler
     {
         bool adaYangDiserve = false;
 
-        // Looping untuk mengirim semua masakan yang ada di piring
+        // Nyalakan panel kasir jika ada makanan yang mau dikirim
+        if (panelBackgroundKasir != null) panelBackgroundKasir.SetActive(true);
+
         for (int i = 0; i < currentFoods.Length; i++)
         {
             if (currentFoods[i] != null)
             {
                 adaYangDiserve = true;
-                Debug.Log($"Mengirim {currentFoods[i].dataBahan.ingredientID} ke depan...[cite: 10]");
 
-                // Pindahkan masakan ke meja kasir sesuai urutan piring
-                if (i < frontCounterSlots.Length && frontCounterSlots[i] != null)
+                if (i < frontCounterBoxes.Length && frontCounterBoxes[i] != null)
                 {
-                    currentFoods[i].transform.SetParent(frontCounterSlots[i]);
-                    currentFoods[i].transform.position = frontCounterSlots[i].position;
+                    // 1. Nyalakan Box UI ini. 
+                    // Content Size Fitter akan otomatis melebarkan panel background!
+                    frontCounterBoxes[i].gameObject.SetActive(true);
+
+                    // 2. Pindahkan masakan 2D ke dalam Box UI tersebut
+                    // Kembalikan ke 'false' agar kita bisa atur skalanya secara manual
+                    currentFoods[i].transform.SetParent(frontCounterBoxes[i], false);
+
+                    // Gunakan localPosition agar posisinya terpusat persis di tengah kotak UI
+                    currentFoods[i].transform.localPosition = Vector3.zero;
+
+                    // 3. KALKULASI UKURAN OTOMATIS (Sihir Matematika!)
+                    RectTransform boxRect = frontCounterBoxes[i].GetComponent<RectTransform>();
+                    SpriteRenderer sr = currentFoods[i].GetComponent<SpriteRenderer>();
+
+                    if (boxRect != null && sr != null && sr.sprite != null)
+                    {
+                        // Ambil ukuran lebar kotak UI (Pixel)
+                        float lebarKotak = boxRect.rect.width;
+
+                        // Ambil ukuran asli gambar makanan 2D (Unit)
+                        float lebarGambar = sr.sprite.bounds.size.x;
+
+                        // Hitung skala yang dibutuhkan. 
+                        // Dikali 0.7f agar gambar mengambil 70% dari kotak (menyisakan ruang/padding di pinggirnya)
+                        // Ubah pengali dari 0.7f menjadi 1.08f untuk mencapai ukuran ~11.04
+                        float skalaPas = (lebarKotak / lebarGambar) * 1.08f;
+
+                        // Skala Z tidak terlalu berpengaruh pada gambar 2D, jadi bisa kita biarkan 1f
+                        currentFoods[i].transform.localScale = new Vector3(skalaPas, skalaPas, 1f);
+                    }
                 }
 
-                // Kosongkan piring ini
-                currentFoods[i] = null; 
+                currentFoods[i] = null;
             }
         }
 
-        // Sembunyikan tombol jika sudah terkirim semua
-        if (adaYangDiserve && serveButton != null) 
+        if (adaYangDiserve && serveButton != null)
         {
-            serveButton.gameObject.SetActive(false); //[cite: 10]
+            serveButton.gameObject.SetActive(false);
         }
     }
 }
