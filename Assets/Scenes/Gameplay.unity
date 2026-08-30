@@ -9500,9 +9500,9 @@ RectTransform:
   - {fileID: 916444675}
   - {fileID: 988723068}
   - {fileID: 244083414}
+  - {fileID: 1571172197}
   - {fileID: 1682212960}
   - {fileID: 1269308525}
-  - {fileID: 1571172197}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -18932,7 +18932,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1682212960
 RectTransform:
   m_ObjectHideFlags: 0
