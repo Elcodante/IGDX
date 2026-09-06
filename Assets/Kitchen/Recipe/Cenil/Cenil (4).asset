@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24585a0301d620548849279fb4e9137b, type: 3}
+  m_Name: Cenil (4)
+  m_EditorClassIdentifier: Assembly-CSharp::RecipeData
+  inputIngredients:
+  - {fileID: 11400000, guid: c1e30cfe90a34644a97334cf8d1ab5c9, type: 2}
+  - {fileID: 11400000, guid: 1431c2da236bd8e48aa65da57e651b48, type: 2}
+  - {fileID: 11400000, guid: 4f67e6456b40504459d91c6885778abd, type: 2}
+  requiredMechanic: 0
+  timeLimit: 10
+  targetDifficulty: 1
+  successResult: {fileID: 11400000, guid: bcd139a6d76bbfd44a5410d29e0ffc05, type: 2}
+  failResult: {fileID: 0}

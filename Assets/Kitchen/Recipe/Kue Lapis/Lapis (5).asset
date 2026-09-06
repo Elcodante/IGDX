@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Lapis (5)
   m_EditorClassIdentifier: Assembly-CSharp::RecipeData
   inputIngredients:
-  - {fileID: 11400000, guid: 731dcbb457ffa2b4187d004ee17d023a, type: 2}
-  requiredMechanic: 3
+  - {fileID: 11400000, guid: c475bd1dfee798240a05282a31c34bac, type: 2}
+  requiredMechanic: 2
   timeLimit: 10
   targetDifficulty: 1
-  successResult: {fileID: 11400000, guid: c3517bc2ca3012e4aa53b7570d5d42a8, type: 2}
+  successResult: {fileID: 11400000, guid: 26c4064a6e7bbb441a02ecd69c4be511, type: 2}
   failResult: {fileID: 0}
