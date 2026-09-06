@@ -67,10 +67,20 @@ public class CookingAppliance : MonoBehaviour
     // Data internal
     private CookingAppliance mountedAppliance; // Alat yang sedang menempel di atas kompor ini
     private IMinigameMechanic activeMinigame; 
+    public void ResetSetelahDiambil()
+    {
+        stateWajan = 0;
+        currentIngredients.Clear();
+        UpdateVisualAlat();
+    }
     
     private List<IngredientData> currentIngredients = new List<IngredientData>();
     private RecipeData currentValidRecipe;
 
+    public bool AdaAdonanSiapPakai()
+    {
+        return stateWajan == 2; // sama seperti kondisi "Beres" yang sudah kamu pakai buat sprite priority
+    }
     private void Awake()
     {
         RefreshMinigameScript();

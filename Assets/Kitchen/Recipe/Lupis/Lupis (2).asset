@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Lupis (2)
   m_EditorClassIdentifier: Assembly-CSharp::RecipeData
   inputIngredients:
-  - {fileID: 11400000, guid: 0d1ec1ffa228a84408014b94c986ab47, type: 2}
-  requiredMechanic: 3
+  - {fileID: 11400000, guid: d9688947655c3a344a92aca4aec08b9f, type: 2}
+  requiredMechanic: 5
   timeLimit: 10
   targetDifficulty: 1
-  successResult: {fileID: 11400000, guid: 0a5cd6bb6c80dcc4dbe851292c076df5, type: 2}
+  successResult: {fileID: 11400000, guid: 0d1ec1ffa228a84408014b94c986ab47, type: 2}
   failResult: {fileID: 0}

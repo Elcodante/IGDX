@@ -14,6 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::IngredientData
   ingredientID: Kue Putu Ayu
   ingredientName: Kue Putu Ayu
-  icon: {fileID: 1968876835447747157, guid: 2c6e3da22f59df54ca7875fc00a36307, type: 3}
+  icon: {fileID: -5419008019438273267, guid: f3fff29cf50d30248a14275b69a93fa6, type: 3}
   peranBahan: 0
   jenisTepung: 0
+  dropVisualPrefab: {fileID: 0}
+  dragIcon: {fileID: 0}
+  usePourAnimation: 0
+  inBowlIcon: {fileID: 0}
+  butuhGarnish: 1
+  daftarGarnishDibutuhkan:
+  - {fileID: 11400000, guid: 4f67e6456b40504459d91c6885778abd, type: 2}
+  spriteTiapTahapGarnish:
+  - {fileID: 1968876835447747157, guid: 2c6e3da22f59df54ca7875fc00a36307, type: 3}

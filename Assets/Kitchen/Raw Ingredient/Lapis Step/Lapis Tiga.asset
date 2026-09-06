@@ -12,6 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86442b7a1a0223842b7722ae67f037ee, type: 3}
   m_Name: Lapis Tiga
   m_EditorClassIdentifier: Assembly-CSharp::IngredientData
-  ingredientID: 
-  ingredientName: 
-  icon: {fileID: 0}
+  ingredientID: Lapis Tiga
+  ingredientName: Lapis Tiga
+  icon: {fileID: -4419482669910675618, guid: 77eb691dad747ad44a3153a0ce8b9ca3, type: 3}
+  peranBahan: 0
+  jenisTepung: 0
+  dropVisualPrefab: {fileID: 0}
+  dragIcon: {fileID: 0}
+  usePourAnimation: 0
+  inBowlIcon: {fileID: 0}

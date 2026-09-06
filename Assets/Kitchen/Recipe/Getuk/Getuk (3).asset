@@ -17,5 +17,5 @@ MonoBehaviour:
   requiredMechanic: 2
   timeLimit: 10
   targetDifficulty: 1
-  successResult: {fileID: 11400000, guid: e05343a3d51b88b4aa617eef96d0c8fc, type: 2}
+  successResult: {fileID: 11400000, guid: 74905042d2b528e489fab31fcef36f9e, type: 2}
   failResult: {fileID: 0}

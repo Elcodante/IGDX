@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86442b7a1a0223842b7722ae67f037ee, type: 3}
+  m_Name: Tepung Ketan
+  m_EditorClassIdentifier: Assembly-CSharp::IngredientData
+  ingredientID: Tepung Ketan
+  ingredientName: Tepung Ketan
+  icon: {fileID: -7115273739440965115, guid: 4a2854619328a4143ac6c83826c7e48a, type: 3}
+  peranBahan: 1
+  jenisTepung: 1
+  dropVisualPrefab: {fileID: 0}
+  dragIcon: {fileID: 0}
+  usePourAnimation: 0
+  inBowlIcon: {fileID: 5803277668826898794, guid: f776918182d424b48b55d8a184e84083, type: 3}
+  butuhGarnish: 0
+  daftarGarnishDibutuhkan: []
+  spriteTiapTahapGarnish: []

@@ -39,63 +39,100 @@ public class ServingStation : MonoBehaviour, IDropHandler
         if (panelBackgroundKasir != null) panelBackgroundKasir.SetActive(false);
     }
 
-    public void OnDrop(PointerEventData eventData)
+public void OnDrop(PointerEventData eventData)
+{
+    GameObject droppedObj = eventData.pointerDrag;
+    if (droppedObj == null) return;
+
+    // --- CASE 1: GARNISH (UI item) ---
+    DraggableItem garnishUI = droppedObj.GetComponent<DraggableItem>();
+    if (garnishUI != null)
     {
-        GameObject droppedObj = eventData.pointerDrag;
-        if (droppedObj == null) return;
+        if (garnishUI.dataBahan == null) return;
 
-        DraggableItem2D dragItem = droppedObj.GetComponent<DraggableItem2D>();
-        if (dragItem != null && dragItem.dataBahan != null)
+        if (CobaTambahkanGarnish(garnishUI.dataBahan))
         {
-            // --- PELINDUNG 1: CEK DUPLIKASI ---
-            // Pastikan barang yang ditarik ini belum ada di dalam daftar piring
-            for (int i = 0; i < currentFoods.Length; i++)
-            {
-                if (currentFoods[i] == dragItem)
-                {
-                    // Barang sudah pernah masuk! Langsung batalkan agar tidak memenuhi piring lain.
-                    return;
-                }
-            }
-            // ----------------------------------
+            // Garnish habis dipakai, hapus dari UI rak/tangan
+            Destroy(garnishUI.gameObject);
+        }
+        else
+        {
+            Debug.Log("Tidak ada piring yang butuh garnish ini.");
+        }
+        return; // garnish tidak pernah masuk ke logika piring makanan di bawah
+    }
 
-            int piringKosongIndex = -1;
-            for (int i = 0; i < currentFoods.Length; i++)
-            {
-                if (currentFoods[i] == null)
-                {
-                    piringKosongIndex = i;
-                    break;
-                }
-            }
+    // --- CASE 2: FOOD (2D world item, existing plating logic) ---
+    DraggableItem2D dragItem = droppedObj.GetComponent<DraggableItem2D>();
+    if (dragItem == null || dragItem.dataBahan == null) return;
 
-            if (piringKosongIndex != -1)
-            {
-                currentFoods[piringKosongIndex] = dragItem;
+    // --- PELINDUNG 1: CEK DUPLIKASI ---
+    for (int i = 0; i < currentFoods.Length; i++)
+    {
+        if (currentFoods[i] == dragItem) return;
+    }
 
-                // --- PELINDUNG 2: BERI TAHU MAKANAN AGAR TIDAK KABUR ---
-                dragItem.isDroppedSuccessfully = true;
-                // --------------------------------------------------------
-
-                // Gunakan SetParent dengan false agar skala objek 2D tidak rusak oleh Canvas
-                dragItem.transform.SetParent(plateSlots[piringKosongIndex], false);
-                dragItem.transform.position = plateSlots[piringKosongIndex].position;
-
-                SpriteRenderer sr = dragItem.GetComponent<SpriteRenderer>();
-                if (sr != null)
-                {
-                    sr.sortingLayerName = "ItemDiAtasUI"; // Memasukkan sprite ke jalur VIP
-                    sr.sortingOrder = 10;
-                }
-
-                if (serveButton != null) serveButton.gameObject.SetActive(true);
-            }
-            else
-            {
-                Debug.Log("Gagal! Semua 3 piring sudah penuh!");
-            }
+    int piringKosongIndex = -1;
+    for (int i = 0; i < currentFoods.Length; i++)
+    {
+        if (currentFoods[i] == null)
+        {
+            piringKosongIndex = i;
+            break;
         }
     }
+
+    if (piringKosongIndex != -1)
+    {
+        currentFoods[piringKosongIndex] = dragItem;
+
+        dragItem.isDroppedSuccessfully = true;
+        Collider2D foodCol = dragItem.GetComponent<Collider2D>();
+        if (foodCol != null) foodCol.enabled = false;
+
+        dragItem.transform.SetParent(plateSlots[piringKosongIndex], false);
+        dragItem.transform.position = plateSlots[piringKosongIndex].position;
+
+        SpriteRenderer sr = dragItem.GetComponent<SpriteRenderer>();
+        if (sr != null)
+        {
+            sr.sortingLayerName = "ItemDiAtasUI";
+            sr.sortingOrder = 10;
+        }
+
+        if (serveButton != null) serveButton.gameObject.SetActive(true);
+    }
+    else
+    {
+        Debug.Log("Gagal! Semua 3 piring sudah penuh!");
+    }
+}
+
+private bool CobaTambahkanGarnish(IngredientData garnishData)
+{
+    if (garnishData == null) return false;
+
+    foreach (var food in currentFoods)
+    {
+        if (food == null || food.dataBahan == null) continue;
+
+        var dataBahan = food.dataBahan;
+        if (dataBahan.daftarGarnishDibutuhkan == null || dataBahan.daftarGarnishDibutuhkan.Count == 0) continue;
+        if (food.garnishSudahMasuk.Contains(garnishData)) continue;
+        if (!dataBahan.daftarGarnishDibutuhkan.Contains(garnishData)) continue;
+
+        food.garnishSudahMasuk.Add(garnishData);
+
+        int progres = food.garnishSudahMasuk.Count;
+        if (dataBahan.spriteTiapTahapGarnish != null && progres <= dataBahan.spriteTiapTahapGarnish.Count)
+        {
+            SpriteRenderer sr = food.GetComponent<SpriteRenderer>();
+            if (sr != null) sr.sprite = dataBahan.spriteTiapTahapGarnish[progres - 1];
+        }
+        return true;
+    }
+    return false;
+}
 
     private void OnServeButtonClicked()
     {

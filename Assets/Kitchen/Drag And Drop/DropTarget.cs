@@ -52,6 +52,7 @@ public class DropTarget : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPo
             DraggableApplianceUI uiAppliance = eventData.pointerDrag.GetComponent<DraggableApplianceUI>();
             if (uiAppliance != null && appliance.isStoveBase)
             {
+                
                 if (uiAppliance.appliancePrefab2D != null)
                 {
                     // 1. Munculkan panci 2D yang asli
@@ -70,6 +71,29 @@ public class DropTarget : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPo
                     }
                 }
                 return; // Selesai urusan pasang alat, stop sampai di sini
+            }
+
+            // --- BARU: DETEKSI CETAKAN TOOL ---
+            CetakanTool cetakan = eventData.pointerDrag.GetComponent<CetakanTool>();
+            if (cetakan != null)
+            {
+                CookingAppliance targetPenerima = appliance.GetMountedAppliance() != null ? appliance.GetMountedAppliance() : appliance;
+
+                if (!cetakan.sudahDicelup)
+                {
+                    if (targetPenerima.AdaAdonanSiapPakai())
+                    {
+                        cetakan.CelupkanKeAdonan();
+                        targetPenerima.ResetSetelahDiambil(); // Mangkuk kosong lagi, harus di-mix ulang buat batch berikutnya
+                    }
+                    else Debug.Log("Belum ada adonan siap di sini.");
+}
+                else
+                {
+                    targetPenerima.AddIngredient(cetakan.adonanData); // masuk ke pipeline yang SUDAH ADA
+                    cetakan.ResetSetelahDigoreng(); // bukan Destroy() — alat balik sendiri lewat OnEndDrag
+                }
+                return;
             }
 
             // --- LOGIKA LAMA: DETEKSI BAHAN MASUK ---

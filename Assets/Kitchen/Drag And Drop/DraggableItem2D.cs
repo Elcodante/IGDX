@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
+using System.Collections.Generic;
 
 public class DraggableItem2D : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerEnterHandler, IPointerExitHandler
 {
@@ -15,6 +16,8 @@ public class DraggableItem2D : MonoBehaviour, IBeginDragHandler, IDragHandler, I
 
     private Vector3 posisiAwal;
     public bool isDroppedSuccessfully = false;
+
+    [HideInInspector] public List<IngredientData> garnishSudahMasuk = new List<IngredientData>();
 
     private void Awake()
     {

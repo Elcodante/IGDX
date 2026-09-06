@@ -14,4 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::IngredientData
   ingredientID: Potong Getuk
   ingredientName: Potong Getuk
-  icon: {fileID: -2597748956768640907, guid: e15f0830dcffd2f45b5f9ed898aacb97, type: 3}
+  icon: {fileID: -1733167998399997688, guid: 7e5b0b223b73a1f4286f78473925d42f, type: 3}
+  peranBahan: 0
+  jenisTepung: 0
+  dropVisualPrefab: {fileID: 0}
+  dragIcon: {fileID: 0}
+  usePourAnimation: 0
+  inBowlIcon: {fileID: 0}
