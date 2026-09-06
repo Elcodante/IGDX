@@ -7,7 +7,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float _speed = 5f;
     [SerializeField] private Animator anim;
 
-    public bool canMove = true;
+    private bool canMove = true;
 
     private Rigidbody2D rb;
 
@@ -66,5 +66,10 @@ public class PlayerMovement : MonoBehaviour
         }
 
         rb.linearVelocity = moveInput * _speed;
+    }
+
+    public void SetCanMove(bool value)
+    {
+        canMove = value;
     }
 }

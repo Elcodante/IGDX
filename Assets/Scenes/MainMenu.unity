@@ -2428,7 +2428,7 @@ MonoBehaviour:
   sfxSource: {fileID: 2000314371}
   musicSounds:
   - name: BG
-    clip: {fileID: 8300000, guid: 6411565249649814baf25dfd9560ee3e, type: 3}
+    clip: {fileID: 8300000, guid: ce0150e10425ad14985470890e25124f, type: 3}
     volume: 1
     pitch: 1
     loop: 1
@@ -2489,7 +2489,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -114.05066, y: -87.9715}
+  m_AnchoredPosition: {x: -114.05054, y: -87.971436}
   m_SizeDelta: {x: 1830, y: 1770}
   m_Pivot: {x: 1, y: 1}
 --- !u!114 &2048566116

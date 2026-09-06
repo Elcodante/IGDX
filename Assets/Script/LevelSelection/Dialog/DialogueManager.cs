@@ -6,6 +6,7 @@ using TMPro;
 public class DialogueManager : MonoBehaviour
 {
     private bool isDialogueLocked = true;
+    [SerializeField] private PlayerMovement playerMovement;
 
     [Header("UI References")]
     [SerializeField] private GameObject dialoguePanel;
@@ -36,6 +37,7 @@ public class DialogueManager : MonoBehaviour
     public void StartCharacterDialogue(CharacterDialogueData data, int playerCurrentLevel)
     {
         dialogueQueue.Clear();
+        playerMovement.SetCanMove(false);
 
        DialogueLine[] selectedLines;
 
@@ -95,6 +97,7 @@ public class DialogueManager : MonoBehaviour
         else
         {
             dialoguePanel.SetActive(false);
+            playerMovement.SetCanMove(true);
         }
     }
 

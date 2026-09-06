@@ -226,7 +226,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &84468885
 RectTransform:
   m_ObjectHideFlags: 0
@@ -770,9 +770,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a5d1b0b14bb3df48bd3dbd9b23de5cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CollectionBook
+  currentLevel: 0
   gambarBuku: {fileID: 2070061520}
+  resepnotfound: {fileID: -855298285791758126, guid: 362dd881574c4944392936d429474da4, type: 3}
   daftarAsetGambar:
-  - {fileID: -855298285791758126, guid: 362dd881574c4944392936d429474da4, type: 3}
   - {fileID: 6937817954938267909, guid: 134ff4b633ac65649ab5917518ffaaa4, type: 3}
   - {fileID: -6470460504253458178, guid: c6154d8275638d44884217e4df72880c, type: 3}
   - {fileID: -4178046375966092550, guid: c39fbb6cdb9d0d248850d8b3691a2022, type: 3}
@@ -783,7 +784,7 @@ MonoBehaviour:
   - {fileID: 4113829005332862926, guid: 17f4be307bd36444fa79fa54a4a3eafd, type: 3}
   - {fileID: -5099292496197868168, guid: e5c30e9d31de25a4c8297f389e793bb1, type: 3}
   - {fileID: -2966200626249415253, guid: c4f39259a549fd448bbd960b1ec34aab, type: 3}
-  - {fileID: -71188362744829109, guid: 6ab3cadd6030b994eaedf8d8d4cd4144, type: 3}
+  resepTerbukaPerLevel: 020000000400000006000000080000000a000000
   tombolKiri: {fileID: 796646922}
   tombolKanan: {fileID: 2145129394}
 --- !u!1 &262462532
@@ -1223,7 +1224,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &371402088
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2712,7 +2713,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
   _speed: 2
   anim: {fileID: 991205701}
-  canMove: 1
 --- !u!50 &991205699
 Rigidbody2D:
   serializedVersion: 5
@@ -3333,6 +3333,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1ebb6526345cae4ea6c357ac97c013f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DialogueManager
+  playerMovement: {fileID: 991205698}
   dialoguePanel: {fileID: 1348789733}
   speakerText: {fileID: 1821562457}
   messageText: {fileID: 1504345383}
@@ -3709,7 +3710,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1348789734
 RectTransform:
   m_ObjectHideFlags: 0

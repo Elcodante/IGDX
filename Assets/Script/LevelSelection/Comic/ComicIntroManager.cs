@@ -24,7 +24,7 @@ public class ComicIntroManager : MonoBehaviour
 
         if (playerMovement != null)
         {
-            playerMovement.canMove = false;
+            playerMovement.SetCanMove(false);
         }
 
         foreach (GameObject panel in panelkomik)
@@ -78,7 +78,7 @@ public class ComicIntroManager : MonoBehaviour
 
         if(playerMovement != null)
         {
-            playerMovement.canMove = true;
+            playerMovement.SetCanMove(true);
         }
 
         gameObject.SetActive(false);
