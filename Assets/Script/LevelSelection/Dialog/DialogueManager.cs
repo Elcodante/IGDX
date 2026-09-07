@@ -10,6 +10,7 @@ public class DialogueManager : MonoBehaviour
 
     [Header("UI References")]
     [SerializeField] private GameObject dialoguePanel;
+    [SerializeField] private GameObject skipButton;
     [SerializeField] private TMP_Text speakerText;
     [SerializeField] private TMP_Text messageText;
     [SerializeField] private Image portraitImage; 
@@ -32,6 +33,8 @@ public class DialogueManager : MonoBehaviour
         {
             panelMulaiGameplay.SetActive(false);
         }
+
+        skipButton.SetActive(false);
     }
 
     public void StartCharacterDialogue(CharacterDialogueData data, int playerCurrentLevel)
@@ -41,15 +44,25 @@ public class DialogueManager : MonoBehaviour
 
        DialogueLine[] selectedLines;
 
+       if(data.isDialogueLockedDoneReading || data.isDialogueUnlockedDoneReading)
+        {
+            skipButton.SetActive(true);
+        }else
+        {
+            skipButton.SetActive(false);
+        }
+
         if (playerCurrentLevel >= data.requiredLevel)
         {
             isDialogueLocked = false;
             selectedLines = data.unlockedDialogue;
+            data.isDialogueUnlockedDoneReading = true;
         }
         else
         {
             isDialogueLocked = true; 
             selectedLines = data.lockedDialogue;
+            data.isDialogueLockedDoneReading = true;
         }
 
         foreach (DialogueLine line in selectedLines)
@@ -58,6 +71,8 @@ public class DialogueManager : MonoBehaviour
         }
 
         dialoguePanel.SetActive(true);
+
+        
         if (panelMulaiGameplay != null)
         {
             panelMulaiGameplay.SetActive(false);
@@ -84,7 +99,7 @@ public class DialogueManager : MonoBehaviour
         messageText.text = currentLine.message;
     }
 
-    private void EndDialogue()
+    public void EndDialogue()
     {
         if(!isDialogueLocked)
         {

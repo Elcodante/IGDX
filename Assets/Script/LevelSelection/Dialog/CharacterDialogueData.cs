@@ -25,6 +25,8 @@ public class CharacterDialogueData : ScriptableObject
     public int requiredLevel;   
 
     [Header("Dialogue Content")]
+    public bool isDialogueUnlockedDoneReading = false;
     public DialogueLine[] unlockedDialogue;
+    public bool isDialogueLockedDoneReading = false;
     public DialogueLine[] lockedDialogue;
 }

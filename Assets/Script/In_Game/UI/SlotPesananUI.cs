@@ -20,7 +20,7 @@ public class SlotPesananUI
         if (teksNamaMenu != null) teksNamaMenu.text = data.idResep.ToUpper();
 
         // Memanggil Helper yang sudah kita buat
-        if (teksKeyword != null) teksKeyword.text = "KEYWORDS: " + OrderTextHelper.BuatTeksKeyword(data);
+        if (teksKeyword != null) teksKeyword.text = OrderTextHelper.BuatTeksKeyword(data);
         if (teksDialog != null) teksDialog.text = OrderTextHelper.BuatTeksDialog(data);
     }
 

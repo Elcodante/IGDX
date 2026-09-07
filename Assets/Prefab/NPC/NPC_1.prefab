@@ -109,7 +109,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 616748fa2be02cf49bf216659fb5c50d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NPCController
-  moveSpeed: 3
+  moveSpeed: 8
   tandaSeru: {fileID: 4217841086553712287}
   warnaPesananDiambil: {r: 0.4, g: 0.4, b: 0.4, a: 1}
   OnPesananDiambil:

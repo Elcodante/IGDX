@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CharacterDialogueData
   characterOwner: 0
   requiredLevel: 1
+  isDialogueUnlockedDoneReading: 0
   unlockedDialogue:
   - speaker: 0
     message: Hah...? Ini di mana? Kok aku bisa ada di sini?
@@ -83,4 +84,5 @@ MonoBehaviour:
     message: Aku akan mengantarmu pulang.
   - speaker: 0
     message: Anak menarik napas dan perlahan berjalan menuju warung.
+  isDialogueLockedDoneReading: 0
   lockedDialogue: []

@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CharacterDialogueData
   characterOwner: 0
   requiredLevel: 5
+  isDialogueUnlockedDoneReading: 0
   unlockedDialogue:
   - speaker: 0
     message: Kamu Wewe Gombel?
@@ -48,8 +49,8 @@ MonoBehaviour:
     message: 'Iya. Dulu ada anak-anak yang sering datang kepadaku. Ada yang tersesat,
       ada yang
 
-      tidak ingin pulang, ada juga yang cuma ingin punya tempat
-      untuk beristirahat.'
+      tidak ingin pulang, ada juga yang cuma ingin punya tempat untuk
+      beristirahat.'
   - speaker: 0
     message: Terus kamu masakin mereka?
   - speaker: 4
@@ -120,6 +121,7 @@ MonoBehaviour:
     message: Aku tahu siapa.
   - speaker: 0
     message: Kalau begitu, kita mulai.
+  isDialogueLockedDoneReading: 0
   lockedDialogue:
   - speaker: 0
     message: Kamu Wewe Gombel?

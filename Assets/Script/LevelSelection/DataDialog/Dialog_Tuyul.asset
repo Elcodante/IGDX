@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CharacterDialogueData
   characterOwner: 0
   requiredLevel: 4
+  isDialogueUnlockedDoneReading: 0
   unlockedDialogue:
   - speaker: 0
     message: Aku lagi cari hantu yang bisa ngajarin aku.
@@ -97,6 +98,7 @@ MonoBehaviour:
   - speaker: 5
     message: Sudah, sekarang giliran kamu. Kita lihat kamu bisa bikin makanan yang
       bikin orang mau duduk bareng atau nggak.
+  isDialogueLockedDoneReading: 0
   lockedDialogue:
   - speaker: 0
     message: Kamu Tuyul?

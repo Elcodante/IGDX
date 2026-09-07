@@ -5,11 +5,16 @@ using System.Collections.Generic;
 public class UIManager : MonoBehaviour
 {
     [Header("UI Elements")]
-    public GameObject panelPesanan;
+    public GameObject panelKasir;
     public GameObject tombolPerpindahan;
     public GameObject tombolSettings;
     public Image potretNPC;
     public GameObject panelMakanan;
+    [SerializeField] private RectTransform panelPesanan;
+
+    [Header("UI Ukuran Panel")]
+    [SerializeField] private float panjang1Slot = 300f;
+    [SerializeField] private float lebar1Slot = 300f;
 
     [Header("Slot Pesanan (Cukup Isi dengan 2 Slot)")]
     public SlotPesananUI[] daftarSlotUI;
@@ -26,7 +31,7 @@ public class UIManager : MonoBehaviour
     void Start()
     {
         IsPanelOpen = false;
-        if (panelPesanan != null) panelPesanan.SetActive(false);
+        if (panelKasir != null) panelKasir.SetActive(false);
         if (tombolPerpindahan != null) tombolPerpindahan.SetActive(true);
         if (potretNPC != null)
         {
@@ -41,7 +46,15 @@ public class UIManager : MonoBehaviour
 
     public void TampilkanPanelPesanan(List<OrderData> dataPesanan, Sprite gambarNPC)
     {
-        panelPesanan.SetActive(true);
+        if (panelKasir == null || daftarSlotUI == null || daftarSlotUI.Length == 0) return;
+
+        if(dataPesanan.Count <= 1)
+        {
+            Debug.Log("Jumlah pesanan kurang dari atau sama dengan 1, menyesuaikan ukuran panel.");
+            panelPesanan.sizeDelta = new Vector2(lebar1Slot, panjang1Slot);
+        }
+
+        panelKasir.SetActive(true);
         tombolPerpindahan.SetActive(false);
         potretNPC.enabled = true;
         IsPanelOpen = true;
@@ -103,7 +116,7 @@ public class UIManager : MonoBehaviour
 
     public void TutupPanelPesanan()
     {
-        panelPesanan.SetActive(false);
+        panelKasir.SetActive(false);
         tombolPerpindahan.SetActive(true);
         potretNPC.enabled = false;
         IsPanelOpen = false;

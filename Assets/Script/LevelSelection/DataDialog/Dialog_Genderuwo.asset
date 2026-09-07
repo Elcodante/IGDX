@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CharacterDialogueData
   characterOwner: 0
   requiredLevel: 3
+  isDialogueUnlockedDoneReading: 0
   unlockedDialogue:
   - speaker: 0
     message: Kamu yang tinggal di sini?
@@ -88,6 +89,7 @@ MonoBehaviour:
     message: Nah. Sekarang kamu sudah siap.
   - speaker: 0
     message: Oke. Ayo mulai.
+  isDialogueLockedDoneReading: 0
   lockedDialogue:
   - speaker: 0
     message: Eh... kamu tinggal di sini?

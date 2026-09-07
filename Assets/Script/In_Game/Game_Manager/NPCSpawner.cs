@@ -132,6 +132,16 @@ public class NPCSpawner : MonoBehaviour
         {
             Debug.Log("Level Selesai! Semua NPC sudah pulang.");
 
+            if (LevelManager.Instance != null)
+            {
+                LevelManager.Instance.NextLevel();
+                Debug.Log($"Level berhasil ditingkatkan! Level saat ini: {LevelManager.Instance.LevelNow}");
+            }
+            else
+            {
+                Debug.LogError("LevelManager tidak ditemukan! Pastikan LevelManager ada di Scene Map.");
+            }
+
             // CEK TERSANGKA 2: Apakah LevelEndManager belum dimasukkan?
             if (levelEndManager == null)
             {

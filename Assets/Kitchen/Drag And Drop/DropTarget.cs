@@ -123,6 +123,8 @@ public class DropTarget : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPo
 
 
                 Debug.Log($"Berhasil! {bahanYangMasuk.ingredientName} dimasukkan ke {namaAlat}"); 
+
+                
                 targetPenerima.AddIngredient(bahanYangMasuk); 
                 
                 // Tandai berhasil drop untuk 2D
