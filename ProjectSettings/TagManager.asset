@@ -50,5 +50,8 @@ TagManager:
   - name: ItemDiAtasUI
     uniqueID: 161547567
     locked: 0
+  - name: Bahan
+    uniqueID: 968071707
+    locked: 0
   m_RenderingLayers:
   - Default

@@ -71,7 +71,7 @@ public class CookingAppliance : MonoBehaviour
     {
         stateWajan = 0;
         currentIngredients.Clear();
-        UpdateVisualAlat();
+        UpdateVisualAlat(null);
     }
     
     private List<IngredientData> currentIngredients = new List<IngredientData>();
@@ -156,12 +156,17 @@ public class CookingAppliance : MonoBehaviour
     public void UbahStateWajan(int stateIndex)
     {
         stateWajan = stateIndex;
-        UpdateVisualAlat();
+        UpdateVisualAlat(null);
     }
 
     public void AddIngredient(IngredientData ingredient)
     {
         currentIngredients.Add(ingredient);
+
+        if(ingredient.typeBahanInBowl == TypeBahanInBowl.Tepung)
+        {
+            
+        }
         
         if (ingredient.peranBahan == PeranBahan.BumbuManis) countManis++;
         else if (ingredient.peranBahan == PeranBahan.BumbuLembut) countLembut++;
@@ -171,7 +176,7 @@ public class CookingAppliance : MonoBehaviour
 
         // Pas bahan masuk, reset wajan biar ga stuck di state "Beres"
         stateWajan = 0; 
-        UpdateVisualAlat(); 
+        UpdateVisualAlat(ingredient); 
         
         if (komporInduk != null) komporInduk.CheckForValidRecipe();
         else CheckForValidRecipe();
@@ -318,7 +323,7 @@ public class CookingAppliance : MonoBehaviour
         alatYangDipakai.UbahStateWajan(2); 
     }
 
-    private void UpdateVisualAlat()
+    private void UpdateVisualAlat(IngredientData ingredient)
     {
         if (applianceSprite2D != null)
         {
@@ -361,20 +366,30 @@ public class CookingAppliance : MonoBehaviour
 
             for (int i = 0; i < currentIngredients.Count; i++)
             {
+                IngredientData bahan = currentIngredients[i];
                 GameObject visualBaru = Instantiate(prefabVisualBahan2D, tumpukanContainer);
+                
+                if (bahan.typeBahanInBowl == TypeBahanInBowl.Tepung)
+                {
+                    visualBaru.transform.localScale = bahan.scaleSaatMasukBowl;
+                }
+                else
+                {
+                    visualBaru.transform.localScale = new Vector3(0.3f, 0.3f, 0.3f); 
+                }
+
                 SpriteRenderer sr = visualBaru.GetComponent<SpriteRenderer>();
                 if (sr != null)
                 {
-                    IngredientData bahan = currentIngredients[i];
-                    
                     if (bahan.inBowlIcon != null) sr.sprite = bahan.inBowlIcon;
                     else if (bahan.dragIcon != null) sr.sprite = bahan.dragIcon;
                     else sr.sprite = bahan.icon;
 
                     sr.sortingOrder = i + 1;
                 }
-                float randomX = UnityEngine.Random.Range(-0.2f, 0.2f);
-                visualBaru.transform.localPosition = new Vector3(randomX, i * 0.3f, 0); 
+
+            
+                visualBaru.transform.localPosition = new Vector3(0, 0, 0); 
             }
         }
 

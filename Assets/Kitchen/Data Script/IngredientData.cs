@@ -9,6 +9,13 @@ public enum PeranBahan {
     Isian          
 }
 
+public enum TypeBahanInBowl
+{
+    Tepung,
+    Cairan,
+    Normal
+}
+
 [CreateAssetMenu(fileName = "New Ingredient", menuName = "Cooking/Ingredient Data")]
 public class IngredientData : ScriptableObject
 {
@@ -18,6 +25,10 @@ public class IngredientData : ScriptableObject
     
     [Header("Atribut Pesanan)")]
     public PeranBahan peranBahan = PeranBahan.Biasa; 
+    
+    [Header("Type Bahan in Bowl")]
+    public TypeBahanInBowl typeBahanInBowl = TypeBahanInBowl.Normal;
+    public Vector3 scaleSaatMasukBowl = new Vector3(1f, 1f, 1f);
     
     [Tooltip("Hanya berlaku jika Peran Bahan diset ke 'Tepung'")]
     public JenisTepung jenisTepung; 
