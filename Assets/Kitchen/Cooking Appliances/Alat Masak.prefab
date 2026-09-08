@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 7724762565414998806}
   - component: {fileID: 7396575840639729556}
   - component: {fileID: 4225007674460342585}
+  - component: {fileID: 498480362135064203}
   m_Layer: 0
   m_Name: Alat Masak
   m_TagString: Untagged
@@ -30,9 +31,10 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -2.73216, y: -2.52546, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.7, y: 1.7, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1228137156119238976}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &623856024595282973
@@ -81,8 +83,8 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 75f5f34dc1b5347e0b8351032682f224, type: 3}
+  m_SortingOrder: 1
+  m_Sprite: {fileID: -8144024881919118906, guid: b620ad19455741347b69eb96ebd069d1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -127,17 +129,17 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0.21133333}
+  m_Offset: {x: -0.5, y: 0.63}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.28866667}
-    oldSize: {x: 1, y: 1}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 6.32, y: 3.86}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 5.52, y: 2.38}
   m_EdgeRadius: 0
 --- !u!114 &7396575840639729556
 MonoBehaviour:
@@ -151,7 +153,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9af3a6de5a51b5b48949d2f719bece68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DropTarget
-  namaAlat: 
+  namaAlat: Bowl
 --- !u!114 &4225007674460342585
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -164,9 +166,85 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91561802db75f0843aacc284379b9a05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CookingAppliance
-  applianceName: 
+  komporInduk: {fileID: 0}
+  gunakanTumpukanVisual: 1
+  tumpukanContainer: {fileID: 5250202370168442478}
+  prefabVisualBahan2D: {fileID: 3135460901893421600, guid: 579154e2714ee634e85534c221d63e2b, type: 3}
+  applianceName: Bowl
+  isStoveBase: 0
+  applianceMountPoint: {fileID: 0}
   startButtonUI: {fileID: 0}
-  minigameScript: {fileID: 0}
-  resepYangBisaDimasak: []
-  draggableItemPrefab: {fileID: 0}
-  spawnPoint: {fileID: 0}
+  stoveSpriteRenderer: {fileID: 0}
+  spriteKomporMati: {fileID: 0}
+  spriteKomporNyala: {fileID: 0}
+  minigameScript: {fileID: 498480362135064203}
+  minigameAlternatif: {fileID: 0}
+  resepYangBisaDimasak:
+  - {fileID: 11400000, guid: 4c38c751c6be395489ebcfa4e25ac11d, type: 2}
+  - {fileID: 11400000, guid: 756cab6bb5060bf4eb67a77e7a4a3b5e, type: 2}
+  - {fileID: 11400000, guid: ea9c4c2e7abdc9a4285fe1e19e230eb1, type: 2}
+  - {fileID: 11400000, guid: 4c38c751c6be395489ebcfa4e25ac11d, type: 2}
+  - {fileID: 11400000, guid: 2809fa9f4db7929498d16eca0b691d33, type: 2}
+  - {fileID: 11400000, guid: 8317db78babe91442914f824092a7ab6, type: 2}
+  - {fileID: 11400000, guid: 88cefc9ff1b95fb489c26b3bcbfaeda7, type: 2}
+  - {fileID: 11400000, guid: 392f11034321d6c47abea05c1a6d0461, type: 2}
+  - {fileID: 11400000, guid: 24a419e029d11834d8f3e2168569dd38, type: 2}
+  - {fileID: 11400000, guid: 0248329b1e73f27479d4a696815a3def, type: 2}
+  - {fileID: 11400000, guid: 01c84c7baa7138541b5b7eafc05083da, type: 2}
+  - {fileID: 11400000, guid: fb108f1e30a3e3241bd8bd00f3e5ab8c, type: 2}
+  draggableItemPrefab: {fileID: 8340565135148567373, guid: 6a5f009ce834a6346b05a750c4041426, type: 3}
+  spawnPoint: {fileID: 5250202370168442478}
+  applianceSprite2D: {fileID: 623856024595282973}
+  spriteKosong: {fileID: -8144024881919118906, guid: b620ad19455741347b69eb96ebd069d1, type: 3}
+  spriteTerisi: {fileID: -8144024881919118906, guid: b620ad19455741347b69eb96ebd069d1, type: 3}
+  spriteMasak: {fileID: 0}
+  spriteBeres: {fileID: 0}
+  stateWajan: 0
+  visualSpesifikBahan: []
+  indikatorContainer: {fileID: 0}
+  indikatorPrefab: {fileID: 8481080896259009455, guid: 3e73e4721f2f8de46a81561f4644feca, type: 3}
+--- !u!114 &498480362135064203
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7095517591368786406}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1606b61a032586f4ca4e24be2549a936, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::StirMinigame
+  progressBar: {fileID: 0}
+  stirSensitivity: 2
+--- !u!1 &8110358944244399645
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1228137156119238976}
+  m_Layer: 0
+  m_Name: PointSpawn
+  m_TagString: Untagged
+  m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1228137156119238976
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8110358944244399645}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.49, y: 0.49, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5250202370168442478}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
