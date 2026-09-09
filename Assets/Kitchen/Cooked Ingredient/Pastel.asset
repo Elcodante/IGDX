@@ -15,9 +15,15 @@ MonoBehaviour:
   ingredientID: Pastel
   ingredientName: Pastel
   icon: {fileID: 6679852185467842059, guid: adc058bc830aa2c44952cc5afb6f8ff7, type: 3}
+  isFinalProduct: 1
   peranBahan: 0
+  typeBahanInBowl: 2
+  scaleSaatMasukBowl: {x: 1, y: 1, z: 1}
   jenisTepung: 0
   dropVisualPrefab: {fileID: 0}
   dragIcon: {fileID: 0}
   usePourAnimation: 0
   inBowlIcon: {fileID: 0}
+  butuhGarnish: 0
+  daftarGarnishDibutuhkan: []
+  spriteTiapTahapGarnish: []

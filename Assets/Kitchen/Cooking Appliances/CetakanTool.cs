@@ -2,8 +2,12 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class CetakanTool : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
+public class CetakanTool : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerEnterHandler, IPointerExitHandler
 {
+    [Header("Data Alat")]
+    [Tooltip("Nama alat yang ditampilkan di tooltip, misal: Cetakan Kembang Goyang")]
+    public string namaAlat;
+
     [Header("Data & Sprite")]
     public IngredientData adonanData; // "Adonan Kembang Goyang" — dipakai saat AddIngredient ke Wajan
     public Sprite spriteKosong;
@@ -17,8 +21,27 @@ public class CetakanTool : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
 
     private void Awake() { img = GetComponent<Image>(); }
 
+    // --- TOOLTIP HOVER ---
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        if (FoodTooltipUI.Instance != null && !string.IsNullOrEmpty(namaAlat))
+        {
+            FoodTooltipUI.Instance.TampilkanTooltip(namaAlat);
+        }
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        if (FoodTooltipUI.Instance != null)
+        {
+            FoodTooltipUI.Instance.SembunyikanTooltip();
+        }
+    }
+
     public void OnBeginDrag(PointerEventData eventData)
     {
+        if (FoodTooltipUI.Instance != null) FoodTooltipUI.Instance.SembunyikanTooltip();
+
         posisiAwal = transform.position;
         parentAwal = transform.parent;
         transform.SetParent(transform.root);

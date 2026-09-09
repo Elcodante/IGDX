@@ -14,4 +14,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::IngredientData
   ingredientID: Gethuk
   ingredientName: Gethuk
-  icon: {fileID: 7366911125478607792, guid: db344592e7b92f147ab3c35fefa9cc37, type: 3}
+  icon: {fileID: 6662302691217863707, guid: e2ce10427cbd99b48950f18039dc3fa0, type: 3}
+  isFinalProduct: 1
+  peranBahan: 0
+  typeBahanInBowl: 2
+  scaleSaatMasukBowl: {x: 1, y: 1, z: 1}
+  jenisTepung: 0
+  dropVisualPrefab: {fileID: 0}
+  dragIcon: {fileID: 0}
+  usePourAnimation: 0
+  inBowlIcon: {fileID: 0}
+  butuhGarnish: 0
+  daftarGarnishDibutuhkan:
+  - {fileID: 11400000, guid: 4f67e6456b40504459d91c6885778abd, type: 2}
+  spriteTiapTahapGarnish:
+  - {fileID: 7366911125478607792, guid: db344592e7b92f147ab3c35fefa9cc37, type: 3}

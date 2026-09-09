@@ -15,3 +15,15 @@ MonoBehaviour:
   ingredientID: Kembang Goyang
   ingredientName: Kembang Goyang
   icon: {fileID: 7449724838469933353, guid: 398f0f3fe94281c44a3a19117f3da105, type: 3}
+  isFinalProduct: 1
+  peranBahan: 0
+  typeBahanInBowl: 2
+  scaleSaatMasukBowl: {x: 1, y: 1, z: 1}
+  jenisTepung: 0
+  dropVisualPrefab: {fileID: 0}
+  dragIcon: {fileID: 0}
+  usePourAnimation: 0
+  inBowlIcon: {fileID: 0}
+  butuhGarnish: 0
+  daftarGarnishDibutuhkan: []
+  spriteTiapTahapGarnish: []
