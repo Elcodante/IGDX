@@ -2,9 +2,10 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class DraggableApplianceUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
+public class DraggableApplianceUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerEnterHandler, IPointerExitHandler
 {
     [Header("Data Alat")]
+    public string namaAlat;
     [Tooltip("Masukkan Prefab Panci/Wajan 2D ke sini")]
     public GameObject appliancePrefab2D; 
     
@@ -19,8 +20,25 @@ public class DraggableApplianceUI : MonoBehaviour, IBeginDragHandler, IDragHandl
         img = GetComponent<Image>();
     }
 
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        if (FoodTooltipUI.Instance != null && !string.IsNullOrEmpty(namaAlat))
+        {
+            FoodTooltipUI.Instance.TampilkanTooltip(namaAlat);
+        }
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        if (FoodTooltipUI.Instance != null)
+        {
+            FoodTooltipUI.Instance.SembunyikanTooltip();
+        }
+    }
+
     public void OnBeginDrag(PointerEventData eventData)
     {
+        if (FoodTooltipUI.Instance != null) FoodTooltipUI.Instance.SembunyikanTooltip();
         posisiAwal = transform.position;
         parentAwal = transform.parent;
         transform.SetParent(transform.root); // Pindah ke root Canvas biar nggak ketutupan panel lain

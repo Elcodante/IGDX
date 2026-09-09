@@ -3,7 +3,7 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
 [RequireComponent(typeof(CanvasGroup), typeof(Image))]
-public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
+public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerEnterHandler, IPointerExitHandler
 {
     [Header("Data Bahan")]
     public IngredientData dataBahan; 
@@ -43,9 +43,24 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         itemImage.sprite = dataBahan.icon; 
         iconAsli = dataBahan.icon;
     }
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        if (FoodTooltipUI.Instance != null && dataBahan != null)
+        {
+            FoodTooltipUI.Instance.TampilkanTooltip(dataBahan.ingredientName);
+        }
+    }
 
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        if (FoodTooltipUI.Instance != null)
+        {
+            FoodTooltipUI.Instance.SembunyikanTooltip();
+        }
+    }
     public void OnBeginDrag(PointerEventData eventData)
     {
+        if (FoodTooltipUI.Instance != null) FoodTooltipUI.Instance.SembunyikanTooltip();
         posisiAwal = rectTransform.position;
         parentAwal = transform.parent;
         

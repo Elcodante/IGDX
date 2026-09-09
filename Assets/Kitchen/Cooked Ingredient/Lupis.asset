@@ -15,7 +15,10 @@ MonoBehaviour:
   ingredientID: Lupis
   ingredientName: Lupis
   icon: {fileID: 5759262235042497136, guid: bf742798f63e65e4ab0f57c9d649ff20, type: 3}
+  isFinalProduct: 1
   peranBahan: 0
+  typeBahanInBowl: 2
+  scaleSaatMasukBowl: {x: 1, y: 1, z: 1}
   jenisTepung: 0
   dropVisualPrefab: {fileID: 0}
   dragIcon: {fileID: 0}

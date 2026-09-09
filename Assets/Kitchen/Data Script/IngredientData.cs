@@ -22,6 +22,7 @@ public class IngredientData : ScriptableObject
     public string ingredientID;     
     public string ingredientName;    
     public Sprite icon;              
+    public bool isFinalProduct = false;
     
     [Header("Atribut Pesanan)")]
     public PeranBahan peranBahan = PeranBahan.Biasa; 
