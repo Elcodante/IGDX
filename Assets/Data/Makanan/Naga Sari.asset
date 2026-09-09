@@ -13,5 +13,13 @@ MonoBehaviour:
   m_Name: Naga Sari
   m_EditorClassIdentifier: Assembly-CSharp::MenuData
   menuName: Naga Sari
-  menuImage: {fileID: 2209797324394584017, guid: bdc7f2ce956eb134fb71bba28350c709, type: 3}
-  jenisTepung: 0
+  order:
+    idResep: 2
+    ikonMakanan: {fileID: 2209797324394584017, guid: bdc7f2ce956eb134fb71bba28350c709, type: 3}
+    customizations:
+    - jenis: 1
+      target: 0
+    - jenis: 0
+      target: 0
+    - jenis: 2
+      target: 0

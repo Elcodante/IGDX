@@ -208,10 +208,10 @@ public class MixingBowl : MonoBehaviour
                 {
                     dragScript2D.SetupData(hasilAkhir);
                     dragScript2D.tepungDigunakan = jenisTepung;
-                    dragScript2D.tingkatManis = KonversiKeTingkatRasa(countManis);
-                    dragScript2D.tingkatLembut = KonversiKeTingkatRasa(countLembut);
-                    dragScript2D.tingkatGurih = KonversiKeTingkatRasa(countGurih);
-                    dragScript2D.tingkatIsian = KonversiKeTingkatIsian(countIsian);
+                    // dragScript2D.tingkatManis = KonversiKeTingkatRasa(countManis);
+                    // dragScript2D.tingkatLembut = KonversiKeTingkatRasa(countLembut);
+                    // dragScript2D.tingkatGurih = KonversiKeTingkatRasa(countGurih);
+                    // dragScript2D.tingkatIsian = KonversiKeTingkatIsian(countIsian);
                 }
             }
         }
@@ -304,18 +304,18 @@ public class MixingBowl : MonoBehaviour
         }
     }
 
-    private TingkatRasa KonversiKeTingkatRasa(int jumlah)
-    {
-        if (jumlah == 0) return TingkatRasa.TidakPakai;
-        if (jumlah == 1) return TingkatRasa.Sedikit;
-        if (jumlah == 2) return TingkatRasa.Sedang;
-        return TingkatRasa.Banyak;
-    }
+    // private TingkatRasa KonversiKeTingkatRasa(int jumlah)
+    // {
+    //     if (jumlah == 0) return TingkatRasa.Sedikit;
+    //     if (jumlah == 1) return TingkatRasa.Lumayan;
+    //     return TingkatRasa.Sangat;
+       
+    // }
 
-    private TingkatIsian KonversiKeTingkatIsian(int jumlah)
-    {
-        if (jumlah <= 1) return TingkatIsian.Sedikit; 
-        if (jumlah == 2) return TingkatIsian.Sedang;
-        return TingkatIsian.Banyak;
-    }
+    // private TingkatIsian KonversiKeTingkatIsian(int jumlah)
+    // {
+    //     if (jumlah <= 1) return TingkatIsian.Sedikit; 
+    //     if (jumlah == 2) return TingkatIsian.Sedang;
+    //     return TingkatIsian.Banyak;
+    // }
 }

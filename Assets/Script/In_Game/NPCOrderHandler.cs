@@ -44,12 +44,24 @@ public class NPCOrderHandler : MonoBehaviour
             MenuData menuDipilih = menuList[Random.Range(0, menuList.Length)];
 
             pesananBaru.idResep = menuDipilih.menuName;
-            pesananBaru.ikonMakanan = menuDipilih.menuImage;
-            pesananBaru.tepung = menuDipilih.jenisTepung;
-            pesananBaru.isian = (TingkatIsian)Random.Range(0, 3);
-            pesananBaru.targetManis = (TingkatRasa)Random.Range(0, 4);
-            pesananBaru.targetLembut = (TingkatRasa)Random.Range(0, 4);
-            pesananBaru.targetGurih = (TingkatRasa)Random.Range(0, 4);
+            pesananBaru.ikonMakanan = menuDipilih.order.ikonMakanan;
+            
+            CustomizationData[] customizationMenu = menuDipilih.order.customizations;
+            pesananBaru.customizations = new CustomizationData[customizationMenu.Length];
+
+            for (int j = 0; j < customizationMenu.Length; j++)
+            {
+                pesananBaru.customizations[j] = customizationMenu[j];
+
+                // Acak target
+                pesananBaru.customizations[j].target =
+                    (Tingkat)Random.Range(0, System.Enum.GetValues(typeof(Tingkat)).Length);
+            }
+            
+            // pesananBaru.isian = (TingkatIsian)Random.Range(0, System.Enum.GetValues(typeof(TingkatIsian)).Length);
+            // pesananBaru.targetManis = (TingkatRasa)Random.Range(0, System.Enum.GetValues(typeof(TingkatRasa)).Length);
+            // pesananBaru.targetLembut = (TingkatRasa)Random.Range(0, System.Enum.GetValues(typeof(TingkatRasa)).Length);
+            // pesananBaru.targetGurih = (TingkatRasa)Random.Range(0, System.Enum.GetValues(typeof(TingkatRasa)).Length);
 
             daftarPesanan.Add(pesananBaru);
         }

@@ -308,10 +308,10 @@ public class CookingAppliance : MonoBehaviour
                 {
                     dragScript2D.SetupData(hasilAkhir);
                     dragScript2D.tepungDigunakan = alatYangDipakai.jenisTepung;
-                    dragScript2D.tingkatManis = KonversiKeTingkatRasa(alatYangDipakai.countManis);
-                    dragScript2D.tingkatLembut = KonversiKeTingkatRasa(alatYangDipakai.countLembut);
-                    dragScript2D.tingkatGurih = KonversiKeTingkatRasa(alatYangDipakai.countGurih);
-                    dragScript2D.tingkatIsian = KonversiKeTingkatIsian(alatYangDipakai.countIsian);
+                    // dragScript2D.tingkatManis = KonversiKeTingkatRasa(alatYangDipakai.countManis);
+                    // dragScript2D.tingkatLembut = KonversiKeTingkatRasa(alatYangDipakai.countLembut);
+                    // dragScript2D.tingkatGurih = KonversiKeTingkatRasa(alatYangDipakai.countGurih);
+                    // dragScript2D.tingkatIsian = KonversiKeTingkatIsian(alatYangDipakai.countIsian);
                 }
             }
         }
@@ -423,18 +423,17 @@ public class CookingAppliance : MonoBehaviour
         }
     }
 
-    private TingkatRasa KonversiKeTingkatRasa(int jumlah)
-    {
-        if (jumlah == 0) return TingkatRasa.TidakPakai;
-        if (jumlah == 1) return TingkatRasa.Sedikit;
-        if (jumlah == 2) return TingkatRasa.Sedang;
-        return TingkatRasa.Banyak;
-    }
+    // private TingkatRasa KonversiKeTingkatRasa(int jumlah)
+    // {
+    //     if (jumlah == 1) return TingkatRasa.Sedikit;
+    //     if (jumlah == 2) return TingkatRasa.Lumayan;
+    //     return TingkatRasa.Sangat;
+    // }
 
-    private TingkatIsian KonversiKeTingkatIsian(int jumlah)
-    {
-        if (jumlah <= 1) return TingkatIsian.Sedikit; 
-        if (jumlah == 2) return TingkatIsian.Sedang;
-        return TingkatIsian.Banyak;
-    }
+    // private TingkatIsian KonversiKeTingkatIsian(int jumlah)
+    // {
+    //     if (jumlah <= 1) return TingkatIsian.Sedikit; 
+    //     if (jumlah == 2) return TingkatIsian.Sedang;
+    //     return TingkatIsian.Banyak;
+    // }
 }

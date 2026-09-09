@@ -6,10 +6,10 @@ public class DraggableItem2D : MonoBehaviour, IBeginDragHandler, IDragHandler, I
 {
     [Header("Data Rasa (Hanya untuk Makanan Matang)")]
     public JenisTepung tepungDigunakan;
-    public TingkatIsian tingkatIsian;
-    public TingkatRasa tingkatManis;
-    public TingkatRasa tingkatLembut;
-    public TingkatRasa tingkatGurih;
+    // public TingkatIsian tingkatIsian;
+    // public TingkatRasa tingkatManis;
+    // public TingkatRasa tingkatLembut;
+    // public TingkatRasa tingkatGurih;
     public IngredientData dataBahan;
     private Collider2D col;
     private Vector3 offset;
@@ -68,11 +68,11 @@ public class DraggableItem2D : MonoBehaviour, IBeginDragHandler, IDragHandler, I
         if (FoodTooltipUI.Instance != null && dataBahan != null)
         {
             string info = $"<b>{dataBahan.ingredientName}</b>\n";
-            info += $"Manis: {tingkatManis}\n";
-            info += $"Lembut: {tingkatLembut}\n";
-            info += $"Gurih: {tingkatGurih}\n";
-            info += $"Isian: {tingkatIsian}\n";
-            info += $"Tepung: {tepungDigunakan}";
+            // info += $"Manis: {tingkatManis}\n";
+            // info += $"Lembut: {tingkatLembut}\n";
+            // info += $"Gurih: {tingkatGurih}\n";
+            // info += $"Isian: {tingkatIsian}\n";
+            // info += $"Tepung: {tepungDigunakan}";
 
             FoodTooltipUI.Instance.TampilkanTooltip(info);
         }

@@ -6,50 +6,153 @@ public static class OrderTextHelper
     {
         List<string> keyword = new List<string>();
 
-        switch (data.targetManis)
+        foreach (CustomizationData customization in data.customizations)
         {
-            case TingkatRasa.Sedikit: keyword.Add("Sedikit manis"); break;
-            case TingkatRasa.Sedang: keyword.Add("Manis sedang"); break;
-            case TingkatRasa.Banyak: keyword.Add("Sangat manis"); break;
+            string teks = "";
+
+            switch (customization.jenis)
+            {
+                case JenisCustomization.Isian:
+                    switch (customization.target)
+                    {
+                        case Tingkat.Sedikit:
+                            teks = "Isian sedikit";
+                            break;
+
+                        case Tingkat.Lumayan:
+                            teks = "Isian Sedang";
+                            break;
+
+                        case Tingkat.Sangat:
+                            teks = "Isian Banyak";
+                            break;
+                    }
+                    break;
+
+                case JenisCustomization.Manis:
+                    switch (customization.target)
+                    {
+                        case Tingkat.Sedikit:
+                            teks = "Sedikit manis";
+                            break;
+
+                        case Tingkat.Lumayan:
+                            teks = "Lumayan manis";
+                            break;
+
+                        case Tingkat.Sangat:
+                            teks = "Sangat manis";
+                            break;
+                    }
+                    break;
+
+                case JenisCustomization.Gurih:
+                    switch (customization.target)
+                    {
+                        case Tingkat.Sedikit:
+                            teks = "Sedikit gurih";
+                            break;
+
+                        case Tingkat.Lumayan:
+                            teks = "Lumayan gurih";
+                            break;
+
+                        case Tingkat.Sangat:
+                            teks = "Sangat gurih";
+                            break;
+                    }
+                    break;
+
+                case JenisCustomization.Lembut:
+                    switch (customization.target)
+                    {
+                        case Tingkat.Sedikit:
+                            teks = "Sedikit lembut";
+                            break;
+
+                        case Tingkat.Lumayan:
+                            teks = "Lumayan lembut";
+                            break;
+
+                        case Tingkat.Sangat:
+                            teks = "Sangat lembut";
+                            break;
+                    }
+                    break;
+
+            }
+
+            if (!string.IsNullOrEmpty(teks))
+                keyword.Add(teks);
         }
 
-        switch (data.targetGurih)
-        {
-            case TingkatRasa.Sedikit: keyword.Add("Sedikit gurih"); break;
-            case TingkatRasa.Sedang: keyword.Add("Gurih sedang"); break;
-            case TingkatRasa.Banyak: keyword.Add("Sangat gurih"); break;
-        }
-
-        switch (data.targetLembut)
-        {
-            case TingkatRasa.Sedikit: keyword.Add("Sedikit lembut"); break;
-            case TingkatRasa.Sedang: keyword.Add("Lembut sedang"); break;
-            case TingkatRasa.Banyak: keyword.Add("Sangat lembut"); break;
-        }
-
-        switch (data.isian)
-        {
-            case TingkatIsian.Sedikit: keyword.Add("Isian sedikit"); break;
-            case TingkatIsian.Sedang: keyword.Add("Isian sedang"); break;
-            case TingkatIsian.Banyak: keyword.Add("Isian banyak"); break;
-        }
-
-        if (keyword.Count == 0) return "Original";
+        if (keyword.Count == 0)
+            return "Original";
 
         return string.Join(", ", keyword);
     }
+
 
     public static string BuatTeksDialog(OrderData data)
     {
         string dialog = $"\"Aku mau pesan {data.idResep}. ";
 
-        if (data.targetManis == TingkatRasa.Banyak) dialog += "Aku suka banget yang manis, gula yang banyak ya. ";
-        else if (data.targetManis == TingkatRasa.Sedikit) dialog += "Manisnya sedikit aja, jangan giung. ";
+        foreach (CustomizationData customization in data.customizations)
+        {
+            switch (customization.jenis)
+            {
+                case JenisCustomization.Manis:
 
-        if (data.targetGurih == TingkatRasa.Banyak || data.targetGurih == TingkatRasa.Sedang) dialog += "Terus agak gurih juga enak. ";
+                    if (customization.target == Tingkat.Sangat)
+                        dialog += "Aku suka banget yang manis, gula yang Banyak ya. ";
 
-        if (data.targetLembut == TingkatRasa.Banyak) dialog += "Jangan terlalu padat, aku lebih suka yang lembut.\"";
-        else dialog += "\"";
+                    else if (customization.target == Tingkat.Sedikit)
+                        dialog += "Manisnya sedikit aja, ntar diabetes. ";
+
+                    break;
+
+
+                case JenisCustomization.Gurih:
+
+                    if (customization.target == Tingkat.Sangat)
+                        dialog += "Yang gurih banget ya. ";
+
+                    else if (customization.target == Tingkat.Lumayan)
+                        dialog += "Agak gurih juga enak. ";
+
+                    else if (customization.target == Tingkat.Sedikit)
+                        dialog += "Gurihnya sedikit aja. ";
+
+                    break;
+
+
+                case JenisCustomization.Lembut:
+
+                    if (customization.target == Tingkat.Sangat)
+                        dialog += "Aku lebih suka yang lembut ya. ";
+
+                    else if (customization.target == Tingkat.Sedikit)
+                        dialog += "Jangan terlalu lembut ya. ";
+
+                    break;
+
+
+                case JenisCustomization.Isian:
+
+                    if (customization.target == Tingkat.Sangat)
+                        dialog += "Isiannya yang Banyak ya. ";
+
+                    else if (customization.target == Tingkat.Sedikit)
+                        dialog += "Isiannya sedikit aja. ";
+
+                    break;
+
+
+                
+            }
+        }
+
+        dialog += "\"";
 
         return dialog;
     }

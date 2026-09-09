@@ -125,10 +125,6 @@ public class KitchenOrderUI : MonoBehaviour
 
             List<string> listAtribut = new List<string>();
 
-            if (order.targetManis != TingkatRasa.TidakPakai) listAtribut.Add("Manis");
-            if (order.targetLembut != TingkatRasa.TidakPakai) listAtribut.Add("Lembut");
-            if (order.targetGurih != TingkatRasa.TidakPakai) listAtribut.Add("Gurih");
-
             if (listAtribut.Count > 0)
             {
                 atributTxt.text = string.Join(", ", listAtribut);
