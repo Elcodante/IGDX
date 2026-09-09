@@ -35,6 +35,8 @@ public class PassiveMinigame : MonoBehaviour, IMinigameMechanic
         onFinishedCallback = onMinigameFinished;
         isCooking = true;
 
+        SetChildSpriteRenderers(false);
+
         if (progressBar != null)
         {
             progressBar.gameObject.SetActive(true);
@@ -73,5 +75,19 @@ public class PassiveMinigame : MonoBehaviour, IMinigameMechanic
         // Karena ini pasif (tidak ada gagalnya), kasih skor sempurna (1.0f)
         onFinishedCallback?.Invoke(1.0f);
         Debug.Log("Masak pasif selesai! Mengeluarkan hasil masakan.");
+    }
+
+    private void SetChildSpriteRenderers(bool enabled)
+    {
+        SpriteRenderer[] renderers = GetComponentsInChildren<SpriteRenderer>();
+
+        foreach (SpriteRenderer sr in renderers)
+        {
+            // Jangan mematikan SpriteRenderer milik object utama jika tidak diperlukan
+            if (sr.transform != transform)
+            {
+                sr.enabled = enabled;
+            }
+        }
     }
 }

@@ -21,6 +21,18 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 3654258370899262754}
     - target: {fileID: 4225007674460342585, guid: a669476c0100d4847948942aa413aa1e, type: 3}
+      propertyPath: spriteMasak
+      value: 
+      objectReference: {fileID: 6924210274763845239, guid: 5d487a5d9611ef34c968cff36eb19a3c, type: 3}
+    - target: {fileID: 4225007674460342585, guid: a669476c0100d4847948942aa413aa1e, type: 3}
+      propertyPath: spriteKosong
+      value: 
+      objectReference: {fileID: -6823122022683050951, guid: ec57ceeb77e152840a54a28a0a2e22c5, type: 3}
+    - target: {fileID: 4225007674460342585, guid: a669476c0100d4847948942aa413aa1e, type: 3}
+      propertyPath: spriteTerisi
+      value: 
+      objectReference: {fileID: -6823122022683050951, guid: ec57ceeb77e152840a54a28a0a2e22c5, type: 3}
+    - target: {fileID: 4225007674460342585, guid: a669476c0100d4847948942aa413aa1e, type: 3}
       propertyPath: applianceName
       value: Panci
       objectReference: {fileID: 0}

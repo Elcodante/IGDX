@@ -21,6 +21,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 3172448644764527807}
     - target: {fileID: 4225007674460342585, guid: a669476c0100d4847948942aa413aa1e, type: 3}
+      propertyPath: spriteKosong
+      value: 
+      objectReference: {fileID: 2420044589646794816, guid: da685674909f71e4ea009867a1f5cb2a, type: 3}
+    - target: {fileID: 4225007674460342585, guid: a669476c0100d4847948942aa413aa1e, type: 3}
+      propertyPath: spriteTerisi
+      value: 
+      objectReference: {fileID: 917569971938324990, guid: 362e8addb0ef456429d92f9260b13f1f, type: 3}
+    - target: {fileID: 4225007674460342585, guid: a669476c0100d4847948942aa413aa1e, type: 3}
       propertyPath: applianceName
       value: Loyang
       objectReference: {fileID: 0}

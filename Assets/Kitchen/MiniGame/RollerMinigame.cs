@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.InputSystem; // <-- KODE BARU: Wajib dipanggil untuk New Input System
+using UnityEngine.InputSystem;
 
 public class RollerMinigame : MonoBehaviour, IMinigameMechanic
 {
@@ -10,7 +10,9 @@ public class RollerMinigame : MonoBehaviour, IMinigameMechanic
     public RectTransform panahIndikator; 
     
     [Header("Pengaturan Posisi UI")]
-    [Tooltip("Ubah angka Y ini di Inspector biar panah/bar pas di atas roller")]
+    [Tooltip("Canvas tempat UI berada (Wajib diisi jika UI berada dalam Canvas Camera/World Space)")]
+    public Canvas parentCanvas; 
+    [Tooltip("Ubah offset ini untuk mengatur jarak UI dari objek")]
     public Vector3 offsetPosisiUI = new Vector3(0, 1.5f, 0); 
 
     [Header("Pengaturan Geser")]
@@ -31,6 +33,12 @@ public class RollerMinigame : MonoBehaviour, IMinigameMechanic
 
     private void Start()
     {
+        
+        if (parentCanvas == null && panahIndikator != null)
+        {
+            parentCanvas = panahIndikator.GetComponentInParent<Canvas>();
+        }
+
         MatikanSemuaUI();
     }
 
@@ -70,7 +78,7 @@ public class RollerMinigame : MonoBehaviour, IMinigameMechanic
 
         currentTime += Time.deltaTime;
 
-        // --- KODE BARU: Kunci posisi panah & bar di atas roller ---
+        // --- Perbaikan Update Posisi UI agar tidak terpental ---
         UpdatePosisiUI();
 
         if (currentTime >= timeLimit)
@@ -79,16 +87,14 @@ public class RollerMinigame : MonoBehaviour, IMinigameMechanic
             return;
         }
 
-        // --- KODE BARU: Menggunakan New Input System ---
+        // --- Logika New Input System ---
         if (Mouse.current != null)
         {
-            // Saat klik kiri ditekan
             if (Mouse.current.leftButton.wasPressedThisFrame)
             {
                 posisiAwalSentuh = Mouse.current.position.ReadValue();
                 sedangMenggeser = true;
             }
-            // Saat klik kiri dilepas
             else if (Mouse.current.leftButton.wasReleasedThisFrame && sedangMenggeser)
             {
                 float jarakY = Mouse.current.position.ReadValue().y - posisiAwalSentuh.y;
@@ -122,15 +128,37 @@ public class RollerMinigame : MonoBehaviour, IMinigameMechanic
 
     private void UpdatePosisiUI()
     {
-        // Ubah koordinat dunia 2D ke koordinat UI (Screen Space)
-        if (Camera.main != null)
+        Camera mainCam = Camera.main;
+        if (mainCam == null || panahIndikator == null) return;
+
+        // 1. Dapatkan posisi objek di dunia 3D/2D beserta offset-nya
+        Vector3 worldPos = transform.position + offsetPosisiUI;
+
+        // 2. Konversi posisi dunia ke koordinat layar (Screen Point)
+        Vector3 screenPos = mainCam.WorldToScreenPoint(worldPos);
+
+        // Jika objek di belakang kamera, abaikan agar tidak terpental balik
+        if (screenPos.z < 0) return;
+
+        // 3. Konversi aman dari Screen Point ke AnchoredPosition Canvas
+        RectTransform canvasRect = parentCanvas != null ? parentCanvas.GetComponent<RectTransform>() : panahIndikator.parent as RectTransform;
+
+        Camera uiCamera = (parentCanvas != null && parentCanvas.renderMode != RenderMode.ScreenSpaceOverlay) ? parentCanvas.worldCamera : null;
+
+        if (RectTransformUtility.ScreenPointToLocalPointInRectangle(canvasRect, screenPos, uiCamera, out Vector2 localPoint))
         {
-            Vector3 posisiLayar = Camera.main.WorldToScreenPoint(transform.position + offsetPosisiUI);
-            
-            if (panahIndikator != null) panahIndikator.position = posisiLayar;
-            
-            // Opsional: Bar juga kita buat ngikut di atas panah
-            if (progressBar != null) progressBar.transform.position = posisiLayar + new Vector3(0, 50f, 0); 
+            // Terapkan ke Panah Indikator
+            panahIndikator.anchoredPosition = localPoint;
+
+            // Terapkan ke Progress Bar (diberi sedikit jarak ke atas)
+            if (progressBar != null)
+            {
+                RectTransform progressRect = progressBar.GetComponent<RectTransform>();
+                if (progressRect != null)
+                {
+                    progressRect.anchoredPosition = localPoint + new Vector2(0, 50f);
+                }
+            }
         }
     }
 

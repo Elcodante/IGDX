@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 public class CollectionBook : MonoBehaviour
 {
-    [SerializeField] private int currentLevel = 0; 
+    private int currentLevel = 0; 
 
     [Header("UI Tampilan")]
     [SerializeField] private Image gambarBuku;
@@ -24,15 +24,26 @@ public class CollectionBook : MonoBehaviour
 
     private int indexSekarang = 0;
 
-    private void Start()
+    private void OnEnable()
     {
-        if (tombolKiri != null) tombolKiri.onClick.AddListener(TampilSebelumnya);
+        currentLevel = LevelManager.Instance.LevelNow;
+
+         if (tombolKiri != null) tombolKiri.onClick.AddListener(TampilSebelumnya);
         if (tombolKanan != null) tombolKanan.onClick.AddListener(TampilBerikutnya);
 
         UpdateTampilanKoleksi();
+    }
+    // private void Start()
+    // {
+
+
+    //     if (tombolKiri != null) tombolKiri.onClick.AddListener(TampilSebelumnya);
+    //     if (tombolKanan != null) tombolKanan.onClick.AddListener(TampilBerikutnya);
+
+    //     UpdateTampilanKoleksi();
 
         
-    }
+    // }
 
     public void TampilBerikutnya()
     {

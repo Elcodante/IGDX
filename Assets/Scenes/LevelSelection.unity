@@ -661,9 +661,8 @@ GameObject:
   - component: {fileID: 191555250}
   - component: {fileID: 191555249}
   - component: {fileID: 191555248}
-  - component: {fileID: 191555252}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: Canvas / Collection Book
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -758,35 +757,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!114 &191555252
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 191555247}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6a5d1b0b14bb3df48bd3dbd9b23de5cc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CollectionBook
-  currentLevel: 0
-  gambarBuku: {fileID: 2070061520}
-  resepnotfound: {fileID: -855298285791758126, guid: 362dd881574c4944392936d429474da4, type: 3}
-  daftarAsetGambar:
-  - {fileID: 6937817954938267909, guid: 134ff4b633ac65649ab5917518ffaaa4, type: 3}
-  - {fileID: -6470460504253458178, guid: c6154d8275638d44884217e4df72880c, type: 3}
-  - {fileID: -4178046375966092550, guid: c39fbb6cdb9d0d248850d8b3691a2022, type: 3}
-  - {fileID: 4130640169021434097, guid: 1a423a1b5fd3259408b6586a85460b5c, type: 3}
-  - {fileID: 3465286685962602723, guid: af77fde43a4876044937a1ac6f53d760, type: 3}
-  - {fileID: 7028616704906629411, guid: d2d94c695c2721648a22bb6472fa7975, type: 3}
-  - {fileID: 8288426215254106694, guid: 98797e7330ca2d24c900bfa5c23d55b1, type: 3}
-  - {fileID: 4113829005332862926, guid: 17f4be307bd36444fa79fa54a4a3eafd, type: 3}
-  - {fileID: -5099292496197868168, guid: e5c30e9d31de25a4c8297f389e793bb1, type: 3}
-  - {fileID: -2966200626249415253, guid: c4f39259a549fd448bbd960b1ec34aab, type: 3}
-  resepTerbukaPerLevel: 020000000400000006000000080000000a000000
-  tombolKiri: {fileID: 796646922}
-  tombolKanan: {fileID: 2145129394}
 --- !u!1 &262462532
 GameObject:
   m_ObjectHideFlags: 0
@@ -1466,7 +1436,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 9a0aaff7ceb0bfe4a8ab1dfc54856e78, type: 2}
   - {fileID: 11400000, guid: e834b2701abb237408589b0531cce300, type: 2}
   - {fileID: 11400000, guid: 98d5a2f1e9e355942a9ad0b3579ee8ee, type: 2}
-  - {fileID: 11400000, guid: c42fde2b8188a32439895b95ef4cfc02, type: 2}
   npcPrefab:
   - {fileID: 1782478254039802041, guid: 26168ca11eb62d749ba4272f5648eb57, type: 3}
   - {fileID: 11347220522793723, guid: 2f73a0997f5d5684d850682ce6f82354, type: 3}
@@ -2090,6 +2059,10 @@ MonoBehaviour:
   menuList:
   - {fileID: 11400000, guid: 9a0aaff7ceb0bfe4a8ab1dfc54856e78, type: 2}
   - {fileID: 11400000, guid: c42fde2b8188a32439895b95ef4cfc02, type: 2}
+  - {fileID: 11400000, guid: e834b2701abb237408589b0531cce300, type: 2}
+  - {fileID: 11400000, guid: 98d5a2f1e9e355942a9ad0b3579ee8ee, type: 2}
+  - {fileID: 11400000, guid: c620c4a7346fff140b1b6a81e43ca3ac, type: 2}
+  - {fileID: 11400000, guid: 701beb6e8d0dc05418ce2a2b0b090383, type: 2}
   npcPrefab: []
   spawnInterval: 5
   maksimalNPC: 20
@@ -2640,6 +2613,14 @@ MonoBehaviour:
   menuList:
   - {fileID: 11400000, guid: 9a0aaff7ceb0bfe4a8ab1dfc54856e78, type: 2}
   - {fileID: 11400000, guid: c42fde2b8188a32439895b95ef4cfc02, type: 2}
+  - {fileID: 11400000, guid: 701beb6e8d0dc05418ce2a2b0b090383, type: 2}
+  - {fileID: 11400000, guid: e860e709ff5f6d14eba5b2df769f4d80, type: 2}
+  - {fileID: 11400000, guid: 664b582842766d7408341a2de4c4c20d, type: 2}
+  - {fileID: 11400000, guid: 661b0534035f5f34d9dff3639c565d27, type: 2}
+  - {fileID: 11400000, guid: 635b21a5f4bdb8f43808623cb784c6ec, type: 2}
+  - {fileID: 11400000, guid: e834b2701abb237408589b0531cce300, type: 2}
+  - {fileID: 11400000, guid: c620c4a7346fff140b1b6a81e43ca3ac, type: 2}
+  - {fileID: 11400000, guid: 98d5a2f1e9e355942a9ad0b3579ee8ee, type: 2}
   npcPrefab: []
   spawnInterval: 5
   maksimalNPC: 25
@@ -5365,6 +5346,7 @@ GameObject:
   - component: {fileID: 1783675490}
   - component: {fileID: 1783675492}
   - component: {fileID: 1783675491}
+  - component: {fileID: 1783675493}
   m_Layer: 5
   m_Name: Panel_Buku
   m_TagString: Untagged
@@ -5433,6 +5415,34 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1783675489}
   m_CullTransparentMesh: 1
+--- !u!114 &1783675493
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1783675489}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a5d1b0b14bb3df48bd3dbd9b23de5cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CollectionBook
+  gambarBuku: {fileID: 2070061520}
+  resepnotfound: {fileID: -855298285791758126, guid: 362dd881574c4944392936d429474da4, type: 3}
+  daftarAsetGambar:
+  - {fileID: 6937817954938267909, guid: 134ff4b633ac65649ab5917518ffaaa4, type: 3}
+  - {fileID: -6470460504253458178, guid: c6154d8275638d44884217e4df72880c, type: 3}
+  - {fileID: -4178046375966092550, guid: c39fbb6cdb9d0d248850d8b3691a2022, type: 3}
+  - {fileID: -5099292496197868168, guid: e5c30e9d31de25a4c8297f389e793bb1, type: 3}
+  - {fileID: 8288426215254106694, guid: 98797e7330ca2d24c900bfa5c23d55b1, type: 3}
+  - {fileID: 7028616704906629411, guid: d2d94c695c2721648a22bb6472fa7975, type: 3}
+  - {fileID: -2966200626249415253, guid: c4f39259a549fd448bbd960b1ec34aab, type: 3}
+  - {fileID: 4130640169021434097, guid: 1a423a1b5fd3259408b6586a85460b5c, type: 3}
+  - {fileID: 3465286685962602723, guid: af77fde43a4876044937a1ac6f53d760, type: 3}
+  - {fileID: 4113829005332862926, guid: 17f4be307bd36444fa79fa54a4a3eafd, type: 3}
+  resepTerbukaPerLevel: 020000000400000006000000080000000a000000
+  tombolKiri: {fileID: 796646922}
+  tombolKanan: {fileID: 2145129394}
 --- !u!1 &1821562455
 GameObject:
   m_ObjectHideFlags: 0
@@ -6295,6 +6305,12 @@ MonoBehaviour:
   menuList:
   - {fileID: 11400000, guid: 9a0aaff7ceb0bfe4a8ab1dfc54856e78, type: 2}
   - {fileID: 11400000, guid: c42fde2b8188a32439895b95ef4cfc02, type: 2}
+  - {fileID: 11400000, guid: 98d5a2f1e9e355942a9ad0b3579ee8ee, type: 2}
+  - {fileID: 11400000, guid: c620c4a7346fff140b1b6a81e43ca3ac, type: 2}
+  - {fileID: 11400000, guid: e834b2701abb237408589b0531cce300, type: 2}
+  - {fileID: 11400000, guid: 701beb6e8d0dc05418ce2a2b0b090383, type: 2}
+  - {fileID: 11400000, guid: e860e709ff5f6d14eba5b2df769f4d80, type: 2}
+  - {fileID: 11400000, guid: 664b582842766d7408341a2de4c4c20d, type: 2}
   npcPrefab: []
   spawnInterval: 5
   maksimalNPC: 15

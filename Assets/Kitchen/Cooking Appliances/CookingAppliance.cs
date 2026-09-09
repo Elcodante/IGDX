@@ -128,6 +128,8 @@ public class CookingAppliance : MonoBehaviour
         newAppliance.transform.SetParent(targetTransform);
         newAppliance.transform.localPosition = Vector3.zero;
 
+        newAppliance.transform.localScale = Vector3.one * 0.88f;
+
         DraggableItem2D dragScript = newAppliance.GetComponent<DraggableItem2D>();
         if (dragScript != null) dragScript.enabled = false;
 

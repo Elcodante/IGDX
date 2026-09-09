@@ -5,20 +5,21 @@ using UnityEngine.UI;
 
 public class TimingMinigame : MonoBehaviour, IMinigameMechanic, IPointerDownHandler, IPointerUpHandler
 {
-[Header("UI Visual")]
+    [Header("UI Visual")]
     public Slider jarumSlider;      // Slider untuk indikator api
     public Slider progressSlider;   // Slider untuk progress masakan 
     public RectTransform zonaTarget; // Gambar kotak hijau di dalam background jarum
 
     [Header("Gameplay")]
-    public float kecepatanNaik = 1.2f;  // Kecepatan indikator saat klik ditahan
-    public float kecepatanTurun = 1.5f; // Kecepatan indikator turun saat klik dilepas
+    public float kecepatanNaik = 12f;   // Ditingkatkan agar seimbang dengan maxValueJarum (20f)
+    public float kecepatanTurun = 15f;  // Ditingkatkan agar seimbang dengan maxValueJarum (20f)
     public float kecepatanMasak = 0.3f; // Seberapa cepat progress penuh
     public float ukuranZona = 0.2f;     // Lebar zona hijau
 
     private bool isMinigameActive = false;
     private bool isHolding = false;
     
+    [SerializeField] private float maxValueJarum = 20f;
     private float posisiJarum = 0f;
     private float posisiZonaTarget = 0.5f;
     private float tujuanZonaTarget = 0.5f;
@@ -53,13 +54,13 @@ public class TimingMinigame : MonoBehaviour, IMinigameMechanic, IPointerDownHand
         if (jarumSlider != null)
         {
             jarumSlider.gameObject.SetActive(true);
-            jarumSlider.maxValue = 1f;
+            jarumSlider.maxValue = maxValueJarum; // Menggunakan batas maksimum 20f
             jarumSlider.value = 0f;
         }
         if (progressSlider != null)
         {
             progressSlider.gameObject.SetActive(true);
-            progressSlider.maxValue = 1f;
+            progressSlider.maxValue = 1f; // Tetap 1f karena progresMasak menggunakan nilai 0 sampai 1
             progressSlider.value = 0f;
         }
 
@@ -77,22 +78,32 @@ public class TimingMinigame : MonoBehaviour, IMinigameMechanic, IPointerDownHand
             return;
         }
 
-        //Logika Pergerakan Jarum 
+        // Logika Pergerakan Jarum 
         if (isHolding)
+        {
             posisiJarum += kecepatanNaik * Time.deltaTime;
+        }
         else
+        {
             posisiJarum -= kecepatanTurun * Time.deltaTime;
+        }
+            
+        // FIX BUG: Menggunakan Mathf.Clamp agar posisi bisa naik melebihi angka 1 hingga nilai maxValueJarum (20f)
+        posisiJarum = Mathf.Clamp(posisiJarum, 0f, maxValueJarum); 
+        
+        if (jarumSlider != null) 
+        {
+            jarumSlider.value = posisiJarum;
+        }
 
-        posisiJarum = Mathf.Clamp01(posisiJarum); // Kunci di angka 0 sampai 1
-        if (jarumSlider != null) jarumSlider.value = posisiJarum;
-
-        //Logika Pergerakan Zona Target 
+        // Logika Pergerakan Zona Target 
         timerGerakZona -= Time.deltaTime;
         if (timerGerakZona <= 0f)
         {
             timerGerakZona = UnityEngine.Random.Range(0.5f, 2f); // Ganti arah tiap 0.5 - 2 detik
             tujuanZonaTarget = UnityEngine.Random.Range(0.1f, 0.9f); // Posisi random baru
         }
+        
         // Smoothing zona target 
         posisiZonaTarget = Mathf.Lerp(posisiZonaTarget, tujuanZonaTarget, Time.deltaTime * 2f);
 
@@ -106,21 +117,26 @@ public class TimingMinigame : MonoBehaviour, IMinigameMechanic, IPointerDownHand
             zonaTarget.offsetMax = Vector2.zero;
         }
 
-        //Logika Penambahan Progress Masak
-        //Cek apakah posisi jarum dalam zona 
-        if (Mathf.Abs(posisiJarum - posisiZonaTarget) <= (ukuranZona / 2f))
+        // FIX BUG: Mengubah nilai posisiJarum (0-20) menjadi bentuk persentase (0-1) agar sinkron dengan posisiZonaTarget
+        float posisiJarumNormal = posisiJarum / maxValueJarum; 
+
+        // Logika Penambahan Progress Masak Berdasarkan Posisi Normal
+        if (Mathf.Abs(posisiJarumNormal - posisiZonaTarget) <= (ukuranZona / 2f))
         {
-            //Progress bertambah
+            // Progress bertambah
             progresMasak += kecepatanMasak * Time.deltaTime;
         }
         else
         {
-            //Progress berkurang
+            // Progress berkurang
             progresMasak -= (kecepatanMasak / 2f) * Time.deltaTime;
         }
         
         progresMasak = Mathf.Clamp01(progresMasak);
-        if (progressSlider != null) progressSlider.value = progresMasak;
+        if (progressSlider != null) 
+        {
+            progressSlider.value = progresMasak;
+        }
 
         // Cek Menang
         if (progresMasak >= 1f)
@@ -131,6 +147,17 @@ public class TimingMinigame : MonoBehaviour, IMinigameMechanic, IPointerDownHand
 
     public void OnPointerDown(PointerEventData eventData) { isHolding = true; }
     public void OnPointerUp(PointerEventData eventData) { isHolding = false; }
+
+    private void OnMouseDown()
+    {
+        if (isMinigameActive) isHolding = true;
+        Debug.Log("Tes Down");
+    }
+
+    private void OnMouseUp()
+    {
+        if (isMinigameActive) isHolding = false;
+    }
 
     private void EndMinigame(float score)
     {
