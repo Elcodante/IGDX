@@ -15,3 +15,15 @@ MonoBehaviour:
   ingredientID: Onde Onde
   ingredientName: Onde Onde
   icon: {fileID: -385209768975763311, guid: 015e27e911a6ddc44a28a94ca48e86e2, type: 3}
+  isFinalProduct: 1
+  peranBahan: 0
+  typeBahanInBowl: 2
+  scaleSaatMasukBowl: {x: 1, y: 1, z: 1}
+  jenisTepung: 0
+  dropVisualPrefab: {fileID: 0}
+  dragIcon: {fileID: 0}
+  usePourAnimation: 0
+  inBowlIcon: {fileID: 0}
+  butuhGarnish: 0
+  daftarGarnishDibutuhkan: []
+  spriteTiapTahapGarnish: []

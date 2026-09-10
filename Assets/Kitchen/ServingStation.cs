@@ -66,6 +66,11 @@ public void OnDrop(PointerEventData eventData)
     DraggableItem2D dragItem = droppedObj.GetComponent<DraggableItem2D>();
     if (dragItem == null || dragItem.dataBahan == null) return;
 
+    if (!dragItem.dataBahan.isFinalProduct)
+    {
+        Debug.Log($"Ditolak! {dragItem.dataBahan.ingredientName} belum jadi makanan akhir, tidak bisa disajikan.");
+        return; // dibiarkan tanpa isDroppedSuccessfully = true, otomatis snap-back via OnEndDrag
+    }
     // --- PELINDUNG 1: CEK DUPLIKASI ---
     for (int i = 0; i < currentFoods.Length; i++)
     {

@@ -3231,6 +3231,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bc16844bfcc5934d80c07a6734a9286, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DraggableApplianceUI
+  namaAlat: Loyang
   appliancePrefab2D: {fileID: 478205786611532599, guid: d33d99364457d2742a75e2de736b7f11, type: 3}
   isDroppedSuccessfully: 0
 --- !u!1 &197163086
@@ -6626,6 +6627,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34c789ba592849741b388c944e3c3cd7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CetakanTool
+  namaAlat: Cetakan Kembang Goyang
   adonanData: {fileID: 11400000, guid: 820ad045eee3ab940a7d83b3da79198f, type: 2}
   spriteKosong: {fileID: 6339946517951633828, guid: 8f5e9965d8711a340a1a3a9519da990b, type: 3}
   spriteAdaAdonan: {fileID: 3910416716716093806, guid: dbfb446306aa77d449f1dc767c59feec, type: 3}
@@ -8598,10 +8600,106 @@ MonoBehaviour:
 
       4. Masukkan Pisang ke Daun
 
-      3. Taro kukusan ke
+      5. Taro kukusan ke
       atas Kompor
 
-      4. Masukkan adonan ke kukusan'
+      6. Masukkan adonan ke kukusan'
+  - resepDasar: {fileID: 0}
+    namaMasakan: Lupis
+    ikonMasakan: {fileID: 4754585837160666378, guid: 8445616465d3bb546a3718794a90081c, type: 3}
+    teksBahan: Tepung, Air, Gula Merah, Kelapa
+    teksAlat: Mangkuk, Kukusan, Daun
+    teksCara: '1. Masukan Tepung dan Air Ke mangkuk
+
+      2. Aduk jadi Adonan
+
+      3.
+      Masukkan Adonan ke Daun
+
+      4. Masukkan Pisang ke Daun
+
+      5. Taro kukusan
+      ke atas Kompor
+
+      6. Masukkan adonan ke kukusan
+
+      7. Masukkan Lupis
+      Ke Piring
+
+      8. Masukkan Gula Merah dan Kelapa'
+  - resepDasar: {fileID: 0}
+    namaMasakan: Lapis
+    ikonMasakan: {fileID: 224318155784578198, guid: a87843af65f163c40a48011182e8d6a2, type: 3}
+    teksBahan: Tepung, Gula Merah, Santan
+    teksAlat: Mangkuk, Kukusan, Daun
+    teksCara: '1. Masukan Bahan Ke mangkuk
+
+      2. Aduk jadi Adonan
+
+      3. Taro
+      kukusan ke atas Kompor
+
+      4. Masukkan adonan ke kukusan
+
+      5. lakukan
+      3 kali step ke 4'
+  - resepDasar: {fileID: 0}
+    namaMasakan: Kembang Goyang
+    ikonMasakan: {fileID: 7449724838469933353, guid: 398f0f3fe94281c44a3a19117f3da105, type: 3}
+    teksBahan: Tepung, Telur, Santan
+    teksAlat: Mangkuk, Cetakan Kembang Goyang, Wajan
+    teksCara: '1. Masukan Bahan Ke mangkuk
+
+      2. Aduk jadi Adonan
+
+      3. Drag
+      Cetakan ke Mangkuk Adonan
+
+      4. Taro wajan ke atas kompor
+
+      5. Drag
+      cetakan ke Wajan'
+  - resepDasar: {fileID: 0}
+    namaMasakan: Getuk
+    ikonMasakan: {fileID: 7366911125478607792, guid: db344592e7b92f147ab3c35fefa9cc37, type: 3}
+    teksBahan: Singkong, Gula Merah, Kelapa
+    teksAlat: Kukusan, Mangkuk, Talenan
+    teksCara: '1. Taro Kukusan ke atas wajan
+
+      2. Rebus singkong dengan kukusan
+
+      3.
+      Masukan Singkong rebus dan Gula Merah Ke mangkuk
+
+      4. Aduk jadi Adonan
+
+      5.
+      Masukkan Adonan ke Talenan
+
+      6.Taro ke atas piring
+
+      7. Tambahkan
+      kelapa'
+  - resepDasar: {fileID: 0}
+    namaMasakan: Cenil
+    ikonMasakan: {fileID: 5325722570233953717, guid: e15f0830dcffd2f45b5f9ed898aacb97, type: 3}
+    teksBahan: Tepung, Air, Kelapa
+    teksAlat: Mangkuk, Talenan, Kukusan
+    teksCara: '1. Masukan Bahan Ke mangkuk
+
+      2. Aduk jadi Adonan
+
+      3. Masukkan
+      Adonan ke Talenan
+
+      4. Taro kukusan ke atas Kompor
+
+      5. Masukkan
+      adonan ke kukusan
+
+      6. Taro di atas piring
+
+      7. Tambahkan kelapa'
 --- !u!114 &684461278
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9041,6 +9139,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bc16844bfcc5934d80c07a6734a9286, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DraggableApplianceUI
+  namaAlat: Wajan
   appliancePrefab2D: {fileID: 5526237413763745578, guid: aa98401898a6b5449b42a11993e80bc4, type: 3}
   isDroppedSuccessfully: 0
 --- !u!1 &751742120
@@ -13674,7 +13773,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 17.478, y: -187.3}
+  m_AnchoredPosition: {x: 17.478, y: -184.18}
   m_SizeDelta: {x: 470.525, y: 116.368}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1103344256
@@ -14920,6 +15019,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bc16844bfcc5934d80c07a6734a9286, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DraggableApplianceUI
+  namaAlat: Panci
   appliancePrefab2D: {fileID: 1734633775182975658, guid: 070bcc284ec5d0649b9b3dc36e0ae5e4, type: 3}
   isDroppedSuccessfully: 0
 --- !u!1 &1262249420
@@ -15442,8 +15542,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 15
-  m_fontSizeBase: 15
+  m_fontSize: 13
+  m_fontSizeBase: 13
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -18187,6 +18287,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bc16844bfcc5934d80c07a6734a9286, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DraggableApplianceUI
+  namaAlat: Kukusan
   appliancePrefab2D: {fileID: 6807897121016336051, guid: c6623b71acc07704a972e5cf1a6869b4, type: 3}
   isDroppedSuccessfully: 0
 --- !u!1 &1610872489
