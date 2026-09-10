@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::IngredientData
   ingredientID: Tepung Terigu
   ingredientName: Tepung Terigu
-  icon: {fileID: -7115273739440965115, guid: 4a2854619328a4143ac6c83826c7e48a, type: 3}
+  icon: {fileID: 7541603848943135833, guid: 60b4f5422401ef04480141b1408a1e67, type: 3}
+  isFinalProduct: 0
   peranBahan: 1
   typeBahanInBowl: 0
   scaleSaatMasukBowl: {x: 0.7, y: 0.7, z: 0.7}

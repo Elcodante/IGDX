@@ -14,7 +14,6 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     private Transform parentAwal;
     private Image itemImage;
     
-    // --- VARIABEL BARU UNTUK MEMORI GAMBAR & UKURAN ---
     private Sprite iconAsli; 
     private Vector2 ukuranAwal; // Simpan ukuran kotak (RectTransform) asli
 

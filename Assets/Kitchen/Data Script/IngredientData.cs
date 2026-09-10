@@ -16,8 +16,15 @@ public enum TypeBahanInBowl
     Normal
 }
 
+public enum TypeBahan
+{
+    Mentah,
+    SetengahJadi,
+    Matang,
+}
+
 [CreateAssetMenu(fileName = "New Ingredient", menuName = "Cooking/Ingredient Data")]
-public class IngredientData : ScriptableObject
+public class IngredientData : ScriptableObject 
 {
     public string ingredientID;     
     public string ingredientName;    
@@ -27,6 +34,7 @@ public class IngredientData : ScriptableObject
     [Header("Atribut Pesanan)")]
     public PeranBahan peranBahan = PeranBahan.Biasa; 
     
+    public TypeBahan typeBahan;
     [Header("Type Bahan in Bowl")]
     public TypeBahanInBowl typeBahanInBowl = TypeBahanInBowl.Normal;
     public Vector3 scaleSaatMasukBowl = new Vector3(1f, 1f, 1f);
@@ -46,4 +54,7 @@ public class IngredientData : ScriptableObject
     public bool butuhGarnish = false;
     public List<IngredientData> daftarGarnishDibutuhkan; // Gethuk/Putu Ayu: isi 1. Lupis/Cenil: isi 2 (gula + kelapa)
     public List<Sprite> spriteTiapTahapGarnish;           // sprite[0] = setelah garnish pertama masuk, sprite[1] = setelah garnish kedua (final), dst.
+
+    public CustomizationResult customizationResult;
+
     }

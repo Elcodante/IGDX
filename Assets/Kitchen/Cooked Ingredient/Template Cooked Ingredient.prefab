@@ -150,10 +150,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d42cb8df83b980046ab843bb76f723fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DraggableItem2D
-  tepungDigunakan: 0
-  tingkatIsian: 0
-  tingkatManis: 0
-  tingkatLembut: 0
-  tingkatGurih: 0
+  customization:
+    manis: 0
+    lembut: 0
+    gurih: 0
+    isian: 0
   dataBahan: {fileID: 0}
   isDroppedSuccessfully: 0
+  garnishSudahMasuk: []

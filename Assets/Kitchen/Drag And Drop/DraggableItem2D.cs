@@ -5,11 +5,7 @@ using System.Collections.Generic;
 public class DraggableItem2D : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerEnterHandler, IPointerExitHandler
 {
     [Header("Data Rasa (Hanya untuk Makanan Matang)")]
-    public JenisTepung tepungDigunakan;
-    // public TingkatIsian tingkatIsian;
-    // public TingkatRasa tingkatManis;
-    // public TingkatRasa tingkatLembut;
-    // public TingkatRasa tingkatGurih;
+    public CustomizationResult customization;
     public IngredientData dataBahan;
     private Collider2D col;
     private Vector3 offset;
@@ -22,6 +18,7 @@ public class DraggableItem2D : MonoBehaviour, IBeginDragHandler, IDragHandler, I
     private void Awake()
     {
         col = GetComponent<Collider2D>();
+      
     }
 
     public void SetupData(IngredientData dataBaru)
@@ -65,16 +62,20 @@ public class DraggableItem2D : MonoBehaviour, IBeginDragHandler, IDragHandler, I
     // --- DETEKSI HOVER MOUSE ---
     public void OnPointerEnter(PointerEventData eventData)
     {
-        if (FoodTooltipUI.Instance != null && dataBahan != null)
+        if (FoodTooltipUI.Instance != null)
         {
-            string info = $"<b>{dataBahan.ingredientName}</b>\n";
-            // info += $"Manis: {tingkatManis}\n";
-            // info += $"Lembut: {tingkatLembut}\n";
-            // info += $"Gurih: {tingkatGurih}\n";
-            // info += $"Isian: {tingkatIsian}\n";
-            // info += $"Tepung: {tepungDigunakan}";
 
-            FoodTooltipUI.Instance.TampilkanTooltip(info);
+            bool adaCustomization =
+            customization.manis != Tingkat.TidakAda ||
+            customization.lembut != Tingkat.TidakAda ||
+            customization.gurih != Tingkat.TidakAda ||
+            customization.isian != Tingkat.TidakAda;
+
+            if (adaCustomization)
+            {
+                string teks = OrderTextHelper.BuatTeksCustomization(customization);
+                FoodTooltipUI.Instance.TampilkanTooltip(teks);
+            }
         }
     }
 

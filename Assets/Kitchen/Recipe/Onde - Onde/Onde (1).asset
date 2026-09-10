@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Onde (1)
   m_EditorClassIdentifier: Assembly-CSharp::RecipeData
   inputIngredients:
-  - {fileID: 11400000, guid: 0eae308e7309a0b42bcad39f7ba8d24b, type: 2}
+  - {fileID: 11400000, guid: a63914c39dfae7e478951a95ef0f0a5c, type: 2}
   - {fileID: 11400000, guid: 14ce1182befeb3f4da89e1f22ee73593, type: 2}
   requiredMechanic: 1
   timeLimit: 10

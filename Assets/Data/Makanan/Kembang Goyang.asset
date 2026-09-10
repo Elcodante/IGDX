@@ -13,5 +13,9 @@ MonoBehaviour:
   m_Name: Kembang Goyang
   m_EditorClassIdentifier: Assembly-CSharp::MenuData
   menuName: Kembang Goyang
-  menuImage: {fileID: 7449724838469933353, guid: 398f0f3fe94281c44a3a19117f3da105, type: 3}
-  jenisTepung: 0
+  order:
+    idResep: 7
+    ikonMakanan: {fileID: 7449724838469933353, guid: 398f0f3fe94281c44a3a19117f3da105, type: 3}
+    customizations:
+    - jenis: 2
+      target: 0

@@ -13,5 +13,11 @@ MonoBehaviour:
   m_Name: Lupis
   m_EditorClassIdentifier: Assembly-CSharp::MenuData
   menuName: Lupis
-  menuImage: {fileID: -5342941536187879845, guid: 8445616465d3bb546a3718794a90081c, type: 3}
-  jenisTepung: 0
+  order:
+    idResep: 6
+    ikonMakanan: {fileID: 4754585837160666378, guid: 8445616465d3bb546a3718794a90081c, type: 3}
+    customizations:
+    - jenis: 3
+      target: 0
+    - jenis: 1
+      target: 0

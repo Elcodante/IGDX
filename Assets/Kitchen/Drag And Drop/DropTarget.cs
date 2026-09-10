@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class DropTarget : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPointerExitHandler
 {
     public string namaAlat; 
-    
+    private bool SetengahJadi = false;
     private Image imageTarget;
     private SpriteRenderer spriteTarget;
     private Color warnaAsli = Color.white; // Default warna jika tidak ada komponen warna[cite: 1]
@@ -42,7 +42,9 @@ public class DropTarget : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPo
 
     public void OnDrop(PointerEventData eventData) 
     {
-        UbahWarna(warnaAsli); 
+        UbahWarna(warnaAsli);
+
+    
 
         if (eventData.pointerDrag != null) 
         {
@@ -109,10 +111,12 @@ public class DropTarget : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPo
             else
             {
                 DraggableItem2D item2D = eventData.pointerDrag.GetComponent<DraggableItem2D>(); 
-                if (item2D != null && item2D.dataBahan != null) 
+                FoodCustomizationController foodCustom = GetComponent<FoodCustomizationController>();
+                if (item2D != null && item2D.dataBahan != null && foodCustom != null) 
                 {
                     bahanYangMasuk = item2D.dataBahan; 
                     isUIItem = false; 
+                    foodCustom.AmbilResult(item2D.customization);
                 }
             }
 
@@ -149,5 +153,10 @@ public class DropTarget : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPo
         {
             spriteTarget.color = warnaBaru; 
         }
+    }
+
+    public void AmbilCustomFood()
+    {
+        SetengahJadi = true;
     }
 }

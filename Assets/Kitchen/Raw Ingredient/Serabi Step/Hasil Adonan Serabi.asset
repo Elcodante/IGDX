@@ -15,5 +15,21 @@ MonoBehaviour:
   ingredientID: Hasil Adonan Serabi
   ingredientName: Hasil Adonan Serabi
   icon: {fileID: 4788085906601644805, guid: 5054bc8e0624d404caf3adaafa6a652c, type: 3}
+  isFinalProduct: 0
   peranBahan: 0
+  typeBahan: 1
+  typeBahanInBowl: 2
+  scaleSaatMasukBowl: {x: 1, y: 1, z: 1}
   jenisTepung: 0
+  dropVisualPrefab: {fileID: 0}
+  dragIcon: {fileID: 0}
+  usePourAnimation: 0
+  inBowlIcon: {fileID: 0}
+  butuhGarnish: 0
+  daftarGarnishDibutuhkan: []
+  spriteTiapTahapGarnish: []
+  customizationResult:
+    manis: 0
+    lembut: 0
+    gurih: 0
+    isian: 0

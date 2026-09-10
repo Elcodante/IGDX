@@ -13,5 +13,9 @@ MonoBehaviour:
   m_Name: Pastel
   m_EditorClassIdentifier: Assembly-CSharp::MenuData
   menuName: Pastel
-  menuImage: {fileID: 6679852185467842059, guid: adc058bc830aa2c44952cc5afb6f8ff7, type: 3}
-  jenisTepung: 0
+  order:
+    idResep: 8
+    ikonMakanan: {fileID: 6679852185467842059, guid: adc058bc830aa2c44952cc5afb6f8ff7, type: 3}
+    customizations:
+    - jenis: 0
+      target: 0

@@ -15,9 +15,21 @@ MonoBehaviour:
   ingredientID: Minyak
   ingredientName: Minyak
   icon: {fileID: 271790178126711492, guid: 61547dc9df0dd344fa909407a88cd7c7, type: 3}
+  isFinalProduct: 0
   peranBahan: 0
+  typeBahan: 0
+  typeBahanInBowl: 1
+  scaleSaatMasukBowl: {x: 0.5, y: 0.5, z: 0.5}
   jenisTepung: 0
   dropVisualPrefab: {fileID: 0}
   dragIcon: {fileID: 0}
   usePourAnimation: 0
   inBowlIcon: {fileID: 271790178126711492, guid: c6f242718e4e8364ba05da3d220fa1e3, type: 3}
+  butuhGarnish: 0
+  daftarGarnishDibutuhkan: []
+  spriteTiapTahapGarnish: []
+  customizationResult:
+    manis: 0
+    lembut: 0
+    gurih: 0
+    isian: 0

@@ -8,6 +8,8 @@ public enum JenisTepung {
 };
 
 public enum Tingkat{ 
+
+    TidakAda,
     Sedikit, 
     Lumayan, 
     Sangat
@@ -25,7 +27,6 @@ public enum JenisCustomization
 public struct CustomizationData
 {
     public JenisCustomization jenis;
-    public IngredientData ingredient;
     
     public Tingkat target;
 }

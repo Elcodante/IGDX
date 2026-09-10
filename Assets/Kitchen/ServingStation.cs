@@ -6,14 +6,10 @@ using UnityEngine.EventSystems;
 public class ServingStation : MonoBehaviour, IDropHandler
 {
     [Header("Referensi Piring (Dapur)")]
-    [Tooltip("Masukkan 3 objek piring kosong di dapur ke sini")]
     public Transform[] plateSlots = new Transform[3];
 
     [Header("UI Meja Kasir Dinamis")]
-    [Tooltip("Masukkan Panel_Background_Kasir yang memiliki Content Size Fitter")]
     public GameObject panelBackgroundKasir;
-
-    [Tooltip("Masukkan ketiga objek UI Box_1, Box_2, Box_3 di dalam panel kasir")]
     public Transform[] frontCounterBoxes = new Transform[3];
 
     [Header("UI Tombol")]
@@ -64,12 +60,18 @@ public void OnDrop(PointerEventData eventData)
 
     // --- CASE 2: FOOD (2D world item, existing plating logic) ---
     DraggableItem2D dragItem = droppedObj.GetComponent<DraggableItem2D>();
+    if(dragItem != null)
+    {
+        CustomizationResult custom = dragItem.customization;
+    }
+
+
     if (dragItem == null || dragItem.dataBahan == null) return;
 
     if (!dragItem.dataBahan.isFinalProduct)
     {
         Debug.Log($"Ditolak! {dragItem.dataBahan.ingredientName} belum jadi makanan akhir, tidak bisa disajikan.");
-        return; // dibiarkan tanpa isDroppedSuccessfully = true, otomatis snap-back via OnEndDrag
+        return;
     }
     // --- PELINDUNG 1: CEK DUPLIKASI ---
     for (int i = 0; i < currentFoods.Length; i++)
@@ -101,8 +103,8 @@ public void OnDrop(PointerEventData eventData)
         SpriteRenderer sr = dragItem.GetComponent<SpriteRenderer>();
         if (sr != null)
         {
-            sr.sortingLayerName = "ItemDiAtasUI";
-            sr.sortingOrder = 10;
+            sr.sortingLayerName = "UI_Canvas";
+            sr.sortingOrder = 5;
         }
 
         if (serveButton != null) serveButton.gameObject.SetActive(true);

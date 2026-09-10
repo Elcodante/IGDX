@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MenuData
   menuName: Gethuk
   order:
-    idResep: 10
+    idResep: 1
     ikonMakanan: {fileID: 7366911125478607792, guid: db344592e7b92f147ab3c35fefa9cc37, type: 3}
     customizations:
     - jenis: 1

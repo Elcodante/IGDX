@@ -14,10 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::IngredientData
   ingredientID: Tepung Tapioka
   ingredientName: Tepung Tapioka
-  icon: {fileID: -7115273739440965115, guid: 4a2854619328a4143ac6c83826c7e48a, type: 3}
+  icon: {fileID: 184234447382292438, guid: a661d61499854e04ba896160c9cb33e6, type: 3}
+  isFinalProduct: 0
   peranBahan: 1
+  typeBahanInBowl: 0
+  scaleSaatMasukBowl: {x: 0.7, y: 0.7, z: 0.7}
   jenisTepung: 0
   dropVisualPrefab: {fileID: 0}
   dragIcon: {fileID: 0}
   usePourAnimation: 0
   inBowlIcon: {fileID: 5803277668826898794, guid: f776918182d424b48b55d8a184e84083, type: 3}
+  butuhGarnish: 0
+  daftarGarnishDibutuhkan: []
+  spriteTiapTahapGarnish: []

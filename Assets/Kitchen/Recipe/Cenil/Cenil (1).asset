@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Cenil (1)
   m_EditorClassIdentifier: Assembly-CSharp::RecipeData
   inputIngredients:
-  - {fileID: 11400000, guid: 0eae308e7309a0b42bcad39f7ba8d24b, type: 2}
+  - {fileID: 11400000, guid: a5815bf97470f7c46ad715f525bb9eae, type: 2}
   - {fileID: 11400000, guid: fd88b628bb5c19345be2674ac5006498, type: 2}
   requiredMechanic: 1
   timeLimit: 10

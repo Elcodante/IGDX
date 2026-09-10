@@ -13,5 +13,9 @@ MonoBehaviour:
   m_Name: Onde Onde
   m_EditorClassIdentifier: Assembly-CSharp::MenuData
   menuName: Onde Onde
-  menuImage: {fileID: -385209768975763311, guid: 015e27e911a6ddc44a28a94ca48e86e2, type: 3}
-  jenisTepung: 0
+  order:
+    idResep: 4
+    ikonMakanan: {fileID: 0}
+    customizations:
+    - jenis: 0
+      target: 0

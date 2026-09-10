@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Kembang (1)
   m_EditorClassIdentifier: Assembly-CSharp::RecipeData
   inputIngredients:
-  - {fileID: 11400000, guid: 0eae308e7309a0b42bcad39f7ba8d24b, type: 2}
+  - {fileID: 11400000, guid: 013338416163ff44b8ac8d6d2f722cca, type: 2}
   - {fileID: 11400000, guid: f23e39e7d779cbc4495583cb72deeb1f, type: 2}
   - {fileID: 11400000, guid: 3f2d486a9222e874cb4d378d02235ad6, type: 2}
   requiredMechanic: 1

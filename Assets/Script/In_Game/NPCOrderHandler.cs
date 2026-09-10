@@ -5,7 +5,6 @@ public class NPCOrderHandler : MonoBehaviour
 {
     [Header("Daftar Pesanan")]
     public List<OrderData> daftarPesanan = new List<OrderData>();
-    private bool pesananSudahDikirimKeDapur = false;
 
     [Header("Pengaturan waktu dan skor")]
     [Tooltip("Batas waktu (detik) sebelum skor pesanan jatuh ke nilai minimum")]
@@ -18,7 +17,6 @@ public class NPCOrderHandler : MonoBehaviour
     // Reset status saat NPC baru spawn
     public void ResetHandler()
     {
-        pesananSudahDikirimKeDapur = false;
         sedangMenungguMakanan = false;
         waktuMenunggu = 0f;
         daftarPesanan.Clear();
@@ -56,7 +54,7 @@ public class NPCOrderHandler : MonoBehaviour
 
                 // Acak target
                 pesananBaru.customizations[j].target =
-                    (Tingkat)Random.Range(0, System.Enum.GetValues(typeof(Tingkat)).Length);
+                    (Tingkat)Random.Range(1, System.Enum.GetValues(typeof(Tingkat)).Length);
             }
             
             // pesananBaru.isian = (TingkatIsian)Random.Range(0, System.Enum.GetValues(typeof(TingkatIsian)).Length);

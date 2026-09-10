@@ -7,6 +7,8 @@ public class CookingAppliance : MonoBehaviour
 {
     [HideInInspector] public CookingAppliance komporInduk;
     
+    private const int maxIngredient = 10;
+    private int totalIngredient;
 
     [Header("Gimik Tumpukan Bahan (2D)")]
     public bool gunakanTumpukanVisual = false; 
@@ -17,7 +19,6 @@ public class CookingAppliance : MonoBehaviour
     public string applianceName;
     public bool isStoveBase = false; 
     public Transform applianceMountPoint; 
-    public GameObject startButtonUI; 
 
     [Header("Visual Indikator Kompor (Khusus Kompor)")]
     public SpriteRenderer stoveSpriteRenderer;
@@ -41,6 +42,9 @@ public class CookingAppliance : MonoBehaviour
     
     [Header("State Tambahan (Khusus Serabi / Dll)")]
     public Sprite spriteBeres;     // Bakal dipake buat state "Udah Matang"
+
+    [Header("Recipe UI")]
+    [SerializeField] private RecipeProgressUI recipeProgressUI;
     
     // 0 = Kosong, 1 = Lagi Masak, 2 = Udah Beres
     [HideInInspector] public int stateWajan = 0;          
@@ -53,20 +57,13 @@ public class CookingAppliance : MonoBehaviour
     }
     public List<VisualBahanMapping> visualSpesifikBahan;
 
-    [Header("Indikator UI Bahan")]
-    public Transform indikatorContainer;     
-    public GameObject indikatorPrefab;       
-
-    // Variabel internal penghitung bumbu
-    private int countManis = 0;
-    private int countLembut = 0;
-    private int countGurih = 0;
-    private int countIsian = 0;
-    private JenisTepung jenisTepung = JenisTepung.Terigu; // Default
-
     // Data internal
     private CookingAppliance mountedAppliance; // Alat yang sedang menempel di atas kompor ini
     private IMinigameMechanic activeMinigame; 
+
+    private FoodCustomizationController foodCustom;
+
+
     public void ResetSetelahDiambil()
     {
         stateWajan = 0;
@@ -81,13 +78,21 @@ public class CookingAppliance : MonoBehaviour
     {
         return stateWajan == 2; // sama seperti kondisi "Beres" yang sudah kamu pakai buat sprite priority
     }
+   
+
     private void Awake()
     {
+        recipeProgressUI = GetComponent<RecipeProgressUI>();
+
         RefreshMinigameScript();
-        if (startButtonUI != null) startButtonUI.SetActive(false);
-        
+
+        if (recipeProgressUI != null)
+            recipeProgressUI.Hide();
+
         SetStoveState(false);
-        UbahStateWajan(0); // Set ke kosong saat mulai
+        UbahStateWajan(0);
+
+        foodCustom = GetComponent<FoodCustomizationController>();
     }
 
     private void RefreshMinigameScript()
@@ -163,18 +168,22 @@ public class CookingAppliance : MonoBehaviour
 
     public void AddIngredient(IngredientData ingredient)
     {
+        if (totalIngredient >= maxIngredient)
+        {
+            return;
+        }
+
+        if(ingredient.typeBahan == TypeBahan.SetengahJadi)
+        {
+            Debug.Log("Sampe Sini ?");
+        }
+
+        totalIngredient++;
+
         currentIngredients.Add(ingredient);
 
-        if(ingredient.typeBahanInBowl == TypeBahanInBowl.Tepung)
-        {
-            
-        }
-        
-        if (ingredient.peranBahan == PeranBahan.BumbuManis) countManis++;
-        else if (ingredient.peranBahan == PeranBahan.BumbuLembut) countLembut++;
-        else if (ingredient.peranBahan == PeranBahan.BumbuGurih) countGurih++;
-        else if (ingredient.peranBahan == PeranBahan.Isian) countIsian++;
-        else if (ingredient.peranBahan == PeranBahan.Tepung) jenisTepung = ingredient.jenisTepung;
+        if (foodCustom != null)
+        foodCustom.AddIngredient(ingredient);
 
         // Pas bahan masuk, reset wajan biar ga stuck di state "Beres"
         stateWajan = 0; 
@@ -188,62 +197,112 @@ public class CookingAppliance : MonoBehaviour
     {
         currentIngredients.Clear();
         currentValidRecipe = null;
-        countManis = 0;
-        countLembut = 0;
-        countGurih = 0;
-        countIsian = 0;
-        if (startButtonUI != null) startButtonUI.SetActive(false);
-        
-        UbahStateWajan(0); // Otomatis balik ke spriteKosong
+
+        totalIngredient = 0;
+
+        if (foodCustom != null)
+            foodCustom.ResetCustomization();
+
+        if (recipeProgressUI != null)
+            recipeProgressUI.Hide();
+
+        UbahStateWajan(0);
     }
 
     private void CheckForValidRecipe()
     {
-        CookingAppliance alatYangDipakai = (mountedAppliance != null) ? mountedAppliance : this;
+        CookingAppliance alatYangDipakai =
+            (mountedAppliance != null) ? mountedAppliance : this;
+
         alatYangDipakai.currentValidRecipe = null;
-        
-        GameObject btnStartAktif = (komporInduk != null && komporInduk.startButtonUI != null) ? komporInduk.startButtonUI : startButtonUI;
-        if (btnStartAktif != null) btnStartAktif.SetActive(false);
 
-        List<RecipeData> activeRecipes = alatYangDipakai.resepYangBisaDimasak;
-        if (activeRecipes == null || activeRecipes.Count == 0) return;
+        List<RecipeData> activeRecipes =
+            alatYangDipakai.resepYangBisaDimasak;
 
-        List<IngredientData> bahanDiWadah = alatYangDipakai.currentIngredients;
+        if (activeRecipes == null || activeRecipes.Count == 0)
+            return;
+
+        List<IngredientData> bahanDiWadah =
+            alatYangDipakai.currentIngredients;
+
         RecipeData resepTerbaik = null;
+
         int jumlahBahanTerbanyak = -1;
+
+        // Untuk menentukan resep yang paling cocok
+        RecipeData resepProgress = null;
+        int jumlahBahanCocokTerbanyak = -1;
 
         foreach (var resep in activeRecipes)
         {
-            List<IngredientData> sisaBahanEkstra = new List<IngredientData>(bahanDiWadah);
+            List<IngredientData> sisaBahan =
+                new List<IngredientData>(bahanDiWadah);
+
+            int jumlahBahanCocok = 0;
             bool semuaBahanWajibAda = true;
 
             foreach (var bahanWajib in resep.inputIngredients)
             {
-                if (sisaBahanEkstra.Contains(bahanWajib)) sisaBahanEkstra.Remove(bahanWajib);
-                else { semuaBahanWajibAda = false; break; }
+                if (sisaBahan.Contains(bahanWajib))
+                {
+                    sisaBahan.Remove(bahanWajib);
+                    jumlahBahanCocok++;
+                }
+                else
+                {
+                    semuaBahanWajibAda = false;
+                }
             }
 
+            // Simpan resep dengan progress paling banyak
+            if (jumlahBahanCocok > jumlahBahanCocokTerbanyak)
+            {
+                jumlahBahanCocokTerbanyak = jumlahBahanCocok;
+                resepProgress = resep;
+            }
+
+            // Kalau semua bahan wajib sudah ada,
+            // cek apakah bahan sisanya hanya bumbu
             if (semuaBahanWajibAda)
             {
                 bool sisaBahanHanyaBumbu = true;
-                foreach (var sisa in sisaBahanEkstra)
+
+                foreach (var sisa in sisaBahan)
                 {
-                    if (sisa.peranBahan == PeranBahan.Biasa || sisa.peranBahan == PeranBahan.Tepung)
+                    if (sisa.peranBahan == PeranBahan.Biasa ||
+                        sisa.peranBahan == PeranBahan.Tepung)
                     {
-                        sisaBahanHanyaBumbu = false; break;
+                        sisaBahanHanyaBumbu = false;
+                        break;
                     }
                 }
 
-                if (sisaBahanHanyaBumbu && resep.inputIngredients.Count > jumlahBahanTerbanyak)
+                if (sisaBahanHanyaBumbu &&
+                    resep.inputIngredients.Count > jumlahBahanTerbanyak)
                 {
-                    jumlahBahanTerbanyak = resep.inputIngredients.Count;
+                    jumlahBahanTerbanyak =
+                        resep.inputIngredients.Count;
+
                     resepTerbaik = resep;
                 }
             }
         }
 
         alatYangDipakai.currentValidRecipe = resepTerbaik;
-        if (alatYangDipakai.currentValidRecipe != null && btnStartAktif != null) btnStartAktif.SetActive(true);
+
+        // ==========================
+        // UPDATE RECIPE UI
+        // ==========================
+
+        if (alatYangDipakai.recipeProgressUI != null &&
+            resepProgress != null)
+        {
+            alatYangDipakai.recipeProgressUI.UpdateUI(
+                bahanDiWadah,
+                resepProgress.inputIngredients,
+                resepTerbaik != null
+            );
+        }
     }
 
     public void OnStartButtonClicked()
@@ -275,8 +334,14 @@ public class CookingAppliance : MonoBehaviour
 
         if (resepAktif != null)
         {
-            if (startButtonUI != null) startButtonUI.SetActive(false);
-            if (komporInduk != null && komporInduk.startButtonUI != null) komporInduk.startButtonUI.SetActive(false);
+            if (recipeProgressUI != null)
+            recipeProgressUI.Hide();
+
+            if (komporInduk != null &&
+                komporInduk.recipeProgressUI != null)
+            {
+                komporInduk.recipeProgressUI.Hide();
+            }
 
             SetStoveState(true);
             
@@ -284,12 +349,20 @@ public class CookingAppliance : MonoBehaviour
             alatYangDipakai.UbahStateWajan(1); 
 
             targetMinigame.StartMinigame(resepAktif, OnMinigameFinished);
+            totalIngredient = 0;
         }
     }
 
     private void OnMinigameFinished(float finalScore)
     {
         SetStoveState(false);
+
+        if (foodCustom != null)
+        {
+            CustomizationResult result = foodCustom.GetResult();
+
+        }
+        
         
         CookingAppliance alatYangDipakai = (mountedAppliance != null) ? mountedAppliance : this;
         RecipeData resepSelesai = alatYangDipakai.currentValidRecipe;
@@ -304,14 +377,15 @@ public class CookingAppliance : MonoBehaviour
                 GameObject objekBaru = Instantiate(draggableItemPrefab, titikSpawn.position, Quaternion.identity);
                 
                 DraggableItem2D dragScript2D = objekBaru.GetComponent<DraggableItem2D>();
+
                 if (dragScript2D != null)
                 {
                     dragScript2D.SetupData(hasilAkhir);
-                    dragScript2D.tepungDigunakan = alatYangDipakai.jenisTepung;
-                    // dragScript2D.tingkatManis = KonversiKeTingkatRasa(alatYangDipakai.countManis);
-                    // dragScript2D.tingkatLembut = KonversiKeTingkatRasa(alatYangDipakai.countLembut);
-                    // dragScript2D.tingkatGurih = KonversiKeTingkatRasa(alatYangDipakai.countGurih);
-                    // dragScript2D.tingkatIsian = KonversiKeTingkatIsian(alatYangDipakai.countIsian);
+
+                    if (foodCustom != null)
+                    {
+                        dragScript2D.customization = foodCustom.GetResult();
+                    }
                 }
             }
         }
@@ -319,7 +393,9 @@ public class CookingAppliance : MonoBehaviour
         // Hapus bahan lama dari memori
         alatYangDipakai.currentIngredients.Clear();
         alatYangDipakai.currentValidRecipe = null;
-        alatYangDipakai.countManis = 0; alatYangDipakai.countLembut = 0; alatYangDipakai.countGurih = 0; alatYangDipakai.countIsian = 0;
+        // alatYangDipakai.countManis = 0; alatYangDipakai.countLembut = 0; alatYangDipakai.countGurih = 0; alatYangDipakai.countIsian = 0;
+        if(foodCustom != null)
+        foodCustom.ResetCustomization();
         
         // --- TRIGGER STATE BERES (2) OTOMATIS SAAT MINIGAME KELAR ---
         alatYangDipakai.UbahStateWajan(2); 
@@ -370,70 +446,73 @@ public class CookingAppliance : MonoBehaviour
             {
                 IngredientData bahan = currentIngredients[i];
                 GameObject visualBaru = Instantiate(prefabVisualBahan2D, tumpukanContainer);
+                SpriteRenderer sr =
+                    visualBaru.GetComponent<SpriteRenderer>();
                 
                 if (bahan.typeBahanInBowl == TypeBahanInBowl.Tepung)
                 {
                     visualBaru.transform.localScale = bahan.scaleSaatMasukBowl;
+                    visualBaru.transform.localPosition = new Vector3(0, 0, 0); 
+                }
+                else if (bahan.typeBahanInBowl == TypeBahanInBowl.Cairan)
+                {
+                    visualBaru.transform.localScale = bahan.scaleSaatMasukBowl;
+                    visualBaru.transform.localPosition = new Vector3(0, 0, 0); 
                 }
                 else
                 {
                     visualBaru.transform.localScale = new Vector3(0.3f, 0.3f, 0.3f); 
+
+                    float randomX =
+                    Random.Range(-0.2f, 0.2f);
+
+                    float randomY =
+                        Random.Range(0f, 0f);
+
+                    visualBaru.transform.localPosition =
+                        new Vector3(
+                            randomX,
+                            randomY,
+                            0f
+                        );
                 }
 
-                SpriteRenderer sr = visualBaru.GetComponent<SpriteRenderer>();
+                switch (bahan.typeBahanInBowl)
+                {
+                    case TypeBahanInBowl.Cairan:
+
+                        sr.sortingOrder = 1;
+
+                        break;
+
+
+                    case TypeBahanInBowl.Tepung:
+
+                        sr.sortingOrder = 10;
+
+                        break;
+
+
+                    case TypeBahanInBowl.Normal:
+
+                        sr.sortingOrder = 20 + i;
+
+                        break;
+                }
+                
                 if (sr != null)
                 {
                     if (bahan.inBowlIcon != null) sr.sprite = bahan.inBowlIcon;
                     else if (bahan.dragIcon != null) sr.sprite = bahan.dragIcon;
                     else sr.sprite = bahan.icon;
-
-                    sr.sortingOrder = i + 1;
                 }
 
-            
-                visualBaru.transform.localPosition = new Vector3(0, 0, 0); 
+        
             }
         }
 
         // Indikator UI Icon Bahan
-        Transform targetContainer = (indikatorContainer != null) ? indikatorContainer : (komporInduk != null ? komporInduk.indikatorContainer : null);
-        GameObject targetPrefab = (indikatorPrefab != null) ? indikatorPrefab : (komporInduk != null ? komporInduk.indikatorPrefab : null);
-
-        if (targetContainer == null || targetPrefab == null) return;
-        if (currentIngredients.Count == 0) { targetContainer.gameObject.SetActive(false); return; }
-
-        targetContainer.gameObject.SetActive(true);
-        foreach (Transform child in targetContainer) Destroy(child.gameObject);
-
-        Dictionary<IngredientData, int> hitungBahan = new Dictionary<IngredientData, int>();
-        foreach (var bahan in currentIngredients)
-        {
-            if (hitungBahan.ContainsKey(bahan)) hitungBahan[bahan]++;
-            else hitungBahan[bahan] = 1;
-        }
-
-        foreach (var item in hitungBahan)
-        {
-            GameObject iconBaru = Instantiate(targetPrefab, targetContainer);
-            Image iconImage = iconBaru.GetComponentInChildren<Image>();
-            TextMeshProUGUI qtyText = iconBaru.GetComponentInChildren<TextMeshProUGUI>();
-
-            if (iconImage != null) iconImage.sprite = item.Key.icon;
-            if (qtyText != null) qtyText.text = "x" + item.Value.ToString();
-        }
     }
 
-    // private TingkatRasa KonversiKeTingkatRasa(int jumlah)
-    // {
-    //     if (jumlah == 1) return TingkatRasa.Sedikit;
-    //     if (jumlah == 2) return TingkatRasa.Lumayan;
-    //     return TingkatRasa.Sangat;
-    // }
-
-    // private TingkatIsian KonversiKeTingkatIsian(int jumlah)
-    // {
-    //     if (jumlah <= 1) return TingkatIsian.Sedikit; 
-    //     if (jumlah == 2) return TingkatIsian.Sedang;
-    //     return TingkatIsian.Banyak;
-    // }
+  
 }

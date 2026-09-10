@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Lapis (1)
   m_EditorClassIdentifier: Assembly-CSharp::RecipeData
   inputIngredients:
-  - {fileID: 11400000, guid: 0eae308e7309a0b42bcad39f7ba8d24b, type: 2}
+  - {fileID: 11400000, guid: 013338416163ff44b8ac8d6d2f722cca, type: 2}
   - {fileID: 11400000, guid: 1431c2da236bd8e48aa65da57e651b48, type: 2}
   - {fileID: 11400000, guid: 3f2d486a9222e874cb4d378d02235ad6, type: 2}
   requiredMechanic: 1
