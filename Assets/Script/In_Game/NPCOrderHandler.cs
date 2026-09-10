@@ -14,6 +14,7 @@ public class NPCOrderHandler : MonoBehaviour
     private float waktuMenunggu = 0f;
     private bool sedangMenungguMakanan = false;
 
+
     // Reset status saat NPC baru spawn
     public void ResetHandler()
     {
@@ -64,24 +65,6 @@ public class NPCOrderHandler : MonoBehaviour
             // pesananBaru.targetGurih = (TingkatRasa)Random.Range(0, System.Enum.GetValues(typeof(TingkatRasa)).Length);
 
             daftarPesanan.Add(pesananBaru);
-        }
-    }
-
-    // Tanggung jawab 2: Mengirim ke Dapur
-    public void KirimKeDapur()
-    {
-        if (!pesananSudahDikirimKeDapur && OrderManager.Instance != null)
-        {
-            foreach (OrderData pesanan in daftarPesanan)
-            {
-                OrderManager.Instance.KirimPesananKeDapur(pesanan);
-            }
-            pesananSudahDikirimKeDapur = true;
-
-            sedangMenungguMakanan = true;
-            waktuMenunggu = 0f;
-
-            Debug.Log("Pesanan NPC dikirim ke dapur.");
         }
     }
 

@@ -50,7 +50,6 @@ public class UIManager : MonoBehaviour
 
         if(dataPesanan.Count <= 1)
         {
-            Debug.Log("Jumlah pesanan kurang dari atau sama dengan 1, menyesuaikan ukuran panel.");
             panelPesanan.sizeDelta = new Vector2(lebar1Slot, panjang1Slot);
         }
 
@@ -87,6 +86,7 @@ public class UIManager : MonoBehaviour
             {
                 // Cukup suruh slotnya untuk menampilkan data
                 daftarSlotUI[i].TampilkanData(dataPesananAktif[indexData]);
+                Debug.Log("Update Tampilan Halaman Aktif");
             }
             else
             {

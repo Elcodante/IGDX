@@ -88,7 +88,7 @@ public class NPCController : MonoBehaviour, IPointerClickHandler
             currentState = NPCState.WaitingForFood;
 
             // Suruh handler mengirim tiket ke dapur
-            orderHandler.KirimKeDapur();
+            // orderHandler.KirimKeDapur();
 
             OnPesananDiambil?.Invoke(orderHandler.daftarPesanan, npcSpriteRenderer.sprite);
         }

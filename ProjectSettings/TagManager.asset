@@ -44,14 +44,14 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: UI_Canvas
-    uniqueID: 3541231807
-    locked: 0
   - name: ItemDiAtasUI
     uniqueID: 161547567
     locked: 0
   - name: Bahan
     uniqueID: 968071707
+    locked: 0
+  - name: UI_Canvas
+    uniqueID: 3541231807
     locked: 0
   m_RenderingLayers:
   - Default
