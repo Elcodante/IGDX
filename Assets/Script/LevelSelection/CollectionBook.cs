@@ -26,7 +26,7 @@ public class CollectionBook : MonoBehaviour
 
     private void OnEnable()
     {
-        currentLevel = LevelManager.Instance.LevelNow;
+        currentLevel = LevelManager.Instance.LevelNow - 1;
 
          if (tombolKiri != null) tombolKiri.onClick.AddListener(TampilSebelumnya);
         if (tombolKanan != null) tombolKanan.onClick.AddListener(TampilBerikutnya);

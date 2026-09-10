@@ -116,13 +116,17 @@ PrefabInstance:
       propertyPath: m_SpriteTilingProperty.oldSize.y
       value: 5.98
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 498480362135064203, guid: a669476c0100d4847948942aa413aa1e, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 7095517591368786406, guid: a669476c0100d4847948942aa413aa1e, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1069875868377520205}
+    - targetCorrespondingSourceObject: {fileID: 7095517591368786406, guid: a669476c0100d4847948942aa413aa1e, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -2804638619073220927}
   m_SourcePrefab: {fileID: 100100000, guid: a669476c0100d4847948942aa413aa1e, type: 3}
 --- !u!1 &1734633775182975658 stripped
 GameObject:
@@ -142,6 +146,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PassiveMinigame
   progressBar: {fileID: 0}
+--- !u!114 &-2804638619073220927
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1734633775182975658}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 251c18bc6b5ff354cbda6ab8b3dc7172, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FoodCustomizationController
+  customization:
+    manis: 0
+    lembut: 0
+    gurih: 0
+    isian: 0
 --- !u!4 &3654258370899262754 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5250202370168442478, guid: a669476c0100d4847948942aa413aa1e, type: 3}

@@ -210,100 +210,89 @@ public class CookingAppliance : MonoBehaviour
     }
 
     private void CheckForValidRecipe()
+{
+    // Tentukan alat mana yang menyimpan resep (wajan/panci/kompor)
+    CookingAppliance alatYangDipakai = (mountedAppliance != null) ? mountedAppliance : this;
+
+    alatYangDipakai.currentValidRecipe = null;
+
+    List<RecipeData> activeRecipes = alatYangDipakai.resepYangBisaDimasak;
+    if (activeRecipes == null || activeRecipes.Count == 0) return;
+
+    List<IngredientData> bahanDiWadah = alatYangDipakai.currentIngredients;
+
+    RecipeData resepTerbaik = null;
+    int jumlahBahanTerbanyak = -1;
+
+    RecipeData resepProgress = null;
+    int jumlahBahanCocokTerbanyak = -1;
+
+    foreach (var resep in activeRecipes)
     {
-        CookingAppliance alatYangDipakai =
-            (mountedAppliance != null) ? mountedAppliance : this;
+        List<IngredientData> sisaBahan = new List<IngredientData>(bahanDiWadah);
+        int jumlahBahanCocok = 0;
+        bool semuaBahanWajibAda = true;
 
-        alatYangDipakai.currentValidRecipe = null;
-
-        List<RecipeData> activeRecipes =
-            alatYangDipakai.resepYangBisaDimasak;
-
-        if (activeRecipes == null || activeRecipes.Count == 0)
-            return;
-
-        List<IngredientData> bahanDiWadah =
-            alatYangDipakai.currentIngredients;
-
-        RecipeData resepTerbaik = null;
-
-        int jumlahBahanTerbanyak = -1;
-
-        // Untuk menentukan resep yang paling cocok
-        RecipeData resepProgress = null;
-        int jumlahBahanCocokTerbanyak = -1;
-
-        foreach (var resep in activeRecipes)
+        foreach (var bahanWajib in resep.inputIngredients)
         {
-            List<IngredientData> sisaBahan =
-                new List<IngredientData>(bahanDiWadah);
-
-            int jumlahBahanCocok = 0;
-            bool semuaBahanWajibAda = true;
-
-            foreach (var bahanWajib in resep.inputIngredients)
+            if (sisaBahan.Contains(bahanWajib))
             {
-                if (sisaBahan.Contains(bahanWajib))
-                {
-                    sisaBahan.Remove(bahanWajib);
-                    jumlahBahanCocok++;
-                }
-                else
-                {
-                    semuaBahanWajibAda = false;
-                }
+                sisaBahan.Remove(bahanWajib);
+                jumlahBahanCocok++;
             }
-
-            // Simpan resep dengan progress paling banyak
-            if (jumlahBahanCocok > jumlahBahanCocokTerbanyak)
+            else
             {
-                jumlahBahanCocokTerbanyak = jumlahBahanCocok;
-                resepProgress = resep;
-            }
-
-            // Kalau semua bahan wajib sudah ada,
-            // cek apakah bahan sisanya hanya bumbu
-            if (semuaBahanWajibAda)
-            {
-                bool sisaBahanHanyaBumbu = true;
-
-                foreach (var sisa in sisaBahan)
-                {
-                    if (sisa.peranBahan == PeranBahan.Biasa ||
-                        sisa.peranBahan == PeranBahan.Tepung)
-                    {
-                        sisaBahanHanyaBumbu = false;
-                        break;
-                    }
-                }
-
-                if (sisaBahanHanyaBumbu &&
-                    resep.inputIngredients.Count > jumlahBahanTerbanyak)
-                {
-                    jumlahBahanTerbanyak =
-                        resep.inputIngredients.Count;
-
-                    resepTerbaik = resep;
-                }
+                semuaBahanWajibAda = false;
             }
         }
 
-        alatYangDipakai.currentValidRecipe = resepTerbaik;
-
-        // ==========================
-        // UPDATE RECIPE UI
-        // ==========================
-
-        if (alatYangDipakai.recipeProgressUI != null &&
-            resepProgress != null)
+        if (jumlahBahanCocok > jumlahBahanCocokTerbanyak)
         {
-            alatYangDipakai.recipeProgressUI.UpdateUI(
-                bahanDiWadah,
-                resepProgress.inputIngredients,
-                resepTerbaik != null
-            );
+            jumlahBahanCocokTerbanyak = jumlahBahanCocok;
+            resepProgress = resep;
+        }
+
+        if (semuaBahanWajibAda)
+        {
+            bool sisaBahanHanyaBumbu = true;
+            foreach (var sisa in sisaBahan)
+            {
+                if (sisa.peranBahan == PeranBahan.Biasa || sisa.peranBahan == PeranBahan.Tepung)
+                {
+                    sisaBahanHanyaBumbu = false;
+                    break;
+                }
+            }
+
+            if (sisaBahanHanyaBumbu && resep.inputIngredients.Count > jumlahBahanTerbanyak)
+            {
+                jumlahBahanTerbanyak = resep.inputIngredients.Count;
+                resepTerbaik = resep;
+            }
         }
     }
+
+    // Simpan resep yang valid ke alat & kompor
+    alatYangDipakai.currentValidRecipe = resepTerbaik;
+    this.currentValidRecipe = resepTerbaik; 
+
+    // ==========================
+    // FIX UPDATE RECIPE UI
+    // ==========================
+    // Cari UI di alat yang dipakai, kalau tidak ada fallback ke kompor ini
+    RecipeProgressUI targetUI = (alatYangDipakai.recipeProgressUI != null) 
+                                ? alatYangDipakai.recipeProgressUI 
+                                : this.recipeProgressUI;
+
+    if (targetUI != null && resepProgress != null)
+    {
+        targetUI.UpdateUI(
+            bahanDiWadah,
+            resepProgress.inputIngredients,
+            resepTerbaik != null
+        );
+    }
+}
 
     public void OnStartButtonClicked()
     {
