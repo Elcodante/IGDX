@@ -7,7 +7,7 @@ public class CookingAppliance : MonoBehaviour
 {
     [HideInInspector] public CookingAppliance komporInduk;
     
-    private const int maxIngredient = 10;
+    [SerializeField]private int maxIngredient = 10;
     private int totalIngredient;
 
     [Header("Gimik Tumpukan Bahan (2D)")]

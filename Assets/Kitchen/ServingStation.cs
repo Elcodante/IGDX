@@ -6,16 +6,16 @@ using UnityEngine.EventSystems;
 public class ServingStation : MonoBehaviour, IDropHandler
 {
     [Header("Referensi Piring (Dapur)")]
-    public Transform[] plateSlots = new Transform[3];
+    public Transform[] plateSlots = new Transform[2];
 
     [Header("UI Meja Kasir Dinamis")]
     public GameObject panelBackgroundKasir;
-    public Transform[] frontCounterBoxes = new Transform[3];
+    public Transform[] frontCounterBoxes = new Transform[2];
 
     [Header("UI Tombol")]
     public Button serveButton;
 
-    private DraggableItem2D[] currentFoods = new DraggableItem2D[3];
+    private DraggableItem2D[] currentFoods = new DraggableItem2D[2];
 
     void Start()
     {

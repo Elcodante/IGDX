@@ -9,12 +9,6 @@ public class RollerMinigame : MonoBehaviour, IMinigameMechanic
     public Slider progressBar;
     public RectTransform panahIndikator; 
     
-    [Header("Pengaturan Posisi UI")]
-    [Tooltip("Canvas tempat UI berada (Wajib diisi jika UI berada dalam Canvas Camera/World Space)")]
-    public Canvas parentCanvas; 
-    [Tooltip("Ubah offset ini untuk mengatur jarak UI dari objek")]
-    public Vector3 offsetPosisiUI = new Vector3(0, 1.5f, 0); 
-
     [Header("Pengaturan Geser")]
     public float jarakMinimalGeser = 50f; 
 
@@ -33,11 +27,6 @@ public class RollerMinigame : MonoBehaviour, IMinigameMechanic
 
     private void Start()
     {
-        
-        if (parentCanvas == null && panahIndikator != null)
-        {
-            parentCanvas = panahIndikator.GetComponentInParent<Canvas>();
-        }
 
         MatikanSemuaUI();
     }
@@ -77,9 +66,6 @@ public class RollerMinigame : MonoBehaviour, IMinigameMechanic
         if (!isMinigameActive) return;
 
         currentTime += Time.deltaTime;
-
-        // --- Perbaikan Update Posisi UI agar tidak terpental ---
-        UpdatePosisiUI();
 
         if (currentTime >= timeLimit)
         {
@@ -126,41 +112,6 @@ public class RollerMinigame : MonoBehaviour, IMinigameMechanic
         }
     }
 
-    private void UpdatePosisiUI()
-    {
-        Camera mainCam = Camera.main;
-        if (mainCam == null || panahIndikator == null) return;
-
-        // 1. Dapatkan posisi objek di dunia 3D/2D beserta offset-nya
-        Vector3 worldPos = transform.position + offsetPosisiUI;
-
-        // 2. Konversi posisi dunia ke koordinat layar (Screen Point)
-        Vector3 screenPos = mainCam.WorldToScreenPoint(worldPos);
-
-        // Jika objek di belakang kamera, abaikan agar tidak terpental balik
-        if (screenPos.z < 0) return;
-
-        // 3. Konversi aman dari Screen Point ke AnchoredPosition Canvas
-        RectTransform canvasRect = parentCanvas != null ? parentCanvas.GetComponent<RectTransform>() : panahIndikator.parent as RectTransform;
-
-        Camera uiCamera = (parentCanvas != null && parentCanvas.renderMode != RenderMode.ScreenSpaceOverlay) ? parentCanvas.worldCamera : null;
-
-        if (RectTransformUtility.ScreenPointToLocalPointInRectangle(canvasRect, screenPos, uiCamera, out Vector2 localPoint))
-        {
-            // Terapkan ke Panah Indikator
-            panahIndikator.anchoredPosition = localPoint;
-
-            // Terapkan ke Progress Bar (diberi sedikit jarak ke atas)
-            if (progressBar != null)
-            {
-                RectTransform progressRect = progressBar.GetComponent<RectTransform>();
-                if (progressRect != null)
-                {
-                    progressRect.anchoredPosition = localPoint + new Vector2(0, 50f);
-                }
-            }
-        }
-    }
 
     private void UpdateVisualPanah()
     {

@@ -60,7 +60,7 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     public void OnBeginDrag(PointerEventData eventData)
     {
         if (FoodTooltipUI.Instance != null) FoodTooltipUI.Instance.SembunyikanTooltip();
-        posisiAwal = rectTransform.position;
+        posisiAwal = Vector3.zero;
         parentAwal = transform.parent;
         
         transform.SetParent(transform.root);
@@ -89,7 +89,7 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         canvasGroup.alpha = 1f;
 
         transform.SetParent(parentAwal);
-        rectTransform.position = posisiAwal;
+        rectTransform.localPosition = posisiAwal;
 
         if (iconAsli != null)
         {

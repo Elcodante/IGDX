@@ -82,7 +82,12 @@ public class RecipeProgressUI : MonoBehaviour
             return;
 
         foreach (Transform child in indikatorContainer)
+        {
+            if (child.GetComponent<Button>() != null)
+                continue;
+
             Destroy(child.gameObject);
+        }
 
         Dictionary<IngredientData, int> jumlahBahan =
             new Dictionary<IngredientData, int>();
