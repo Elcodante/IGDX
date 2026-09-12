@@ -14,4 +14,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::IngredientData
   ingredientID: Adonan Kembang Goyang
   ingredientName: Adonan Kembang Goyang
-  icon: {fileID: -2597748956768640907, guid: e15f0830dcffd2f45b5f9ed898aacb97, type: 3}
+  icon: {fileID: 3910416716716093806, guid: dbfb446306aa77d449f1dc767c59feec, type: 3}
+  isFinalProduct: 0
+  peranBahan: 0
+  typeBahan: 0
+  typeBahanInBowl: 2
+  scaleSaatMasukBowl: {x: 1, y: 1, z: 1}
+  jenisTepung: 0
+  dropVisualPrefab: {fileID: 0}
+  dragIcon: {fileID: 0}
+  usePourAnimation: 0
+  inBowlIcon: {fileID: 0}
+  butuhGarnish: 0
+  daftarGarnishDibutuhkan: []
+  spriteTiapTahapGarnish: []
+  customizationResult:
+    manis: 0
+    lembut: 0
+    gurih: 0
+    isian: 0

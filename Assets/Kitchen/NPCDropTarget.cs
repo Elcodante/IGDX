@@ -33,14 +33,12 @@ public class NPCDropTarget : MonoBehaviour, IDropHandler
         {
             string idMakananDiberikan = foodItem.dataBahan.ingredientID;
 
-            // MENGGUNAKAN FUNGSI ENKAPSULASI: Biarkan NPC yang mengecek daftar pesanannya sendiri
-            bool diterima = npcController.CobaTerimaMakanan(idMakananDiberikan);
+            bool diterima = npcController.CobaTerimaMakanan(idMakananDiberikan, out string orderIdSelesai); // BARU
 
             if (diterima)
             {
                 Debug.Log("Sesuai! Makanan diterima oleh NPC.");
 
-                // Hapus 1 tiket pesanan terkait dari papan dapur
                 if (OrderManager.Instance != null)
                 {
                     for (int i = 0; i < OrderManager.Instance.daftarPesananAktif.Count; i++)
@@ -53,14 +51,17 @@ public class NPCDropTarget : MonoBehaviour, IDropHandler
                     }
                 }
 
-                // Hancurkan makanan dari tangan pemain
+                // GANTI: hapus berdasarkan orderId spesifik, bukan nama
+                if (KitchenOrderUI.Instance != null && !string.IsNullOrEmpty(orderIdSelesai))
+                {
+                    KitchenOrderUI.Instance.HapusPesananByOrderId(orderIdSelesai);
+                }
+
                 Destroy(foodItem.gameObject);
             }
             else
             {
                 Debug.Log("Salah makanan! NPC menolak masakan ini.");
-                // Karena makanan tidak di-Destroy, otomatis fitur 'Snap Back' 
-                // di DraggableItem2D akan menarik makanan ini kembali ke meja.
             }
         }
     }

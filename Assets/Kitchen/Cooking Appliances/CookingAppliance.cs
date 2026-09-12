@@ -42,6 +42,10 @@ public class CookingAppliance : MonoBehaviour
     
     [Header("State Tambahan (Khusus Serabi / Dll)")]
     public Sprite spriteBeres;     // Bakal dipake buat state "Udah Matang"
+    public IngredientData targetHasilUntukSpriteBeres; // BARU
+
+// BARU: simpen hasil resep terakhir yang selesai, dipakai buat cek sprite beres
+    private IngredientData hasilResepTerakhir;
 
     [Header("Recipe UI")]
     [SerializeField] private RecipeProgressUI recipeProgressUI;
@@ -219,6 +223,13 @@ public class CookingAppliance : MonoBehaviour
     List<RecipeData> activeRecipes = alatYangDipakai.resepYangBisaDimasak;
     if (activeRecipes == null || activeRecipes.Count == 0) return;
 
+    if (LevelManager.Instance != null && LevelManager.Instance.currentActiveRecipes != null)
+    {
+        activeRecipes = activeRecipes.FindAll(r => LevelManager.Instance.currentActiveRecipes.Contains(r));
+    }
+
+    if (activeRecipes.Count == 0) return;
+
     List<IngredientData> bahanDiWadah = alatYangDipakai.currentIngredients;
 
     RecipeData resepTerbaik = null;
@@ -355,12 +366,14 @@ public class CookingAppliance : MonoBehaviour
         
         CookingAppliance alatYangDipakai = (mountedAppliance != null) ? mountedAppliance : this;
         RecipeData resepSelesai = alatYangDipakai.currentValidRecipe;
+        alatYangDipakai.hasilResepTerakhir = (resepSelesai != null) ? resepSelesai.successResult : null;
 
         if (resepSelesai != null)
         {
             IngredientData hasilAkhir = (finalScore >= 0.6f) ? resepSelesai.successResult : resepSelesai.failResult;
             
-            if (hasilAkhir != null && draggableItemPrefab != null)
+            // GANTI: cek flag per-resep, bukan draggableItemPrefab appliance
+            if (hasilAkhir != null && draggableItemPrefab != null && !resepSelesai.tidakSpawnHasil)
             {
                 Transform titikSpawn = (alatYangDipakai.spawnPoint != null) ? alatYangDipakai.spawnPoint : alatYangDipakai.transform;
                 GameObject objekBaru = Instantiate(draggableItemPrefab, titikSpawn.position, Quaternion.identity);
@@ -379,14 +392,11 @@ public class CookingAppliance : MonoBehaviour
             }
         }
         
-        // Hapus bahan lama dari memori
         alatYangDipakai.currentIngredients.Clear();
         alatYangDipakai.currentValidRecipe = null;
-        // alatYangDipakai.countManis = 0; alatYangDipakai.countLembut = 0; alatYangDipakai.countGurih = 0; alatYangDipakai.countIsian = 0;
         if(foodCustom != null)
-        foodCustom.ResetCustomization();
+            foodCustom.ResetCustomization();
         
-        // --- TRIGGER STATE BERES (2) OTOMATIS SAAT MINIGAME KELAR ---
         alatYangDipakai.UbahStateWajan(2); 
     }
 
@@ -396,12 +406,12 @@ public class CookingAppliance : MonoBehaviour
         {
             Sprite targetSprite = spriteKosong; 
 
-            // 1. Prioritas Utama: Kalau state 2 (Udah Beres)
-            if (stateWajan == 2 && spriteBeres != null)
+            // 1. Prioritas Utama: Kalau state 2 (Udah Beres) DAN memang boleh nampilin spriteBeres
+            if (stateWajan == 2 && spriteBeres != null && BolehTampilkanSpriteBeres())
             {
                 targetSprite = spriteBeres;
             }
-            // 2. Kalau state 1 (Lagi Proses Masak / Tombol Start ditekan)
+            // 2. Kalau state 1 (Lagi Proses Masak)
             else if (stateWajan == 1 && spriteMasak != null)
             {
                 targetSprite = spriteMasak;
@@ -411,13 +421,15 @@ public class CookingAppliance : MonoBehaviour
             {
                 targetSprite = spriteTerisi; 
                 
-                // Cek apakah ada gambar mangkuk/wajan custom dari bahan tertentu
                 IngredientData bahanTerakhir = currentIngredients[currentIngredients.Count - 1]; 
                 foreach (var mapping in visualSpesifikBahan)
                 {
                     if (mapping.bahan == bahanTerakhir)
                     {
-                        targetSprite = mapping.spriteSaatBahanMasuk;
+                        if (mapping.spriteSaatBahanMasuk != null)
+                        {
+                            targetSprite = mapping.spriteSaatBahanMasuk;
+                        }
                         break;
                     }
                 }
@@ -501,6 +513,14 @@ public class CookingAppliance : MonoBehaviour
         }
 
         // Indikator UI Icon Bahan
+    }
+    private bool BolehTampilkanSpriteBeres()
+    {
+        // Kalau field dikosongin di Inspector, behavior lama: selalu muncul
+        if (targetHasilUntukSpriteBeres == null) return true;
+
+        // Kalau diisi, cuma muncul kalau hasil resep terakhir PERSIS sama
+        return hasilResepTerakhir == targetHasilUntukSpriteBeres;
     }
 
   

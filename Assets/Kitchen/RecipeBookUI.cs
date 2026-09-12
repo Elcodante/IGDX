@@ -42,6 +42,8 @@ public class RecipeBookUI : MonoBehaviour
     [Header("Database Buku Resep UI")]
     // List ini sekarang menggunakan struct BukuResepData yang kita buat di atas
     public List<BukuResepData> listResepUI; 
+    private List<BukuResepData> resepAktif = new List<BukuResepData>();
+
 
     // Variabel Internal
     private Vector2[] basePositions;
@@ -55,26 +57,73 @@ public class RecipeBookUI : MonoBehaviour
         {
             basePositions[i] = papers[i].anchoredPosition;
         }
-
+        FilterResepSesuaiLevel();
         UpdateUIContent();
+    }
+
+    private void FilterResepSesuaiLevel()
+    {
+        resepAktif.Clear();
+
+        Debug.Log($"[RECIPE_BOOK] Total listResepUI (master): {listResepUI.Count}");
+
+        if (LevelManager.Instance == null || LevelManager.Instance.currentMenuList == null)
+        {
+            Debug.LogWarning("[RECIPE_BOOK] LevelManager.Instance atau currentMenuList NULL, fallback tampilkan SEMUA resep.");
+            resepAktif.AddRange(listResepUI);
+            currentIndex = 0;
+            return;
+        }
+
+        foreach (var data in listResepUI)
+        {
+            if (data.resepDasar == null)
+            {
+                Debug.LogWarning($"[RECIPE_BOOK] Entry '{data.namaMasakan}' punya resepDasar NULL, gak bisa dicocokkan!");
+                continue;
+            }
+            if (data.resepDasar.successResult == null)
+            {
+                Debug.LogWarning($"[RECIPE_BOOK] resepDasar '{data.resepDasar.name}' punya successResult NULL!");
+                continue;
+            }
+
+            bool ketemu = false;
+            foreach (var menu in LevelManager.Instance.currentMenuList)
+            {
+                if (menu.finalProduct != null && data.resepDasar.successResult == menu.finalProduct)
+                {
+                    resepAktif.Add(data);
+                    ketemu = true;
+                    Debug.Log($"[RECIPE_BOOK] MATCH: '{data.namaMasakan}' cocok dengan menu '{menu.menuName}'");
+                    break;
+                }
+            }
+
+            if (!ketemu)
+                Debug.Log($"[RECIPE_BOOK] '{data.namaMasakan}' TIDAK ada di menuList level ini, disembunyikan.");
+        }
+
+        Debug.Log($"[RECIPE_BOOK] Hasil akhir resepAktif: {resepAktif.Count} dari {listResepUI.Count}");
+        currentIndex = 0;
     }
 
     public void NextRecipe()
     {
-        if (isAnimating || listResepUI.Count <= 1) return;
+        if (isAnimating || resepAktif.Count <= 1) return; // resepAktif, bukan listResepUI
         
         currentIndex++;
-        if (currentIndex >= listResepUI.Count) currentIndex = 0; 
+        if (currentIndex >= resepAktif.Count) currentIndex = 0; 
         
         StartCoroutine(AnimateShuffle(1));
     }
 
     public void PrevRecipe()
     {
-        if (isAnimating || listResepUI.Count <= 1) return;
+        if (isAnimating || resepAktif.Count <= 1) return; // resepAktif, bukan listResepUI
         
         currentIndex--;
-        if (currentIndex < 0) currentIndex = listResepUI.Count - 1; 
+        if (currentIndex < 0) currentIndex = resepAktif.Count - 1; 
         
         StartCoroutine(AnimateShuffle(-1));
     }
@@ -142,13 +191,20 @@ public class RecipeBookUI : MonoBehaviour
 
     private void UpdateUIContent()
     {
-        if (listResepUI == null || listResepUI.Count == 0) return;
-        
-        // Ambil data dari struct UI, BUKAN dari RecipeData
-        BukuResepData data = listResepUI[currentIndex];
+        if (resepAktif == null || resepAktif.Count == 0)
+        {
+            if (namaMasakan != null) namaMasakan.text = "";
+            if (iconMasakan != null) iconMasakan.enabled = false;
+            if (teksBahan != null) teksBahan.text = "";
+            if (teksAlat != null) teksAlat.text = "";
+            if (teksCara != null) teksCara.text = "";
+            return;
+        }
+
+        BukuResepData data = resepAktif[currentIndex]; // <-- resepAktif, bukan listResepUI
 
         if (namaMasakan != null) namaMasakan.text = data.namaMasakan;
-        
+
         if (iconMasakan != null)
         {
             if (data.ikonMasakan != null)
