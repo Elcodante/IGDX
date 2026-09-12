@@ -19,3 +19,4 @@ MonoBehaviour:
     customizations:
     - jenis: 0
       target: 0
+  finalProduct: {fileID: 11400000, guid: b3d950e1e08f0d44a96c24db4043f5c2, type: 2}

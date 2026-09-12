@@ -21,3 +21,4 @@ MonoBehaviour:
       target: 0
     - jenis: 1
       target: 0
+  finalProduct: {fileID: 11400000, guid: 12dc15e785ad23546bbb8e6a8cfa427b, type: 2}

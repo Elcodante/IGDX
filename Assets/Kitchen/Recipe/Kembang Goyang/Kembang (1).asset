@@ -19,5 +19,6 @@ MonoBehaviour:
   requiredMechanic: 1
   timeLimit: 10
   targetDifficulty: 1
-  successResult: {fileID: 0}
+  successResult: {fileID: 11400000, guid: 820ad045eee3ab940a7d83b3da79198f, type: 2}
   failResult: {fileID: 0}
+  tidakSpawnHasil: 1

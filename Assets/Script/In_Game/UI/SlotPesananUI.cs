@@ -6,6 +6,7 @@ using UnityEngine.UI;
 [System.Serializable]
 public class SlotPesananUI
 {
+    
     public GameObject wadahSlot;
     public Image ikonMakanan;
     public TextMeshProUGUI teksNamaMenu;
@@ -13,7 +14,7 @@ public class SlotPesananUI
     public TextMeshProUGUI teksKeyword;
 
     // 1. Tambahkan Event ini untuk ngirim teks ke mana saja
-    public static event Action<string, string> OnPesananDicatat;
+    public static event Action<string, string, string> OnPesananDicatat;
 
     public void TampilkanData(OrderData data)
     {
@@ -24,10 +25,11 @@ public class SlotPesananUI
 
         if (teksKeyword != null) teksKeyword.text = OrderTextHelper.BuatTeksKeyword(data);
         if (teksDialog != null) teksDialog.text = OrderTextHelper.BuatTeksDialog(data);
-        Debug.Log("TampilkanData Aktif");
-        // Panggil method pencatat
-        CatatdiDapur(teksNamaMenu.text, teksKeyword.text);
+
+        CatatdiDapur(teksNamaMenu.text, teksKeyword.text, data.orderId); // BARU
     }
+
+    
 
     public void Sembunyikan()
     {
@@ -35,9 +37,8 @@ public class SlotPesananUI
     }
 
     // 2. Cukup panggil event saat method ini berjalan
-    private void CatatdiDapur(string namaMakanan, string keyword)
+    private void CatatdiDapur(string namaMakanan, string keyword, string orderId) // BARU
     {
-        OnPesananDicatat?.Invoke(namaMakanan, keyword);
-        Debug.Log("Catat Dapur Aktif");
+        OnPesananDicatat?.Invoke(namaMakanan, keyword, orderId);
     }
 }

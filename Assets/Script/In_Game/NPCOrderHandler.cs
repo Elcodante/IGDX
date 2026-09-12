@@ -40,6 +40,7 @@ public class NPCOrderHandler : MonoBehaviour
         for (int i = 0; i < jumlahPesanan; i++)
         {
             OrderData pesananBaru = new OrderData();
+            pesananBaru.orderId = System.Guid.NewGuid().ToString();
             MenuData menuDipilih = menuList[Random.Range(0, menuList.Length)];
 
             pesananBaru.idResep = menuDipilih.menuName;
@@ -67,17 +68,20 @@ public class NPCOrderHandler : MonoBehaviour
     }
 
     // Tanggung jawab 3: Mengecek Makanan dari Pemain
-    public bool CobaTerimaMakanan(string idMakananDiberikan)
+    public bool CobaTerimaMakanan(string idMakananDiberikan, out string orderIdTerhapus)
     {
+        orderIdTerhapus = null;
+
         for (int i = 0; i < daftarPesanan.Count; i++)
         {
             if (daftarPesanan[i].idResep == idMakananDiberikan)
             {
+                orderIdTerhapus = daftarPesanan[i].orderId; // BARU
+
                 HitungSkorMakanan(daftarPesanan[i].idResep, daftarPesanan[i].ikonMakanan);
+                daftarPesanan.RemoveAt(i);
 
-                daftarPesanan.RemoveAt(i); // Coret dari daftar
-
-                if(ApakahSemuaPesananSelesai())
+                if (ApakahSemuaPesananSelesai())
                 {
                     sedangMenungguMakanan = false;
                     Debug.Log("Semua pesanan NPC telah selesai.");

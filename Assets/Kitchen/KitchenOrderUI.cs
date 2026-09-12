@@ -5,17 +5,20 @@ using TMPro;
 
 public class KitchenOrderUI : MonoBehaviour
 {
+    public static KitchenOrderUI Instance { get; private set; }
     // Struct sederhana untuk menampung teks pesanan
     [System.Serializable]
     public struct SimpleOrder
     {
         public string namaMakanan;
         public string keyword;
+        public string orderId;
 
-        public SimpleOrder(string nama, string key)
+        public SimpleOrder(string nama, string key, string id)
         {
             namaMakanan = nama;
             keyword = key;
+            orderId = id;
         }
     }
 
@@ -36,24 +39,41 @@ public class KitchenOrderUI : MonoBehaviour
 
     // List lokal untuk menyimpan pesanan teks
     private List<SimpleOrder> daftarPesananDapur = new List<SimpleOrder>();
+    
 
     private void Awake()
     {
+        Instance = this;
         SlotPesananUI.OnPesananDicatat += TerimaTeksDapur;
         Debug.Log("Event Aktif");
     }
 
     private void OnDestroy()
     {
+         if (Instance == this) Instance = null;
         SlotPesananUI.OnPesananDicatat -= TerimaTeksDapur;
     }
 
-    // Tangkap data dan simpan ke List lokal
-    private void TerimaTeksDapur(string namaMakanan, string keyword)
+    public void HapusPesananByOrderId(string orderId)
     {
-        daftarPesananDapur.Add(new SimpleOrder(namaMakanan, keyword));
+        int index = daftarPesananDapur.FindIndex(o => o.orderId == orderId);
+
+        if (index != -1)
+        {
+            Debug.Log($"[KITCHEN_ORDER] Menghapus tiket dengan orderId '{orderId}'.");
+            HapusPesanan(index);
+        }
+        else
+        {
+            Debug.LogWarning($"[KITCHEN_ORDER] orderId '{orderId}' tidak ditemukan di papan!");
+        }
+    }
+
+    // Tangkap data dan simpan ke List lokal
+    private void TerimaTeksDapur(string namaMakanan, string keyword, string orderId) // BARU
+    {
+        daftarPesananDapur.Add(new SimpleOrder(namaMakanan, keyword, orderId));
         UpdateUI();
-        Debug.Log("Teks diterima dan UI diperbarui.");
     }
 
     public void NextPage()

@@ -18,8 +18,7 @@ MonoBehaviour:
     ikonMakanan: {fileID: -5081801242459528388, guid: 63c73e4f00501eb4faaa6c29086d2401, type: 3}
     customizations:
     - jenis: 2
-      ingredient: {fileID: 11400000, guid: 3f2d486a9222e874cb4d378d02235ad6, type: 2}
       target: 0
     - jenis: 1
-      ingredient: {fileID: 11400000, guid: 1431c2da236bd8e48aa65da57e651b48, type: 2}
       target: 0
+  finalProduct: {fileID: 11400000, guid: dfa096bd9a1c70048af4a94e26ebed9b, type: 2}

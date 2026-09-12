@@ -99,14 +99,12 @@ public class NPCController : MonoBehaviour, IPointerClickHandler
     }
 
     // Fungsi Facade (Jembatan) untuk NPCDropTarget
-    public bool CobaTerimaMakanan(string idMakananDiberikan)
+    public bool CobaTerimaMakanan(string idMakananDiberikan, out string orderIdTerhapus)
     {
-        // Lempar tugas pengecekan ke orderHandler
-        bool diterima = orderHandler.CobaTerimaMakanan(idMakananDiberikan);
+        bool diterima = orderHandler.CobaTerimaMakanan(idMakananDiberikan, out orderIdTerhapus);
 
         if (diterima)
         {
-            // Cek apakah NPC ini sudah kenyang (semua pesanan terpenuhi)
             if (orderHandler.ApakahSemuaPesananSelesai())
             {
                 Pulang();

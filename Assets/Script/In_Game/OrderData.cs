@@ -34,6 +34,7 @@ public struct CustomizationData
 [System.Serializable]
 public struct OrderData
 {
+    public string orderId; 
     public string idResep;
     public Sprite ikonMakanan;
 

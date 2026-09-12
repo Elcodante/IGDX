@@ -49,7 +49,7 @@ public void OnDrop(PointerEventData eventData)
         if (CobaTambahkanGarnish(garnishUI.dataBahan))
         {
             // Garnish habis dipakai, hapus dari UI rak/tangan
-            Destroy(garnishUI.gameObject);
+            // Destroy(garnishUI.gameObject);
         }
         else
         {

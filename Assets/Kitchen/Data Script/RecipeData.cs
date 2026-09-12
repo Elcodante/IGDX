@@ -15,6 +15,7 @@ public class RecipeData : ScriptableObject
     [Header("Hasil")]
     public IngredientData successResult; // Jika skor bagus 
     public IngredientData failResult;    // Jika skor jelek 
+    public bool tidakSpawnHasil = false;
 }
 
 // Ubah baris enum di paling bawah menjadi seperti ini:

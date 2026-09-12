@@ -74,6 +74,13 @@ public class DropTarget : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPo
                 }
                 return; // Selesai urusan pasang alat, stop sampai di sini
             }
+            if (appliance.isStoveBase && appliance.GetMountedAppliance() == null)
+            {
+                Debug.Log("Kompor masih kosong! Pasang panci/wajan dulu sebelum masukin bahan atau pakai cetakan.");
+                return; // stop di sini, biarkan item snap-back ke posisi asal
+            }
+
+
 
             // --- BARU: DETEKSI CETAKAN TOOL ---
             CetakanTool cetakan = eventData.pointerDrag.GetComponent<CetakanTool>();

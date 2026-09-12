@@ -6,5 +6,6 @@ public class MenuData : ScriptableObject
     [Header("Informasi Menu")]
     public string menuName; // Nama menu
     public OrderData order;
+    public IngredientData finalProduct;
 
 }
