@@ -8740,7 +8740,7 @@ MonoBehaviour:
   - resepDasar: {fileID: 11400000, guid: c96ab9ab57f66df4c855a8a6641671c1, type: 2}
     namaMasakan: Lapis
     ikonMasakan: {fileID: 224318155784578198, guid: a87843af65f163c40a48011182e8d6a2, type: 3}
-    teksBahan: Tepung Beras, Tepung Tapioka,  Gula Merah, Santan
+    teksBahan: Tepung Beras, Tepung Tapioka, Gula Merah, Santan
     teksAlat: Mangkuk, Kukusan, Daun
     teksCara: '1. Masukan Bahan Ke mangkuk
 
@@ -8752,7 +8752,9 @@ MonoBehaviour:
       4. Masukkan adonan ke kukusan
 
       5. lakukan
-      3 kali step ke 4'
+      2 kali step ke 4
+
+      6. Potong di talenan'
   - resepDasar: {fileID: 11400000, guid: b8a7edbe600eb3d40b6b8a5a6088680c, type: 2}
     namaMasakan: Kembang Goyang
     ikonMasakan: {fileID: 7449724838469933353, guid: 398f0f3fe94281c44a3a19117f3da105, type: 3}
@@ -8865,7 +8867,6 @@ MonoBehaviour:
   semuaResep:
   - {fileID: 11400000, guid: 756cab6bb5060bf4eb67a77e7a4a3b5e, type: 2}
   - {fileID: 11400000, guid: 3665dd341a10c274db56086c28c77782, type: 2}
-  - {fileID: 11400000, guid: fe66a132f78e7fb4d85a263b541f5c42, type: 2}
   - {fileID: 11400000, guid: ea9c4c2e7abdc9a4285fe1e19e230eb1, type: 2}
   - {fileID: 11400000, guid: 5bd8c2b51cf672a4abeb26bed70c3eeb, type: 2}
   - {fileID: 11400000, guid: 4c38c751c6be395489ebcfa4e25ac11d, type: 2}
