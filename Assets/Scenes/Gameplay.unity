@@ -2280,7 +2280,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -107, y: -202}
+  m_AnchoredPosition: {x: -107, y: -195.9}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &133384063
@@ -22750,6 +22750,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 0248329b1e73f27479d4a696815a3def, type: 2}
   - {fileID: 11400000, guid: 01c84c7baa7138541b5b7eafc05083da, type: 2}
   - {fileID: 11400000, guid: fb108f1e30a3e3241bd8bd00f3e5ab8c, type: 2}
+  - {fileID: 11400000, guid: 51d7f2d3b751ba245aa9a6093db8df3f, type: 2}
   draggableItemPrefab: {fileID: 8340565135148567373, guid: 6a5f009ce834a6346b05a750c4041426, type: 3}
   spawnPoint: {fileID: 5250202370097049794}
   applianceSprite2D: {fileID: 623856024792367793}
