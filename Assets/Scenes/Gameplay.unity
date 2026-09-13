@@ -359,9 +359,9 @@ RectTransform:
   - {fileID: 1850476886}
   m_Father: {fileID: 1114000244}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 830, y: -69.005}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &11561908
@@ -435,9 +435,9 @@ RectTransform:
   - {fileID: 1009778275}
   m_Father: {fileID: 1114000244}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 1740, y: -69.005}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &12968471
@@ -4750,9 +4750,9 @@ RectTransform:
   - {fileID: 302551980}
   m_Father: {fileID: 1114000244}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 1220, y: -69.005}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &382642619
@@ -5837,9 +5837,9 @@ RectTransform:
   - {fileID: 2138816021}
   m_Father: {fileID: 1114000244}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 960, y: -69.005}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &471548709
@@ -6475,9 +6475,9 @@ RectTransform:
   - {fileID: 184648152}
   m_Father: {fileID: 463803013}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 180, y: -69.005}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &512613995
@@ -6775,9 +6775,9 @@ RectTransform:
   - {fileID: 643241573}
   m_Father: {fileID: 1114000244}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 2000, y: -69.005}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &544785850
@@ -8499,9 +8499,9 @@ RectTransform:
   - {fileID: 1259979341}
   m_Father: {fileID: 463803013}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 310, y: -69.005}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &674067097
@@ -8606,7 +8606,7 @@ MonoBehaviour:
   - resepDasar: {fileID: 11400000, guid: 3665dd341a10c274db56086c28c77782, type: 2}
     namaMasakan: Serabi
     ikonMasakan: {fileID: -5081801242459528388, guid: 63c73e4f00501eb4faaa6c29086d2401, type: 3}
-    teksBahan: Tepung, Gula Merah, Santan
+    teksBahan: Tepung Beras, Gula Merah, Santan
     teksAlat: Mangkuk, Serabi Pan
     teksCara: '1. Masukan Bahan Ke mangkuk
 
@@ -8617,7 +8617,7 @@ MonoBehaviour:
   - resepDasar: {fileID: 11400000, guid: 5bd8c2b51cf672a4abeb26bed70c3eeb, type: 2}
     namaMasakan: Putu Ayu
     ikonMasakan: {fileID: 1968876835447747157, guid: 2c6e3da22f59df54ca7875fc00a36307, type: 3}
-    teksBahan: Tepung, Telur, Santan, Kelapa
+    teksBahan: Tepung Terigu, Telur, Santan, Kelapa
     teksAlat: Mangkuk, Kukusan
     teksCara: '1. Masukan Bahan Ke mangkuk
 
@@ -8630,7 +8630,7 @@ MonoBehaviour:
   - resepDasar: {fileID: 11400000, guid: be1a5201ec7952647be702daa59e10fe, type: 2}
     namaMasakan: Pastel
     ikonMasakan: {fileID: 6679852185467842059, guid: adc058bc830aa2c44952cc5afb6f8ff7, type: 3}
-    teksBahan: Tepung, Telur
+    teksBahan: Tepung Terigu, Telur
     teksAlat: Mangkuk, Talenan, Wajan, Daun
     teksCara: '1. Masukan Bahan Ke mangkuk
 
@@ -8650,7 +8650,7 @@ MonoBehaviour:
   - resepDasar: {fileID: 11400000, guid: fe79b9e1ded45e347b7bdb9db3afddc0, type: 2}
     namaMasakan: Onde Onde
     ikonMasakan: {fileID: -385209768975763311, guid: 015e27e911a6ddc44a28a94ca48e86e2, type: 3}
-    teksBahan: Tepung, Kentang
+    teksBahan: Tepung Ketan, Kentang
     teksAlat: Mangkuk, Talenan, Daun, Wajan
     teksCara: '1. Masukan Bahan Ke mangkuk
 
@@ -8670,7 +8670,7 @@ MonoBehaviour:
   - resepDasar: {fileID: 11400000, guid: 553efc2ab41c983428490f37311963b3, type: 2}
     namaMasakan: Naga Sari
     ikonMasakan: {fileID: 2209797324394584017, guid: bdc7f2ce956eb134fb71bba28350c709, type: 3}
-    teksBahan: Tepung, Gula Merah, Santan
+    teksBahan: Tepung Beras, Gula Merah, Santan
     teksAlat: Mangkuk, Kukusan, Daun
     teksCara: '1. Masukan Bahan Ke mangkuk
 
@@ -8688,7 +8688,7 @@ MonoBehaviour:
   - resepDasar: {fileID: 11400000, guid: 392f11034321d6c47abea05c1a6d0461, type: 2}
     namaMasakan: Lupis
     ikonMasakan: {fileID: 4754585837160666378, guid: 8445616465d3bb546a3718794a90081c, type: 3}
-    teksBahan: Tepung, Air, Gula Merah, Kelapa
+    teksBahan: Tepung Ketan, Air, Gula Merah, Kelapa
     teksAlat: Mangkuk, Kukusan, Daun
     teksCara: '1. Masukan Tepung dan Air Ke mangkuk
 
@@ -8711,7 +8711,7 @@ MonoBehaviour:
   - resepDasar: {fileID: 11400000, guid: c96ab9ab57f66df4c855a8a6641671c1, type: 2}
     namaMasakan: Lapis
     ikonMasakan: {fileID: 224318155784578198, guid: a87843af65f163c40a48011182e8d6a2, type: 3}
-    teksBahan: Tepung, Gula Merah, Santan
+    teksBahan: Tepung Beras, Tepung Tapioka, Gula Merah, Santan
     teksAlat: Mangkuk, Kukusan, Daun
     teksCara: '1. Masukan Bahan Ke mangkuk
 
@@ -8723,11 +8723,13 @@ MonoBehaviour:
       4. Masukkan adonan ke kukusan
 
       5. lakukan
-      3 kali step ke 4'
+      2 kali step ke 4
+
+      6. Potong di talenan'
   - resepDasar: {fileID: 11400000, guid: b8a7edbe600eb3d40b6b8a5a6088680c, type: 2}
     namaMasakan: Kembang Goyang
     ikonMasakan: {fileID: 7449724838469933353, guid: 398f0f3fe94281c44a3a19117f3da105, type: 3}
-    teksBahan: Tepung, Telur, Santan
+    teksBahan: Tepung Beras, Telur, Santan
     teksAlat: Mangkuk, Cetakan Kembang Goyang, Wajan
     teksCara: '1. Masukan Bahan Ke mangkuk
 
@@ -8764,7 +8766,7 @@ MonoBehaviour:
   - resepDasar: {fileID: 11400000, guid: bef7536293c8c7647bb8a247bf47acba, type: 2}
     namaMasakan: Cenil
     ikonMasakan: {fileID: 5325722570233953717, guid: e15f0830dcffd2f45b5f9ed898aacb97, type: 3}
-    teksBahan: Tepung, Air, Kelapa
+    teksBahan: Tepung Tapioka, Air, Kelapa
     teksAlat: Mangkuk, Talenan, Kukusan
     teksCara: '1. Masukan Bahan Ke mangkuk
 
@@ -8836,7 +8838,6 @@ MonoBehaviour:
   semuaResep:
   - {fileID: 11400000, guid: 756cab6bb5060bf4eb67a77e7a4a3b5e, type: 2}
   - {fileID: 11400000, guid: 3665dd341a10c274db56086c28c77782, type: 2}
-  - {fileID: 11400000, guid: fe66a132f78e7fb4d85a263b541f5c42, type: 2}
   - {fileID: 11400000, guid: ea9c4c2e7abdc9a4285fe1e19e230eb1, type: 2}
   - {fileID: 11400000, guid: 5bd8c2b51cf672a4abeb26bed70c3eeb, type: 2}
   - {fileID: 11400000, guid: 4c38c751c6be395489ebcfa4e25ac11d, type: 2}
@@ -9006,9 +9007,9 @@ RectTransform:
   - {fileID: 2130814106}
   m_Father: {fileID: 1114000244}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 1090, y: -69.005}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &691594581
@@ -9892,9 +9893,9 @@ RectTransform:
   - {fileID: 1601251723}
   m_Father: {fileID: 463803013}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 50, y: -69.005}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &796904093
@@ -12805,9 +12806,9 @@ RectTransform:
   - {fileID: 304983972}
   m_Father: {fileID: 1114000244}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 1480, y: -69.005}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1037509307
@@ -15345,9 +15346,9 @@ RectTransform:
   - {fileID: 717981754}
   m_Father: {fileID: 463803013}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 440, y: -69.005}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1294323272
@@ -15924,9 +15925,9 @@ RectTransform:
   - {fileID: 2103250662}
   m_Father: {fileID: 1114000244}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 1610, y: -69.005}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1362269963
@@ -16772,9 +16773,9 @@ RectTransform:
   - {fileID: 604525152}
   m_Father: {fileID: 1114000244}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 440, y: -69.005}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1490512001
@@ -16888,9 +16889,9 @@ RectTransform:
   - {fileID: 952352185}
   m_Father: {fileID: 1114000244}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 180, y: -69.005}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1538571857
@@ -17611,9 +17612,9 @@ RectTransform:
   - {fileID: 2024213249}
   m_Father: {fileID: 1114000244}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 310, y: -69.005}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1589614236
@@ -18459,9 +18460,9 @@ RectTransform:
   - {fileID: 572124847}
   m_Father: {fileID: 1114000244}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 700, y: -69.005}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1692246935
@@ -18786,9 +18787,9 @@ RectTransform:
   - {fileID: 516376145}
   m_Father: {fileID: 463803013}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 570, y: -69.005}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1715761841
@@ -19223,9 +19224,9 @@ RectTransform:
   - {fileID: 1792346363}
   m_Father: {fileID: 1114000244}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 570, y: -69.005}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1765479403
@@ -19808,9 +19809,9 @@ RectTransform:
   - {fileID: 686307777}
   m_Father: {fileID: 1114000244}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 1350, y: -69.005}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1839692045
@@ -20442,9 +20443,9 @@ RectTransform:
   - {fileID: 93119797}
   m_Father: {fileID: 1114000244}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 50, y: -69.005}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1884114831
@@ -21492,9 +21493,9 @@ RectTransform:
   - {fileID: 158237026}
   m_Father: {fileID: 1114000244}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 1870, y: -69.005}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1986745604
