@@ -1,11 +1,13 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
-using System.Collections.Generic;
 
-public enum NPCState { WalkToCounter, WaitingToOrder, WaitingForFood, Leave }
+// 1. TAMBAHKAN STATUS 'Spawning' DI SINI
+public enum NPCState { Spawning, WalkToCounter, WaitingToOrder, WaitingForFood, Leave }
 
-[RequireComponent(typeof(NPCOrderHandler))] // Memastikan script Order otomatis terpasang
+[RequireComponent(typeof(NPCOrderHandler))]
 public class NPCController : MonoBehaviour, IPointerClickHandler
 {
     [Header("NPC Settings")]
@@ -24,15 +26,14 @@ public class NPCController : MonoBehaviour, IPointerClickHandler
     private SpriteRenderer tandaSeruRenderer;
     private SpriteRenderer npcSpriteRenderer;
 
-    // Referensi ke "Buku Catatan" NPC
     private NPCOrderHandler orderHandler;
+    private SpriteRenderer sr;
 
     void Awake()
     {
         if (tandaSeru != null) tandaSeruRenderer = tandaSeru.GetComponent<SpriteRenderer>();
         npcSpriteRenderer = GetComponent<SpriteRenderer>();
-
-        // Ambil komponen handler
+        sr = GetComponent<SpriteRenderer>();
         orderHandler = GetComponent<NPCOrderHandler>();
     }
 
@@ -42,18 +43,22 @@ public class NPCController : MonoBehaviour, IPointerClickHandler
     {
         targetWaypoint = assignedWaypoint;
         mySlotIndex = slotIndex;
-        currentState = NPCState.WalkToCounter;
+
+        // 2. KUNCI STATUS KE 'Spawning' AGAR TIDAK LANGSUNG JALAN
+        currentState = NPCState.Spawning;
 
         tandaSeru.SetActive(false);
         if (tandaSeruRenderer != null) tandaSeruRenderer.color = Color.white;
 
-        // Suruh handler mereset dan mengacak pesanan
         orderHandler.ResetHandler();
         orderHandler.GenerateRandomOrder(menuList, minVariasi, maxVariasi);
+
+        StartCoroutine(AnimasiMunculLaluJalan(targetWaypoint));
     }
 
     void Update()
     {
+        // Fungsi Update ini otomatis MENGABAIKAN NPC yang statusnya 'Spawning'
         if (currentState == NPCState.WalkToCounter || currentState == NPCState.Leave)
         {
             MoveTowardsTarget();
@@ -86,10 +91,6 @@ public class NPCController : MonoBehaviour, IPointerClickHandler
         {
             if (tandaSeruRenderer != null) tandaSeruRenderer.color = warnaPesananDiambil;
             currentState = NPCState.WaitingForFood;
-
-            // Suruh handler mengirim tiket ke dapur
-            // orderHandler.KirimKeDapur();
-
             OnPesananDiambil?.Invoke(orderHandler.daftarPesanan, npcSpriteRenderer.sprite);
         }
         else if (currentState == NPCState.WaitingForFood)
@@ -98,7 +99,6 @@ public class NPCController : MonoBehaviour, IPointerClickHandler
         }
     }
 
-    // Fungsi Facade (Jembatan) untuk NPCDropTarget
     public bool CobaTerimaMakanan(string idMakananDiberikan, out string orderIdTerhapus)
     {
         bool diterima = orderHandler.CobaTerimaMakanan(idMakananDiberikan, out orderIdTerhapus);
@@ -119,5 +119,32 @@ public class NPCController : MonoBehaviour, IPointerClickHandler
         tandaSeru.SetActive(false);
         targetWaypoint = (mySpawner != null && mySpawner.exitPoint != null) ? mySpawner.exitPoint : transform;
         mySpawner.BebaskanSlot(mySlotIndex);
+    }
+
+    private IEnumerator AnimasiMunculLaluJalan(Transform targetWaypoint)
+    {
+        if (sr != null)
+        {
+            Color warna = sr.color;
+            warna.a = 0f;
+            sr.color = warna;
+
+            float waktuFade = 0f;
+            float durasiFade = 2f;
+
+            while (waktuFade < durasiFade)
+            {
+                waktuFade += Time.deltaTime;
+                warna.a = Mathf.Lerp(0f, 1f, waktuFade / durasiFade);
+                sr.color = warna;
+                yield return null;
+            }
+
+            warna.a = 1f;
+            sr.color = warna;
+        }
+
+        // 3. SETELAH ANIMASI SELESAI, BARU UBAH STATUS KE BERJALAN!
+        currentState = NPCState.WalkToCounter;
     }
 }

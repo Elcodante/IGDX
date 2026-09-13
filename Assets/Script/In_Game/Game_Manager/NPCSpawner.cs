@@ -1,5 +1,7 @@
-using UnityEngine;
+using System.Collections;
 using System.Collections.Generic;
+using UnityEngine;
+using TMPro; // PENTING: Tambahkan ini untuk mengakses TextMeshPro
 
 public class NPCSpawner : MonoBehaviour
 {
@@ -27,8 +29,13 @@ public class NPCSpawner : MonoBehaviour
     public LevelEndManager levelEndManager;
     private int jumlahNPCSelesai = 0;
 
-    // 1. TAMBAHKAN REFERENSI KE MANAJER ANTREAN
     public NPCQueueManager queueManager;
+
+    // --- KODE BARU: Referensi UI Penghitung ---
+    [Header("UI Progress NPC")]
+    public TextMeshProUGUI teksProgressNPC;
+    private Coroutine rutinitasAnimasiTeks;
+    // ------------------------------------------
 
     private float timer;
     private int jumlahNPCSudahMuncul = 0;
@@ -37,7 +44,6 @@ public class NPCSpawner : MonoBehaviour
     {
         LoadLevelData();
 
-        // 2. KODE INISIALISASI POOL LEBIH BERSIH
         npcPool = new Queue<GameObject>();
 
         if (npcPrefab.Length == 0 || npcPrefab[0] == null) return;
@@ -65,7 +71,6 @@ public class NPCSpawner : MonoBehaviour
 
         if (timer >= spawnInterval)
         {
-            // 3. MINTA INFO SLOT KOSONG DARI QUEUE MANAGER
             int availableSlot = queueManager.GetEmptySlot();
 
             if (availableSlot != -1 && npcPool.Count > 0)
@@ -78,7 +83,6 @@ public class NPCSpawner : MonoBehaviour
 
     private void SpawnNPC(int slotIndex)
     {
-        // 4. BERITAHU QUEUE MANAGER BAHWA SLOT INI DIAMBIL
         queueManager.TempatiSlot(slotIndex);
 
         GameObject spawnNPC = npcPool.Dequeue();
@@ -86,27 +90,25 @@ public class NPCSpawner : MonoBehaviour
         spawnNPC.SetActive(true);
 
         NPCController controller = spawnNPC.GetComponent<NPCController>();
-
-        // 5. MINTA TITIK WAYPOINT DARI QUEUE MANAGER
         Transform targetWaypoint = queueManager.GetWaypoint(slotIndex);
 
         controller.InitializeNPC(targetWaypoint, slotIndex, menuList, minimalVariasiMenu, maksimalVariasiMenu);
 
         jumlahNPCSudahMuncul++;
-        Debug.Log($"NPC spawned. Total NPCs spawned: {jumlahNPCSudahMuncul}/{maksimalNPC}");
     }
 
     private void LoadLevelData()
     {
         if (LevelManager.Instance != null)
         {
-            Debug.Log("Ini Level" + LevelManager.Instance.pilihanlevel);
             menuList = LevelManager.Instance.currentMenuList;
             maksimalNPC = LevelManager.Instance.currentMaksimalNPC;
         }
+
+        // --- KODE BARU: Set teks ke 0/X di awal permainan tanpa animasi ---
+        UpdateProgressUI(false);
     }
 
-    // 6. FUNGSI FACADE: Meneruskan perintah dari NPCController ke QueueManager
     public void BebaskanSlot(int slotIndex)
     {
         queueManager.BebaskanSlot(slotIndex);
@@ -114,12 +116,7 @@ public class NPCSpawner : MonoBehaviour
 
     public void ReturnNPC(GameObject npc)
     {
-        // CEK TERSANGKA 1: Apakah Sistem Pool Kosong?
-        if (npcPool == null)
-        {
-            Debug.LogError("<color=red>[ERROR 1]</color> npcPool KOSONG! Ini biasanya terjadi karena ada error merah lain saat game baru saja di-Play (di fungsi Start).");
-            return; // Hentikan sistem agar tidak crash
-        }
+        if (npcPool == null) return;
 
         npc.SetActive(false);
         npcPool.Enqueue(npc);
@@ -127,37 +124,68 @@ public class NPCSpawner : MonoBehaviour
         // Tambah hitungan NPC yang sudah beres
         jumlahNPCSelesai++;
 
+        // --- KODE BARU: Perbarui Teks UI dengan animasi Pop! ---
+        UpdateProgressUI(true);
+
         // Cek apakah NPC yang sudah di-spawn mencapai batas, DAN semuanya sudah pulang
         if (jumlahNPCSudahMuncul >= maksimalNPC && jumlahNPCSelesai >= maksimalNPC)
         {
-            Debug.Log("Level Selesai! Semua NPC sudah pulang.");
-
             if (LevelManager.Instance != null)
             {
                 LevelManager.Instance.NextLevel();
-                Debug.Log($"Level berhasil ditingkatkan! Level saat ini: {LevelManager.Instance.LevelNow}");
-            }
-            else
-            {
-                Debug.LogError("LevelManager tidak ditemukan! Pastikan LevelManager ada di Scene Map.");
             }
 
-            // CEK TERSANGKA 2: Apakah LevelEndManager belum dimasukkan?
-            if (levelEndManager == null)
+            if (levelEndManager != null && ScoreManager.Instance != null)
             {
-                Debug.LogError("<color=red>[ERROR 2]</color> levelEndManager KOSONG! Anda belum menarik objek LevelEnd_Manager ke dalam kolom Spawner di Inspector.");
-                return; // Hentikan sistem agar tidak crash
+                levelEndManager.TampilkanHasilAkhir(ScoreManager.Instance.totalSkor);
             }
-
-            // CEK TERSANGKA 3: Apakah ScoreManager hilang dari Scene?
-            if (ScoreManager.Instance == null)
-            {
-                Debug.LogError("<color=red>[ERROR 3]</color> ScoreManager KOSONG! Pastikan objek yang memiliki script ScoreManager ada menyala di dalam Scene.");
-                return; // Hentikan sistem agar tidak crash
-            }
-
-            // Jika semua aman, panggil Panel Hasil!
-            levelEndManager.TampilkanHasilAkhir(ScoreManager.Instance.totalSkor);
         }
+    }
+
+    // ==========================================
+    // FUNGSI BARU UNTUK UI PENGHITUNG
+    // ==========================================
+    private void UpdateProgressUI(bool pakaiAnimasi)
+    {
+        if (teksProgressNPC != null)
+        {
+            // Ubah teksnya
+            teksProgressNPC.text = $"{jumlahNPCSelesai}/{maksimalNPC}";
+
+            // Jalankan efek jus (animasi) jika diminta
+            if (pakaiAnimasi)
+            {
+                if (rutinitasAnimasiTeks != null) StopCoroutine(rutinitasAnimasiTeks);
+                rutinitasAnimasiTeks = StartCoroutine(AnimasiPopTeks());
+            }
+        }
+    }
+
+    private IEnumerator AnimasiPopTeks()
+    {
+        Vector3 skalaNormal = Vector3.one;
+        Vector3 skalaMembesar = new Vector3(1.5f, 1.5f, 1f); // Membesar 1.5x
+        float durasi = 0.15f;
+        float waktu = 0f;
+
+        // Fase 1: Membesar dengan cepat
+        while (waktu < durasi)
+        {
+            waktu += Time.deltaTime;
+            teksProgressNPC.transform.localScale = Vector3.Lerp(skalaNormal, skalaMembesar, waktu / durasi);
+            yield return null;
+        }
+
+        waktu = 0f;
+
+        // Fase 2: Kembali ke ukuran normal
+        while (waktu < durasi)
+        {
+            waktu += Time.deltaTime;
+            teksProgressNPC.transform.localScale = Vector3.Lerp(skalaMembesar, skalaNormal, waktu / durasi);
+            yield return null;
+        }
+
+        teksProgressNPC.transform.localScale = skalaNormal; // Pastikan posisi akhir presisi
     }
 }
