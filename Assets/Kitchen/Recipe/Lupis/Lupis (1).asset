@@ -20,3 +20,4 @@ MonoBehaviour:
   targetDifficulty: 1
   successResult: {fileID: 11400000, guid: d9688947655c3a344a92aca4aec08b9f, type: 2}
   failResult: {fileID: 0}
+  tidakSpawnHasil: 0

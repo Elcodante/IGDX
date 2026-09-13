@@ -2280,7 +2280,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -107, y: -202}
+  m_AnchoredPosition: {x: -107, y: -195.9}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &133384063
@@ -8606,7 +8606,7 @@ MonoBehaviour:
   - resepDasar: {fileID: 11400000, guid: 3665dd341a10c274db56086c28c77782, type: 2}
     namaMasakan: Serabi
     ikonMasakan: {fileID: -5081801242459528388, guid: 63c73e4f00501eb4faaa6c29086d2401, type: 3}
-    teksBahan: Tepung, Gula Merah, Santan
+    teksBahan: Tepung Beras, Gula Merah, Santan
     teksAlat: Mangkuk, Serabi Pan
     teksCara: '1. Masukan Bahan Ke mangkuk
 
@@ -8617,7 +8617,7 @@ MonoBehaviour:
   - resepDasar: {fileID: 11400000, guid: 5bd8c2b51cf672a4abeb26bed70c3eeb, type: 2}
     namaMasakan: Putu Ayu
     ikonMasakan: {fileID: 1968876835447747157, guid: 2c6e3da22f59df54ca7875fc00a36307, type: 3}
-    teksBahan: Tepung, Telur, Santan, Kelapa
+    teksBahan: Tepung Terigu, Telur, Santan, Kelapa
     teksAlat: Mangkuk, Kukusan
     teksCara: '1. Masukan Bahan Ke mangkuk
 
@@ -8630,7 +8630,7 @@ MonoBehaviour:
   - resepDasar: {fileID: 11400000, guid: be1a5201ec7952647be702daa59e10fe, type: 2}
     namaMasakan: Pastel
     ikonMasakan: {fileID: 6679852185467842059, guid: adc058bc830aa2c44952cc5afb6f8ff7, type: 3}
-    teksBahan: Tepung, Telur
+    teksBahan: Tepung Terigu, Telur
     teksAlat: Mangkuk, Talenan, Wajan, Daun
     teksCara: '1. Masukan Bahan Ke mangkuk
 
@@ -8650,7 +8650,7 @@ MonoBehaviour:
   - resepDasar: {fileID: 11400000, guid: fe79b9e1ded45e347b7bdb9db3afddc0, type: 2}
     namaMasakan: Onde Onde
     ikonMasakan: {fileID: -385209768975763311, guid: 015e27e911a6ddc44a28a94ca48e86e2, type: 3}
-    teksBahan: Tepung, Kentang
+    teksBahan: Tepung Ketan, Kentang
     teksAlat: Mangkuk, Talenan, Daun, Wajan
     teksCara: '1. Masukan Bahan Ke mangkuk
 
@@ -8670,7 +8670,7 @@ MonoBehaviour:
   - resepDasar: {fileID: 11400000, guid: 553efc2ab41c983428490f37311963b3, type: 2}
     namaMasakan: Naga Sari
     ikonMasakan: {fileID: 2209797324394584017, guid: bdc7f2ce956eb134fb71bba28350c709, type: 3}
-    teksBahan: Tepung, Gula Merah, Santan
+    teksBahan: Tepung Beras, Gula Merah, Santan
     teksAlat: Mangkuk, Kukusan, Daun
     teksCara: '1. Masukan Bahan Ke mangkuk
 
@@ -8688,7 +8688,7 @@ MonoBehaviour:
   - resepDasar: {fileID: 11400000, guid: 392f11034321d6c47abea05c1a6d0461, type: 2}
     namaMasakan: Lupis
     ikonMasakan: {fileID: 4754585837160666378, guid: 8445616465d3bb546a3718794a90081c, type: 3}
-    teksBahan: Tepung, Air, Gula Merah, Kelapa
+    teksBahan: Tepung Ketan, Air, Gula Merah, Kelapa
     teksAlat: Mangkuk, Kukusan, Daun
     teksCara: '1. Masukan Tepung dan Air Ke mangkuk
 
@@ -8711,7 +8711,7 @@ MonoBehaviour:
   - resepDasar: {fileID: 11400000, guid: c96ab9ab57f66df4c855a8a6641671c1, type: 2}
     namaMasakan: Lapis
     ikonMasakan: {fileID: 224318155784578198, guid: a87843af65f163c40a48011182e8d6a2, type: 3}
-    teksBahan: Tepung, Gula Merah, Santan
+    teksBahan: Tepung Beras, Tepung Tapioka,  Gula Merah, Santan
     teksAlat: Mangkuk, Kukusan, Daun
     teksCara: '1. Masukan Bahan Ke mangkuk
 
@@ -8727,7 +8727,7 @@ MonoBehaviour:
   - resepDasar: {fileID: 11400000, guid: b8a7edbe600eb3d40b6b8a5a6088680c, type: 2}
     namaMasakan: Kembang Goyang
     ikonMasakan: {fileID: 7449724838469933353, guid: 398f0f3fe94281c44a3a19117f3da105, type: 3}
-    teksBahan: Tepung, Telur, Santan
+    teksBahan: Tepung Beras, Telur, Santan
     teksAlat: Mangkuk, Cetakan Kembang Goyang, Wajan
     teksCara: '1. Masukan Bahan Ke mangkuk
 
@@ -8764,7 +8764,7 @@ MonoBehaviour:
   - resepDasar: {fileID: 11400000, guid: bef7536293c8c7647bb8a247bf47acba, type: 2}
     namaMasakan: Cenil
     ikonMasakan: {fileID: 5325722570233953717, guid: e15f0830dcffd2f45b5f9ed898aacb97, type: 3}
-    teksBahan: Tepung, Air, Kelapa
+    teksBahan: Tepung Tapioka, Air, Kelapa
     teksAlat: Mangkuk, Talenan, Kukusan
     teksCara: '1. Masukan Bahan Ke mangkuk
 
@@ -22749,6 +22749,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 0248329b1e73f27479d4a696815a3def, type: 2}
   - {fileID: 11400000, guid: 01c84c7baa7138541b5b7eafc05083da, type: 2}
   - {fileID: 11400000, guid: fb108f1e30a3e3241bd8bd00f3e5ab8c, type: 2}
+  - {fileID: 11400000, guid: 51d7f2d3b751ba245aa9a6093db8df3f, type: 2}
   draggableItemPrefab: {fileID: 8340565135148567373, guid: 6a5f009ce834a6346b05a750c4041426, type: 3}
   spawnPoint: {fileID: 5250202370097049794}
   applianceSprite2D: {fileID: 623856024792367793}
