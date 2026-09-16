@@ -2169,7 +2169,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c86bb766bab7ae746ae9c9a535178496, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UITypewriter
-  kecepatanKetik: 0.02
+  kecepatanKetik: 0.01
 --- !u!1 &132737250
 GameObject:
   m_ObjectHideFlags: 0
@@ -19838,7 +19838,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c86bb766bab7ae746ae9c9a535178496, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UITypewriter
-  kecepatanKetik: 0.02
+  kecepatanKetik: 0.01
 --- !u!114 &1808267547
 MonoBehaviour:
   m_ObjectHideFlags: 0
