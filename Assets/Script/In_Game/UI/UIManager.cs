@@ -12,6 +12,7 @@ public class UIManager : MonoBehaviour
     public GameObject tombolSettings;
     public GameObject panelMakanan;
     public GameObject text_Jumlah_NPC;
+    public GameObject textJumlahNPC;
 
     [Header("Animasi Target")]
     public RectTransform potretNPC;
@@ -43,12 +44,13 @@ public class UIManager : MonoBehaviour
         // Simpan posisi default saat game dimuat
         if (potretNPC != null) posisiPotretAsli = potretNPC.anchoredPosition;
         if (panelPesanan != null) posisiPanelAsli = panelPesanan.anchoredPosition;
-     
+        
         IsPanelOpen = false;
 
         if (panelKasir != null) panelKasir.SetActive(false);
         if (tombolPerpindahan != null) tombolPerpindahan.SetActive(true);
         if (tombolSettings != null) tombolSettings.SetActive(true);
+        if (textJumlahNPC != null) textJumlahNPC.SetActive(true);
 
         if (potretNPC != null)
         {
@@ -96,6 +98,7 @@ public class UIManager : MonoBehaviour
         if (tombolSettings != null) tombolSettings.SetActive(false);
         if (panelMakanan != null) panelMakanan.SetActive(false);
         if(text_Jumlah_NPC != null) text_Jumlah_NPC.SetActive(false);
+        if (textJumlahNPC != null) textJumlahNPC.SetActive(false);
         IsPanelOpen = true;
 
         // Lempar objek ke luar layar
@@ -178,6 +181,7 @@ public class UIManager : MonoBehaviour
         if (tombolSettings != null) tombolSettings.SetActive(true);
         if (panelMakanan != null) panelMakanan.SetActive(true);
         if(text_Jumlah_NPC != null) text_Jumlah_NPC.SetActive(true);
+        if (textJumlahNPC != null) textJumlahNPC.SetActive(true);
 
         Image imgNPC = potretNPC.GetComponent<Image>();
         if (imgNPC != null) imgNPC.enabled = false;

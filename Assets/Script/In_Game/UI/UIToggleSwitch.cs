@@ -3,6 +3,11 @@ using System.Collections;
 using UnityEngine.UI;
 public class UIToggleSwitch : MonoBehaviour
 {
+    public enum ToggleType { BGM, SFX }
+
+    [Header("Fungsi Tombol")]
+    public ToggleType tipeToggle;
+
     [Header("Referensi UI")]
     public RectTransform knobGeser;
     public Image gambarKnob;
@@ -24,6 +29,9 @@ public class UIToggleSwitch : MonoBehaviour
 
     private void Start()
     {
+        string keyMemori = (tipeToggle == ToggleType.BGM) ? "BGM" : "SFX";
+        isMenyala = PlayerPrefs.GetInt(keyMemori, 1) == 1;
+
         UpdateVisual(false);
     }
 
@@ -31,6 +39,22 @@ public class UIToggleSwitch : MonoBehaviour
     {
         isMenyala = !isMenyala;
         UpdateVisual(true);
+
+        string keyMemori = (tipeToggle == ToggleType.BGM) ? "BGM" : "SFX";
+        PlayerPrefs.SetInt(keyMemori, isMenyala ? 1 : 0);
+        PlayerPrefs.Save();
+
+        if(AudioManager.instance != null)
+        {
+            if(tipeToggle == ToggleType.BGM)
+            {
+                AudioManager.instance.ToggleBGM(isMenyala);
+            }
+            else if (tipeToggle == ToggleType.SFX)
+            {
+                AudioManager.instance.ToggleSFX(isMenyala);
+            }
+        }
     }
 
     private void UpdateVisual(bool pakaiAnimasi)

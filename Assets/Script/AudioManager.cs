@@ -32,8 +32,29 @@ public class AudioManager : MonoBehaviour
 
     private void Start()
     {
-       
+        bool bgmOn = PlayerPrefs.GetInt("BGM", 1) == 1;
+        bool sfxOn = PlayerPrefs.GetInt("SFX", 1) == 1;
+
+        ToggleBGM(bgmOn);
+        ToggleSFX(sfxOn);
+
         PlayMusic();
+    }
+
+    public void ToggleBGM(bool isOn)
+    {
+        if(musicSource != null)
+        {
+            musicSource.mute = !isOn;
+        }
+    }
+
+    public void ToggleSFX(bool isOn)
+    {
+        if(sfxSource != null)
+        {
+            sfxSource.mute = !isOn;
+        }
     }
 
     // ==========================================
