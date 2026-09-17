@@ -62,7 +62,7 @@ public class CookingAppliance : MonoBehaviour
     public List<VisualBahanMapping> visualSpesifikBahan;
 
     // Data internal
-    private CookingAppliance mountedAppliance; // Alat yang sedang menempel di atas kompor ini
+    private CookingAppliance mountedAppliance;
     private IMinigameMechanic activeMinigame; 
 
     private FoodCustomizationController foodCustom;

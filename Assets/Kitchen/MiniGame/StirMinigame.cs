@@ -12,7 +12,7 @@ public class StirMinigame : MonoBehaviour, IMinigameMechanic, IPointerDownHandle
     private bool isHolding = false;
     
     private float currentTime = 0f;
-    private float timeLimit = 5f;
+    // private float timeLimit = 5f;
     
     private float currentStirProgress = 0f;
     private float targetStirProgress = 100f;
@@ -34,14 +34,10 @@ public class StirMinigame : MonoBehaviour, IMinigameMechanic, IPointerDownHandle
         // Pengaman data resep
         if (recipe != null)
         {
-            timeLimit = recipe.timeLimit;
-            // Target progres bisa disesuaikan dengan tingkat kesulitan resep
             targetStirProgress = 100f * recipe.targetDifficulty;
         }
         else
         {
-            Debug.LogWarning("Resep kosong! Menggunakan nilai default untuk testing Bowl.");
-            timeLimit = 5f;
             targetStirProgress = 100f;
         }
 
@@ -58,7 +54,6 @@ public class StirMinigame : MonoBehaviour, IMinigameMechanic, IPointerDownHandle
             progressBar.value = 0;
         }
 
-        Debug.Log($"Mulai Mengaduk! Tahan klik dan gerakkan mouse/jari untuk mengaduk. Waktu: {timeLimit} detik.");
     }
 
     private void Update()
@@ -66,12 +61,6 @@ public class StirMinigame : MonoBehaviour, IMinigameMechanic, IPointerDownHandle
         if (!isMinigameActive) return;
 
         currentTime += Time.deltaTime;
-
-        // Jika waktu habis sebelum adonan selesai diaduk
-        if (currentTime >= timeLimit)
-        {
-            EndMinigameTimeOut();
-        }
     }
 
     // Deteksi saat pertama kali klik/sentuh mangkuk
@@ -107,26 +96,12 @@ public class StirMinigame : MonoBehaviour, IMinigameMechanic, IPointerDownHandle
             }
         }
 
-        // Simpan posisi mouse saat ini untuk kalkulasi di frame berikutnya
         lastMousePosition = eventData.position;
     }
 
-    // Deteksi saat klik dilepas
     public void OnPointerUp(PointerEventData eventData)
     {
         isHolding = false;
-    }
-
-    private void EndMinigameTimeOut()
-    {
-        isMinigameActive = false;
-        isHolding = false;
-        if (progressBar != null) progressBar.gameObject.SetActive(false);
-
-        float score = currentStirProgress / targetStirProgress;
-        score = Mathf.Clamp01(score); 
-        
-        onFinishedCallback?.Invoke(score);
     }
 
     public void StopMinigame()

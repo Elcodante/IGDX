@@ -10,12 +10,6 @@ public class RecipeProgressUI : MonoBehaviour
     [SerializeField] private Button buttonStart;
     [SerializeField] private Transform indikatorContainer;
     [SerializeField] private GameObject indikatorPrefab;
-
-    [Header("Progress Bar")]
-    [SerializeField] private RectTransform progressRect;
-    [SerializeField] private float rightSaatKosong = 100f;
-    [SerializeField] private float rightSaatPenuh = 0f;
-
     [Header("Button")]
     [SerializeField] private float opacityAktif = 1f;
     [SerializeField] private float opacityTidakAktif = 0.35f;
@@ -123,10 +117,6 @@ public class RecipeProgressUI : MonoBehaviour
         List<IngredientData> currentIngredients,
         List<IngredientData> requiredIngredients)
     {
-        if (progressRect == null ||
-            requiredIngredients == null ||
-            requiredIngredients.Count == 0)
-            return;
 
         int jumlahCocok = 0;
 
@@ -146,17 +136,6 @@ public class RecipeProgressUI : MonoBehaviour
             (float)jumlahCocok / requiredIngredients.Count;
 
         progress = Mathf.Clamp01(progress);
-
-        float right =
-            Mathf.Lerp(
-                rightSaatKosong,
-                rightSaatPenuh,
-                progress
-            );
-
-        Vector2 offsetMax = progressRect.offsetMax;
-        offsetMax.x = -right;
-        progressRect.offsetMax = offsetMax;
     }
 
     public void Hide()

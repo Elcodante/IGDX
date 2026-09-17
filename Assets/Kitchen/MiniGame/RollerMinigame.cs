@@ -14,7 +14,7 @@ public class RollerMinigame : MonoBehaviour, IMinigameMechanic
 
     private bool isMinigameActive = false;
     private float currentTime = 0f;
-    private float timeLimit = 10f;
+    // private float timeLimit = 10f;
     
     private int currentScore = 0;
     private int targetScore = 6; 
@@ -35,12 +35,10 @@ public class RollerMinigame : MonoBehaviour, IMinigameMechanic
     {
         if (recipe != null)
         {
-            timeLimit = recipe.timeLimit;
             targetScore = Mathf.RoundToInt(6 * recipe.targetDifficulty);
         }
         else
         {
-            timeLimit = 10f; 
             targetScore = 6; 
         }
         
@@ -58,7 +56,6 @@ public class RollerMinigame : MonoBehaviour, IMinigameMechanic
         }
 
         UpdateVisualPanah();
-        Debug.Log($"Mulai Giling! Target: {targetScore} gesekan dalam {timeLimit} detik.");
     }
 
     private void Update()
@@ -67,11 +64,11 @@ public class RollerMinigame : MonoBehaviour, IMinigameMechanic
 
         currentTime += Time.deltaTime;
 
-        if (currentTime >= timeLimit)
-        {
-            StopMinigame(); 
-            return;
-        }
+        // if (currentTime >= timeLimit)
+        // {
+        //     StopMinigame(); 
+        //     return;
+        // }
 
         // --- Logika New Input System ---
         if (Mouse.current != null)

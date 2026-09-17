@@ -10,9 +10,12 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioSource musicSource;
     [SerializeField] private AudioSource sfxSource;
 
-    [Header("---- Playlist ----")]
-    public Sound[] musicSounds;
-    public Sound[] sfxSounds;
+    [Header("---- Music ----")]
+    public Sound musicSounds;
+     [Header("---- SFX ----")]
+    public AudioClip sfxClick;
+    public AudioClip sfxBook;
+    public AudioClip sfxGhost;
 
     private void Awake()
     {
@@ -30,16 +33,16 @@ public class AudioManager : MonoBehaviour
     private void Start()
     {
        
-        PlayMusic("BG");
+        PlayMusic();
     }
 
     // ==========================================
     // FUNGSI UNTUK MEMUTAR AUDIO
     // ==========================================
 
-    public void PlayMusic(string name)
+    public void PlayMusic()
     {
-        Sound s = Array.Find(musicSounds, x => x.name == name);
+        Sound s = musicSounds;
 
         if (s == null)
         {
@@ -54,18 +57,10 @@ public class AudioManager : MonoBehaviour
         musicSource.Play();
     }
 
-    public void PlaySFX(string name)
+    public void PlaySFX(AudioClip clip, float volume = 1f)
     {
-        Sound s = Array.Find(sfxSounds, x => x.name == name);
-
-        if (s == null)
-        {
-            Debug.LogWarning("SFX tidak ditemukan: " + name);
-            return;
-        }
-
-        sfxSource.pitch = s.pitch;
-        sfxSource.PlayOneShot(s.clip, s.volume);
+        if (clip != null)
+            sfxSource.PlayOneShot(clip, volume);
     }
 
     public void StopMusic()
