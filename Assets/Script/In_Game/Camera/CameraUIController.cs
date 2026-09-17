@@ -14,10 +14,12 @@ public class CameraUIController : MonoBehaviour
     public GameObject PanelKasir;
     public GameObject PanelDapur;
     public GameObject panelMakanan;
+    public GameObject textJumlahNPC;
 
     private void Awake()
     {
         panelMakanan.SetActive(true);
+        textJumlahNPC.SetActive(true);
     }
 
     private void Start()
@@ -54,6 +56,7 @@ public class CameraUIController : MonoBehaviour
         PanelDapur.SetActive(false);
         tombolKeDapur.SetActive(false);
         tombolKeKasir.SetActive(false);
+        textJumlahNPC.SetActive(false);
     }
 
     private void TampilkanUI(CameraController.CameraArea area)
@@ -64,6 +67,7 @@ public class CameraUIController : MonoBehaviour
         //PanelKasir.SetActive(isKasir);
         PanelDapur.SetActive(!isKasir);
         tombolKeDapur.SetActive(isKasir);
+        textJumlahNPC.SetActive(isKasir);
         tombolKeKasir.SetActive(!isKasir);
     }
 }

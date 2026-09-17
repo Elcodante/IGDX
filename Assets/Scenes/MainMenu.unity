@@ -828,7 +828,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 1912446157324625447, guid: 67d3ca6a585649844a47e403986d0ab1, type: 3}
+  m_Sprite: {fileID: -8029587898440689632, guid: e5c90be5b04ae624da6d795f5d2b55db, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1361,6 +1361,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24f54603dc7f590438a437b1b7f844e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UIToggleSwitch
+  tipeToggle: 1
   knobGeser: {fileID: 2147023434}
   gambarKnob: {fileID: 2147023435}
   posisiXMenyala: 45
@@ -1763,12 +1764,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24f54603dc7f590438a437b1b7f844e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UIToggleSwitch
+  tipeToggle: 0
   knobGeser: {fileID: 690360273}
   gambarKnob: {fileID: 690360274}
   posisiXMenyala: 45
   posisiXMati: -45
-  ikonMati: {fileID: 1912446157324625447, guid: 67d3ca6a585649844a47e403986d0ab1, type: 3}
-  ikonMenyala: {fileID: -2346458947309146013, guid: c4f2180521b4422438b133bc0fd39eda, type: 3}
+  ikonMati: {fileID: -8029587898440689632, guid: e5c90be5b04ae624da6d795f5d2b55db, type: 3}
+  ikonMenyala: {fileID: 2196860369424673168, guid: b5bb7c4df9d4b554aae69ae24f25fe8b, type: 3}
   durasiGeser: 0.15
   isMenyala: 1
 --- !u!114 &1753298233
@@ -1866,7 +1868,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: MUSIC
+  m_text: 'SFX
+
+'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 6388f3aa11b59f24ebe396a609c3e921, type: 2}
   m_sharedMaterial: {fileID: 8181848908835944101, guid: 6388f3aa11b59f24ebe396a609c3e921, type: 2}
@@ -2427,17 +2431,14 @@ MonoBehaviour:
   musicSource: {fileID: 2000314372}
   sfxSource: {fileID: 2000314371}
   musicSounds:
-  - name: BG
-    clip: {fileID: 8300000, guid: ce0150e10425ad14985470890e25124f, type: 3}
+    name: 
+    clip: {fileID: 0}
     volume: 1
     pitch: 1
-    loop: 1
-  sfxSounds:
-  - name: 
-    clip: {fileID: 0}
-    volume: 0
-    pitch: 0
     loop: 0
+  sfxClick: {fileID: 0}
+  sfxBook: {fileID: 0}
+  sfxGhost: {fileID: 0}
 --- !u!4 &2000314374
 Transform:
   m_ObjectHideFlags: 0
