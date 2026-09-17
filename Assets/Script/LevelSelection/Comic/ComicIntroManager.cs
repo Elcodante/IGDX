@@ -43,6 +43,8 @@ public class ComicIntroManager : MonoBehaviour
             return;
         }
 
+        AudioManager.instance.PlaySFXBook();
+
         if (currentPanelIndex < panelkomik.Length)
         {
             GameObject panelAktif = panelkomik[currentPanelIndex];

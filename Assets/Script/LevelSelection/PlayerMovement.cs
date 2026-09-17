@@ -47,6 +47,7 @@ public class PlayerMovement : MonoBehaviour
             if(moveInput != Vector2.zero)
             {
                 anim.SetBool("isWalk", true);
+                // AudioManager.instance.PlaySFXWalk();
             }
             else
             {

@@ -56,6 +56,7 @@ public class CollectionBook : MonoBehaviour
         }
 
         UpdateTampilanKoleksi();
+        AudioManager.instance.PlaySFXClick();
     }
 
     public void TampilSebelumnya()
@@ -69,6 +70,7 @@ public class CollectionBook : MonoBehaviour
         }
 
         UpdateTampilanKoleksi();
+        AudioManager.instance.PlaySFXClick();
     }
 
     private void UpdateTampilanKoleksi()
@@ -80,7 +82,7 @@ public class CollectionBook : MonoBehaviour
 
         int batasResep = 0;
 
-      
+        AudioManager.instance.PlaySFXBook();
         if (levelValid == 0)
         {
             batasResep = 0;

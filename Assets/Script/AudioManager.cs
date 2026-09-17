@@ -1,19 +1,20 @@
-using System;
 using UnityEngine;
 
 public class AudioManager : MonoBehaviour
 {
-    // Singleton Instance
     public static AudioManager instance;
 
     [Header("---- Audio Sources ----")]
     [SerializeField] private AudioSource musicSource;
     [SerializeField] private AudioSource sfxSource;
 
-    [Header("---- Music ----")]
-    public Sound musicSounds;
-     [Header("---- SFX ----")]
+    [Header("---- Music Clips ----")]
+    public AudioClip musicMainMenu;
+    public AudioClip musicInGame;
+
+    [Header("---- SFX Clips ----")]
     public AudioClip sfxClick;
+    public AudioClip sfxWalk;
     public AudioClip sfxBook;
     public AudioClip sfxGhost;
 
@@ -37,52 +38,27 @@ public class AudioManager : MonoBehaviour
 
         ToggleBGM(bgmOn);
         ToggleSFX(sfxOn);
-
-        PlayMusic();
-    }
-
-    public void ToggleBGM(bool isOn)
-    {
-        if(musicSource != null)
-        {
-            musicSource.mute = !isOn;
-        }
-    }
-
-    public void ToggleSFX(bool isOn)
-    {
-        if(sfxSource != null)
-        {
-            sfxSource.mute = !isOn;
-        }
     }
 
     // ==========================================
-    // FUNGSI UNTUK MEMUTAR AUDIO
+    // FUNGSI UNTUK MEMUTAR MUSIC (BGM)
     // ==========================================
 
-    public void PlayMusic()
+    public void PlayMusic(AudioClip clip)
     {
-        Sound s = musicSounds;
+        if (clip == null) return;
 
-        if (s == null)
-        {
-            Debug.LogWarning("Music tidak ditemukan: " + name);
-            return;
-        }
+        // Jangan putar ulang jika musik yang sama sedang dimainkan
+        if (musicSource.clip == clip && musicSource.isPlaying) return;
 
-        musicSource.clip = s.clip;
-        musicSource.volume = s.volume;
-        musicSource.pitch = s.pitch;
-        musicSource.loop = s.loop;
+        musicSource.clip = clip;
+        musicSource.loop = true; // BGM biasanya berulang
         musicSource.Play();
     }
 
-    public void PlaySFX(AudioClip clip, float volume = 1f)
-    {
-        if (clip != null)
-            sfxSource.PlayOneShot(clip, volume);
-    }
+    // Fungsi khusus untuk dipanggil di Scene berbeda (Bisa dipanggil dari Button OnClick)
+    public void PlayMainMenuMusic() => PlayMusic(musicMainMenu);
+    public void PlayInGameMusic()   => PlayMusic(musicInGame);
 
     public void StopMusic()
     {
@@ -90,8 +66,36 @@ public class AudioManager : MonoBehaviour
     }
 
     // ==========================================
-    // FUNGSI UNTUK KONTROL VOLUME (Cocok untuk Menu Settings)
+    // FUNGSI UNTUK MEMUTAR SFX
     // ==========================================
+
+    public void PlaySFX(AudioClip clip)
+    {
+        if (clip != null)
+        {
+            sfxSource.PlayOneShot(clip);
+        }
+    }
+
+    // Fungsi khusus SFX agar bisa dipanggil langsung dari UI Button OnClick()
+    public void PlaySFXClick() => PlaySFX(sfxClick);
+    public void PlaySFXWalk()  => PlaySFX(sfxWalk);
+    public void PlaySFXBook()  => PlaySFX(sfxBook);
+    public void PlaySFXGhost() => PlaySFX(sfxGhost);
+
+    // ==========================================
+    // KONTROL VOLUME & TOGGLE
+    // ==========================================
+
+    public void ToggleBGM(bool isOn)
+    {
+        if (musicSource != null) musicSource.mute = !isOn;
+    }
+
+    public void ToggleSFX(bool isOn)
+    {
+        if (sfxSource != null) sfxSource.mute = !isOn;
+    }
 
     public void SetMusicVolume(float volume)
     {
@@ -102,15 +106,4 @@ public class AudioManager : MonoBehaviour
     {
         sfxSource.volume = Mathf.Clamp01(volume);
     }
-}
-
-// Class penampung data audio agar rapi di Inspector
-[System.Serializable]
-public class Sound
-{
-    public string name;
-    public AudioClip clip;
-    [Range(0f, 1f)] public float volume = 1f;
-    [Range(0.1f, 3f)] public float pitch = 1f;
-    public bool loop;
 }

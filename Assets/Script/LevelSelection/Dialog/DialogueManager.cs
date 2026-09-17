@@ -83,6 +83,7 @@ public class DialogueManager : MonoBehaviour
 
     public void DisplayNextSentence()
     {
+        AudioManager.instance.PlaySFXBook();
         if (dialogueQueue.Count == 0)
         {
             EndDialogue();

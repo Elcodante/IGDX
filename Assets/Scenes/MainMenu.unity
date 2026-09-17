@@ -211,6 +211,7 @@ GameObject:
   - component: {fileID: 198995071}
   - component: {fileID: 198995070}
   - component: {fileID: 198995073}
+  - component: {fileID: 198995074}
   m_Layer: 0
   m_Name: Play
   m_TagString: Untagged
@@ -293,6 +294,18 @@ MonoBehaviour:
           m_StringArgument: LevelSelection
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 198995074}
+        m_TargetAssemblyTypeName: UIButton, Assembly-CSharp
+        m_MethodName: ClickSound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &198995071
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -347,6 +360,18 @@ MonoBehaviour:
   duration: 1.2
   offsetStart: {x: 0, y: -1200}
   delay: 2.5
+--- !u!114 &198995074
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 198995068}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 885cce3c7dc27764fbb831f9b1d5cee2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UIButton
 --- !u!1 &298563455
 GameObject:
   m_ObjectHideFlags: 0
@@ -523,6 +548,18 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
         m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 198995074}
+        m_TargetAssemblyTypeName: UIButton, Assembly-CSharp
+        m_MethodName: ClickSound
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -1128,6 +1165,7 @@ GameObject:
   - component: {fileID: 939548883}
   - component: {fileID: 939548882}
   - component: {fileID: 939548885}
+  - component: {fileID: 939548886}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1253,6 +1291,18 @@ MonoBehaviour:
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
   m_Version: 2
+--- !u!114 &939548886
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 939548881}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1675d6e8ac9e6347a22086b57b19fa4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MusicMainMenu
 --- !u!1 &1143991457
 GameObject:
   m_ObjectHideFlags: 0
@@ -2430,15 +2480,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::AudioManager
   musicSource: {fileID: 2000314372}
   sfxSource: {fileID: 2000314371}
-  musicSounds:
-    name: 
-    clip: {fileID: 0}
-    volume: 1
-    pitch: 1
-    loop: 0
-  sfxClick: {fileID: 0}
-  sfxBook: {fileID: 0}
-  sfxGhost: {fileID: 0}
+  musicMainMenu: {fileID: 8300000, guid: ce0150e10425ad14985470890e25124f, type: 3}
+  musicInGame: {fileID: 8300000, guid: 2b92d121e1a819042b26e59099534322, type: 3}
+  sfxClick: {fileID: 8300000, guid: 454a086e6bc452c4a86da878c2023e3f, type: 3}
+  sfxWalk: {fileID: 8300000, guid: eea4a65bb2c418e4eb63292f6fa28754, type: 3}
+  sfxBook: {fileID: 8300000, guid: b890814f360df894b831bad7ea5d2ea3, type: 3}
+  sfxGhost: {fileID: 8300000, guid: f611a13517343954d84cc579b84493d2, type: 3}
 --- !u!4 &2000314374
 Transform:
   m_ObjectHideFlags: 0
@@ -2467,6 +2514,7 @@ GameObject:
   - component: {fileID: 2048566117}
   - component: {fileID: 2048566116}
   - component: {fileID: 2048566119}
+  - component: {fileID: 2048566120}
   m_Layer: 5
   m_Name: Settings
   m_TagString: Untagged
@@ -2549,6 +2597,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+      - m_Target: {fileID: 198995074}
+        m_TargetAssemblyTypeName: UIButton, Assembly-CSharp
+        m_MethodName: ClickSound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!114 &2048566117
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2603,6 +2663,18 @@ MonoBehaviour:
   duration: 1.2
   offsetStart: {x: 0, y: 700}
   delay: 2.5
+--- !u!114 &2048566120
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2048566114}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 885cce3c7dc27764fbb831f9b1d5cee2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UIButton
 --- !u!1 &2147023433
 GameObject:
   m_ObjectHideFlags: 0
