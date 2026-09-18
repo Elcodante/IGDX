@@ -31,6 +31,7 @@ public class StirMinigame : MonoBehaviour, IMinigameMechanic, IPointerDownHandle
 
     public void StartMinigame(RecipeData recipe, Action<float> onMinigameFinished)
     {
+        AudioManager.instance.PlaySFXMengaduk();
         // Pengaman data resep
         if (recipe != null)
         {

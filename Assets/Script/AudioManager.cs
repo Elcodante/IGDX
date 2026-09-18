@@ -17,6 +17,15 @@ public class AudioManager : MonoBehaviour
     public AudioClip sfxWalk;
     public AudioClip sfxBook;
     public AudioClip sfxGhost;
+    public AudioClip sfxTing;
+    public AudioClip sfxAngkat;
+    public AudioClip sfxTaruh;
+    public AudioClip sfxMemberiPesanan;
+    public AudioClip sfxMenang;
+    public AudioClip sfxMengaduk;
+    public AudioClip sfxMenggoreng;
+    public AudioClip sfxMenkukus;
+    public AudioClip sfxMerebus;
 
     private void Awake()
     {
@@ -83,6 +92,17 @@ public class AudioManager : MonoBehaviour
     public void PlaySFXBook()  => PlaySFX(sfxBook);
     public void PlaySFXGhost() => PlaySFX(sfxGhost);
 
+    public void PlaySFXTing()           => PlaySFX(sfxTing);
+    public void PlaySFXAngkat()         => PlaySFX(sfxAngkat);
+    public void PlaySFXTaruh()          => PlaySFX(sfxTaruh);
+    public void PlaySFXMemberiPesanan() => PlaySFX(sfxMemberiPesanan);
+    public void PlaySFXMenang()         => PlaySFX(sfxMenang);
+    public void PlaySFXMengaduk()       => PlaySFX(sfxMengaduk);
+    public void PlaySFXMenggoreng()     => PlaySFX(sfxMenggoreng);
+    public void PlaySFXMenkukus()       => PlaySFX(sfxMenkukus);
+    public void PlaySFXMerebus()        => PlaySFX(sfxMerebus);
+
+
     // ==========================================
     // KONTROL VOLUME & TOGGLE
     // ==========================================
@@ -105,5 +125,13 @@ public class AudioManager : MonoBehaviour
     public void SetSFXVolume(float volume)
     {
         sfxSource.volume = Mathf.Clamp01(volume);
+    }
+
+     public void StopSFXWalk()
+    {
+        if (sfxSource.isPlaying)
+        {
+            sfxSource.Stop();
+        }
     }
 }

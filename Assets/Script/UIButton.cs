@@ -6,4 +6,14 @@ public class UIButton : MonoBehaviour
     {
         AudioManager.instance.PlaySFXClick();
     }
+
+     public void GhostSound()
+    {
+        AudioManager.instance.PlaySFXGhost();
+    }
+
+     public void TingSound()
+    {
+        AudioManager.instance.PlaySFXTing();
+    }
 }

@@ -59,6 +59,7 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     }
     public void OnBeginDrag(PointerEventData eventData)
     {
+        AudioManager.instance.PlaySFXAngkat();
         if (FoodTooltipUI.Instance != null) FoodTooltipUI.Instance.SembunyikanTooltip();
         posisiAwal = Vector3.zero;
         parentAwal = transform.parent;
@@ -85,6 +86,7 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 
     public void OnEndDrag(PointerEventData eventData)
     {
+        AudioManager.instance.PlaySFXTaruh();
         canvasGroup.blocksRaycasts = true;
         canvasGroup.alpha = 1f;
 

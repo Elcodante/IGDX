@@ -2382,7 +2382,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -2486,6 +2486,15 @@ MonoBehaviour:
   sfxWalk: {fileID: 8300000, guid: eea4a65bb2c418e4eb63292f6fa28754, type: 3}
   sfxBook: {fileID: 8300000, guid: b890814f360df894b831bad7ea5d2ea3, type: 3}
   sfxGhost: {fileID: 8300000, guid: f611a13517343954d84cc579b84493d2, type: 3}
+  sfxTing: {fileID: 8300000, guid: 9fc0a8e5adf08bd4aa7b7f5993355ed1, type: 3}
+  sfxAngkat: {fileID: 8300000, guid: 6faf3276db1980b46a1ef62074c23dae, type: 3}
+  sfxTaruh: {fileID: 8300000, guid: 088f7f83cdafe29498fd67c9e1c5623d, type: 3}
+  sfxMemberiPesanan: {fileID: 8300000, guid: ffeb90c809c4ea44facbd6777f48cbaf, type: 3}
+  sfxMenang: {fileID: 8300000, guid: 8ff66eb8d2784f4499b35115eb594d1a, type: 3}
+  sfxMengaduk: {fileID: 8300000, guid: 607e9f2aba01d19419513939c80594f4, type: 3}
+  sfxMenggoreng: {fileID: 8300000, guid: 41bcfbfc383d50245aa596d4591dc20e, type: 3}
+  sfxMenkukus: {fileID: 8300000, guid: e43ad0bb32bd1de46b4a36f6bdf9bc87, type: 3}
+  sfxMerebus: {fileID: 8300000, guid: 3b3b11de75b21b64782487a14f0538fc, type: 3}
 --- !u!4 &2000314374
 Transform:
   m_ObjectHideFlags: 0

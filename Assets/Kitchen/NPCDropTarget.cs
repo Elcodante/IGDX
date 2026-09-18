@@ -38,6 +38,7 @@ public class NPCDropTarget : MonoBehaviour, IDropHandler
             if (diterima)
             {
                 Debug.Log("Sesuai! Makanan diterima oleh NPC.");
+                AudioManager.instance.PlaySFXMemberiPesanan();
 
                 if (OrderManager.Instance != null)
                 {

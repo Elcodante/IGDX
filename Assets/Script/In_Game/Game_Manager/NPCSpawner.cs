@@ -88,6 +88,7 @@ public class NPCSpawner : MonoBehaviour
         GameObject spawnNPC = npcPool.Dequeue();
         spawnNPC.transform.position = spawnPoint.position;
         spawnNPC.SetActive(true);
+        AudioManager.instance.PlaySFXGhost();
 
         NPCController controller = spawnNPC.GetComponent<NPCController>();
         Transform targetWaypoint = queueManager.GetWaypoint(slotIndex);

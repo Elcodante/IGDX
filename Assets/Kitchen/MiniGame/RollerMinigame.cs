@@ -33,6 +33,7 @@ public class RollerMinigame : MonoBehaviour, IMinigameMechanic
 
     public void StartMinigame(RecipeData recipe, Action<float> onMinigameFinished)
     {
+        AudioManager.instance.PlaySFXMengaduk();
         if (recipe != null)
         {
             targetScore = Mathf.RoundToInt(6 * recipe.targetDifficulty);

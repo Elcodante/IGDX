@@ -20,6 +20,7 @@ public class PassiveMinigame : MonoBehaviour, IMinigameMechanic
 
     public void StartMinigame(RecipeData recipe, Action<float> onMinigameFinished)
     {
+        AudioManager.instance.PlaySFXMerebus();
         if (recipe != null)
         {
             // Ambil batas waktu dari data resep

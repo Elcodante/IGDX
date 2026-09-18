@@ -6,6 +6,8 @@ using UnityEngine.UI;
 
 public class SlotPesananUI : MonoBehaviour
 {
+    private bool isDoneGet;
+
     [Header("Referensi UI Internal")]
     public GameObject wadahSlot;
     public Image ikonMakanan;

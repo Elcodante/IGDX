@@ -29,6 +29,7 @@ public class DraggableItem2D : MonoBehaviour, IBeginDragHandler, IDragHandler, I
 
     public void OnBeginDrag(PointerEventData eventData)
     {
+        AudioManager.instance.PlaySFXAngkat();
         posisiAwal = transform.position;
         isDroppedSuccessfully = false; // RESET status setiap kali mulai ditarik
 
@@ -52,6 +53,7 @@ public class DraggableItem2D : MonoBehaviour, IBeginDragHandler, IDragHandler, I
     {
         if (col != null) col.enabled = true;
 
+        AudioManager.instance.PlaySFXTaruh();
         // KUNCI UTAMA: Jika setelah dilepas statusnya masih false, kembalikan ke awal!
         if (!isDroppedSuccessfully)
         {

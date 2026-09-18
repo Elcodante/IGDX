@@ -89,14 +89,12 @@ public class NPCController : MonoBehaviour, IPointerClickHandler
 
         if (currentState == NPCState.WaitingToOrder)
         {
+            currentState = NPCState.WaitingForFood; 
             if (tandaSeruRenderer != null) tandaSeruRenderer.color = warnaPesananDiambil;
-            currentState = NPCState.WaitingForFood;
+            
             OnPesananDiambil?.Invoke(orderHandler.daftarPesanan, npcSpriteRenderer.sprite);
         }
-        else if (currentState == NPCState.WaitingForFood)
-        {
-            OnPesananDiambil?.Invoke(orderHandler.daftarPesanan, npcSpriteRenderer.sprite);
-        }
+    
     }
 
     public bool CobaTerimaMakanan(string idMakananDiberikan, out string orderIdTerhapus)
@@ -116,6 +114,7 @@ public class NPCController : MonoBehaviour, IPointerClickHandler
     public void Pulang()
     {
         currentState = NPCState.Leave;
+        AudioManager.instance.PlaySFXGhost();
         tandaSeru.SetActive(false);
         targetWaypoint = (mySpawner != null && mySpawner.exitPoint != null) ? mySpawner.exitPoint : transform;
         mySpawner.BebaskanSlot(mySlotIndex);
