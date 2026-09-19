@@ -113,5 +113,6 @@ public class StirMinigame : MonoBehaviour, IMinigameMechanic, IPointerDownHandle
 
         Debug.Log("Adonan selesai diaduk dengan sempurna!");
         onFinishedCallback?.Invoke(1.0f);
+        AudioManager.instance.StopSFXWalk();
     }
 }

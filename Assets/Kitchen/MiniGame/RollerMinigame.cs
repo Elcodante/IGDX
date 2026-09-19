@@ -131,7 +131,7 @@ public class RollerMinigame : MonoBehaviour, IMinigameMechanic
     {
         isMinigameActive = false;
         MatikanSemuaUI();
-
+        AudioManager.instance.StopSFXWalk();
         float score = (float)currentScore / targetScore;
         score = Mathf.Clamp01(score); 
         

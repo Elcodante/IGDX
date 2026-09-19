@@ -170,6 +170,7 @@ public class TimingMinigame : MonoBehaviour, IMinigameMechanic, IPointerDownHand
         if (score >= 1f) Debug.Log("Sempurna! Masakan Matang!");
         else Debug.Log("Gagal! Waktu habis.");
 
+        AudioManager.instance.StopSFXWalk();
         onFinishedCallback?.Invoke(score);
     }
 

@@ -76,6 +76,7 @@ public class PassiveMinigame : MonoBehaviour, IMinigameMechanic
         // Karena ini pasif (tidak ada gagalnya), kasih skor sempurna (1.0f)
         onFinishedCallback?.Invoke(1.0f);
         Debug.Log("Masak pasif selesai! Mengeluarkan hasil masakan.");
+        AudioManager.instance.StopSFXWalk();
     }
 
     private void SetChildSpriteRenderers(bool enabled)
