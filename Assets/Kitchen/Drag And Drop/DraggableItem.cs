@@ -17,6 +17,7 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     private Sprite iconAsli; 
     private Vector2 ukuranAwal; // Simpan ukuran kotak (RectTransform) asli
     private Canvas parentCanvas; 
+    public float ukuranMaksimalDragIcon = 100f; 
 
     private void Awake()
     {
@@ -76,8 +77,14 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         {
             itemImage.sprite = dataBahan.dragIcon;
             
-            // Saat ditarik, biarkan ukurannya menyesuaikan proporsi dragIcon (telur 1 butir)
-            itemImage.SetNativeSize(); 
+            // GANTI: hitung ukuran manual dengan aspect ratio dijaga, jangan SetNativeSize()
+            Sprite sprite = dataBahan.dragIcon;
+            float lebarAsli = sprite.rect.width;
+            float tinggiAsli = sprite.rect.height;
+
+            float skalaFit = ukuranMaksimalDragIcon / Mathf.Max(lebarAsli, tinggiAsli);
+
+            rectTransform.sizeDelta = new Vector2(lebarAsli * skalaFit, tinggiAsli * skalaFit);
         }
     }
 
