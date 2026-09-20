@@ -15,8 +15,9 @@ MonoBehaviour:
   inputIngredients:
   - {fileID: 11400000, guid: 2c8a31b4b2e14544db05febb92ea6eba, type: 2}
   - {fileID: 11400000, guid: 204ce2184c1e4f441873870884f65129, type: 2}
-  requiredMechanic: 4
+  requiredMechanic: 5
   timeLimit: 10
   targetDifficulty: 1
   successResult: {fileID: 11400000, guid: 8ed522869fe5cc94ca80e22b18cbfef0, type: 2}
   failResult: {fileID: 0}
+  tidakSpawnHasil: 0

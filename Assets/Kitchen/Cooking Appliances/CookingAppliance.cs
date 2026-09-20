@@ -305,10 +305,37 @@ public class CookingAppliance : MonoBehaviour
     }
 }
 
-    public void OnStartButtonClicked()
+public void OnStartButtonClicked()
+{
+    CookingAppliance alatYangDipakai = (mountedAppliance != null) ? mountedAppliance : this;
+    RecipeData resepAktif = alatYangDipakai.currentValidRecipe;
+
+    Debug.Log($"[TUTORIAL_CHECK] resepAktif: {(resepAktif != null ? resepAktif.name : "NULL")}");
+
+    if (resepAktif == null) return;
+
+    Debug.Log($"[TUTORIAL_CHECK] TutorialManager.Instance: {(TutorialManager.Instance != null ? "ADA" : "NULL")}");
+    Debug.Log($"[TUTORIAL_CHECK] Mekanik resep ini: {resepAktif.requiredMechanic}");
+
+    if (TutorialManager.Instance != null)
     {
-        CookingAppliance alatYangDipakai = (mountedAppliance != null) ? mountedAppliance : this;
-        RecipeData resepAktif = alatYangDipakai.currentValidRecipe;
+        bool sudahLihat = TutorialManager.Instance.SudahPernahLihat(resepAktif.requiredMechanic);
+        Debug.Log($"[TUTORIAL_CHECK] Sudah pernah lihat tutorial {resepAktif.requiredMechanic}? {sudahLihat}");
+
+        TutorialManager.Instance.TampilkanTutorialJikaPerlu(
+            resepAktif.requiredMechanic,
+            () => LanjutkanStartMinigame(alatYangDipakai, resepAktif)
+        );
+    }
+    else
+    {
+        LanjutkanStartMinigame(alatYangDipakai, resepAktif);
+    }
+}
+
+    // BARU: isi logic yang dulu ada di OnStartButtonClicked, dipindah ke sini
+    private void LanjutkanStartMinigame(CookingAppliance alatYangDipakai, RecipeData resepAktif)
+    {
         IMinigameMechanic targetMinigame = this.activeMinigame;
 
         if (targetMinigame == null)
@@ -317,40 +344,24 @@ public class CookingAppliance : MonoBehaviour
             targetMinigame = this.activeMinigame;
         }
 
-        // --- LOGIKA KHUSUS TALENAN (Tanpa merusak alat lain) ---
-        if (resepAktif != null)
+        if (resepAktif.requiredMechanic == CookingMechanicType.Roll)
         {
-            // Cek kalau resep minta mekanik Roll, ganti targetnya ke minigame alternatif
-            if (resepAktif.requiredMechanic == CookingMechanicType.Roll)
-            {
-                if (minigameAlternatif != null)
-                    targetMinigame = minigameAlternatif as IMinigameMechanic;
-                else 
-                    targetMinigame = GetComponent<RollerMinigame>(); // Fallback otomatis biar sat-set
-            }
+            if (minigameAlternatif != null)
+                targetMinigame = minigameAlternatif as IMinigameMechanic;
+            else 
+                targetMinigame = GetComponent<RollerMinigame>();
         }
 
         if (targetMinigame == null) return;
 
-        if (resepAktif != null)
-        {
-            if (recipeProgressUI != null)
-            recipeProgressUI.Hide();
+        if (recipeProgressUI != null) recipeProgressUI.Hide();
+        if (komporInduk != null && komporInduk.recipeProgressUI != null) komporInduk.recipeProgressUI.Hide();
 
-            if (komporInduk != null &&
-                komporInduk.recipeProgressUI != null)
-            {
-                komporInduk.recipeProgressUI.Hide();
-            }
+        SetStoveState(true);
+        alatYangDipakai.UbahStateWajan(1); 
 
-            SetStoveState(true);
-            
-            // Trigger state masak
-            alatYangDipakai.UbahStateWajan(1); 
-
-            targetMinigame.StartMinigame(resepAktif, OnMinigameFinished);
-            totalIngredient = 0;
-        }
+        targetMinigame.StartMinigame(resepAktif, OnMinigameFinished);
+        totalIngredient = 0;
     }
 
     private void OnMinigameFinished(float finalScore)

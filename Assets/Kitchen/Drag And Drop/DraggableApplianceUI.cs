@@ -14,10 +14,15 @@ public class DraggableApplianceUI : MonoBehaviour, IBeginDragHandler, IDragHandl
     private Vector3 posisiAwal;
     private Transform parentAwal;
     private Image img;
+    private RectTransform rectTransform;
+    private Canvas parentCanvas; 
+
 
     private void Awake()
     {
         img = GetComponent<Image>();
+        rectTransform = GetComponent<RectTransform>();
+        parentCanvas = GetComponentInParent<Canvas>();
     }
 
     public void OnPointerEnter(PointerEventData eventData)
@@ -50,8 +55,19 @@ public class DraggableApplianceUI : MonoBehaviour, IBeginDragHandler, IDragHandl
 
     public void OnDrag(PointerEventData eventData)
     {
-        // Ganti Input.mousePosition menjadi eventData.position
-        transform.position = eventData.position; 
+        if (parentCanvas == null) 
+        {
+            transform.position = eventData.position; // fallback lama
+            return;
+        }
+
+        RectTransformUtility.ScreenPointToWorldPointInRectangle(
+            rectTransform, 
+            eventData.position, 
+            eventData.pressEventCamera, 
+            out Vector3 worldPoint
+        );
+        rectTransform.position = worldPoint;
     }
 
     public void OnEndDrag(PointerEventData eventData)

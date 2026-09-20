@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 844f9ba8aeb638a45bee1920f9f61252
+guid: 237a4db32f65280488ec3fe99a0b02db
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 6494988614767486462
-    second: Gula merah single_0
+      213: -6468831176212231959
+    second: overlay-image (3)_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Gula merah single_0
+      name: overlay-image (3)_0
       rect:
         serializedVersion: 2
-        x: 251
-        y: 355
-        width: 346
-        height: 294
+        x: 0
+        y: 0
+        width: 300
+        height: 253
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: ef52c63bbb5d22a50800000000000000
-      internalID: 6494988614767486462
+      spriteID: 9e8c5ed81581a36a0800000000000000
+      internalID: -6468831176212231959
       vertices: []
       indices: 
       edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Gula merah single_0: 6494988614767486462
+      overlay-image (3)_0: -6468831176212231959
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

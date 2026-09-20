@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 844f9ba8aeb638a45bee1920f9f61252
+guid: e64a1b7775e596847b26ab2671eb3575
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 6494988614767486462
-    second: Gula merah single_0
+      213: -8306002569234745612
+    second: Screenshot 2026-09-20 140121_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Gula merah single_0
+      name: Screenshot 2026-09-20 140121_0
       rect:
         serializedVersion: 2
-        x: 251
-        y: 355
-        width: 346
-        height: 294
+        x: 0
+        y: 0
+        width: 246
+        height: 274
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: ef52c63bbb5d22a50800000000000000
-      internalID: 6494988614767486462
+      spriteID: 4f6f74d9ba62bbc80800000000000000
+      internalID: -8306002569234745612
       vertices: []
       indices: 
       edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Gula merah single_0: 6494988614767486462
+      Screenshot 2026-09-20 140121_0: -8306002569234745612
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
