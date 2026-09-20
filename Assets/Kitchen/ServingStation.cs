@@ -104,7 +104,7 @@ public void OnDrop(PointerEventData eventData)
         if (sr != null)
         {
             sr.sortingLayerName = "UI_Canvas";
-            sr.sortingOrder = 5;
+            sr.sortingOrder = 25;
         }
 
         if (serveButton != null) serveButton.gameObject.SetActive(true);
