@@ -13,8 +13,11 @@ public class FoodTooltipUI : MonoBehaviour
 
     [Header("Pengaturan")]
     public float delayTooltip = 1.2f;
+    public Vector2 offsetMouse = new Vector2(15f, -15f);
 
     private Coroutine tooltipCoroutine;
+    private RectTransform tooltipRect;
+    private Canvas parentCanvas;
 
     private void Awake()
     {
@@ -25,14 +28,33 @@ public class FoodTooltipUI : MonoBehaviour
 
         if (tooltipPanel != null)
             tooltipPanel.SetActive(false);
+            tooltipRect = tooltipPanel.GetComponent<RectTransform>();
+            parentCanvas = tooltipPanel.GetComponentInParent<Canvas>();
     }
 
     private void Update()
     {
-        if (tooltipPanel != null && tooltipPanel.activeSelf && Mouse.current != null)
+        if (tooltipRect != null && tooltipPanel.activeSelf && Mouse.current != null)
         {
             Vector2 mousePos = Mouse.current.position.ReadValue();
-            transform.position = mousePos + new Vector2(15f, -15f);
+
+            if (parentCanvas != null && parentCanvas.renderMode != RenderMode.ScreenSpaceOverlay)
+            {
+                // GANTI: konversi screen point ke world point, karena Canvas-nya Screen Space - Camera
+                Camera cam = parentCanvas.worldCamera; // kamera yang di-assign di Canvas
+                RectTransformUtility.ScreenPointToWorldPointInRectangle(
+                    tooltipRect,
+                    mousePos,
+                    cam,
+                    out Vector3 worldPoint
+                );
+                tooltipRect.position = worldPoint;
+            }
+            else
+            {
+                // fallback lama, buat kalau ternyata Overlay
+                tooltipRect.position = mousePos + offsetMouse;
+            }
         }
     }
 

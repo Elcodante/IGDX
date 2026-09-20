@@ -16,12 +16,14 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     
     private Sprite iconAsli; 
     private Vector2 ukuranAwal; // Simpan ukuran kotak (RectTransform) asli
+    private Canvas parentCanvas; 
 
     private void Awake()
     {
         rectTransform = GetComponent<RectTransform>();
         canvasGroup = GetComponent<CanvasGroup>();
         itemImage = GetComponent<Image>();
+        parentCanvas = GetComponentInParent<Canvas>();
     }
 
     private void Start()
@@ -81,7 +83,19 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 
     public void OnDrag(PointerEventData eventData)
     {
-        rectTransform.position = eventData.position;
+        if (parentCanvas == null)
+        {
+            rectTransform.position = eventData.position;
+            return;
+        }
+
+        RectTransformUtility.ScreenPointToWorldPointInRectangle(
+            rectTransform,
+            eventData.position,
+            eventData.pressEventCamera,
+            out Vector3 worldPoint
+        );
+        rectTransform.position = worldPoint;
     }
 
     public void OnEndDrag(PointerEventData eventData)
