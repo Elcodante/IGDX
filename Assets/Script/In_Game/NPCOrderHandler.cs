@@ -1,25 +1,45 @@
 using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine.UI; // PENTING: Tambahkan ini untuk akses UI Slider
 
 public class NPCOrderHandler : MonoBehaviour
 {
     [Header("Daftar Pesanan")]
     public List<OrderData> daftarPesanan = new List<OrderData>();
 
-    [Header("Pengaturan waktu dan skor")]
-    [Tooltip("Batas waktu (detik) sebelum skor pesanan jatuh ke nilai minimum")]
-    public float batasWaktuTunggu = 60f; //Detik
+    [Header("Pengaturan Waktu (Sistem Keadilan)")]
+    public float waktuDasarPerItem = 40f;
+    public float bonusWaktuPemulihan = 15f;
 
+    // --- KODE BARU: Referensi UI Bar Kesabaran ---
+    [Header("Visual Kesabaran (Patience Bar)")]
+    public GameObject canvasKesabaran;
+    public Slider sliderKesabaran;
+    public Image warnaFillSlider; // Untuk mengubah warna bar
+    public Color warnaSabar = Color.green;
+    public Color warnaMarah = Color.red;
+    // ---------------------------------------------
+
+    private float batasWaktuTungguTotal;
     private float waktuMenunggu = 0f;
     private bool sedangMenungguMakanan = false;
 
-
-    // Reset status saat NPC baru spawn
     public void ResetHandler()
     {
         sedangMenungguMakanan = false;
         waktuMenunggu = 0f;
         daftarPesanan.Clear();
+
+        // Sembunyikan bar saat NPC baru spawn atau sedang jalan
+        if (canvasKesabaran != null) canvasKesabaran.SetActive(false);
+    }
+
+    public void MulaiTungguPesanan()
+    {
+        sedangMenungguMakanan = true;
+
+        // Munculkan bar tepat saat pesanan diambil
+        if (canvasKesabaran != null) canvasKesabaran.SetActive(true);
     }
 
     void Update()
@@ -27,15 +47,32 @@ public class NPCOrderHandler : MonoBehaviour
         if (sedangMenungguMakanan)
         {
             waktuMenunggu += Time.deltaTime;
+
+            // --- KODE BARU: Update Visual UI ---
+            if (sliderKesabaran != null && batasWaktuTungguTotal > 0)
+            {
+                // Hitung sisa waktu (1 = penuh, 0 = habis)
+                float sisaPersentase = 1f - Mathf.Clamp01(waktuMenunggu / batasWaktuTungguTotal);
+                sliderKesabaran.value = sisaPersentase;
+
+                // Juicing: Ubah warna secara dinamis dari hijau ke merah
+                if (warnaFillSlider != null)
+                {
+                    warnaFillSlider.color = Color.Lerp(warnaMarah, warnaSabar, sisaPersentase);
+                }
+            }
         }
     }
 
-    // Tanggung jawab 1: Mengacak Pesanan
     public void GenerateRandomOrder(MenuData[] menuList, int minVariasi, int maxVariasi)
     {
         if (menuList == null || menuList.Length == 0) return;
 
         int jumlahPesanan = Random.Range(minVariasi, maxVariasi + 1);
+        batasWaktuTungguTotal = waktuDasarPerItem * jumlahPesanan;
+
+        // Reset bar visual ke 100% di awal
+        if (sliderKesabaran != null) sliderKesabaran.value = 1f;
 
         for (int i = 0; i < jumlahPesanan; i++)
         {
@@ -45,45 +82,43 @@ public class NPCOrderHandler : MonoBehaviour
 
             pesananBaru.idResep = menuDipilih.menuName;
             pesananBaru.ikonMakanan = menuDipilih.order.ikonMakanan;
-            
+
             CustomizationData[] customizationMenu = menuDipilih.order.customizations;
             pesananBaru.customizations = new CustomizationData[customizationMenu.Length];
 
             for (int j = 0; j < customizationMenu.Length; j++)
             {
                 pesananBaru.customizations[j] = customizationMenu[j];
-
-                // Acak target
-                pesananBaru.customizations[j].target =
-                    (Tingkat)Random.Range(1, System.Enum.GetValues(typeof(Tingkat)).Length);
+                pesananBaru.customizations[j].target = (Tingkat)Random.Range(1, System.Enum.GetValues(typeof(Tingkat)).Length);
             }
-            
-            // pesananBaru.isian = (TingkatIsian)Random.Range(0, System.Enum.GetValues(typeof(TingkatIsian)).Length);
-            // pesananBaru.targetManis = (TingkatRasa)Random.Range(0, System.Enum.GetValues(typeof(TingkatRasa)).Length);
-            // pesananBaru.targetLembut = (TingkatRasa)Random.Range(0, System.Enum.GetValues(typeof(TingkatRasa)).Length);
-            // pesananBaru.targetGurih = (TingkatRasa)Random.Range(0, System.Enum.GetValues(typeof(TingkatRasa)).Length);
 
             daftarPesanan.Add(pesananBaru);
         }
     }
 
-    // Tanggung jawab 3: Mengecek Makanan dari Pemain
-    public bool CobaTerimaMakanan(string idMakananDiberikan, out string orderIdTerhapus)
+    public bool CobaTerimaMakanan(DraggableItem2D makananPemain, out string orderIdTerhapus)
     {
+        string idMakananDiberikan = makananPemain.dataBahan.ingredientID;
         orderIdTerhapus = null;
 
         for (int i = 0; i < daftarPesanan.Count; i++)
         {
             if (daftarPesanan[i].idResep == idMakananDiberikan)
             {
-                orderIdTerhapus = daftarPesanan[i].orderId; // BARU
+                orderIdTerhapus = daftarPesanan[i].orderId;
 
-                HitungSkorMakanan(daftarPesanan[i].idResep, daftarPesanan[i].ikonMakanan);
+                HitungSkorMakanan(daftarPesanan[i], makananPemain);
+
+                waktuMenunggu -= bonusWaktuPemulihan;
+                if (waktuMenunggu < 0) waktuMenunggu = 0f;
+
                 daftarPesanan.RemoveAt(i);
 
                 if (ApakahSemuaPesananSelesai())
                 {
                     sedangMenungguMakanan = false;
+                    // Sembunyikan bar jika semua pesanan selesai
+                    if (canvasKesabaran != null) canvasKesabaran.SetActive(false);
                     Debug.Log("Semua pesanan NPC telah selesai.");
                 }
 
@@ -93,31 +128,49 @@ public class NPCOrderHandler : MonoBehaviour
         return false;
     }
 
-    // Tanggung jawab 4: Mengecek apakah sudah kenyang
     public bool ApakahSemuaPesananSelesai()
     {
         return daftarPesanan.Count == 0;
     }
 
-    // --- FUNGSI MENGHITUNG SKOR --- //
-    private void HitungSkorMakanan(string namaMakanan, Sprite ikonMakanan)
+    private void HitungSkorMakanan(OrderData pesananNPC, DraggableItem2D makananPemain)
     {
-        float persentaseWaktuTerpakai = Mathf.Clamp01(waktuMenunggu / batasWaktuTunggu);
-        int skorDidapat = Mathf.RoundToInt(Mathf.Lerp(100f, 10f, persentaseWaktuTerpakai));
+        float persentaseWaktuTerpakai = Mathf.Clamp01(waktuMenunggu / batasWaktuTungguTotal);
+        float skorWaktu = Mathf.Lerp(100f, 10f, persentaseWaktuTerpakai);
 
-        Debug.Log($"[DEBUG 1] Menghitung skor untuk {namaMakanan}. Skor: {skorDidapat}");
+        int skorAkhir = 0;
+        float skorKustomisasi = 100f;
 
-        if (ScoreManager.Instance != null) ScoreManager.Instance.TambahSkor(skorDidapat);
-
-        NPCScoreDisplay scoreDisplay = GetComponent<NPCScoreDisplay>();
-        if (scoreDisplay != null)
+        if (pesananNPC.customizations != null && pesananNPC.customizations.Length > 0)
         {
-            Debug.Log("[DEBUG 2] Komponen NPCScoreDisplay ditemukan di NPC. Memerintahkan MunculkanSkor().");
-            scoreDisplay.MunculkanSkor(skorDidapat, ikonMakanan);
+            skorKustomisasi = 0f;
+            float nilaiPerItemCustom = 100f / pesananNPC.customizations.Length;
+
+            foreach (CustomizationData customNPC in pesananNPC.customizations)
+            {
+                Tingkat hasilPemain = makananPemain.DapatkanTingkatHasil(customNPC);
+
+                if (hasilPemain == customNPC.target)
+                {
+                    skorKustomisasi += nilaiPerItemCustom;
+                }
+                else if (Mathf.Abs((int)hasilPemain - (int)customNPC.target) == 1)
+                {
+                    skorKustomisasi += (nilaiPerItemCustom * 0.5f);
+                }
+            }
+
+            float skorFinalFloat = (skorWaktu * 0.4f) + (skorKustomisasi * 0.6f);
+            skorAkhir = Mathf.RoundToInt(skorFinalFloat);
         }
         else
         {
-            Debug.LogError("[ERROR A] Komponen NPCScoreDisplay TIDAK DITEMUKAN pada NPC ini! Pastikan script-nya sudah ditempel ke Prefab NPC.");
+            skorAkhir = Mathf.RoundToInt(skorWaktu);
         }
+
+        if (ScoreManager.Instance != null) ScoreManager.Instance.TambahSkor(skorAkhir);
+
+        NPCScoreDisplay scoreDisplay = GetComponent<NPCScoreDisplay>();
+        if (scoreDisplay != null) scoreDisplay.MunculkanSkor(skorAkhir, pesananNPC.ikonMakanan);
     }
 }

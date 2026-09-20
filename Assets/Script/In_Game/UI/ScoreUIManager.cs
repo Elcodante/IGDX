@@ -1,21 +1,27 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+
 public class ScoreUIManager : MonoBehaviour
 {
     [Header("Referensi UI")]
     public Slider progressBar;
+
+    [Header("Referensi Data Level")]
+    [Tooltip("Tarik GameObject yang memiliki LevelEndManager ke sini")]
+    public LevelEndManager levelEndManager;
 
     [Header("Referensi Bintang")]
     public Image[] bintangImages;
     public Sprite bintangKosong;
     public Sprite bintangPenuh;
 
-    [Header("Target Skor untuk Bintang (Sesuai dengan LevelEndManager")]
-    public float maksimalSkor = 300f; // Skor maksimal untuk mendapatkan 3 bintang
-    public int skorBintang1 = 100; // Skor untuk mendapatkan 1 bintang
-    public int skorBintang2 = 200; // Skor untuk mendapatkan 2 bintang
-    public int skorBintang3 = 300; // Skor untuk mendapatkan 3 bintang
+    // Variabel ini sekarang disembunyikan (private) karena angkanya akan
+    // di-copy otomatis dari LevelEndManager.
+    private float maksimalSkor;
+    private int skorBintang1;
+    private int skorBintang2;
+    private int skorBintang3;
 
     private bool[] bintangTercapai = new bool[3];
     private float targetSkor = 0f;
@@ -32,11 +38,28 @@ public class ScoreUIManager : MonoBehaviour
 
     private void Start()
     {
+        // 1. SINKRONISASI DATA: Baca syarat menang dari LevelEndManager
+        if (levelEndManager != null)
+        {
+            skorBintang1 = levelEndManager.skorsatuBintang;
+            skorBintang2 = levelEndManager.skorduaBintang;
+            skorBintang3 = levelEndManager.skortigaBintang;
+
+            // Jadikan bintang 3 sebagai ujung akhir bar (100%)
+            maksimalSkor = levelEndManager.skortigaBintang;
+        }
+        else
+        {
+            Debug.LogError("LevelEndManager belum dimasukkan ke ScoreUIManager! Bar skor tidak akan berfungsi.");
+            return;
+        }
+
+        // 2. Terapkan data ke Slider
         progressBar.maxValue = maksimalSkor;
         progressBar.value = 0f;
         targetSkor = 0f;
 
-        for(int i = 0; i < bintangImages.Length; i++)
+        for (int i = 0; i < bintangImages.Length; i++)
         {
             bintangImages[i].sprite = bintangKosong;
             bintangTercapai[i] = false;
@@ -45,9 +68,9 @@ public class ScoreUIManager : MonoBehaviour
 
     private void Update()
     {
-        if(progressBar.value != targetSkor)
+        if (progressBar.value != targetSkor)
         {
-            progressBar.value = Mathf.MoveTowards(progressBar.value, targetSkor, Time.deltaTime * 5f);
+            progressBar.value = Mathf.Lerp(progressBar.value, targetSkor, Time.deltaTime * 5f);
         }
     }
 
@@ -88,7 +111,7 @@ public class ScoreUIManager : MonoBehaviour
         float durasi = 0.2f;
         float waktu = 0f;
 
-        while(waktu < durasi)
+        while (waktu < durasi)
         {
             waktu += Time.deltaTime;
             bintangTransform.localScale = Vector3.Lerp(skalaAwal, skalaMembesar, waktu / durasi);
