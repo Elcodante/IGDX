@@ -91,15 +91,18 @@ public class NPCController : MonoBehaviour, IPointerClickHandler
         {
             currentState = NPCState.WaitingForFood; 
             if (tandaSeruRenderer != null) tandaSeruRenderer.color = warnaPesananDiambil;
-            
+
+            orderHandler.MulaiTungguPesanan();
+
             OnPesananDiambil?.Invoke(orderHandler.daftarPesanan, npcSpriteRenderer.sprite);
         }
     
     }
 
-    public bool CobaTerimaMakanan(string idMakananDiberikan, out string orderIdTerhapus)
+    public bool CobaTerimaMakanan(DraggableItem2D makananPemain, out string orderIdTerhapus)
     {
-        bool diterima = orderHandler.CobaTerimaMakanan(idMakananDiberikan, out orderIdTerhapus);
+        // Teruskan data makananPemain secara utuh ke OrderHandler
+        bool diterima = orderHandler.CobaTerimaMakanan(makananPemain, out orderIdTerhapus);
 
         if (diterima)
         {

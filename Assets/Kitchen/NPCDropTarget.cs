@@ -33,7 +33,7 @@ public class NPCDropTarget : MonoBehaviour, IDropHandler
         {
             string idMakananDiberikan = foodItem.dataBahan.ingredientID;
 
-            bool diterima = npcController.CobaTerimaMakanan(idMakananDiberikan, out string orderIdSelesai); // BARU
+            bool diterima = npcController.CobaTerimaMakanan(foodItem, out string orderIdSelesai); // BARU
 
             if (diterima)
             {

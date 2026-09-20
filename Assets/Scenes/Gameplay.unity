@@ -1980,6 +1980,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DraggableItem
   dataBahan: {fileID: 11400000, guid: 0eae308e7309a0b42bcad39f7ba8d24b, type: 2}
+  ukuranMaksimalDragIcon: 100
 --- !u!225 &93119799
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -3234,6 +3235,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DraggableItem
   dataBahan: {fileID: 11400000, guid: ed904f14a7f4fdc4ca33653481b44397, type: 2}
+  ukuranMaksimalDragIcon: 100
 --- !u!225 &158237028
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -4171,6 +4173,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DraggableItem
   dataBahan: {fileID: 11400000, guid: 468f97c7e6e30a1408dee138cdb638ef, type: 2}
+  ukuranMaksimalDragIcon: 100
 --- !u!225 &302551982
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -4273,6 +4276,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DraggableItem
   dataBahan: {fileID: 11400000, guid: 14ce1182befeb3f4da89e1f22ee73593, type: 2}
+  ukuranMaksimalDragIcon: 100
 --- !u!225 &304983974
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -6176,7 +6180,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: -0.000061035156, y: 0}
-  m_SizeDelta: {x: 0, y: 138.01}
+  m_SizeDelta: {x: -294.26202, y: 138.01}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &463803014
 MonoBehaviour:
@@ -7684,6 +7688,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DraggableItem
   dataBahan: {fileID: 11400000, guid: 09521a470fc24c743846e960be33ea84, type: 2}
+  ukuranMaksimalDragIcon: 100
 --- !u!225 &572124849
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -7861,6 +7866,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DraggableItem
   dataBahan: {fileID: 11400000, guid: a63914c39dfae7e478951a95ef0f0a5c, type: 2}
+  ukuranMaksimalDragIcon: 100
 --- !u!225 &604525154
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -8672,6 +8678,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DraggableItem
   dataBahan: {fileID: 11400000, guid: fd88b628bb5c19345be2674ac5006498, type: 2}
+  ukuranMaksimalDragIcon: 100
 --- !u!225 &643241575
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -9683,6 +9690,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DraggableItem
   dataBahan: {fileID: 11400000, guid: 7bd6fd53c6b9b664a80aa48d1753b559, type: 2}
+  ukuranMaksimalDragIcon: 100
 --- !u!225 &686307779
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -10993,16 +11001,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ScoreUIManager
   progressBar: {fileID: 157998741}
+  levelEndManager: {fileID: 235005398}
   bintangImages:
   - {fileID: 1778358147}
   - {fileID: 132332311}
   - {fileID: 1514868450}
   bintangKosong: {fileID: 6329021203002477789, guid: c4a28be84de19e442a1822b283db988a, type: 3}
   bintangPenuh: {fileID: -2712330078097564660, guid: d7c26126b6c8ec94f9afac3dd730d5f4, type: 3}
-  maksimalSkor: 300
-  skorBintang1: 100
-  skorBintang2: 200
-  skorBintang3: 300
 --- !u!1 &819863272
 GameObject:
   m_ObjectHideFlags: 0
@@ -12533,6 +12538,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DraggableItem
   dataBahan: {fileID: 11400000, guid: a5815bf97470f7c46ad715f525bb9eae, type: 2}
+  ukuranMaksimalDragIcon: 100
 --- !u!225 &952352187
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -12839,7 +12845,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &988723068
 RectTransform:
   m_ObjectHideFlags: 0
@@ -13183,6 +13189,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DraggableItem
   dataBahan: {fileID: 11400000, guid: 204ce2184c1e4f441873870884f65129, type: 2}
+  ukuranMaksimalDragIcon: 100
 --- !u!225 &1009778277
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -14979,7 +14986,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: -0.000061035156, y: 0}
-  m_SizeDelta: {x: 0, y: 138.01}
+  m_SizeDelta: {x: 1135.738, y: 138.01}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1114000245
 MonoBehaviour:
@@ -21547,6 +21554,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DraggableItem
   dataBahan: {fileID: 11400000, guid: f23e39e7d779cbc4495583cb72deeb1f, type: 2}
+  ukuranMaksimalDragIcon: 100
 --- !u!225 &1792346365
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -22197,6 +22205,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DraggableItem
   dataBahan: {fileID: 11400000, guid: 3f2d486a9222e874cb4d378d02235ad6, type: 2}
+  ukuranMaksimalDragIcon: 100
 --- !u!225 &1850476888
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -24166,6 +24175,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DraggableItem
   dataBahan: {fileID: 11400000, guid: 013338416163ff44b8ac8d6d2f722cca, type: 2}
+  ukuranMaksimalDragIcon: 100
 --- !u!225 &2024213251
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -24497,6 +24507,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DraggableItem
   dataBahan: {fileID: 11400000, guid: 4f67e6456b40504459d91c6885778abd, type: 2}
+  ukuranMaksimalDragIcon: 100
 --- !u!225 &2103250664
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -24867,6 +24878,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DraggableItem
   dataBahan: {fileID: 11400000, guid: 1438d68ae9f9a9c4aaa7d0a1d5ed156b, type: 2}
+  ukuranMaksimalDragIcon: 100
 --- !u!225 &2130814108
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -24969,6 +24981,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DraggableItem
   dataBahan: {fileID: 11400000, guid: 1431c2da236bd8e48aa65da57e651b48, type: 2}
+  ukuranMaksimalDragIcon: 100
 --- !u!225 &2138816023
 CanvasGroup:
   m_ObjectHideFlags: 0
