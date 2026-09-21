@@ -10060,7 +10060,7 @@ MonoBehaviour:
   tooltipPanel: {fileID: 1679939078}
   tooltipText: {fileID: 840718138}
   delayTooltip: 0.6
-  offsetMouse: {x: 15, y: -15}
+  offsetMouse: {x: 0, y: 190}
 --- !u!1 &717981753
 GameObject:
   m_ObjectHideFlags: 0

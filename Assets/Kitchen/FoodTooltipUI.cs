@@ -44,7 +44,7 @@ public class FoodTooltipUI : MonoBehaviour
                 Camera cam = parentCanvas.worldCamera; // kamera yang di-assign di Canvas
                 RectTransformUtility.ScreenPointToWorldPointInRectangle(
                     tooltipRect,
-                    mousePos,
+                    mousePos + offsetMouse,
                     cam,
                     out Vector3 worldPoint
                 );
