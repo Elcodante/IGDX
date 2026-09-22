@@ -17,6 +17,7 @@ public class FoodTooltipUI : MonoBehaviour
 
     private Coroutine tooltipCoroutine;
     private RectTransform tooltipRect;
+    private RectTransform canvasRect;
     private Canvas parentCanvas;
 
     private void Awake()
@@ -27,9 +28,16 @@ public class FoodTooltipUI : MonoBehaviour
             Destroy(gameObject);
 
         if (tooltipPanel != null)
-            tooltipPanel.SetActive(false);
+        {
             tooltipRect = tooltipPanel.GetComponent<RectTransform>();
             parentCanvas = tooltipPanel.GetComponentInParent<Canvas>();
+            if (parentCanvas != null)
+            {
+                canvasRect = parentCanvas.GetComponent<RectTransform>();
+            }
+            
+            tooltipPanel.SetActive(false);
+        }
     }
 
     private void Update()
@@ -38,35 +46,55 @@ public class FoodTooltipUI : MonoBehaviour
         {
             Vector2 mousePos = Mouse.current.position.ReadValue();
 
-            if (parentCanvas != null && parentCanvas.renderMode != RenderMode.ScreenSpaceOverlay)
+            // Batasi posisi mouse agar panel tooltip tidak terpotong tepi layar
+            Vector2 clampedMousePos = ClampToScreen(mousePos);
+
+            // Konversi Screen Position ke Local Position Canvas (Mendukung Overlay & Camera Mode)
+            Camera uiCamera = (parentCanvas != null && parentCanvas.renderMode != RenderMode.ScreenSpaceOverlay) 
+                ? parentCanvas.worldCamera 
+                : null;
+
+            if (RectTransformUtility.ScreenPointToLocalPointInRectangle(
+                canvasRect,
+                clampedMousePos,
+                uiCamera,
+                out Vector2 localPoint))
             {
-                // GANTI: konversi screen point ke world point, karena Canvas-nya Screen Space - Camera
-                Camera cam = parentCanvas.worldCamera; // kamera yang di-assign di Canvas
-                RectTransformUtility.ScreenPointToWorldPointInRectangle(
-                    tooltipRect,
-                    mousePos + offsetMouse,
-                    cam,
-                    out Vector3 worldPoint
-                );
-                tooltipRect.position = worldPoint;
-            }
-            else
-            {
-                // fallback lama, buat kalau ternyata Overlay
-                tooltipRect.position = mousePos + offsetMouse;
+                tooltipRect.anchoredPosition = localPoint;
             }
         }
     }
 
+    private Vector2 ClampToScreen(Vector2 screenPosition)
+    {
+        // Hitung posisi target awal ditambah offset
+        Vector2 targetPos = screenPosition + offsetMouse;
+
+        // Ambil ukuran dimensi RectTransform Tooltip
+        Vector2 tooltipSize = tooltipRect.rect.size;
+        Vector2 pivot = tooltipRect.pivot;
+
+        // Hitung batas minimal dan maksimal di Layar
+        float minX = tooltipSize.x * pivot.x;
+        float maxX = Screen.width - (tooltipSize.x * (1f - pivot.x));
+
+        float minY = tooltipSize.y * pivot.y;
+        float maxY = Screen.height - (tooltipSize.y * (1f - pivot.y));
+
+        // Clamp koordinat X dan Y agar tidak melebihi batas layar
+        targetPos.x = Mathf.Clamp(targetPos.x, minX, maxX);
+        targetPos.y = Mathf.Clamp(targetPos.y, minY, maxY);
+
+        return targetPos;
+    }
+
     public void TampilkanTooltip(string infoText)
     {
-        // Batalkan coroutine sebelumnya
         if (tooltipCoroutine != null)
         {
             StopCoroutine(tooltipCoroutine);
         }
 
-        // Mulai delay
         tooltipCoroutine = StartCoroutine(TampilkanTooltipDelay(infoText));
     }
 
@@ -85,7 +113,6 @@ public class FoodTooltipUI : MonoBehaviour
 
     public void SembunyikanTooltip()
     {
-
         if (tooltipCoroutine != null)
         {
             StopCoroutine(tooltipCoroutine);

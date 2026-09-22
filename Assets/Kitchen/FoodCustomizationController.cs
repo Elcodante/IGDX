@@ -35,25 +35,30 @@ public class FoodCustomizationController : MonoBehaviour
 
             case PeranBahan.Isian:
                 countIsian++;
+                Debug.Log("Sampe Sini Gak, Masa Gak Nambah isian");
                 break;
         }
     }
 
     public CustomizationResult GetResult()
     {
-        if(customization.manis != Tingkat.TidakAda || customization.lembut != Tingkat.TidakAda || customization.gurih != Tingkat.TidakAda || customization.isian != Tingkat.TidakAda)
-        {
-            return customization;
-        }
+        // 1. Hitung tingkat baru berdasarkan bahan yang baru saja dimasukkan (AddIngredient)
+        Tingkat hasilManis = ConvertToTingkat(countManis);
+        Tingkat hasilLembut = ConvertToTingkat(countLembut);
+        Tingkat hasilGurih = ConvertToTingkat(countGurih);
+        Tingkat hasilIsian = ConvertToTingkat(countIsian);
 
+        // 2. Jika sebelumnya sudah ada data dari AmbilResult(), gunakan data itu 
+        // KECUALI jika ada bahan baru yang dimasukkan (hasilnya bukan TidakAda)
         return new CustomizationResult
         {
-            manis = ConvertToTingkat(countManis),
-            lembut = ConvertToTingkat(countLembut),
-            gurih = ConvertToTingkat(countGurih),
-            isian = ConvertToTingkat(countIsian)
+            manis = (hasilManis != Tingkat.TidakAda) ? hasilManis : customization.manis,
+            lembut = (hasilLembut != Tingkat.TidakAda) ? hasilLembut : customization.lembut,
+            gurih = (hasilGurih != Tingkat.TidakAda) ? hasilGurih : customization.gurih,
+            isian = (hasilIsian != Tingkat.TidakAda) ? hasilIsian : customization.isian
         };
     }
+
 
 
     private Tingkat ConvertToTingkat(int count)

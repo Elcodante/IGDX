@@ -88,8 +88,6 @@ public class StirMinigame : MonoBehaviour, IMinigameMechanic, IPointerDownHandle
             if (progressBar != null) 
                 progressBar.value = currentStirProgress;
 
-            Debug.Log($"Sedang Mengaduk... Progress: {Mathf.RoundToInt(currentStirProgress)}/{targetStirProgress}");
-
             // Cek apakah sudah selesai diaduk
             if (currentStirProgress >= targetStirProgress)
             {

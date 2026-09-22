@@ -113,6 +113,7 @@ public class RecipeBookUI : MonoBehaviour
         if (isAnimating || resepAktif.Count <= 1) return; // resepAktif, bukan listResepUI
         
         currentIndex++;
+        AudioManager.instance.PlaySFXBook();
         if (currentIndex >= resepAktif.Count) currentIndex = 0; 
         
         StartCoroutine(AnimateShuffle(1));
@@ -123,6 +124,7 @@ public class RecipeBookUI : MonoBehaviour
         if (isAnimating || resepAktif.Count <= 1) return; // resepAktif, bukan listResepUI
         
         currentIndex--;
+        AudioManager.instance.PlaySFXBook();
         if (currentIndex < 0) currentIndex = resepAktif.Count - 1; 
         
         StartCoroutine(AnimateShuffle(-1));

@@ -80,7 +80,7 @@ public class CookingAppliance : MonoBehaviour
 
     public bool AdaAdonanSiapPakai()
     {
-        return stateWajan == 2; // sama seperti kondisi "Beres" yang sudah kamu pakai buat sprite priority
+        return stateWajan == 2; 
     }
    
 
@@ -177,17 +177,16 @@ public class CookingAppliance : MonoBehaviour
             return;
         }
 
-        if(ingredient.typeBahan == TypeBahan.SetengahJadi)
-        {
-            Debug.Log("Sampe Sini ?");
-        }
-
         totalIngredient++;
 
         currentIngredients.Add(ingredient);
 
         if (foodCustom != null)
-        foodCustom.AddIngredient(ingredient);
+        {
+            foodCustom.AddIngredient(ingredient);
+            Debug.Log("FooodCustom Di AddIngredient");
+        }
+       
 
         // Pas bahan masuk, reset wajan biar ga stuck di state "Beres"
         stateWajan = 0; 
