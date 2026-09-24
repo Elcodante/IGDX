@@ -532,6 +532,5 @@ public void OnStartButtonClicked()
         // Kalau diisi, cuma muncul kalau hasil resep terakhir PERSIS sama
         return hasilResepTerakhir == targetHasilUntukSpriteBeres;
     }
-
   
 }
