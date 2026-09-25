@@ -14,8 +14,16 @@ public class ChopMinigame : MonoBehaviour, IMinigameMechanic, IPointerDownHandle
     
     private int currentTaps = 0;
     private int targetTaps = 10;
+    private CookingAppliance appliance;
+    private RecipeData recipeAktif;
+    private bool sudahTriggerHalfBake = false; 
 
     private Action<float> onFinishedCallback;
+
+    private void Awake()
+    {
+        appliance = GetComponent<CookingAppliance>(); 
+    }
 
     private void Start()
     {
@@ -24,6 +32,8 @@ public class ChopMinigame : MonoBehaviour, IMinigameMechanic, IPointerDownHandle
 
     public void StartMinigame(RecipeData recipe, Action<float> onMinigameFinished)
     {
+        recipeAktif = recipe; 
+        sudahTriggerHalfBake = false; 
         if (recipe != null)
         {
             timeLimit = recipe.timeLimit;
@@ -75,9 +85,18 @@ public class ChopMinigame : MonoBehaviour, IMinigameMechanic, IPointerDownHandle
         if (progressBar != null) 
             progressBar.value = currentTaps;
 
+        if (!sudahTriggerHalfBake 
+            && recipeAktif != null 
+            && recipeAktif.tampilkanHalfBakeSaatSetengahJalan
+            && currentTaps >= targetTaps * 0.5f)
+        {
+            sudahTriggerHalfBake = true;
+            if (appliance != null) appliance.TampilkanHalfBake();
+        }
         if (currentTaps >= targetTaps)
         {
             StopMinigame(); 
+            if (appliance != null) appliance.SembunyikanHalfBake();
         }
     }
 

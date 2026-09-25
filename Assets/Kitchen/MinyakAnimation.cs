@@ -2,15 +2,38 @@ using UnityEngine;
 
 public class MinyakAnimation : MonoBehaviour
 {
+    public static MinyakAnimation Instance { get; private set; }
+
     [SerializeField] private GameObject _MinyakAnimation;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    public void Minyak()
+    [SerializeField] private float durasiAnimasi = 1f;
+
+    private CookingAppliance targetAppliance; // BARU: simpen siapa yang minta
+
+    private void Awake()
     {
-        _MinyakAnimation.SetActive(true);
+        Instance = this;
     }
-    // Update is called once per frame
+
+    // GANTI: sekarang minta parameter appliance target
+    public void Minyak(CookingAppliance appliance)
+    {
+        targetAppliance = appliance;
+
+        _MinyakAnimation.SetActive(false);
+        _MinyakAnimation.SetActive(true);
+
+        CancelInvoke(nameof(MatikanMinyak));
+        Invoke(nameof(MatikanMinyak), durasiAnimasi);
+    }
+
     public void MatikanMinyak()
     {
-        gameObject.SetActive(false);
+        _MinyakAnimation.SetActive(false);
+
+        // BARU: begitu animasi tuang selesai, nyalain sprite minyak statis di wajan
+        if (targetAppliance != null)
+        {
+            targetAppliance.TampilkanMinyakDiWajan();
+        }
     }
 }
