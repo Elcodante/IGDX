@@ -47,6 +47,8 @@ public class CookingAppliance : MonoBehaviour
     public SpriteRenderer halfBakeSpriteRenderer; 
     public Sprite spriteHalfBake;
     public float durasiFadeHalfBake = 0.4f;
+    public IngredientData ingredientMinyak;
+    public SpriteRenderer minyakDiWajanRenderer; 
 
     private Coroutine fadeCoroutine;
 
@@ -79,6 +81,7 @@ public class CookingAppliance : MonoBehaviour
         stateWajan = 0;
         currentIngredients.Clear();
         SembunyikanHalfBake();
+        SembunyikanMinyakDiWajan();
         UpdateVisualAlat(null);
     }
     
@@ -102,6 +105,7 @@ public class CookingAppliance : MonoBehaviour
 
         SetStoveState(false);
         UbahStateWajan(0);
+
 
         foodCustom = GetComponent<FoodCustomizationController>();
     }
@@ -194,8 +198,13 @@ public class CookingAppliance : MonoBehaviour
             Debug.Log("FooodCustom Di AddIngredient");
         }
         SembunyikanHalfBake();
-       
+        
 
+        if (MinyakAnimation.Instance != null && ingredientMinyak != null && ingredient == ingredientMinyak)
+        {
+            MinyakAnimation.Instance.Minyak(this); 
+        }
+       
         // Pas bahan masuk, reset wajan biar ga stuck di state "Beres"
         stateWajan = 0; 
         UpdateVisualAlat(ingredient); 
@@ -206,18 +215,27 @@ public class CookingAppliance : MonoBehaviour
 
     public void ResetIngredients()
     {
-        currentIngredients.Clear();
-        currentValidRecipe = null;
+        CookingAppliance alatYangDipakai = (mountedAppliance != null) ? mountedAppliance : this;
 
-        totalIngredient = 0;
+        alatYangDipakai.currentIngredients.Clear();
+        alatYangDipakai.currentValidRecipe = null;
+        alatYangDipakai.totalIngredient = 0;
 
-        if (foodCustom != null)
-            foodCustom.ResetCustomization();
 
-        if (recipeProgressUI != null)
-            recipeProgressUI.Hide();
+        // GANTI: hide di dua kemungkinan tempat, sama kayak LanjutkanStartMinigame
+        if (alatYangDipakai.recipeProgressUI != null) 
+            alatYangDipakai.recipeProgressUI.Hide();
+        if (alatYangDipakai.komporInduk != null && alatYangDipakai.komporInduk.recipeProgressUI != null) 
+            alatYangDipakai.komporInduk.recipeProgressUI.Hide();
+        if (this.recipeProgressUI != null)
+            this.recipeProgressUI.Hide();
+        if (komporInduk != null && komporInduk.recipeProgressUI != null) 
+            komporInduk.recipeProgressUI.Hide();
 
-        UbahStateWajan(0);
+        alatYangDipakai.SembunyikanHalfBake();
+        alatYangDipakai.SembunyikanMinyakDiWajan();
+
+        alatYangDipakai.UbahStateWajan(0);
     }
 
     private void CheckForValidRecipe()
@@ -412,6 +430,7 @@ public void OnStartButtonClicked()
         
         alatYangDipakai.currentIngredients.Clear();
         alatYangDipakai.currentValidRecipe = null;
+        alatYangDipakai.SembunyikanMinyakDiWajan();
         if(foodCustom != null)
             foodCustom.ResetCustomization();
         
@@ -640,6 +659,23 @@ public void OnStartButtonClicked()
         halfBakeSpriteRenderer.gameObject.SetActive(false);
 
         fadeCoroutine = null;
+    }
+    
+    public void TampilkanMinyakDiWajan()
+    {
+        Debug.Log($"[MINYAK] TampilkanMinyakDiWajan() dipanggil di {gameObject.name}, minyakDiWajanRenderer: {(minyakDiWajanRenderer != null ? minyakDiWajanRenderer.name : "NULL — belum di-assign di Inspector!")}");
+        if (minyakDiWajanRenderer != null)
+        {
+            minyakDiWajanRenderer.gameObject.SetActive(true);
+        }
+    }
+
+    public void SembunyikanMinyakDiWajan()
+    {
+        if (minyakDiWajanRenderer != null)
+        {
+            minyakDiWajanRenderer.gameObject.SetActive(false);
+        }
     }
   
 }
