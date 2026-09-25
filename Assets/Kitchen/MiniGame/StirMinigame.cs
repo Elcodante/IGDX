@@ -23,6 +23,13 @@ public class StirMinigame : MonoBehaviour, IMinigameMechanic, IPointerDownHandle
 
     private Vector2 lastMousePosition;
     private Action<float> onFinishedCallback;
+    private CookingAppliance appliance;
+    private bool sudahTriggerHalfBake = false; 
+
+    private void Awake()
+    {
+        appliance = GetComponent<CookingAppliance>(); // BARU
+    }
 
     private void Start()
     {
@@ -45,6 +52,7 @@ public class StirMinigame : MonoBehaviour, IMinigameMechanic, IPointerDownHandle
         currentStirProgress = 0f;
         currentTime = 0f;
         isHolding = false;
+        sudahTriggerHalfBake = false;
         onFinishedCallback = onMinigameFinished;
         isMinigameActive = true;
 
@@ -87,11 +95,18 @@ public class StirMinigame : MonoBehaviour, IMinigameMechanic, IPointerDownHandle
             
             if (progressBar != null) 
                 progressBar.value = currentStirProgress;
+            
+            if (!sudahTriggerHalfBake && currentStirProgress >= targetStirProgress * 0.2f)
+            {
+                sudahTriggerHalfBake = true;
+                if (appliance != null) appliance.TampilkanHalfBake();
+            }
 
             // Cek apakah sudah selesai diaduk
             if (currentStirProgress >= targetStirProgress)
             {
                 StopMinigame();
+                if (appliance != null) appliance.SembunyikanHalfBake();
             }
         }
 

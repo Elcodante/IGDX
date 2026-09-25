@@ -16,6 +16,7 @@ public class RecipeData : ScriptableObject
     public IngredientData successResult; // Jika skor bagus 
     public IngredientData failResult;    // Jika skor jelek 
     public bool tidakSpawnHasil = false;
+    public bool tampilkanHalfBakeSaatSetengahJalan = false;
 }
 
 // Ubah baris enum di paling bawah menjadi seperti ini:

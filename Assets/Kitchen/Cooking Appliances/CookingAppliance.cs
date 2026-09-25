@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -43,6 +44,11 @@ public class CookingAppliance : MonoBehaviour
     [Header("State Tambahan (Khusus Serabi / Dll)")]
     public Sprite spriteBeres;     // Bakal dipake buat state "Udah Matang"
     public IngredientData targetHasilUntukSpriteBeres; // BARU
+    public SpriteRenderer halfBakeSpriteRenderer; 
+    public Sprite spriteHalfBake;
+    public float durasiFadeHalfBake = 0.4f;
+
+    private Coroutine fadeCoroutine;
 
 // BARU: simpen hasil resep terakhir yang selesai, dipakai buat cek sprite beres
     private IngredientData hasilResepTerakhir;
@@ -72,6 +78,7 @@ public class CookingAppliance : MonoBehaviour
     {
         stateWajan = 0;
         currentIngredients.Clear();
+        SembunyikanHalfBake();
         UpdateVisualAlat(null);
     }
     
@@ -186,6 +193,7 @@ public class CookingAppliance : MonoBehaviour
             foodCustom.AddIngredient(ingredient);
             Debug.Log("FooodCustom Di AddIngredient");
         }
+        SembunyikanHalfBake();
        
 
         // Pas bahan masuk, reset wajan biar ga stuck di state "Beres"
@@ -533,5 +541,105 @@ public void OnStartButtonClicked()
         return hasilResepTerakhir == targetHasilUntukSpriteBeres;
     }
 
+        public void TampilkanHalfBake()
+    {
+        if (fadeCoroutine != null) StopCoroutine(fadeCoroutine);
+        fadeCoroutine = StartCoroutine(FadeKeHalfBake());
+    }
+
+    private IEnumerator FadeKeHalfBake()
+    {
+        List<SpriteRenderer> tumpukanSprites = new List<SpriteRenderer>();
+        if (tumpukanContainer != null)
+        {
+            foreach (Transform child in tumpukanContainer)
+            {
+                SpriteRenderer sr = child.GetComponent<SpriteRenderer>();
+                if (sr != null) tumpukanSprites.Add(sr);
+            }
+        }
+
+        if (halfBakeSpriteRenderer != null)
+        {
+            halfBakeSpriteRenderer.sprite = spriteHalfBake;
+            halfBakeSpriteRenderer.gameObject.SetActive(true);
+            Color c0 = halfBakeSpriteRenderer.color;
+            c0.a = 0f;
+            halfBakeSpriteRenderer.color = c0;
+        }
+
+        float waktu = 0f;
+        while (waktu < durasiFadeHalfBake)
+        {
+            waktu += Time.deltaTime;
+            float t = waktu / durasiFadeHalfBake;
+
+            foreach (var sr in tumpukanSprites)
+            {
+                if (sr == null) continue;
+                Color c = sr.color;
+                c.a = Mathf.Lerp(1f, 0f, t); // fade OUT tumpukan bahan
+                sr.color = c;
+            }
+
+            if (halfBakeSpriteRenderer != null)
+            {
+                Color c = halfBakeSpriteRenderer.color;
+                c.a = Mathf.Lerp(0f, 1f, t); // fade IN half bake
+                halfBakeSpriteRenderer.color = c;
+            }
+
+            yield return null;
+        }
+
+        // Finalisasi biar presisi, dan matikan objek tumpukan biar gak numpuk raycast/render
+        foreach (var sr in tumpukanSprites)
+        {
+            if (sr != null) sr.gameObject.SetActive(false);
+        }
+        if (halfBakeSpriteRenderer != null)
+        {
+            Color c = halfBakeSpriteRenderer.color;
+            c.a = 1f;
+            halfBakeSpriteRenderer.color = c;
+        }
+
+        fadeCoroutine = null;
+    }
+
+    public void SembunyikanHalfBake()
+    {
+        if (fadeCoroutine != null) { StopCoroutine(fadeCoroutine); fadeCoroutine = null; }
+
+        if (halfBakeSpriteRenderer != null && halfBakeSpriteRenderer.gameObject.activeSelf)
+        {
+            fadeCoroutine = StartCoroutine(FadeOutHalfBake());
+        }
+    }
+
+    private IEnumerator FadeOutHalfBake()
+    {
+        float waktu = 0f;
+        Color warnaAwal = halfBakeSpriteRenderer.color;
+
+        while (waktu < durasiFadeHalfBake)
+        {
+            waktu += Time.deltaTime;
+            float t = waktu / durasiFadeHalfBake;
+
+            Color c = halfBakeSpriteRenderer.color;
+            c.a = Mathf.Lerp(warnaAwal.a, 0f, t);
+            halfBakeSpriteRenderer.color = c;
+
+            yield return null;
+        }
+
+        Color cFinal = halfBakeSpriteRenderer.color;
+        cFinal.a = 0f;
+        halfBakeSpriteRenderer.color = cFinal;
+        halfBakeSpriteRenderer.gameObject.SetActive(false);
+
+        fadeCoroutine = null;
+    }
   
 }

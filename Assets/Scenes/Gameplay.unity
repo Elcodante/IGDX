@@ -6752,21 +6752,21 @@ MonoBehaviour:
   tombolMengerti: {fileID: 2145342495}
   daftarTutorial:
   - mekanik: 1
-    gambar: {fileID: -6468831176212231959, guid: 67fb7c79e82071642bb758317f6d0645, type: 3}
+    gambar: {fileID: 1571363359237710767, guid: 2a9bfa0aceb23e242a534739f5bc5081, type: 3}
     teks: Tahan Mouse Sebelah kiri dan Lakukanlah gerakan memutar menggunakan mouse
       untuk mengaduk!
   - mekanik: 4
-    gambar: {fileID: -8306002569234745612, guid: e64a1b7775e596847b26ab2671eb3575, type: 3}
+    gambar: {fileID: -4960189880391560060, guid: ed5f7425028bc674594b882a71f5845a, type: 3}
     teks: Diam dan Tunggu Saja!
   - mekanik: 2
-    gambar: {fileID: -925857135628240800, guid: a9f670126cb725e4893e37a8ff1f5318, type: 3}
+    gambar: {fileID: -4380211687408298856, guid: efdb6c9fd7f2f4842b730295485c8978, type: 3}
     teks: Tekan Mouse sebelah kiri terus menerus untuk memotong bahan!
   - mekanik: 3
-    gambar: {fileID: -924536381665001540, guid: 1c736c58a8552474092eca757859322c, type: 3}
+    gambar: {fileID: -1414873183544389170, guid: a50c381f885168240b207adbfeaa0f74, type: 3}
     teks: Tahan Mouse sebelah kiri untuk menggerakan bar. Jaga bar agar terus di
       bagian yang tepat!
   - mekanik: 5
-    gambar: {fileID: -6468831176212231959, guid: 237a4db32f65280488ec3fe99a0b02db, type: 3}
+    gambar: {fileID: -1132582986675236599, guid: a2c7196049b76474db6ff891344fa9e2, type: 3}
     teks: Swipe ke atas atau ke bawah sesuai dengan panah dengan menggunakan mouse
       sebelah kiri!
 --- !u!1 &491981589
@@ -7077,7 +7077,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &512613994
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7093,9 +7093,9 @@ RectTransform:
   - {fileID: 184648152}
   m_Father: {fileID: 463803013}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 180, y: -69.005}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &512613995
@@ -9314,7 +9314,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &672206305
 RectTransform:
   m_ObjectHideFlags: 0
@@ -9468,7 +9468,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &674067096
 RectTransform:
   m_ObjectHideFlags: 0
@@ -9484,9 +9484,9 @@ RectTransform:
   - {fileID: 1259979341}
   m_Father: {fileID: 463803013}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 180, y: -69.005}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &674067097
@@ -9604,14 +9604,17 @@ MonoBehaviour:
     ikonMasakan: {fileID: 1968876835447747157, guid: 2c6e3da22f59df54ca7875fc00a36307, type: 3}
     teksBahan: Tepung Terigu, Telur, Santan, Kelapa
     teksAlat: Mangkuk, Kukusan
-    teksCara: '1. Masukan Bahan Ke mangkuk
+    teksCara: '1. Masukkan bahan kecuali kelapa ke mangkuk
 
-      2. Aduk jadi Adonan
+      2. Taruh Kukusan
+      di atas kompor
 
-      3. Taro
-      kukusan ke atas Kompor
+      3. Masukkan adonan ke kukusan
 
-      4. Masukkan adonan ke kukusan'
+      4. Masukan putu
+      ayu ke piring
+
+      5. Tambahkan kelapa'
   - resepDasar: {fileID: 11400000, guid: be1a5201ec7952647be702daa59e10fe, type: 2}
     namaMasakan: Pastel
     ikonMasakan: {fileID: 6679852185467842059, guid: adc058bc830aa2c44952cc5afb6f8ff7, type: 3}
@@ -9682,17 +9685,15 @@ MonoBehaviour:
       3.
       Masukkan Adonan ke Daun
 
-      4. Masukkan Pisang ke Daun
+      4. Taro kukusan ke atas Kompor
 
-      5. Taro kukusan
-      ke atas Kompor
+      5. Masukkan
+      adonan ke kukusan
 
-      6. Masukkan adonan ke kukusan
+      6. Masukkan Lupis Ke Piring
 
-      7. Masukkan Lupis
-      Ke Piring
-
-      8. Masukkan Gula Merah dan Kelapa'
+      7. Masukkan Gula
+      Merah dan Kelapa'
   - resepDasar: {fileID: 11400000, guid: c96ab9ab57f66df4c855a8a6641671c1, type: 2}
     namaMasakan: Lapis
     ikonMasakan: {fileID: 224318155784578198, guid: a87843af65f163c40a48011182e8d6a2, type: 3}
@@ -16004,6 +16005,96 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1203818586}
   m_CullTransparentMesh: 1
+--- !u!1 &1213933714
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1213933715}
+  - component: {fileID: 1213933716}
+  m_Layer: 0
+  m_Name: HalfBake
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &1213933715
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1213933714}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.3, y: 0.3, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1710114642}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!212 &1213933716
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1213933714}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 2
+  m_Sprite: {fileID: -1733167998399997688, guid: 7e5b0b223b73a1f4286f78473925d42f, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 6.58, y: 2.74}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
 --- !u!114 &1228818106
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17682,6 +17773,96 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -25}
   m_SizeDelta: {x: 100, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &1396475362
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1396475364}
+  - component: {fileID: 1396475363}
+  m_Layer: 0
+  m_Name: HalfBake
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!212 &1396475363
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1396475362}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 2
+  m_Sprite: {fileID: 1825915074328452854, guid: 20b2999ae9d7c9b44a84e0c524bc6252, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 7.46, y: 3.74}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
+--- !u!4 &1396475364
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1396475362}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.4658, y: 0.59, z: 0}
+  m_LocalScale: {x: 0.6224267, y: 0.6, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5250202370097049794}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1399448161
 GameObject:
   m_ObjectHideFlags: 0
@@ -17717,7 +17898,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -227.37, y: 63}
-  m_SizeDelta: {x: 355.52, y: 227.76}
+  m_SizeDelta: {x: 360, y: 240}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1399448163
 MonoBehaviour:
@@ -20300,7 +20481,7 @@ MonoBehaviour:
   komporInduk: {fileID: 0}
   maxIngredient: 3
   gunakanTumpukanVisual: 1
-  tumpukanContainer: {fileID: 1710114642}
+  tumpukanContainer: {fileID: 1809129402}
   prefabVisualBahan2D: {fileID: 3135460901893421600, guid: 579154e2714ee634e85534c221d63e2b, type: 3}
   applianceName: Chop
   isStoveBase: 0
@@ -20325,6 +20506,9 @@ MonoBehaviour:
   spriteMasak: {fileID: 0}
   spriteBeres: {fileID: 0}
   targetHasilUntukSpriteBeres: {fileID: 0}
+  halfBakeSpriteRenderer: {fileID: 1213933716}
+  spriteHalfBake: {fileID: -1733167998399997688, guid: 7e5b0b223b73a1f4286f78473925d42f, type: 3}
+  durasiFadeHalfBake: 0.4
   recipeProgressUI: {fileID: 0}
   stateWajan: 0
   visualSpesifikBahan: []
@@ -20398,7 +20582,9 @@ Transform:
   m_LocalPosition: {x: 2.28, y: -2.16, z: 0}
   m_LocalScale: {x: 1.7, y: 1.7, z: -164.61}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1213933715}
+  - {fileID: 1809129402}
   m_Father: {fileID: 883541377}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &1710114644
@@ -22171,6 +22357,96 @@ MonoBehaviour:
   progressBar: {fileID: 331396525}
   panahIndikator: {fileID: 254203857}
   jarakMinimalGeser: 50
+--- !u!1 &1809129401
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1809129402}
+  - component: {fileID: 1809129403}
+  m_Layer: 0
+  m_Name: PoinSpawn
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1809129402
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1809129401}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1710114642}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!212 &1809129403
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1809129401}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 0.14, y: 0.14}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 0
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
 --- !u!1 &1825072383
 GameObject:
   m_ObjectHideFlags: 0
@@ -25846,6 +26122,9 @@ MonoBehaviour:
   spriteMasak: {fileID: 0}
   spriteBeres: {fileID: 0}
   targetHasilUntukSpriteBeres: {fileID: 0}
+  halfBakeSpriteRenderer: {fileID: 0}
+  spriteHalfBake: {fileID: 0}
+  durasiFadeHalfBake: 0.4
   recipeProgressUI: {fileID: 0}
   stateWajan: 0
   visualSpesifikBahan: []
@@ -25896,6 +26175,9 @@ MonoBehaviour:
   spriteMasak: {fileID: 0}
   spriteBeres: {fileID: 1861056198310362565, guid: 4c9fd944b34800f4d935bb6cfd8df279, type: 3}
   targetHasilUntukSpriteBeres: {fileID: 11400000, guid: 820ad045eee3ab940a7d83b3da79198f, type: 2}
+  halfBakeSpriteRenderer: {fileID: 1396475363}
+  spriteHalfBake: {fileID: 1825915074328452854, guid: 20b2999ae9d7c9b44a84e0c524bc6252, type: 3}
+  durasiFadeHalfBake: 0.4
   recipeProgressUI: {fileID: 0}
   stateWajan: 0
   visualSpesifikBahan: []
@@ -25942,6 +26224,9 @@ MonoBehaviour:
   spriteMasak: {fileID: 0}
   spriteBeres: {fileID: 0}
   targetHasilUntukSpriteBeres: {fileID: 0}
+  halfBakeSpriteRenderer: {fileID: 0}
+  spriteHalfBake: {fileID: 0}
+  durasiFadeHalfBake: 0.4
   recipeProgressUI: {fileID: 0}
   stateWajan: 0
   visualSpesifikBahan: []
@@ -25993,6 +26278,9 @@ MonoBehaviour:
   spriteMasak: {fileID: 5762806411792082684, guid: bc5d3b02e3fa1864ca1aecee9315ca14, type: 3}
   spriteBeres: {fileID: 280367412176733295, guid: 43eb72e39deb27540a0928a29d6a4962, type: 3}
   targetHasilUntukSpriteBeres: {fileID: 0}
+  halfBakeSpriteRenderer: {fileID: 0}
+  spriteHalfBake: {fileID: 0}
+  durasiFadeHalfBake: 0.4
   recipeProgressUI: {fileID: 0}
   stateWajan: 0
   visualSpesifikBahan:
@@ -26030,6 +26318,7 @@ Transform:
   m_Children:
   - {fileID: 1228137155913820140}
   - {fileID: 2044370591}
+  - {fileID: 1396475364}
   m_Father: {fileID: 883541377}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &5250202370182844870

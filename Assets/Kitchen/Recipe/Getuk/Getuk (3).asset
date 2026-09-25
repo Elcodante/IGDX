@@ -19,3 +19,5 @@ MonoBehaviour:
   targetDifficulty: 1
   successResult: {fileID: 11400000, guid: 74905042d2b528e489fab31fcef36f9e, type: 2}
   failResult: {fileID: 0}
+  tidakSpawnHasil: 0
+  tampilkanHalfBakeSaatSetengahJalan: 1
