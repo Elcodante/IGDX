@@ -20,9 +20,21 @@ public class NPCOrderHandler : MonoBehaviour
     public Color warnaMarah = Color.red;
     // ---------------------------------------------
 
+    // --- Pengaturan Ekspresi NPC ---
+    [Header("Pengaturan Ekspresi NPC")]
+    public float batasPersenSedih = 0.33f;
+    private bool isSedih = false;
+    private NPCController npcController;
+
     private float batasWaktuTungguTotal;
     private float waktuMenunggu = 0f;
     private bool sedangMenungguMakanan = false;
+
+    private void Awake()
+    {
+        npcController = GetComponent<NPCController>();
+    }
+
 
     public void ResetHandler()
     {
@@ -32,6 +44,9 @@ public class NPCOrderHandler : MonoBehaviour
 
         // Sembunyikan bar saat NPC baru spawn atau sedang jalan
         if (canvasKesabaran != null) canvasKesabaran.SetActive(false);
+
+        isSedih = false;
+        if(npcController != null) npcController.SetEkspresiSedih(false);
     }
 
     public void MulaiTungguPesanan()
@@ -48,17 +63,33 @@ public class NPCOrderHandler : MonoBehaviour
         {
             waktuMenunggu += Time.deltaTime;
 
-            // --- KODE BARU: Update Visual UI ---
-            if (sliderKesabaran != null && batasWaktuTungguTotal > 0)
+            if (batasWaktuTungguTotal > 0)
             {
-                // Hitung sisa waktu (1 = penuh, 0 = habis)
+                // Menghitung sisa persentase (1.0 turun ke 0.0)
                 float sisaPersentase = 1f - Mathf.Clamp01(waktuMenunggu / batasWaktuTungguTotal);
-                sliderKesabaran.value = sisaPersentase;
 
-                // Juicing: Ubah warna secara dinamis dari hijau ke merah
-                if (warnaFillSlider != null)
+                // Update Visual Slider Kesabaran
+                if (sliderKesabaran != null)
                 {
-                    warnaFillSlider.color = Color.Lerp(warnaMarah, warnaSabar, sisaPersentase);
+                    sliderKesabaran.value = sisaPersentase;
+                    if (warnaFillSlider != null)
+                    {
+                        warnaFillSlider.color = Color.Lerp(warnaMarah, warnaSabar, sisaPersentase);
+                    }
+                }
+
+                // --- LOGIKA BARU: PERUBAHAN WAJAH SEDIH ---
+                if (sisaPersentase <= batasPersenSedih && !isSedih)
+                {
+                    // Masuk zona merah (di bawah 1/3)
+                    isSedih = true;
+                    if (npcController != null) npcController.SetEkspresiSedih(true);
+                }
+                else if (sisaPersentase > batasPersenSedih && isSedih)
+                {
+                    // Pemain memberikan makanan -> waktu pulih (di atas 1/3) -> NPC kembali tersenyum!
+                    isSedih = false;
+                    if (npcController != null) npcController.SetEkspresiSedih(false);
                 }
             }
         }

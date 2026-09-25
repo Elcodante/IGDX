@@ -117,6 +117,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   currentState: 0
+  spriteSedih: {fileID: -573136182650855632, guid: a1223b41458938e4585acb6151e87da7, type: 3}
 --- !u!61 &8571169356774012739
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -195,6 +196,7 @@ MonoBehaviour:
   warnaFillSlider: {fileID: 1339495891337631187}
   warnaSabar: {r: 1, g: 1, b: 1, a: 1}
   warnaMarah: {r: 1, g: 0, b: 0, a: 1}
+  batasPersenSedih: 0.33
 --- !u!114 &-8889457693731439583
 MonoBehaviour:
   m_ObjectHideFlags: 0
