@@ -7,7 +7,7 @@ public class PauseManager : MonoBehaviour
     [Header("Referensi UI")]
     public GameObject panelSettings;
     public GameObject settingsButton;
-    public GameObject tombolNavigasi;
+    //public GameObject tombolNavigasi;
 
     [Header("Pengaturan Animasi")]
     public float durasiAnimasi = 0.2f;
@@ -25,7 +25,7 @@ public class PauseManager : MonoBehaviour
         panelSettings.SetActive(false);
 
         settingsButton.SetActive(true);
-        tombolNavigasi.SetActive(true);
+        //tombolNavigasi.SetActive(true);
     }
 
     public void Pausegame()
@@ -38,7 +38,7 @@ public class PauseManager : MonoBehaviour
         Time.timeScale = 0f;
 
         settingsButton.SetActive(false);
-        tombolNavigasi.SetActive(false);
+        //tombolNavigasi.SetActive(false);
 
         // Mulai animasi membesar dari 0 ke 1
         StartCoroutine(AnimasiSkalaPanel(Vector3.zero, Vector3.one, true));
@@ -52,7 +52,7 @@ public class PauseManager : MonoBehaviour
         isPaused = false;
 
         settingsButton.SetActive(true);
-        tombolNavigasi.SetActive(true);
+        //tombolNavigasi.SetActive(true);
 
         // Mulai animasi mengecil dari 1 ke 0
         StartCoroutine(AnimasiSkalaPanel(Vector3.one, Vector3.zero, false));

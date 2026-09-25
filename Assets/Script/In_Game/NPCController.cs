@@ -29,12 +29,28 @@ public class NPCController : MonoBehaviour, IPointerClickHandler
     private NPCOrderHandler orderHandler;
     private SpriteRenderer sr;
 
+    [Header("Ekspresi NPC")]
+    public Sprite spriteSedih;
+    private Sprite spriteNormal;
+
     void Awake()
     {
         if (tandaSeru != null) tandaSeruRenderer = tandaSeru.GetComponent<SpriteRenderer>();
         npcSpriteRenderer = GetComponent<SpriteRenderer>();
         sr = GetComponent<SpriteRenderer>();
         orderHandler = GetComponent<NPCOrderHandler>();
+        if (npcSpriteRenderer != null)
+        {
+            spriteNormal = npcSpriteRenderer.sprite;
+        }
+    }
+
+    public void SetEkspresiSedih(bool apakahSedih)
+    {
+        if (spriteSedih == null || npcSpriteRenderer == null) return;
+
+        // Ganti visual karakter sesuai kondisinya
+        npcSpriteRenderer.sprite = apakahSedih ? spriteSedih : spriteNormal;
     }
 
     public void SetSpawner(NPCSpawner spawner) { mySpawner = spawner; }
