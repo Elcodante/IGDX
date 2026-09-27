@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
 
-// 1. TAMBAHKAN STATUS 'Spawning' DI SINI
 public enum NPCState { Spawning, WalkToCounter, WaitingToOrder, WaitingForFood, Leave }
 
 [RequireComponent(typeof(NPCOrderHandler))]
@@ -18,6 +17,23 @@ public class NPCController : MonoBehaviour, IPointerClickHandler
     public Color warnaPesananDiambil = new Color(0.4f, 0.4f, 0.4f, 1f);
     public UnityEvent<List<OrderData>, Sprite> OnPesananDiambil;
 
+    [Header("Ekspresi Karakter")]
+    public Sprite spriteSedih;
+    private Sprite spriteNormal;
+
+    // --- VARIABEL JUICING BARU ---
+    [Header("Juicing Settings (Animasi Prosedural)")]
+    public float kecepatanNapas = 4f;
+    public float skalaNapas = 0.03f;
+    public float kecepatanGetar = 35f;
+    public float jarakGetar = 0.05f;
+
+    private Vector3 skalaAwal;
+    private Vector3 posisiVisualAwal;
+    private bool sedangSedih = false;
+    private bool sedangLompat = false;
+    // -----------------------------
+
     public NPCState currentState;
     private Transform targetWaypoint;
     private NPCSpawner mySpawner;
@@ -25,13 +41,8 @@ public class NPCController : MonoBehaviour, IPointerClickHandler
 
     private SpriteRenderer tandaSeruRenderer;
     private SpriteRenderer npcSpriteRenderer;
-
     private NPCOrderHandler orderHandler;
     private SpriteRenderer sr;
-
-    [Header("Ekspresi NPC")]
-    public Sprite spriteSedih;
-    private Sprite spriteNormal;
 
     void Awake()
     {
@@ -39,32 +50,29 @@ public class NPCController : MonoBehaviour, IPointerClickHandler
         npcSpriteRenderer = GetComponent<SpriteRenderer>();
         sr = GetComponent<SpriteRenderer>();
         orderHandler = GetComponent<NPCOrderHandler>();
+
         if (npcSpriteRenderer != null)
         {
             spriteNormal = npcSpriteRenderer.sprite;
         }
+
+        // Simpan ukuran dan posisi asli untuk animasi
+        skalaAwal = transform.localScale;
     }
-
-    public void SetEkspresiSedih(bool apakahSedih)
-    {
-        if (spriteSedih == null || npcSpriteRenderer == null) return;
-
-        // Ganti visual karakter sesuai kondisinya
-        npcSpriteRenderer.sprite = apakahSedih ? spriteSedih : spriteNormal;
-    }
-
-    public void SetSpawner(NPCSpawner spawner) { mySpawner = spawner; }
 
     public void InitializeNPC(Transform assignedWaypoint, int slotIndex, MenuData[] menuList, int minVariasi, int maxVariasi)
     {
         targetWaypoint = assignedWaypoint;
         mySlotIndex = slotIndex;
-
-        // 2. KUNCI STATUS KE 'Spawning' AGAR TIDAK LANGSUNG JALAN
         currentState = NPCState.Spawning;
 
         tandaSeru.SetActive(false);
         if (tandaSeruRenderer != null) tandaSeruRenderer.color = Color.white;
+
+        sedangSedih = false;
+        sedangLompat = false;
+        transform.localScale = skalaAwal; // Reset skala
+        SetEkspresiSedih(false);
 
         orderHandler.ResetHandler();
         orderHandler.GenerateRandomOrder(menuList, minVariasi, maxVariasi);
@@ -74,19 +82,50 @@ public class NPCController : MonoBehaviour, IPointerClickHandler
 
     void Update()
     {
-        // Fungsi Update ini otomatis MENGABAIKAN NPC yang statusnya 'Spawning'
         if (currentState == NPCState.WalkToCounter || currentState == NPCState.Leave)
         {
             MoveTowardsTarget();
+        }
+
+        // --- LOGIKA JUICING BERJALAN SAAT DIAM DI MEJA ---
+        if ((currentState == NPCState.WaitingToOrder || currentState == NPCState.WaitingForFood) && !sedangLompat)
+        {
+            AnimasiDiamJuice();
+        }
+    }
+
+    // --- FUNGSI JUICING (Napas & Gemetar) ---
+    private void AnimasiDiamJuice()
+    {
+        if (sedangSedih)
+        {
+            // 1. PANIC SHAKE: Bergetar cepat ke kiri dan kanan
+            float geserX = Mathf.Sin(Time.time * kecepatanGetar) * jarakGetar;
+            transform.position = new Vector3(targetWaypoint.position.x + geserX, transform.position.y, transform.position.z);
+            transform.localScale = skalaAwal; // Pastikan skala kembali normal
+        }
+        else
+        {
+            // 2. IDLE BREATHING: Membesar dan mengecil perlahan (Squash & Stretch)
+            float napas = Mathf.Sin(Time.time * kecepatanNapas) * skalaNapas;
+            transform.localScale = new Vector3(skalaAwal.x - napas, skalaAwal.y + napas, skalaAwal.z);
+            transform.position = new Vector3(targetWaypoint.position.x, transform.position.y, transform.position.z); // Pastikan posisi X terkunci di waypoint
         }
     }
 
     private void MoveTowardsTarget()
     {
-        transform.position = Vector2.MoveTowards(transform.position, targetWaypoint.position, moveSpeed * Time.deltaTime);
+        // Beri sedikit efek mentul-mentul saat jalan (Opsional)
+        float jalanMentul = Mathf.Abs(Mathf.Sin(Time.time * 15f)) * 0.05f;
 
-        if (Vector2.Distance(transform.position, targetWaypoint.position) < 0.1f)
+        Vector3 targetPos = new Vector3(targetWaypoint.position.x, targetWaypoint.position.y + jalanMentul, targetWaypoint.position.z);
+        transform.position = Vector3.MoveTowards(transform.position, targetPos, moveSpeed * Time.deltaTime);
+
+        if (Vector2.Distance(new Vector2(transform.position.x, transform.position.y), new Vector2(targetWaypoint.position.x, targetWaypoint.position.y)) < 0.1f)
         {
+            // Kunci posisi y agar tidak melayang setelah jalan
+            transform.position = new Vector3(transform.position.x, targetWaypoint.position.y, transform.position.z);
+
             if (currentState == NPCState.WalkToCounter)
             {
                 currentState = NPCState.WaitingToOrder;
@@ -105,29 +144,70 @@ public class NPCController : MonoBehaviour, IPointerClickHandler
 
         if (currentState == NPCState.WaitingToOrder)
         {
-            currentState = NPCState.WaitingForFood; 
+            currentState = NPCState.WaitingForFood;
             if (tandaSeruRenderer != null) tandaSeruRenderer.color = warnaPesananDiambil;
-
             orderHandler.MulaiTungguPesanan();
-
             OnPesananDiambil?.Invoke(orderHandler.daftarPesanan, npcSpriteRenderer.sprite);
         }
-    
     }
 
     public bool CobaTerimaMakanan(DraggableItem2D makananPemain, out string orderIdTerhapus)
     {
-        // Teruskan data makananPemain secara utuh ke OrderHandler
         bool diterima = orderHandler.CobaTerimaMakanan(makananPemain, out orderIdTerhapus);
 
         if (diterima)
         {
+            // --- JUICING: LOMPAT KEGIRANGAN SAAT MAKANAN BENAR ---
+            StartCoroutine(AnimasiLompatBahagia());
+
             if (orderHandler.ApakahSemuaPesananSelesai())
             {
                 Pulang();
             }
         }
         return diterima;
+    }
+
+    // --- COROUTINE JUICING LOMPAT ---
+    private IEnumerator AnimasiLompatBahagia()
+    {
+        sedangLompat = true;
+        float durasiLompat = 0.3f;
+        float waktu = 0f;
+
+        Vector3 posisiAwalLompat = transform.position;
+        Vector3 posisiPuncak = posisiAwalLompat + new Vector3(0, 0.5f, 0); // Lompat setengah unit ke atas
+
+        // Squash sebelum lompat (Menunduk)
+        transform.localScale = new Vector3(skalaAwal.x * 1.2f, skalaAwal.y * 0.8f, skalaAwal.z);
+        yield return new WaitForSeconds(0.05f);
+
+        // Melayang ke atas
+        while (waktu < durasiLompat / 2)
+        {
+            waktu += Time.deltaTime;
+            transform.position = Vector3.Lerp(posisiAwalLompat, posisiPuncak, waktu / (durasiLompat / 2));
+            transform.localScale = new Vector3(skalaAwal.x * 0.9f, skalaAwal.y * 1.1f, skalaAwal.z); // Stretch saat di udara
+            yield return null;
+        }
+
+        waktu = 0f;
+
+        // Mendarat ke bawah
+        while (waktu < durasiLompat / 2)
+        {
+            waktu += Time.deltaTime;
+            transform.position = Vector3.Lerp(posisiPuncak, posisiAwalLompat, waktu / (durasiLompat / 2));
+            yield return null;
+        }
+
+        // Squash saat mendarat
+        transform.position = posisiAwalLompat;
+        transform.localScale = new Vector3(skalaAwal.x * 1.1f, skalaAwal.y * 0.9f, skalaAwal.z);
+        yield return new WaitForSeconds(0.05f);
+
+        transform.localScale = skalaAwal;
+        sedangLompat = false;
     }
 
     public void Pulang()
@@ -137,6 +217,14 @@ public class NPCController : MonoBehaviour, IPointerClickHandler
         tandaSeru.SetActive(false);
         targetWaypoint = (mySpawner != null && mySpawner.exitPoint != null) ? mySpawner.exitPoint : transform;
         mySpawner.BebaskanSlot(mySlotIndex);
+    }
+
+    public void SetEkspresiSedih(bool apakahSedih)
+    {
+        if (spriteSedih == null || npcSpriteRenderer == null) return;
+
+        sedangSedih = apakahSedih; // Simpan status sedih untuk trigger getaran
+        npcSpriteRenderer.sprite = apakahSedih ? spriteSedih : spriteNormal;
     }
 
     private IEnumerator AnimasiMunculLaluJalan(Transform targetWaypoint)
@@ -162,7 +250,11 @@ public class NPCController : MonoBehaviour, IPointerClickHandler
             sr.color = warna;
         }
 
-        // 3. SETELAH ANIMASI SELESAI, BARU UBAH STATUS KE BERJALAN!
         currentState = NPCState.WalkToCounter;
+    }
+
+    public void SetSpawner(NPCSpawner spawner)
+    {
+        mySpawner = spawner;
     }
 }

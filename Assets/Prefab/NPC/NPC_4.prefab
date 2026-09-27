@@ -189,8 +189,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NPCOrderHandler
   daftarPesanan: []
-  waktuDasarPerItem: 40
-  bonusWaktuPemulihan: 15
+  waktuDasarPerItem: 90
+  bonusWaktuPemulihan: 30
   canvasKesabaran: {fileID: 177126485434098962}
   sliderKesabaran: {fileID: 6735303939972968917}
   warnaFillSlider: {fileID: 2258773402710248159}
