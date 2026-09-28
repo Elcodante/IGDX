@@ -7,7 +7,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float _speed = 5f;
     [SerializeField] private Animator anim;
 
-    private bool canMove = true;
+    public bool canMove = true;
     private bool wasMoving = false;
 
     private Rigidbody2D rb;
@@ -15,15 +15,20 @@ public class PlayerMovement : MonoBehaviour
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        Time.timeScale = 1f;
     }
 
     private void FixedUpdate()
     {
+        Debug.Log("Can Move: " + canMove);
+        Debug.Log("Keyboard: " + (Keyboard.current != null));
+
         Move();
     }
 
     private void Move()
-{
+    {
+
     if(!canMove)
     {
         rb.linearVelocity = Vector2.zero;
@@ -82,5 +87,6 @@ public class PlayerMovement : MonoBehaviour
     public void SetCanMove(bool value)
     {
         canMove = value;
+        Debug.Log(value);
     }
 }
