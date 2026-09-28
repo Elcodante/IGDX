@@ -6,6 +6,7 @@ public class LevelData : MonoBehaviour
     [Header("Level Dialog")]
     [SerializeField] private CharacterDialogueData dialogueData;
     [SerializeField] private DialogueManager dialogueManager;
+    [SerializeField] private AudioClip sfx;
 
     [Header("Target Scene")]
     public string namaSceneGameplay = "GameplayScene"; 
@@ -47,5 +48,7 @@ public class LevelData : MonoBehaviour
     {
         int playerLevel = PlayerPrefs.GetInt("PlayerLevel", 1);
         dialogueManager.StartCharacterDialogue(dialogueData, playerLevel);
+        AudioManager.instance.StopSFX();
+        AudioManager.instance.PlaySFX(sfx);
     }
 }

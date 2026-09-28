@@ -20,6 +20,8 @@ public class NPCController : MonoBehaviour, IPointerClickHandler
     [Header("Ekspresi Karakter")]
     public Sprite spriteSedih;
     private Sprite spriteNormal;
+    [Header("Suara Karakter")]
+    [SerializeField] private AudioClip sfx;
 
     // --- VARIABEL JUICING BARU ---
     [Header("Juicing Settings (Animasi Prosedural)")]
@@ -145,6 +147,7 @@ public class NPCController : MonoBehaviour, IPointerClickHandler
         if (currentState == NPCState.WaitingToOrder)
         {
             currentState = NPCState.WaitingForFood;
+            AudioManager.instance.PlaySFX(sfx);
             if (tandaSeruRenderer != null) tandaSeruRenderer.color = warnaPesananDiambil;
             orderHandler.MulaiTungguPesanan();
             OnPesananDiambil?.Invoke(orderHandler.daftarPesanan, npcSpriteRenderer.sprite);
@@ -214,6 +217,7 @@ public class NPCController : MonoBehaviour, IPointerClickHandler
     {
         currentState = NPCState.Leave;
         AudioManager.instance.PlaySFXGhost();
+        AudioManager.instance.PlaySFX(sfx);
         tandaSeru.SetActive(false);
         targetWaypoint = (mySpawner != null && mySpawner.exitPoint != null) ? mySpawner.exitPoint : transform;
         mySpawner.BebaskanSlot(mySlotIndex);

@@ -21596,6 +21596,11 @@ MonoBehaviour:
   sfxMenggoreng: {fileID: 8300000, guid: 41bcfbfc383d50245aa596d4591dc20e, type: 3}
   sfxMenkukus: {fileID: 8300000, guid: e43ad0bb32bd1de46b4a36f6bdf9bc87, type: 3}
   sfxMerebus: {fileID: 8300000, guid: 3b3b11de75b21b64782487a14f0538fc, type: 3}
+  sfxGenderuwo: {fileID: 0}
+  sfxKuntilanak: {fileID: 0}
+  sfxPocong: {fileID: 0}
+  sfxTuyul: {fileID: 0}
+  sfxWeweGombel: {fileID: 0}
 --- !u!4 &1723236787
 Transform:
   m_ObjectHideFlags: 0
@@ -26215,7 +26220,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::StirMinigame
   progressBar: {fileID: 878602336}
-  stirSensitivity: 2
+  stirSensitivity: 1
 --- !u!212 &623856023655291351
 SpriteRenderer:
   m_ObjectHideFlags: 0

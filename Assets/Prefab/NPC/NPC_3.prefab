@@ -116,8 +116,13 @@ MonoBehaviour:
   OnPesananDiambil:
     m_PersistentCalls:
       m_Calls: []
-  currentState: 0
   spriteSedih: {fileID: -573136182650855632, guid: a1223b41458938e4585acb6151e87da7, type: 3}
+  sfx: {fileID: 8300000, guid: 326f60895e5de3d459b17dc262fd2a46, type: 3}
+  kecepatanNapas: 4
+  skalaNapas: 0.03
+  kecepatanGetar: 35
+  jarakGetar: 0.05
+  currentState: 0
 --- !u!61 &8571169356774012739
 BoxCollider2D:
   m_ObjectHideFlags: 0

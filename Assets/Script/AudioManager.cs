@@ -26,6 +26,11 @@ public class AudioManager : MonoBehaviour
     public AudioClip sfxMenggoreng;
     public AudioClip sfxMenkukus;
     public AudioClip sfxMerebus;
+    public AudioClip sfxGenderuwo;
+    public AudioClip sfxKuntilanak;
+    public AudioClip sfxPocong;
+    public AudioClip sfxTuyul;
+    public AudioClip sfxWeweGombel;
 
     private void Awake()
     {
@@ -86,6 +91,11 @@ public class AudioManager : MonoBehaviour
         }
     }
 
+    public void StopSFX()
+    {
+        sfxSource.Stop();
+    }
+
     // Fungsi khusus SFX agar bisa dipanggil langsung dari UI Button OnClick()
     public void PlaySFXClick() => PlaySFX(sfxClick);
     public void PlaySFXWalk()  => PlaySFX(sfxWalk);
@@ -101,6 +111,11 @@ public class AudioManager : MonoBehaviour
     public void PlaySFXMenggoreng()     => PlaySFX(sfxMenggoreng);
     public void PlaySFXMenkukus()       => PlaySFX(sfxMenkukus);
     public void PlaySFXMerebus()        => PlaySFX(sfxMerebus);
+    public void PlaySFXGenderuwo()      => PlaySFX(sfxGenderuwo);
+    public void PlaySFXKuntilanak()      => PlaySFX(sfxKuntilanak);
+    public void PlaySFXPocong()      => PlaySFX(sfxPocong);
+    public void PlaySFXTuyul()      => PlaySFX(sfxTuyul);
+    public void PlaySFXWeweGombel()      => PlaySFX(sfxWeweGombel);
 
 
     // ==========================================

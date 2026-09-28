@@ -2495,6 +2495,11 @@ MonoBehaviour:
   sfxMenggoreng: {fileID: 8300000, guid: 41bcfbfc383d50245aa596d4591dc20e, type: 3}
   sfxMenkukus: {fileID: 8300000, guid: e43ad0bb32bd1de46b4a36f6bdf9bc87, type: 3}
   sfxMerebus: {fileID: 8300000, guid: 3b3b11de75b21b64782487a14f0538fc, type: 3}
+  sfxGenderuwo: {fileID: 8300000, guid: 3d64ef44264ee604fb0720eb8ce33156, type: 3}
+  sfxKuntilanak: {fileID: 8300000, guid: 908b31080902dd84cbac6662b81b32a8, type: 3}
+  sfxPocong: {fileID: 8300000, guid: 9592fb31e0c1ebf4eac80ad60a9d4352, type: 3}
+  sfxTuyul: {fileID: 8300000, guid: 47c72a050db305347a62a96315e2efa8, type: 3}
+  sfxWeweGombel: {fileID: 8300000, guid: 326f60895e5de3d459b17dc262fd2a46, type: 3}
 --- !u!4 &2000314374
 Transform:
   m_ObjectHideFlags: 0

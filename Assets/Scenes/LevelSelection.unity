@@ -1430,6 +1430,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::LevelData
   dialogueData: {fileID: 11400000, guid: d85965e25973468409f3250d162f13d6, type: 2}
   dialogueManager: {fileID: 1257800608}
+  sfx: {fileID: 8300000, guid: 9592fb31e0c1ebf4eac80ad60a9d4352, type: 3}
   namaSceneGameplay: GameplayScene
   levelberapa: 2
   menuList:
@@ -2055,6 +2056,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::LevelData
   dialogueData: {fileID: 11400000, guid: 20b074e57e808d94085a83a9d6ebdad3, type: 2}
   dialogueManager: {fileID: 1257800608}
+  sfx: {fileID: 8300000, guid: 3d64ef44264ee604fb0720eb8ce33156, type: 3}
   namaSceneGameplay: GameplayScene
   levelberapa: 3
   menuList:
@@ -2634,6 +2636,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::LevelData
   dialogueData: {fileID: 11400000, guid: 70b35b1e08a0e414387fb503e68ac84f, type: 2}
   dialogueManager: {fileID: 1257800608}
+  sfx: {fileID: 8300000, guid: 326f60895e5de3d459b17dc262fd2a46, type: 3}
   namaSceneGameplay: GameplayScene
   levelberapa: 5
   menuList:
@@ -2853,6 +2856,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
   _speed: 2
   anim: {fileID: 991205701}
+  canMove: 1
 --- !u!50 &991205699
 Rigidbody2D:
   serializedVersion: 5
@@ -4472,6 +4476,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::LevelData
   dialogueData: {fileID: 11400000, guid: bc14ffe175dc9714f8671f67d2dee44d, type: 2}
   dialogueManager: {fileID: 1257800608}
+  sfx: {fileID: 8300000, guid: 908b31080902dd84cbac6662b81b32a8, type: 3}
   namaSceneGameplay: GameplayScene
   levelberapa: 1
   menuList:
@@ -6663,6 +6668,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::LevelData
   dialogueData: {fileID: 11400000, guid: e0cd17d72a7bc15459a41b67adc1aeb6, type: 2}
   dialogueManager: {fileID: 1257800608}
+  sfx: {fileID: 8300000, guid: 47c72a050db305347a62a96315e2efa8, type: 3}
   namaSceneGameplay: GameplayScene
   levelberapa: 3
   menuList:
