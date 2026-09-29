@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::IngredientData
   ingredientID: Kue Lapis
   ingredientName: Kue Lapis
-  icon: {fileID: 224318155784578198, guid: a87843af65f163c40a48011182e8d6a2, type: 3}
+  icon: {fileID: -6919029770479819627, guid: 6e569e1ff0ac6db4da7ee53f2d4a086e, type: 3}
   isFinalProduct: 1
   peranBahan: 0
   typeBahan: 0
@@ -28,6 +28,7 @@ MonoBehaviour:
   butuhGarnish: 0
   daftarGarnishDibutuhkan: []
   spriteTiapTahapGarnish: []
+  spriteSaatDisajikan: {fileID: 224318155784578198, guid: a87843af65f163c40a48011182e8d6a2, type: 3}
   customizationResult:
     manis: 0
     lembut: 0

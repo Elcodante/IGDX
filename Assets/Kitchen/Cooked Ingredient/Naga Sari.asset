@@ -14,9 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::IngredientData
   ingredientID: Naga Sari
   ingredientName: Naga Sari
-  icon: {fileID: 2209797324394584017, guid: bdc7f2ce956eb134fb71bba28350c709, type: 3}
+  icon: {fileID: 2859110354887243876, guid: e1d8d6a536d25bd4b9480a1afdcb75fe, type: 3}
   isFinalProduct: 1
   peranBahan: 0
+  typeBahan: 0
   typeBahanInBowl: 2
   scaleSaatMasukBowl: {x: 1, y: 1, z: 1}
   jenisTepung: 0
@@ -27,3 +28,9 @@ MonoBehaviour:
   butuhGarnish: 0
   daftarGarnishDibutuhkan: []
   spriteTiapTahapGarnish: []
+  spriteSaatDisajikan: {fileID: 2209797324394584017, guid: bdc7f2ce956eb134fb71bba28350c709, type: 3}
+  customizationResult:
+    manis: 0
+    lembut: 0
+    gurih: 0
+    isian: 0

@@ -14,9 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::IngredientData
   ingredientID: Pastel
   ingredientName: Pastel
-  icon: {fileID: 6679852185467842059, guid: adc058bc830aa2c44952cc5afb6f8ff7, type: 3}
+  icon: {fileID: -836686763865771126, guid: 4db057f528cf3e146a5ed074c75e7995, type: 3}
   isFinalProduct: 1
   peranBahan: 0
+  typeBahan: 0
   typeBahanInBowl: 2
   scaleSaatMasukBowl: {x: 1, y: 1, z: 1}
   jenisTepung: 0
@@ -27,3 +28,9 @@ MonoBehaviour:
   butuhGarnish: 0
   daftarGarnishDibutuhkan: []
   spriteTiapTahapGarnish: []
+  spriteSaatDisajikan: {fileID: 6679852185467842059, guid: adc058bc830aa2c44952cc5afb6f8ff7, type: 3}
+  customizationResult:
+    manis: 0
+    lembut: 0
+    gurih: 0
+    isian: 0

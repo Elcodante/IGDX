@@ -10277,7 +10277,7 @@ MonoBehaviour:
   tooltipPanel: {fileID: 1679939078}
   tooltipText: {fileID: 840718138}
   delayTooltip: 0.6
-  offsetMouse: {x: 20, y: 190}
+  offsetMouse: {x: -10, y: 40}
 --- !u!1 &717981753
 GameObject:
   m_ObjectHideFlags: 0
@@ -26679,7 +26679,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: fb108f1e30a3e3241bd8bd00f3e5ab8c, type: 2}
   - {fileID: 11400000, guid: 51d7f2d3b751ba245aa9a6093db8df3f, type: 2}
   draggableItemPrefab: {fileID: 8340565135148567373, guid: 6a5f009ce834a6346b05a750c4041426, type: 3}
-  spawnPoint: {fileID: 5250202370097049794}
+  spawnPoint: {fileID: 1228137155913820140}
   applianceSprite2D: {fileID: 623856024792367793}
   spriteKosong: {fileID: -8144024881919118906, guid: b620ad19455741347b69eb96ebd069d1, type: 3}
   spriteTerisi: {fileID: -8144024881919118906, guid: b620ad19455741347b69eb96ebd069d1, type: 3}

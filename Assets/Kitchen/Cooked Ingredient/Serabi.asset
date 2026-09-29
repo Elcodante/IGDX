@@ -14,9 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::IngredientData
   ingredientID: Kue Serabi Solo
   ingredientName: Kue Serabi Solo
-  icon: {fileID: -5081801242459528388, guid: 63c73e4f00501eb4faaa6c29086d2401, type: 3}
+  icon: {fileID: -3969638836592471432, guid: b0fbd8b110478924b9739d50c03f2445, type: 3}
   isFinalProduct: 1
   peranBahan: 0
+  typeBahan: 0
   typeBahanInBowl: 2
   scaleSaatMasukBowl: {x: 1, y: 1, z: 1}
   jenisTepung: 0
@@ -27,3 +28,9 @@ MonoBehaviour:
   butuhGarnish: 0
   daftarGarnishDibutuhkan: []
   spriteTiapTahapGarnish: []
+  spriteSaatDisajikan: {fileID: -5081801242459528388, guid: 63c73e4f00501eb4faaa6c29086d2401, type: 3}
+  customizationResult:
+    manis: 0
+    lembut: 0
+    gurih: 0
+    isian: 0
