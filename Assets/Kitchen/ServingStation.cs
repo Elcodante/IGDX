@@ -105,6 +105,10 @@ public void OnDrop(PointerEventData eventData)
         {
             sr.sortingLayerName = "UI_Canvas";
             sr.sortingOrder = 25;
+            if (dragItem.dataBahan.spriteSaatDisajikan != null)
+            {
+                sr.sprite = dragItem.dataBahan.spriteSaatDisajikan;
+            }
         }
 
         if (serveButton != null) serveButton.gameObject.SetActive(true);

@@ -54,7 +54,7 @@ public class IngredientData : ScriptableObject
     public bool butuhGarnish = false;
     public List<IngredientData> daftarGarnishDibutuhkan; // Gethuk/Putu Ayu: isi 1. Lupis/Cenil: isi 2 (gula + kelapa)
     public List<Sprite> spriteTiapTahapGarnish;           // sprite[0] = setelah garnish pertama masuk, sprite[1] = setelah garnish kedua (final), dst.
-
+    public Sprite spriteSaatDisajikan;
     public CustomizationResult customizationResult;
 
     }

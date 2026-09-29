@@ -28,6 +28,7 @@ MonoBehaviour:
   butuhGarnish: 0
   daftarGarnishDibutuhkan: []
   spriteTiapTahapGarnish: []
+  spriteSaatDisajikan: {fileID: 0}
   customizationResult:
     manis: 0
     lembut: 0

@@ -14,9 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::IngredientData
   ingredientID: Kembang Goyang
   ingredientName: Kembang Goyang
-  icon: {fileID: 7449724838469933353, guid: 398f0f3fe94281c44a3a19117f3da105, type: 3}
+  icon: {fileID: -7683595009843244897, guid: 3f0a23bc1cc7ee54ca98c0fe4f335aff, type: 3}
   isFinalProduct: 1
   peranBahan: 0
+  typeBahan: 0
   typeBahanInBowl: 2
   scaleSaatMasukBowl: {x: 1, y: 1, z: 1}
   jenisTepung: 0
@@ -27,3 +28,9 @@ MonoBehaviour:
   butuhGarnish: 0
   daftarGarnishDibutuhkan: []
   spriteTiapTahapGarnish: []
+  spriteSaatDisajikan: {fileID: 7449724838469933353, guid: 398f0f3fe94281c44a3a19117f3da105, type: 3}
+  customizationResult:
+    manis: 0
+    lembut: 0
+    gurih: 0
+    isian: 0
