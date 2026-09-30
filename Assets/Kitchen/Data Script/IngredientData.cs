@@ -38,6 +38,7 @@ public class IngredientData : ScriptableObject
     [Header("Type Bahan in Bowl")]
     public TypeBahanInBowl typeBahanInBowl = TypeBahanInBowl.Normal;
     public Vector3 scaleSaatMasukBowl = new Vector3(1f, 1f, 1f);
+    public Vector3 scaleSaatSpawnOutput = new Vector3(1f, 1f, 1f);
     
     [Tooltip("Hanya berlaku jika Peran Bahan diset ke 'Tepung'")]
     public JenisTepung jenisTepung; 

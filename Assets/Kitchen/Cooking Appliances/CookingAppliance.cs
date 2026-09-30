@@ -414,6 +414,12 @@ public void OnStartButtonClicked()
                 Transform titikSpawn = (alatYangDipakai.spawnPoint != null) ? alatYangDipakai.spawnPoint : alatYangDipakai.transform;
                 GameObject objekBaru = Instantiate(draggableItemPrefab, titikSpawn.position, Quaternion.identity);
                 
+                // GANTI: cuma override scale kalau field-nya beneran diisi (bukan default 1,1,1)
+                if (hasilAkhir.scaleSaatSpawnOutput != Vector3.one)
+                {
+                    objekBaru.transform.localScale = hasilAkhir.scaleSaatSpawnOutput;
+                }
+
                 DraggableItem2D dragScript2D = objekBaru.GetComponent<DraggableItem2D>();
 
                 if (dragScript2D != null)

@@ -15,9 +15,23 @@ MonoBehaviour:
   ingredientID: adonan cenil
   ingredientName: adonan cenil
   icon: {fileID: 8601798175171810588, guid: cac841c913d6fe449957e94d322e685d, type: 3}
+  isFinalProduct: 0
   peranBahan: 0
+  typeBahan: 0
+  typeBahanInBowl: 2
+  scaleSaatMasukBowl: {x: 1, y: 1, z: 1}
+  scaleSaatSpawnOutput: {x: 1, y: 1, z: 1.1}
   jenisTepung: 0
   dropVisualPrefab: {fileID: 0}
   dragIcon: {fileID: 0}
   usePourAnimation: 0
   inBowlIcon: {fileID: 0}
+  butuhGarnish: 0
+  daftarGarnishDibutuhkan: []
+  spriteTiapTahapGarnish: []
+  spriteSaatDisajikan: {fileID: 0}
+  customizationResult:
+    manis: 0
+    lembut: 0
+    gurih: 0
+    isian: 0

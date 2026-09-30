@@ -20,6 +20,7 @@ MonoBehaviour:
   typeBahan: 1
   typeBahanInBowl: 2
   scaleSaatMasukBowl: {x: 1, y: 1, z: 1}
+  scaleSaatSpawnOutput: {x: 1, y: 1, z: 1.1}
   jenisTepung: 0
   dropVisualPrefab: {fileID: 0}
   dragIcon: {fileID: 0}
