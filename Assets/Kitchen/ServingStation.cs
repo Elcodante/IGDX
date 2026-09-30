@@ -103,8 +103,8 @@ public void OnDrop(PointerEventData eventData)
         SpriteRenderer sr = dragItem.GetComponent<SpriteRenderer>();
         if (sr != null)
         {
-            sr.sortingLayerName = "UI_Canvas";
-            sr.sortingOrder = 25;
+            sr.sortingLayerName = "Bahan";
+            sr.sortingOrder = 20;
             if (dragItem.dataBahan.spriteSaatDisajikan != null)
             {
                 sr.sprite = dragItem.dataBahan.spriteSaatDisajikan;
